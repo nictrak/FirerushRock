@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerGrab : MonoBehaviour
 {
+    private string direction;
+    private GameObject usedGrab;
 
-    public GameObject leftGrab;
-    public GameObject rightGrab;
-    public GameObject upGrab;
-    public GameObject downGrab;
-    public Grabbable grabedObject;
+    public GameObject LeftGrab;
+    public GameObject RightGrab;
+    public GameObject UpGrab;
+    public GameObject DownGrab;
+    public Grabbable GrabedObject;
+
+    public string Direction { get => direction; set => direction = value; }
+    public GameObject UsedGrab { get => usedGrab; set => usedGrab = value; }
 
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -26,7 +32,26 @@ public class PlayerGrab : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            grabedObject.Use();
+            GrabedObject.Use();
+        }
+    }
+    public void SelectGrab()
+    {
+        if(Direction == "left")
+        {
+            usedGrab = LeftGrab;
+        }
+        else if (Direction == "rigth")
+        {
+            usedGrab = RightGrab;
+        }
+        else if (Direction == "up")
+        {
+            usedGrab = UpGrab;
+        }
+        else if (Direction == "down")
+        {
+            usedGrab = DownGrab;
         }
     }
 }
