@@ -9,7 +9,7 @@ public class FireSystem : MonoBehaviour
     public GridSystem grid;
     public int fire_spread_counter;
     private int framerate_counter;
-    private NDArray heat_array;
+    public static NDArray heat_array;
     private NDArray fire_1_array;
     private NDArray fire_2_array;
     private NDArray fire_3_array;
