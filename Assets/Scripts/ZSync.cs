@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class ZSync : MonoBehaviour
 {
+    private float lavitateHeight;
+
     public float SpriteHeight;
+
+    public float LavitateHeight { get => lavitateHeight; set => lavitateHeight = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +29,7 @@ public class ZSync : MonoBehaviour
     private float CalZ()
     {
         Vector3 presentPosition = transform.position;
-        return (presentPosition.y - SpriteHeight / 2) / 10;
+        return (presentPosition.y - SpriteHeight / 2 - lavitateHeight) / 10;
     }
     public Vector2 GetPlanarPosition()
     {
