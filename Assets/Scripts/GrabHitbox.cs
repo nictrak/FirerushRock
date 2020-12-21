@@ -6,10 +6,13 @@ using UnityEngine;
 public class GrabHitbox : MonoBehaviour
 {
     private List<Grabbable> grabbables;
+
+    public List<Grabbable> Grabbables { get => grabbables; set => grabbables = value; }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        grabbables = new List<Grabbable>();
     }
 
     // Update is called once per frame
@@ -33,20 +36,31 @@ public class GrabHitbox : MonoBehaviour
             grabbables.Remove(grabbable);
         }
     }
-    private Grabbable CalNearest()
+    public Grabbable CalNearest()
     {
         if (grabbables.Count == 0)
         {
             return null;
         }
         float shortestDistance = float.MaxValue;
+        int index = -1;
+        float distance;
         Grabbable temp;
-        temp = grabbables[0];
         for (int i = 0; i < grabbables.Count; i++)
         {
             temp = grabbables[i];
-            
+            distance = CalDistance(temp.transform.position);
+            if(shortestDistance > distance)
+            {
+                shortestDistance = distance;
+                index = i;
+            }
         }
-        return temp;
+        return grabbables[index];
+    }
+    private float CalDistance(Vector3 position)
+    {
+        Vector2 distanceVector =  transform.position - position;
+        return distanceVector.magnitude;
     }
 }

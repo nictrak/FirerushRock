@@ -4,28 +4,31 @@ using UnityEngine;
 
 public class PlayerGrab : MonoBehaviour
 {
-    private string direction;
-    private GameObject usedGrab;
+    private GrabHitbox usedGrab;
+    private Grabbable grabedObject;
+    private PlayerDirection playerDirection;
 
-    public GameObject LeftGrab;
-    public GameObject RightGrab;
-    public GameObject UpGrab;
-    public GameObject DownGrab;
-    public Grabbable GrabedObject;
+    public GrabHitbox LeftGrab;
+    public GrabHitbox RightGrab;
+    public GrabHitbox UpGrab;
+    public GrabHitbox DownGrab;
 
-    public string Direction { get => direction; set => direction = value; }
-    public GameObject UsedGrab { get => usedGrab; set => usedGrab = value; }
+    
+    public GrabHitbox UsedGrab { get => usedGrab; set => usedGrab = value; }
+    public Grabbable GrabedObject { get => GrabedObject; set => GrabedObject = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        playerDirection = GetComponent<PlayerDirection>(); 
+        usedGrab = LeftGrab;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        SelectGrab();
+        GrabControl();
     }
 
     public void UseObject()
@@ -35,23 +38,69 @@ public class PlayerGrab : MonoBehaviour
             GrabedObject.Use();
         }
     }
-    public void SelectGrab()
+    
+    private void SelectGrab()
     {
-        if(Direction == "left")
+        string direction = playerDirection.Direction;
+        if(direction == "left")
         {
             usedGrab = LeftGrab;
         }
-        else if (Direction == "rigth")
+        else if (direction == "rigth")
         {
             usedGrab = RightGrab;
         }
-        else if (Direction == "up")
+        else if (direction == "up")
         {
             usedGrab = UpGrab;
         }
-        else if (Direction == "down")
+        else if (direction == "down")
         {
             usedGrab = DownGrab;
+        }
+    }
+    private void Grab()
+    {
+        Grabbable grabed = usedGrab.CalNearest();
+        Rigidbody2D grabedRigidbody;
+        if (grabed != null)
+        {
+            grabedObject = grabed;
+            grabedObject.IsGrabed = true;
+            grabedObject.Grabber = this;
+            grabedObject.transform.position = transform.position;
+            grabedObject.GetComponent<ZSync>().LavitateHeight = GetComponent<ZSync>().SpriteHeight / 2 + 0.1f;
+            grabedObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            grabedObject.transform.position = transform.position;
+            grabedObject.GetComponent<PlayerControl>().isEnable = true;
+        }
+    }
+    private void Release()
+    {
+        float releasePositionY = transform.position.y - GetComponent<ZSync>().SpriteHeight / 2 + grabedObject.GetComponent<ZSync>().SpriteHeight / 2 - 0.0001f;
+        if (grabedObject != null)
+        {
+            grabedObject.IsGrabed = false;
+            grabedObject.Grabber = null;
+            grabedObject.transform.position = new Vector2(transform.position.x ,releasePositionY);
+            grabedObject.GetComponent<ZSync>().LavitateHeight = 0;
+            grabedObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            grabedObject.GetComponent<PlayerControl>().isEnable = false;
+            grabedObject = null;
+        }
+    }
+    private void GrabControl()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (grabedObject == null)
+            {
+                Grab();
+            }
+            else
+            {
+                Release();
+            }
         }
     }
 }

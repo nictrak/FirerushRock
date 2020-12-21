@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Life : MonoBehaviour
+public class IgnoreRotation : MonoBehaviour
 {
-    public float lifePoint;
-
     // Start is called before the first frame update
     void Start()
     {
-
+        GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 
     // Update is called once per frame
