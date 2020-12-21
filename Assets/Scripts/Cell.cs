@@ -19,7 +19,7 @@ public class Cell : MonoBehaviour
     public bool LevelOneFire { get => levelOneFire; set => levelOneFire = value; }
     public bool LevelTwoFire { get => levelTwoFire; set => levelTwoFire = value; }
     public bool LevelThreeFire { get => levelThreeFire; set => levelThreeFire = value; }
-    public GameObject FireSimulation { get => fireSimulation; set => fireSimulation = value; }
+    public GameObject FireSystem { get => fireSimulation; set => fireSimulation = value; }
 
     // Start is called before the first frame update
     void Start()
