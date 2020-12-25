@@ -13,7 +13,7 @@ public class FireSystem : MonoBehaviour
     private NDArray fire_1_array;
     private NDArray fire_2_array;
     private NDArray fire_3_array;
-    private NDArray wall_array;
+    public static NDArray wall_array;
     public int fire_1_size;
     public int fire_2_size;
     public int fire_3_size;
@@ -30,9 +30,8 @@ public class FireSystem : MonoBehaviour
 
 
 
-    void Start()
+    void Awake()
     {
-
         framerate_counter = 0;
     //initial array
         var gridsize = ((int)grid.GridSize.x, (int)grid.GridSize.y);

@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 6939673669449611010}
   - component: {fileID: 9041071835518876721}
   - component: {fileID: 8330863177608705841}
-  - component: {fileID: 4868704434669699545}
+  - component: {fileID: 7662863468016674956}
+  - component: {fileID: 3923777059975770193}
   m_Layer: 0
   m_Name: Grabbable
   m_TagString: Untagged
@@ -171,7 +172,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpriteHeight: 0.25
---- !u!114 &4868704434669699545
+--- !u!114 &7662863468016674956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3583791644520692933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7421d04bf448a0d40beea7859851ee05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3923777059975770193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,4 +197,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveVelocity: 0.25
-  isEnable: 1
+  isEnable: 0
