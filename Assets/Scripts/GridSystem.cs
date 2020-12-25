@@ -23,6 +23,7 @@ public class GridSystem : MonoBehaviour
                 Vector3 instatiatePosition = new Vector3(xPosition, yPosition, BaseZ);
                 Cell newGrid = Instantiate<Cell>(GridPrefab);
                 newGrid.transform.position = instatiatePosition;
+                newGrid.GridPosition = new Vector2(i, j);
                 newRow.Add(newGrid);
             }
             grids.Add(newRow);

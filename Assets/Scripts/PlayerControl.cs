@@ -33,7 +33,19 @@ public class PlayerControl : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (isEnable) rigidbody.MovePosition(rigidbody.position + moveVector);
+        Move();
+    }
+    private void Move()
+    {
+        if (isEnable)
+        {
+            Grabbable grabbable = GetComponent<PlayerGrab>().GrabedObject;
+            rigidbody.position += moveVector;
+            if(grabbable != null)
+            {
+                grabbable.GetComponent<Rigidbody2D>().position = rigidbody.position;
+            }
+        }
     }
     private Vector2 MoveControl()
     {

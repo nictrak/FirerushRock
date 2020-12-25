@@ -6,6 +6,7 @@ public class Grabbable : MonoBehaviour
 {
     private bool isGrabed;
     private PlayerGrab grabber;
+    private Rigidbody2D rigidbody;
     public bool IsGrabed { get => isGrabed; set => isGrabed = value; }
     public PlayerGrab Grabber { get => grabber; set => grabber = value; }
 
@@ -13,12 +14,12 @@ public class Grabbable : MonoBehaviour
     void Start()
     {
         isGrabed = false;
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
     private void FixedUpdate()
     {
@@ -32,7 +33,7 @@ public class Grabbable : MonoBehaviour
     {
         if (isGrabed)
         {
-            transform.position = grabber.transform.position;
+            rigidbody.position = grabber.GetComponent<Rigidbody2D>().position;
         }
     }
 }

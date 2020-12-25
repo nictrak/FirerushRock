@@ -12,10 +12,10 @@ public class PlayerGrab : MonoBehaviour
     public GrabHitbox RightGrab;
     public GrabHitbox UpGrab;
     public GrabHitbox DownGrab;
-
+    public float ThrowSpeed;
     
     public GrabHitbox UsedGrab { get => usedGrab; set => usedGrab = value; }
-    public Grabbable GrabedObject { get => GrabedObject; set => GrabedObject = value; }
+    public Grabbable GrabedObject { get => grabedObject; set => grabedObject = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +30,8 @@ public class PlayerGrab : MonoBehaviour
         SelectGrab();
         GrabControl();
     }
+
+    
 
     public void UseObject()
     {
@@ -69,10 +71,9 @@ public class PlayerGrab : MonoBehaviour
             grabedObject.IsGrabed = true;
             grabedObject.Grabber = this;
             grabedObject.transform.position = transform.position;
-            grabedObject.GetComponent<ZSync>().LavitateHeight = GetComponent<ZSync>().SpriteHeight / 2 + 0.1f;
+            grabedObject.GetComponent<ZSync>().LavitateHeight = GetComponent<ZSync>().SpriteHeight / 2 + 0.2f;
             grabedObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             grabedObject.transform.position = transform.position;
-            grabedObject.GetComponent<PlayerControl>().isEnable = true;
         }
     }
     private void Release()
@@ -85,8 +86,41 @@ public class PlayerGrab : MonoBehaviour
             grabedObject.transform.position = new Vector2(transform.position.x ,releasePositionY);
             grabedObject.GetComponent<ZSync>().LavitateHeight = 0;
             grabedObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            grabedObject.GetComponent<PlayerControl>().isEnable = false;
             grabedObject = null;
+        }
+    }
+    private void Throw()
+    {
+        if(grabedObject != null)
+        {
+            Throwable throwed = grabedObject.GetComponent<Throwable>();
+            Vector2 throwVector;
+            if (grabedObject.GetComponent<Throwable>() != null)
+            {
+                grabedObject.IsGrabed = false;
+                grabedObject.Grabber = null;
+                grabedObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                grabedObject.GetComponent<BoxCollider2D>().isTrigger = false;
+                throwed.IsThrowed = true;
+                if(playerDirection.Direction == "left")
+                {
+                    throwVector = new Vector2(-ThrowSpeed, 0);
+                }
+                else if (playerDirection.Direction == "right")
+                {
+                    throwVector = new Vector2(ThrowSpeed, 0);
+                }
+                else if (playerDirection.Direction == "up")
+                {
+                    throwVector = new Vector2(0, ThrowSpeed);
+                }
+                else
+                {
+                    throwVector = new Vector2(0, -ThrowSpeed);
+                }
+                throwed.ThrowVector = throwVector;
+                grabedObject = null;
+            }
         }
     }
     private void GrabControl()
@@ -100,6 +134,13 @@ public class PlayerGrab : MonoBehaviour
             else
             {
                 Release();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (grabedObject != null)
+            {
+                Throw();
             }
         }
     }
