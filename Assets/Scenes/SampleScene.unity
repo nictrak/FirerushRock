@@ -703,6 +703,21 @@ PrefabInstance:
       propertyPath: grid
       value: 
       objectReference: {fileID: 814208376}
+    - target: {fileID: 391669134699347561, guid: c5b3318304bc3fb4cbc422bff66c1aac,
+        type: 3}
+      propertyPath: heat_decay
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 391669134699347561, guid: c5b3318304bc3fb4cbc422bff66c1aac,
+        type: 3}
+      propertyPath: fire2_add_heat
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 391669134699347561, guid: c5b3318304bc3fb4cbc422bff66c1aac,
+        type: 3}
+      propertyPath: fire3_add_heat
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 391669134699347562, guid: c5b3318304bc3fb4cbc422bff66c1aac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1199,7 +1214,7 @@ PrefabInstance:
     - target: {fileID: 8345127587767532831, guid: 8472de882c098724d8164ab82796f067,
         type: 3}
       propertyPath: GridSize.x
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8345127587767532831, guid: 8472de882c098724d8164ab82796f067,
         type: 3}
@@ -1215,6 +1230,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OriginPosition.y
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345127587767532831, guid: 8472de882c098724d8164ab82796f067,
+        type: 3}
+      propertyPath: GridSize.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8472de882c098724d8164ab82796f067, type: 3}
