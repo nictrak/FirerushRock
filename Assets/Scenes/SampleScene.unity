@@ -706,17 +706,17 @@ PrefabInstance:
     - target: {fileID: 391669134699347561, guid: c5b3318304bc3fb4cbc422bff66c1aac,
         type: 3}
       propertyPath: heat_decay
-      value: -0.2
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 391669134699347561, guid: c5b3318304bc3fb4cbc422bff66c1aac,
         type: 3}
       propertyPath: fire2_add_heat
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 391669134699347561, guid: c5b3318304bc3fb4cbc422bff66c1aac,
         type: 3}
       propertyPath: fire3_add_heat
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 391669134699347562, guid: c5b3318304bc3fb4cbc422bff66c1aac,
         type: 3}
