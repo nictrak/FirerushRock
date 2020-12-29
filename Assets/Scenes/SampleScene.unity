@@ -601,6 +601,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8589663800469107191, guid: 4733831ff480b944282cb40d193f704d,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4733831ff480b944282cb40d193f704d, type: 3}
 --- !u!1 &519420028
@@ -706,17 +711,27 @@ PrefabInstance:
     - target: {fileID: 391669134699347561, guid: c5b3318304bc3fb4cbc422bff66c1aac,
         type: 3}
       propertyPath: heat_decay
-      value: -0.4
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 391669134699347561, guid: c5b3318304bc3fb4cbc422bff66c1aac,
         type: 3}
       propertyPath: fire2_add_heat
-      value: 0.4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 391669134699347561, guid: c5b3318304bc3fb4cbc422bff66c1aac,
         type: 3}
       propertyPath: fire3_add_heat
-      value: 0.2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 391669134699347561, guid: c5b3318304bc3fb4cbc422bff66c1aac,
+        type: 3}
+      propertyPath: max_heat_point
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 391669134699347561, guid: c5b3318304bc3fb4cbc422bff66c1aac,
+        type: 3}
+      propertyPath: fire_spread_counter
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 391669134699347562, guid: c5b3318304bc3fb4cbc422bff66c1aac,
         type: 3}
