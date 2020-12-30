@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8589663800469107190}
   - component: {fileID: 8589663800469107185}
   - component: {fileID: 465597717170276088}
+  - component: {fileID: 3509265492049295686}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -158,3 +159,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpriteHeight: 1
+--- !u!114 &3509265492049295686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8589663800469107184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8350fe8a90a16be49a5e49437a2a0ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
