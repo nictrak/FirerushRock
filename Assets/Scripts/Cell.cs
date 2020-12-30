@@ -24,6 +24,9 @@ public class Cell : MonoBehaviour
     public Color NormalColor;
     public Color WallColor;
     public GameObject HeatSprite;
+    public Rigidbody2D Wall;
+    public Rigidbody2D Door;
+    public float BaseZ;
     public string HouseMap { get => houseMap; set => houseMap = value; }
     public double Heat { get => heat; set => heat = value; }
     public bool LevelOneFire { get => levelOneFire; set => levelOneFire = value; }
@@ -48,16 +51,26 @@ public class Cell : MonoBehaviour
         survivor = (FireSystem.survivor_array[(int)gridPosition.y, (int)gridPosition.x] == 1);
         wall = (FireSystem.wall_array[(int)gridPosition.y, (int)gridPosition.x] == 1);
         empty_space = false;
+        if (!wall & !furniture & !door & !survivor) empty_space = true;
 
+
+        //color
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (wall) spriteRenderer.color = Color.blue;
         if (furniture) spriteRenderer.color = Color.black;
         if (door) spriteRenderer.color = Color.green;
         if (survivor) spriteRenderer.color = Color.yellow;
-        if (!wall & !furniture & !door & !survivor) empty_space = true;
+        if (wall)
+        {
+            Rigidbody2D newWall = Instantiate(Wall);
+            newWall.transform.position = this.transform.position;
+        }
 
-
-
+        if (door)
+        {
+            Rigidbody2D newDoor = Instantiate(Door);
+            newDoor.transform.position = this.transform.position;
+        }
 
     }
 
