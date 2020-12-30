@@ -136,7 +136,7 @@ public class PlayerGrab : MonoBehaviour
                 Release();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.G))
         {
             if (grabedObject != null)
             {
