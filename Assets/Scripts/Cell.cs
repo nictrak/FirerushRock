@@ -85,7 +85,15 @@ public class Cell : MonoBehaviour
         if (empty_space) { 
             if (Mathf.Abs((float)(lastHeat - heat)) > 0.001)
             {
-                float heatScale = (float)(heat / 100);
+                float heatScale;
+                if (heat > 0)
+                {
+                    heatScale = (float)(heat / 100);
+                }
+                else
+                {
+                    heatScale = 0;
+                }
                 HeatSprite.transform.localScale = new Vector3(heatScale, heatScale, 1f);
                 lastHeat = heat;
             }

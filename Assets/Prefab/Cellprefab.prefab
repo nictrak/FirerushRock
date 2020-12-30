@@ -182,6 +182,9 @@ MonoBehaviour:
   NormalColor: {r: 1, g: 1, b: 1, a: 1}
   WallColor: {r: 1, g: 0.6044712, b: 0.3066038, a: 1}
   HeatSprite: {fileID: 6914294050389124009}
+  Wall: {fileID: 8589663800469107191, guid: 4733831ff480b944282cb40d193f704d, type: 3}
+  Door: {fileID: 4421806067456995327, guid: c9c2191c1978ed649acc99111856ad59, type: 3}
+  BaseZ: 0
 --- !u!50 &6500628573084247396
 Rigidbody2D:
   serializedVersion: 4
