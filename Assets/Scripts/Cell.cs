@@ -24,8 +24,10 @@ public class Cell : MonoBehaviour
     public Color NormalColor;
     public Color WallColor;
     public GameObject HeatSprite;
-    public Rigidbody2D Wall;
-    public Rigidbody2D Door;
+    public GameObject Wall;
+    public GameObject Door;
+    public GameObject Survivor;
+    public GameObject Furniture;
     public float BaseZ;
     public string HouseMap { get => houseMap; set => houseMap = value; }
     public double Heat { get => heat; set => heat = value; }
@@ -60,15 +62,27 @@ public class Cell : MonoBehaviour
         if (furniture) spriteRenderer.color = Color.black;
         if (door) spriteRenderer.color = Color.green;
         if (survivor) spriteRenderer.color = Color.yellow;
+        if (furniture)
+        {
+            GameObject newFurniture = Instantiate(Furniture);
+            newFurniture.transform.position = this.transform.position;
+        }
+
+        if (survivor)
+        {
+            GameObject newSurvivor = Instantiate(Survivor);
+            newSurvivor.transform.position = this.transform.position;
+        }
+
         if (wall)
         {
-            Rigidbody2D newWall = Instantiate(Wall);
+            GameObject newWall = Instantiate(Wall);
             newWall.transform.position = this.transform.position;
         }
 
         if (door)
         {
-            Rigidbody2D newDoor = Instantiate(Door);
+            GameObject newDoor = Instantiate(Door);
             newDoor.transform.position = this.transform.position;
         }
 
