@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728c91773a7dac458515aea1d30a919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpeedMultiplier: 0
 --- !u!114 &4575613265741898931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,9 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008df4044bb3ad84e9ffd0ac51fe79a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  self: {fileID: 9033900264385998663}
-  recueArea: {fileID: 4421806067456995320, guid: c9c2191c1978ed649acc99111856ad59,
-    type: 3}
 --- !u!114 &4841528584914492922
 MonoBehaviour:
   m_ObjectHideFlags: 0

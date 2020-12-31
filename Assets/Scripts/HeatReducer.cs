@@ -36,7 +36,6 @@ public class HeatReducer : MonoBehaviour
         }
         for (int i = 0; i < cells.Count; i++)
         {
-            Debug.Log(cells[i]);
             HeatReduce(cells[i]);
         }
         rigidbody.position += moveVector;
