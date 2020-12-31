@@ -14,21 +14,30 @@ public class Spreader : MonoBehaviour
     public int LifeTime;
     public float Angle;
     public float Range;
+    public float UseRate;
+    public float MaxLoad;
+    public GameObject Bar;
 
     private int spawnCounter;
+    private float load;
     private PlayerDirection playerDirection;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnCounter = 0;
+        load = MaxLoad;
     }
 
     // Update is called once per frame
     void Update()
     {
         SyncPlayerDirection();
-        if(spawnCounter < SpreadRate)
+        Bar.transform.localScale = new Vector3(load / MaxLoad, Bar.transform.localScale.y, 1);
+    }
+    private void FixedUpdate()
+    {
+        if (spawnCounter < SpreadRate)
         {
             spawnCounter += 1;
         }
@@ -61,7 +70,7 @@ public class Spreader : MonoBehaviour
     }
     private void SpawnLoop()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && load > 0)
         {
             if (playerDirection != null)
             {
@@ -96,6 +105,7 @@ public class Spreader : MonoBehaviour
                     water.MoveVector = temp;
                 }
                 water.LifeTime = LifeTime;
+                load -= UseRate;
             }
         }
     }

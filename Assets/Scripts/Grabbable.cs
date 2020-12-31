@@ -7,6 +7,8 @@ public class Grabbable : MonoBehaviour
     private bool isGrabed;
     private PlayerGrab grabber;
     private Rigidbody2D rigidbody;
+
+    public float SpeedMultiplier;
     public bool IsGrabed { get => isGrabed; set => isGrabed = value; }
     public PlayerGrab Grabber { get => grabber; set => grabber = value; }
 
