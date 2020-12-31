@@ -14,9 +14,12 @@ public class HeatReducer : MonoBehaviour
 
     private int timeCounter;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         cells = new List<Cell>();
+    }
+    void Start()
+    {
         rigidbody = GetComponent<Rigidbody2D>();
         timeCounter = 0;
     }
@@ -36,7 +39,7 @@ public class HeatReducer : MonoBehaviour
             Debug.Log(cells[i]);
             HeatReduce(cells[i]);
         }
-        transform.position = transform.position + new Vector3(moveVector.x, moveVector.y, 0);
+        rigidbody.position += moveVector;
         timeCounter += 1;
     }
     private void OnTriggerEnter2D(Collider2D collision)
