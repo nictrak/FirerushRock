@@ -14,15 +14,12 @@ public class Survivor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            Destroy(this.gameObject);
-        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<BreakWater>() != null)
+        if (collision.gameObject.GetComponent<RescueZone>() != null)
         {
             Destroy(this.gameObject);
         }
