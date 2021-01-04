@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 4575613265741898931}
   - component: {fileID: 8833526567705338835}
   - component: {fileID: 6054667073101268376}
-  - component: {fileID: 4841528584914492922}
   m_Layer: 0
   m_Name: Survivor
   m_TagString: Untagged
@@ -198,17 +197,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 008df4044bb3ad84e9ffd0ac51fe79a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4841528584914492922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9033900264385998663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7421d04bf448a0d40beea7859851ee05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
