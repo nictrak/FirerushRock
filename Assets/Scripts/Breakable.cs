@@ -19,11 +19,14 @@ public class Breakable : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Collision");
         Throwable throwable = collision.gameObject.GetComponent<Throwable>();
         if (throwable != null)
         {
-            if (throwable.IsThrowed)
+            Debug.Log("Not null");
+            if (throwable.IsBreakActive)
             {
+                Debug.Log("Throwed");
                 toughness -= 1;
                 if(toughness <= 0)
                 {

@@ -10,9 +10,9 @@ public class FireSystem : MonoBehaviour
     public int fire_spread_counter;
     private int framerate_counter;
     public static NDArray heat_array;
-    private NDArray fire_1_array;
-    private NDArray fire_2_array;
-    private NDArray fire_3_array;
+    public static NDArray fire_1_array;
+    public static NDArray fire_2_array;
+    public static NDArray fire_3_array;
     public static NDArray wall_array;
     public static NDArray fire_source_array;
     public static NDArray door_array;

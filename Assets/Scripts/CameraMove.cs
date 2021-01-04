@@ -19,7 +19,10 @@ public class CameraMove : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector3 trackedPosition = TrackedFirefighter.Rigidbody.position;
-        transform.position = new Vector3(trackedPosition.x, trackedPosition.y, BaseZ);
+        if(TrackedFirefighter != null)
+        {
+            Vector3 trackedPosition = TrackedFirefighter.Rigidbody.position;
+            transform.position = new Vector3(trackedPosition.x, trackedPosition.y, BaseZ);
+        }
     }
 }
