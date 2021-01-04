@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728c91773a7dac458515aea1d30a919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpeedMultiplier: 0
 --- !u!114 &9152509562597530809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,4 +222,7 @@ MonoBehaviour:
   WaterVelocity: 0.1
   LifeTime: 20
   Angle: 60
-  Range: 0.5
+  Range: 0.2
+  UseRate: 0
+  MaxLoad: 0
+  Bar: {fileID: 0}
