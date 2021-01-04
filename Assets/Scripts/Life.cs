@@ -7,6 +7,8 @@ public class Life : MonoBehaviour
     private float lifePoint;
 
     public float MaxLifePoint;
+    public GameObject LifeBar;
+    public GameObject Entity;
 
     public float LifePoint { get => lifePoint; set => lifePoint = value; }
 
@@ -14,11 +16,30 @@ public class Life : MonoBehaviour
     void Start()
     {
         lifePoint = MaxLifePoint;
+        SyncLifeBar();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void Damage(float damagePoint)
+    {
+        lifePoint -= damagePoint;
+        if(lifePoint <= 0)
+        {
+            Destroy(Entity);
+        }
+        else
+        {
+            SyncLifeBar();
+        }
+    }
+
+    private void SyncLifeBar()
+    {
+        LifeBar.transform.localScale = new Vector3(lifePoint / MaxLifePoint, 0.1f, 1);
     }
 }

@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(PlayerControl))]
-[RequireComponent(typeof(ZSync))]
-[RequireComponent(typeof(Life))]
-[RequireComponent(typeof(PlayerGrab))]
 public class Firefighter : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
