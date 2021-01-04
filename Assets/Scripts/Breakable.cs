@@ -32,5 +32,20 @@ public class Breakable : MonoBehaviour
                 }
             }
         }
+        else{
+            throwable = GetComponent<Throwable>();
+            if (throwable != null)
+            {
+                if (throwable.IsBreakActive)
+                {
+                    toughness -= 1;
+                    if (toughness <= 0)
+                    {
+                        GetComponent<SpriteRenderer>().enabled = false;
+                        GetComponent<BoxCollider2D>().enabled = false;
+                    }
+                }
+            }
+        }
     }
 }

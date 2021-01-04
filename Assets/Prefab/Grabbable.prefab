@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8330863177608705841}
   - component: {fileID: 7662863468016674956}
   - component: {fileID: 3923777059975770193}
+  - component: {fileID: 7903507764010875226}
   m_Layer: 0
   m_Name: Grabbable
   m_TagString: Untagged
@@ -159,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728c91773a7dac458515aea1d30a919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpeedMultiplier: 0
 --- !u!114 &8330863177608705841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,3 +200,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVelocity: 0.25
   isEnable: 0
+--- !u!114 &7903507764010875226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3583791644520692933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e313566bf1c7dd4b934b44ed27ec8a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxToughness: 1
