@@ -218,7 +218,7 @@ MonoBehaviour:
   RightSpawnVector: {x: 0.5, y: 0, z: 0}
   UpSpawnVector: {x: 0, y: 0.5, z: 0}
   DownSpawnVector: {x: 0, y: -0.5, z: 0}
-  SpreadRate: 0
+  SpreadRate: 2
   WaterVelocity: 0.1
   LifeTime: 20
   Angle: 60
