@@ -21,19 +21,21 @@ public class Spreader : MonoBehaviour
     private int spawnCounter;
     private float load;
     private PlayerDirection playerDirection;
+    private float maxLocalScaleX;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnCounter = 0;
         load = MaxLoad;
+        maxLocalScaleX = Bar.transform.localScale.x;
     }
 
     // Update is called once per frame
     void Update()
     {
         SyncPlayerDirection();
-        Bar.transform.localScale = new Vector3(load / MaxLoad, Bar.transform.localScale.y, 1);
+        Bar.transform.localScale = new Vector3(load / MaxLoad * maxLocalScaleX, Bar.transform.localScale.y, 1);
     }
     private void FixedUpdate()
     {
