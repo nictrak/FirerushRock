@@ -8,6 +8,8 @@ public class Breakable : MonoBehaviour
 
     public int MaxToughness;
 
+    public SpriteRenderer BangPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,33 +27,37 @@ public class Breakable : MonoBehaviour
         BreakThrow breakThrow = collision.gameObject.GetComponent<BreakThrow>();
         if (throwable != null)
         {
-                if (throwable.IsBreakActive)
-                {
-                    toughness -= 1;
-                    if (toughness <= 0)
-                    {
-                        Destroy(this.gameObject);
-                        //GetComponent<SpriteRenderer>().enabled = false;
-                        //GetComponent<BoxCollider2D>().enabled = false;
-                    }
-                }
-        }
-        else
-        {
-            throwable = GetComponent<Throwable>();
-            if (throwable != null && breakThrow != null)
+            if (throwable.IsBreakActive)
             {
-                if (throwable.IsBreakActive)
-                {
-                    toughness -= 1;
-                    if (toughness <= 0)
-                    {
-                        Destroy(this.gameObject);
-                        //GetComponent<SpriteRenderer>().enabled = false;
-                        //GetComponent<BoxCollider2D>().enabled = false;
-                    }
-                }
+                Hit();
+            }
+        }
+        throwable = GetComponent<Throwable>();
+        if (throwable != null && breakThrow != null)
+        {
+            if (throwable.IsBreakActive)
+            {
+                InstantiateBang();
+                Hit();
             }
         }
     }
+
+    private void Hit()
+    {
+        toughness -= 1;
+        if (toughness <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    private void InstantiateBang()
+    {
+        if (BangPrefab != null)
+        {
+            SpriteRenderer bang = Instantiate<SpriteRenderer>(BangPrefab);
+            bang.transform.position = transform.position;
+        }
+    }
+
 }
