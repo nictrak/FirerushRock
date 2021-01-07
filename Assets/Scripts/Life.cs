@@ -5,6 +5,7 @@ using UnityEngine;
 public class Life : MonoBehaviour
 {
     private float lifePoint;
+    private float maxLocalScale;
 
     public float MaxLifePoint;
     public GameObject LifeBar;
@@ -15,6 +16,7 @@ public class Life : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxLocalScale = LifeBar.transform.localScale.x;
         lifePoint = MaxLifePoint;
         SyncLifeBar();
     }
@@ -22,7 +24,6 @@ public class Life : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void Damage(float damagePoint)
@@ -40,6 +41,6 @@ public class Life : MonoBehaviour
 
     private void SyncLifeBar()
     {
-        LifeBar.transform.localScale = new Vector3(lifePoint / MaxLifePoint, 0.1f, 1);
+        LifeBar.transform.localScale = new Vector3(lifePoint / MaxLifePoint * maxLocalScale, LifeBar.transform.localScale.y, 1);
     }
 }
