@@ -9,6 +9,7 @@ public class PCG : MonoBehaviour
 
     private System.Random random;
 
+
     private class Point
     {
 
@@ -179,7 +180,7 @@ public class PCG : MonoBehaviour
             firstDepthArea.children.Sort((firstArea, secondArea) => firstArea.proportion.CompareTo(secondArea.proportion));
             rootArea.children.Add(firstDepthArea);
         }
-        rootArea.children.Sort((firstArea, secondArea) => firstArea.proportion.CompareTo(secondArea.proportion));
+        rootArea.children.Sort((firstArea, secondArea) => -firstArea.proportion.CompareTo(secondArea.proportion));
         return roomList;
     }
 
@@ -278,6 +279,16 @@ public class PCG : MonoBehaviour
             // doubt
             Partition(recursion, areaHierarchy.GetRange(partitionCount, areaHierarchy.Count - partitionCount), remainingPartitionRectangle, pointGraph);
         }
+    }
+
+    private bool VerifyPartition(List<Room> roomList)
+    {
+        foreach (Room room in roomList)
+        {
+            if (room.area.rectangle.GetWidth() <= 7 || room.area.rectangle.GetHeight() <= 5)
+                return false;
+        }
+        return true;
     }
 
     private Dictionary<Point, HashSet<Room>> Geometrize(List<Room> roomList, Graph<Point, bool> pointGraph)
@@ -449,6 +460,8 @@ public class PCG : MonoBehaviour
                 {
                     if (firstRoom.Equals(secondRoom))
                         continue;
+                    if (roomPointDictionary[secondPoint].Contains(secondRoom) == false)
+                        continue;
                     if (roomGraph.graph[firstRoom].ContainsKey(secondRoom))
                         continue;
                     if (additionalConnection.ContainsKey((secondRoom, firstRoom)))
@@ -492,7 +505,7 @@ public class PCG : MonoBehaviour
         {
             (Point firstPoint, Point secondPoint) = additionalConnection[(firstRoom, secondRoom)];
             roomGraph.Connect(firstRoom, secondRoom, (firstPoint, secondPoint));
-            roomGraph.Connect(secondRoom, firstRoom, (firstPoint, secondPoint));
+            roomGraph.Connect(secondRoom, firstRoom, (secondPoint, firstPoint));
         }
     }
 
@@ -551,91 +564,286 @@ public class PCG : MonoBehaviour
         }
     }
 
-    private void Furnish(List<Room> roomList, Dictionary<int, List<(bool, double, double)>> viableFurniture, int furnitureCount, int attemptCount)
+    private void Furnish(List<Room> roomList, Dictionary<int, List<(double, double)>> viableFurniture, int furnitureCount, int attemptCount)
     {
         foreach (Room room in roomList)
         {
-            int choice;
-            for (int i = 0; i < furnitureCount; i++)
+            int successFurnish = 0;
+            for (int i = 0; i < furnitureCount * attemptCount; i++)
             {
-                choice = random.Next(viableFurniture[room.type].Count);
-                (bool wallFurniture, double furnitureWidth, double furnitureHeight) = viableFurniture[room.type][choice];
-                for (int j = 0; j < attemptCount; j++)
+                if (successFurnish >= furnitureCount)
+                    break;
+                int choice = random.Next(viableFurniture[room.type].Count);
+                (double furnitureWidth, double furnitureHeight) = viableFurniture[room.type][choice];
+                if (room.area.rectangle.GetWidth() - 3 <= furnitureWidth || room.area.rectangle.GetHeight() - 5 <= furnitureHeight)
+                    continue;
+                double furnitureX = 0; // bs
+                double furnitureY = 0; // also bs
+                int furnitureType = 8;
+                int wall = random.Next(2);
+                if (wall == 0)
                 {
-                    if (wallFurniture)
+                    int side = random.Next(4);
+                    furnitureType = side + 4;
+                    if (side == 0)
                     {
-                        int side = random.Next(4);
-                        double furnitureX;
-                        double furnitureY;
-                        if (side == 0)
-                        {
-                            furnitureX = room.area.rectangle.x1 + 1;
-                            furnitureY = (room.area.rectangle.y1 + 3) + room.area.rectangle.GetWidth() * random.NextDouble();
-                        }
-                        if (side == 1)
-                        {
-
-                        }
-                        if (side == 2)
-                        {
-
-                        }
-                        if (side == 3)
-                        {
-
-                        }
+                        furnitureX = (room.area.rectangle.x1 + 3) + (room.area.rectangle.GetWidth() - furnitureWidth - 3) * random.NextDouble();
+                        furnitureY = room.area.rectangle.y1 + 1;
                     }
+                    if (side == 1)
+                    {
+                        furnitureX = room.area.rectangle.x2 - furnitureWidth;
+                        furnitureY = (room.area.rectangle.y1 + 1) + (room.area.rectangle.GetHeight() - furnitureHeight - 1) * random.NextDouble();
+                    }
+                    if (side == 2)
+                    {
+                        furnitureX = (room.area.rectangle.x1 + 3) + (room.area.rectangle.GetWidth() - furnitureWidth - 3) * random.NextDouble();
+                        furnitureY = room.area.rectangle.y2 - furnitureHeight;
+                    }
+                    if (side == 3)
+                    {
+                        furnitureX = room.area.rectangle.x1 + 3;
+                        furnitureY = (room.area.rectangle.y1 + 1) + (room.area.rectangle.GetHeight() - furnitureHeight - 1) * random.NextDouble();
+                    }
+                }
+                else
+                {
+                    furnitureX = (room.area.rectangle.x1 + 4) + (room.area.rectangle.GetWidth() - furnitureWidth - 5) * random.NextDouble();
+                    furnitureY = (room.area.rectangle.y1 + 2) + (room.area.rectangle.GetHeight() - furnitureHeight - 3) * random.NextDouble();
+                }
+                Rectangle furniturePadding = new Rectangle(furnitureX, furnitureY, furnitureX + furnitureWidth, furnitureY + furnitureHeight);
+                Rectangle furnitureMargin = new Rectangle(furnitureX - 1, furnitureY - 1, furnitureX + furnitureWidth + 1, furnitureY + furnitureHeight + 1);
+                bool collide = false;
+                foreach (Furniture placedFurniture in room.furniture)
+                {
+                    if (placedFurniture.margin.Collide(furnitureMargin))
+                    {
+                        collide = true;
+                        break;
+                    }
+                }
+                if (collide)
+                    continue;
+                room.furniture.Add(new Furniture(furnitureType, furniturePadding, furnitureMargin));
+                successFurnish++;
+            }
+        }
+    }
+
+
+    private void DrawRoom(NDArray roomArray, List<Room> roomList)
+    {
+        foreach (Room room in roomList)
+        {
+            int x1 = Convert.ToInt32(room.area.rectangle.x1);
+            int y1 = Convert.ToInt32(room.area.rectangle.y1);
+            int x2 = Convert.ToInt32(room.area.rectangle.x2);
+            int y2 = Convert.ToInt32(room.area.rectangle.y2);
+            roomArray[(x1 + 3).ToString() + ":" + x2.ToString(), (y1 + 1).ToString() + ":" + y2.ToString()] = 0;
+            roomArray[(x1 + 1).ToString() + ":" + (x1 + 3).ToString(), (y1 + 1).ToString() + ":" + y2.ToString()] = 2;
+            foreach (Furniture furniture in room.furniture)
+            {
+                if (furniture.type == 0)
+                {
+                    int doorX = Convert.ToInt32(furniture.padding.x1);
+                    int doorY = Convert.ToInt32(furniture.padding.y1);
+                    roomArray[doorX.ToString() + ":" + (doorX + 2).ToString() + ", " + doorY.ToString() + ":" + (doorY + 1).ToString()] = 0/*2*/;
+                    roomArray[(doorX + 2).ToString() + ":" + (doorX + 3).ToString() + ", " + doorY.ToString() + ":" + (doorY + 1).ToString()] = 0;
+                }
+                if (furniture.type == 3)
+                {
+                    int doorX = Convert.ToInt32(furniture.padding.x1);
+                    int doorY = Convert.ToInt32(furniture.padding.y1);
+                    roomArray[doorX.ToString() + ":" + (doorX + 3).ToString() + ", " + doorY.ToString() + ":" + (doorY + 3).ToString()] = 0;
                 }
             }
         }
     }
 
+    private void DrawDoor(NDArray doorArray, List<Room> roomList)
+    {
+        foreach (Room room in roomList)
+        {
+            foreach (Furniture furniture in room.furniture)
+            {
+                if (furniture.type == 0)
+                {
+                    int x = Convert.ToInt32(furniture.padding.x1) + 1;
+                    int y = Convert.ToInt32(furniture.padding.y1);
+                    doorArray[x.ToString() + ", " + y.ToString()] = 1;
+                }
+                if (furniture.type == 3)
+                {
+                    int x = Convert.ToInt32(furniture.padding.x1);
+                    int y = Convert.ToInt32(furniture.padding.y1) + 1;
+                    doorArray[x.ToString() + ", " + y.ToString()] = 2;
+                }
+            }
+        }
+    }
+
+    private void DrawFurniture(NDArray furnitureArray, List<Room> roomList)
+    {
+        foreach (Room room in roomList)
+        {
+            foreach (Furniture furniture in room.furniture)
+            {
+                if (furniture.type < 4)
+                    continue;
+                int x = Convert.ToInt32(furniture.padding.x1);
+                int y = Convert.ToInt32(furniture.padding.y1);
+                furnitureArray[x.ToString() + ", " + y.ToString()] = furniture.type;
+            }
+        }
+    }
+
+    // private void DrawEverything();
+
     private List<List<int>> DebugHouseHierarchy(int roomCount, int firstBreadth)
     {
         List<List<int>> houseHierarchy = new List<List<int>>();
-        List<double> tempList = new List<double>();
+        List<double> tempList1 = new List<double>();
+        double sum = 0;
+        for (int i = 0; i < firstBreadth; i++)
+        {
+            tempList1.Add(random.NextDouble());
+            sum += tempList1[tempList1.Count - 1];
+        }
+        double unit = sum / (roomCount - firstBreadth);
+        double run = 0;
+        for (int i = 0; i < firstBreadth; i++)
+        {
+            List<int> tempList2 = new List<int>();
+            tempList2.Add(random.Next(12));
+            while (run < tempList1[i] - 0.000001)
+            {
+                tempList2.Add(random.Next(12));
+                run += unit;
+            }
+            houseHierarchy.Add(tempList2);
+            run -= tempList1[i];
+        }
         return houseHierarchy;
     }
 
-    private void GenerateHouse()
+    public (NDArray, NDArray, NDArray) GenerateHouse(List<List<int>> houseHierarchy, double width, double height)
     {
 
         Area rootArea = new Area(1);
-        List<List<int>> houseHierarchy = new List<List<int>>();
-        List<int> houseHierarchy0 = new List<int>();
-        for (int i = 0; i < 5; i++)
-            houseHierarchy0.Add(i);
-        houseHierarchy.Add(houseHierarchy0);
-        List<int> houseHierarchy1 = new List<int>();
-        for (int i = 0; i < 4; i++)
-            houseHierarchy1.Add(i);
-        houseHierarchy.Add(houseHierarchy1);
-        List<int> houseHierarchy2 = new List<int>();
-        for (int i = 0; i < 3; i++)
-            houseHierarchy2.Add(i);
-        houseHierarchy.Add(houseHierarchy2);
         List<Room> roomList = GenerateAreaHierarchy(rootArea, houseHierarchy) ;
 
-        Rectangle boundary = new Rectangle(0, 0, 50, 50);
+        Rectangle boundary = new Rectangle(0, 0, width, height);
         Graph<Point, bool> pointGraph = new Graph<Point, bool>();
         Partition(0, rootArea.children, boundary, pointGraph);
+
+        if (VerifyPartition(roomList) == false)
+            return (null, null, null);
 
         Dictionary<Point, HashSet<Room>> roomPointDictionary = Geometrize(roomList, pointGraph);
 
         Room rootRoom = roomList[0];
         Graph<Room, (Point, Point)> roomGraph = GenerateTreeConnection(rootRoom, roomList, roomPointDictionary);
-        GenerateAdditionalConnection(rootRoom, roomList, roomPointDictionary, roomGraph, 6);
+        
+        GenerateAdditionalConnection(rootRoom, roomList, roomPointDictionary, roomGraph, 5);
+
+        PlaceDoor(roomGraph);
+
+        Dictionary<int, List<(double, double)>> viableFurniture = new Dictionary<int, List<(double, double)>>();
+        for (int i = 0; i < 12; i++)
+        {
+            viableFurniture[i] = new List<(double, double)>();
+            viableFurniture[i].Add((1, 1));
+            viableFurniture[i].Add((2, 1));
+            viableFurniture[i].Add((1, 2));
+            viableFurniture[i].Add((3, 2));
+            viableFurniture[i].Add((2, 3));
+        }
+        Furnish(roomList, viableFurniture, 10, 5);
+
+        NDArray roomArray = np.ones((Convert.ToInt32(width + 1), Convert.ToInt32(height + 1)));
+        DrawRoom(roomArray, roomList);
+
+        NDArray doorArray = np.zeros((Convert.ToInt32(width + 1), Convert.ToInt32(height + 1)));
+        DrawDoor(doorArray, roomList);
+
+        NDArray furnitureArray = np.zeros((Convert.ToInt32(width + 1), Convert.ToInt32(height + 1)));
+        DrawFurniture(furnitureArray, roomList);
+
+        return (roomArray, doorArray, furnitureArray);
 
     }
 
     // Start is called before the first frame update
     void Start()
     {
+
         Debug.Log("Hello World!");
-        int seed = 3;
-        random = new System.Random(seed);
-        GenerateHouse();
-        Debug.Log("Complete");
+
+        //int seed = 3;
+        random = new System.Random(/*seed*/);
+
+        List<List<int>> houseHierarchy = DebugHouseHierarchy(11, 3);
+        string houseHierarchyString = "";
+        for (int i = 0; i < houseHierarchy.Count; i++)
+        {
+            houseHierarchyString += "[";
+            for (int j = 0; j < houseHierarchy[i].Count; j++)
+            {
+                houseHierarchyString += houseHierarchy[i][j].ToString();
+                if (j < houseHierarchy[i].Count - 1)
+                    houseHierarchyString += ", ";
+                else
+                    houseHierarchyString += "]";
+            }
+            if (i < houseHierarchy.Count - 1)
+                houseHierarchyString += ", ";
+        }
+        Debug.Log(houseHierarchyString);
+
+        int halfLength = 25;
+        double width = halfLength + halfLength * random.NextDouble();
+        double height = halfLength + halfLength * random.NextDouble();
+        (NDArray roomArray, NDArray doorArray, NDArray furnitureArray) = GenerateHouse(houseHierarchy, width, height);
+        while (roomArray == null)
+        {
+            halfLength = Math.Max(halfLength + 1, Convert.ToInt32(halfLength * 1.25));
+            //Debug.Log(halfLength);
+            width = halfLength + halfLength * random.NextDouble();
+            height = halfLength + halfLength * random.NextDouble();
+            (roomArray, doorArray, furnitureArray) = GenerateHouse(houseHierarchy, width, height);
+        }
+
+        string arrayString = "";
+        for (int i = 0; i < roomArray.Shape[0]; i++)
+        {
+            for (int j = 0; j < roomArray.Shape[1]; j++)
+            {
+
+                string roomString = roomArray[i.ToString() + ", " + j.ToString()].ToString();
+                string doorString = doorArray[i.ToString() + ", " + j.ToString()].ToString();
+                string furnitureString = furnitureArray[i.ToString() + ", " + j.ToString()].ToString();
+
+                string value = furnitureString;
+                if (value == "0")
+                    value = doorString;
+                if (value == "0")
+                {
+                    value = roomString;
+                    if (value == "0")
+                        arrayString += "  ";
+                    if (value == "1")
+                        arrayString += "@ ";
+                    if (value == "2")
+                        arrayString += "# ";
+                }
+                else
+                    arrayString += value + " ";
+
+            }
+            arrayString += "\n";
+        }
+        Debug.Log(arrayString);
+
     }
 
     // Update is called once per frame
