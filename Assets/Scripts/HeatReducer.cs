@@ -43,8 +43,10 @@ public class HeatReducer : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<BreakWater>() != null)
+        if (collision.gameObject.GetComponent<BreakWater>() != null)
         {
+            Debug.Log("breaked");
+            Debug.Log(collision.gameObject);
             Destroy(this.gameObject);
         }
         Cell cell = collision.gameObject.GetComponent<Cell>();

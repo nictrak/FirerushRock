@@ -12,8 +12,13 @@ public class PlayerControl : MonoBehaviour
     private Vector2 idleVector;
     private Vector2 moveVector;
 
+    private bool isMove;
+
     public float moveVelocity;
     public bool isEnable;
+
+    public bool IsMove { get => isMove; set => isMove = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,12 +44,24 @@ public class PlayerControl : MonoBehaviour
     {
         if (isEnable)
         {
-            Grabbable grabbable = GetComponent<PlayerGrab>().GrabedObject;
-            rigidbody.position += moveVector;
-            if(grabbable != null)
+            if(GetComponent<PlayerGrab>() != null)
             {
-                grabbable.GetComponent<Rigidbody2D>().position = rigidbody.position;
+                Grabbable grabbable = GetComponent<PlayerGrab>().GrabedObject;
+                if (grabbable != null)
+                {
+                    grabbable.GetComponent<Rigidbody2D>().position = rigidbody.position;
+                }
             }
+            rigidbody.position += moveVector;
+            if (moveVector.magnitude > 0.0001)
+            {
+                isMove = true;
+            }
+            else
+            {
+                isMove = false;
+            }
+
         }
     }
     private Vector2 MoveControl()

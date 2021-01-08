@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Survivor : MonoBehaviour
 {
+    private bool isRescued;
+
+    public bool IsRescued { get => isRescued; set => isRescued = value; }
+
     // Start is called before the first frame update
 
     void Start()
     {
-        
+        isRescued = false;
     }
 
     // Update is called once per frame
@@ -21,7 +25,8 @@ public class Survivor : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<RescueZone>() != null)
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            isRescued = true;
         }
     }
 }
