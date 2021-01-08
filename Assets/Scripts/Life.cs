@@ -42,7 +42,6 @@ public class Life : MonoBehaviour
     public void Damage(float damagePoint)
     {
         lifePoint -= damagePoint;
-        Debug.Log(lifePoint);
         if(lifePoint <= 0)
         {
             Debug.Log("Destroy");

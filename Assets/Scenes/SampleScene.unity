@@ -1121,6 +1121,7 @@ MonoBehaviour:
   Entity: {fileID: 1142001381}
   RegenPoint: 25
   NonRegenTime: 20
+  IsPlayer: 1
 --- !u!114 &1030994769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1133,6 +1134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56897625a30d344caaac7cd30c9cc5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  count: 0
 --- !u!61 &1030994770
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1173,13 +1175,13 @@ GameObject:
   - component: {fileID: 1142001385}
   - component: {fileID: 1142001387}
   - component: {fileID: 1142001382}
-  - component: {fileID: 1142001390}
   - component: {fileID: 1142001389}
   - component: {fileID: 1142001391}
   - component: {fileID: 1142001392}
   - component: {fileID: 1142001388}
   - component: {fileID: 1142001393}
   - component: {fileID: 1142001394}
+  - component: {fileID: 1142001390}
   m_Layer: 0
   m_Name: Firefighter
   m_TagString: Untagged
@@ -1355,8 +1357,8 @@ MonoBehaviour:
   UpGrab: {fileID: 1146612683}
   DownGrab: {fileID: 233296120}
   ThrowSpeed: 0.5
---- !u!61 &1142001390
-BoxCollider2D:
+--- !u!70 &1142001390
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1368,19 +1370,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.069696605, y: -1.4478998}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.76, y: 4.15}
-    newSize: {x: 2.76, y: 4.15}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.3133788, y: 1.309279}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.05000005, y: -0.9}
+  m_Size: {x: 2.3, y: 2.3}
+  m_Direction: 0
 --- !u!114 &1142001391
 MonoBehaviour:
   m_ObjectHideFlags: 0
