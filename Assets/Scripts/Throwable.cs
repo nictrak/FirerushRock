@@ -30,14 +30,14 @@ public class Throwable : MonoBehaviour
         SyncIsBreak();
         ThrowedMove();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        BreakThrow breakThrow = collision.gameObject.GetComponent<BreakThrow>();
-        if(breakThrow != null && throwVector.magnitude > 0.00001)
+        if (throwVector.magnitude > 0.00001)
         {
             isThrowed = false;
             throwVector = new Vector2();
             collider.isTrigger = true;
+            
         }
     }
     private void SyncIsBreak()

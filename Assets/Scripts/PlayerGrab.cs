@@ -100,7 +100,7 @@ public class PlayerGrab : MonoBehaviour
                 grabedObject.IsGrabed = false;
                 grabedObject.Grabber = null;
                 grabedObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                //grabedObject.GetComponent<BoxCollider2D>().isTrigger = false;
+                grabedObject.GetComponent<BoxCollider2D>().isTrigger = false;
                 throwed.IsThrowed = true;
                 if(playerDirection.Direction == "left")
                 {
