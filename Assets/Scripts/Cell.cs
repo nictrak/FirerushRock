@@ -29,10 +29,6 @@ public class Cell : MonoBehaviour
     public GameObject Survivor;
     public GameObject Furniture;
     public float BaseZ;
-    public SpriteRenderer Fire1;
-    public SpriteRenderer Fire2;
-    public SpriteRenderer Fire3;
-    public bool IsShowHeat;
     public string HouseMap { get => houseMap; set => houseMap = value; }
     public double Heat { get => heat; set => heat = value; }
     public bool LevelOneFire { get => levelOneFire; set => levelOneFire = value; }
@@ -63,9 +59,9 @@ public class Cell : MonoBehaviour
         //color
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (wall) spriteRenderer.color = Color.blue;
-        if (furniture) spriteRenderer.color = Color.white;
+        if (furniture) spriteRenderer.color = Color.black;
         if (door) spriteRenderer.color = Color.green;
-        if (survivor) spriteRenderer.color = Color.white;
+        if (survivor) spriteRenderer.color = Color.yellow;
         if (furniture)
         {
             GameObject newFurniture = Instantiate(Furniture);
@@ -100,12 +96,6 @@ public class Cell : MonoBehaviour
     private void FixedUpdate()
     {
         heat = FireSystem.heat_array[(int)gridPosition.y, (int)gridPosition.x];
-        double fire1 = FireSystem.fire_1_array[(int)gridPosition.y, (int)gridPosition.x];
-        double fire2 = FireSystem.fire_2_array[(int)gridPosition.y, (int)gridPosition.x];
-        double fire3 = FireSystem.fire_3_array[(int)gridPosition.y, (int)gridPosition.x];
-        bool isFire1 = fire1 > 0;
-        bool isFire2 = fire2 > 0;
-        bool isFire3 = fire3 > 0;
         if (empty_space) { 
             if (Mathf.Abs((float)(lastHeat - heat)) > 0.001)
             {
@@ -118,19 +108,9 @@ public class Cell : MonoBehaviour
                 {
                     heatScale = 0;
                 }
-                if (IsShowHeat)
-                {
-                    HeatSprite.transform.localScale = new Vector3(heatScale, heatScale, 1f);
-                }
-                else
-                {
-                    HeatSprite.transform.localScale = new Vector3(0, 0, 1f);
-                }
+                HeatSprite.transform.localScale = new Vector3(heatScale, heatScale, 1f);
                 lastHeat = heat;
             }
         }
-        Fire1.enabled = isFire1;
-        Fire2.enabled = isFire2;
-        Fire3.enabled = isFire3;
     }
 }
