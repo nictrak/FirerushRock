@@ -14,7 +14,8 @@ public class PlayerControl : MonoBehaviour
 
     private bool isMove;
 
-    public float moveVelocity;
+    public float moveVelocityHorizontal;
+    public float moveVelocityVertical;
     public bool isEnable;
 
     public bool IsMove { get => isMove; set => isMove = value; }
@@ -23,10 +24,10 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        leftVector = new Vector2(-moveVelocity, 0);
-        rightVector = new Vector2(moveVelocity, 0);
-        upVector = new Vector2(0, moveVelocity);
-        downVector = new Vector2(0, -moveVelocity);
+        leftVector = new Vector2(-moveVelocityHorizontal, 0);
+        rightVector = new Vector2(moveVelocityHorizontal, 0);
+        upVector = new Vector2(0, moveVelocityVertical);
+        downVector = new Vector2(0, -moveVelocityVertical);
         idleVector = new Vector2();
         moveVector = new Vector2();
     }

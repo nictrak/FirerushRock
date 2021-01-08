@@ -316,8 +316,8 @@ MonoBehaviour:
   UpSpawnVector: {x: 0, y: 0.5, z: 0}
   DownSpawnVector: {x: 0, y: -0.5, z: 0}
   SpreadRate: 1
-  WaterVelocity: 0.25
-  LifeTime: 10
+  WaterVelocity: 0.45
+  LifeTime: 8
   Angle: 60
   Range: 0
   UseRate: 1

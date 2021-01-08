@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NumSharp;
 using System.Timers;
+using UnityEngine.SceneManagement;
 
 public class FireSystem : MonoBehaviour
 {
@@ -28,7 +29,8 @@ public class FireSystem : MonoBehaviour
     public float heat_decay;
     public float fire2_add_heat;
     public float fire3_add_heat;
-
+    private (int, int) gridsize;
+    private NDArray zero_array;
 
     // Start is called before the first frame update
 
@@ -39,7 +41,8 @@ public class FireSystem : MonoBehaviour
     {
         framerate_counter = 0;
     //initial array
-        var gridsize = ((int)grid.GridSize.x, (int)grid.GridSize.y);
+        gridsize = ((int)grid.GridSize.x, (int)grid.GridSize.y);
+        zero_array = np.zeros(gridsize);
         heat_array = np.zeros(gridsize);
         fire_1_array = np.zeros(gridsize);
         fire_2_array = np.zeros(gridsize);
@@ -108,7 +111,7 @@ public class FireSystem : MonoBehaviour
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -187,6 +190,11 @@ public class FireSystem : MonoBehaviour
             heat_array = np.clip(heat_array, (NDArray)0, (NDArray)max_heat_point);
             //Debug.Log(GetHeat(new Vector2(0,0)));
             framerate_counter = 0;
+
+            if (fire_2_array.Equals(zero_array))
+            {
+                SceneManager.LoadScene("Menu");
+            }
         }
         framerate_counter += 1;
     }
@@ -195,7 +203,7 @@ public class FireSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
     static NDArray shift_left(NDArray array)
     {

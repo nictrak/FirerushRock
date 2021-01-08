@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Life : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class Life : MonoBehaviour
         if(lifePoint <= 0)
         {
             Destroy(Entity);
+            SceneManager.LoadScene("Menu");
         }
         isRegen = false;
         regenCounter = 0;
