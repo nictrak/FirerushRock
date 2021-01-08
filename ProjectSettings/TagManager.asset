@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Bar
+    uniqueID: 2713175455
+    locked: 0
   - name: Bang
     uniqueID: 1300179947
     locked: 0

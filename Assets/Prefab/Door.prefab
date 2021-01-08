@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxToughness: 2
+  BangPrefab: {fileID: 0}
 --- !u!50 &4421806067456995327
 Rigidbody2D:
   serializedVersion: 4
@@ -146,7 +147,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.01
 --- !u!114 &5887400106094524988
 MonoBehaviour:
   m_ObjectHideFlags: 0

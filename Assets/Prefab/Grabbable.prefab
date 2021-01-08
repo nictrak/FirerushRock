@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 3923777059975770193}
   - component: {fileID: 7903507764010875226}
   - component: {fileID: 3746787870199620571}
+  - component: {fileID: 2031229615447611672}
+  - component: {fileID: 7166673007799165553}
   m_Layer: 0
   m_Name: Grabbable
   m_TagString: Untagged
@@ -99,7 +101,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3583791644520692933}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -125,7 +127,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.020246029, y: 0.03543067}
+  m_Offset: {x: 0.020246029, y: -0.42504904}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -136,7 +138,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.4577422, y: 2.8120532}
+  m_Size: {x: 2.4577422, y: 1.8910937}
   m_EdgeRadius: 0
 --- !u!114 &6939673669449611010
 MonoBehaviour:
@@ -200,7 +202,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808c35576999be74bad6287f3b70ffbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveVelocity: 0.25
+  moveVelocityHorizontal: 0
+  moveVelocityVertical: 0
   isEnable: 0
 --- !u!114 &7903507764010875226
 MonoBehaviour:
@@ -229,3 +232,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23f11ba197856147b3f45c231f0c421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2031229615447611672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3583791644520692933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0c7cead65fea94daeedabdbe9a79bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxLifePoint: 100
+  LifeBar: {fileID: 0}
+  Entity: {fileID: 3583791644520692933}
+  RegenPoint: 0
+  NonRegenTime: 0
+  IsPlayer: 0
+--- !u!114 &7166673007799165553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3583791644520692933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56897625a30d344caaac7cd30c9cc5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 0

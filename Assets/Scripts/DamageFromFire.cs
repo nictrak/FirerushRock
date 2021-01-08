@@ -8,21 +8,26 @@ public class DamageFromFire : MonoBehaviour
     private float fire2Damage;
     private float fire3Damage;
     private Life life;
+    public int count;
 
     private List<Cell> cells;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        cells = new List<Cell>();
+    }
     void Start()
     {
         fire1Damage = 1;
         fire2Damage = 2;
         fire3Damage = 3;
-        cells = new List<Cell>();
         life = GetComponent<Life>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        count = cells.Count;
     }
     private void FixedUpdate()
     {

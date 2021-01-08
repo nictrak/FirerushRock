@@ -53,7 +53,7 @@ public class PlayerControl : MonoBehaviour
                     grabbable.GetComponent<Rigidbody2D>().position = rigidbody.position;
                 }
             }
-            rigidbody.position += moveVector;
+            rigidbody.MovePosition(rigidbody.position + moveVector);
             if (moveVector.magnitude > 0.0001)
             {
                 isMove = true;
@@ -86,4 +86,34 @@ public class PlayerControl : MonoBehaviour
         }
         return outVector;
     }
+
+    /*private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.GetComponent<BreakWater>() != null)
+        {
+            Vector3 collisionPosition = collision.gameObject.transform.position;
+
+            if (transform.position.x > collisionPosition.x)
+            {
+                Debug.Log("Bounce right");
+                rigidbody.MovePosition(rigidbody.position + 10 * rightVector);
+            }
+            else
+            {
+                Debug.Log("Bounce left");
+                rigidbody.MovePosition(rigidbody.position + 10 * leftVector);
+            }
+            if (transform.position.y > collisionPosition.y)
+            {
+                Debug.Log("Bounce up");
+                rigidbody.MovePosition(rigidbody.position + 10 * upVector);
+            }
+            else
+            {
+                Debug.Log("Bounce down");
+                rigidbody.MovePosition(rigidbody.position + 10 * downVector);
+            }
+        }
+    }*/
+
 }

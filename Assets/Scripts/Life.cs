@@ -10,17 +10,19 @@ public class Life : MonoBehaviour
     private bool isRegen;
     private int regenCounter;
 
+
     public float MaxLifePoint;
     public GameObject LifeBar;
     public GameObject Entity;
     public float RegenPoint;
     public int NonRegenTime;
+    public bool IsPlayer;
     public float LifePoint { get => lifePoint; set => lifePoint = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        maxLocalScale = LifeBar.transform.localScale.x;
+        if (LifeBar != null) maxLocalScale = LifeBar.transform.localScale.x;
         lifePoint = MaxLifePoint;
         SyncLifeBar();
         isRegen = true;
@@ -40,10 +42,12 @@ public class Life : MonoBehaviour
     public void Damage(float damagePoint)
     {
         lifePoint -= damagePoint;
+        Debug.Log(lifePoint);
         if(lifePoint <= 0)
         {
+            Debug.Log("Destroy");
             Destroy(Entity);
-            SceneManager.LoadScene("Menu");
+            if(IsPlayer) SceneManager.LoadScene("Menu");
         }
         isRegen = false;
         regenCounter = 0;
@@ -51,6 +55,7 @@ public class Life : MonoBehaviour
 
     private void SyncLifeBar()
     {
+        if(LifeBar != null)
         LifeBar.transform.localScale = new Vector3(lifePoint / MaxLifePoint * maxLocalScale, LifeBar.transform.localScale.y, 1);
     }
 

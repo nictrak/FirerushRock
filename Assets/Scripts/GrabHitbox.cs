@@ -49,11 +49,18 @@ public class GrabHitbox : MonoBehaviour
         for (int i = 0; i < grabbables.Count; i++)
         {
             temp = grabbables[i];
-            distance = CalDistance(temp.transform.position);
-            if(shortestDistance > distance)
+            if(temp != null)
             {
-                shortestDistance = distance;
-                index = i;
+                distance = CalDistance(temp.transform.position);
+                if (shortestDistance > distance)
+                {
+                    shortestDistance = distance;
+                    index = i;
+                }
+            }
+            else
+            {
+                grabbables.RemoveAt(i);
             }
         }
         return grabbables[index];

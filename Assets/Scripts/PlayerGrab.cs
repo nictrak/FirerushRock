@@ -85,7 +85,6 @@ public class PlayerGrab : MonoBehaviour
             grabedObject.Grabber = null;
             grabedObject.transform.position = new Vector2(transform.position.x ,releasePositionY);
             grabedObject.GetComponent<ZSync>().LavitateHeight = 0;
-            grabedObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             grabedObject = null;
         }
     }

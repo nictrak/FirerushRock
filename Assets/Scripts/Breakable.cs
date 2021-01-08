@@ -42,6 +42,27 @@ public class Breakable : MonoBehaviour
             }
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Throwable throwable = collision.gameObject.GetComponent<Throwable>();
+        BreakThrow breakThrow = collision.gameObject.GetComponent<BreakThrow>();
+        if (throwable != null)
+        {
+            if (throwable.IsBreakActive)
+            {
+                Hit();
+            }
+        }
+        throwable = GetComponent<Throwable>();
+        if (throwable != null && breakThrow != null)
+        {
+            if (throwable.IsBreakActive)
+            {
+                InstantiateBang();
+                Hit();
+            }
+        }
+    }
 
     private void Hit()
     {
