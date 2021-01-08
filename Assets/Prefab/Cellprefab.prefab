@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7971276815141202285}
   - component: {fileID: 8167354872503145101}
   - component: {fileID: 6507103009923313398}
+  - component: {fileID: 6087505292501947032}
   m_Layer: 0
   m_Name: 7ACEE7D2-2A0B-4996-A428-B8AEC06E13B7_1
   m_TagString: Untagged
@@ -116,6 +117,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6087505292501947032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771661312273403718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fb6154a0e1d9b42905bf6f53dc09f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2790520103461173293
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +141,7 @@ GameObject:
   - component: {fileID: 4126798976624828440}
   - component: {fileID: 4015508411869071564}
   - component: {fileID: 7172205284949441439}
+  - component: {fileID: 8687632548834092415}
   m_Layer: 0
   m_Name: 7ACEE7D2-2A0B-4996-A428-B8AEC06E13B7_2
   m_TagString: Untagged
@@ -232,6 +246,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8687632548834092415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2790520103461173293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fb6154a0e1d9b42905bf6f53dc09f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4581705029593554970
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +270,7 @@ GameObject:
   - component: {fileID: 3349699703036880964}
   - component: {fileID: 4385542006191543131}
   - component: {fileID: 3000757817683488105}
+  - component: {fileID: 3166278829750066279}
   m_Layer: 0
   m_Name: 7ACEE7D2-2A0B-4996-A428-B8AEC06E13B7_0
   m_TagString: Untagged
@@ -348,6 +375,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3166278829750066279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4581705029593554970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fb6154a0e1d9b42905bf6f53dc09f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6914294050389124009
 GameObject:
   m_ObjectHideFlags: 0
