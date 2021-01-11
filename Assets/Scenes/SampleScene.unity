@@ -352,7 +352,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 93ecb1a5bd7ae704ba177d15752d593a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -579,7 +579,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1134,7 +1134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56897625a30d344caaac7cd30c9cc5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 0
 --- !u!61 &1030994770
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1357,6 +1356,7 @@ MonoBehaviour:
   UpGrab: {fileID: 1146612683}
   DownGrab: {fileID: 233296120}
   ThrowSpeed: 0.5
+  GrabScale: 0.5
 --- !u!70 &1142001390
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
