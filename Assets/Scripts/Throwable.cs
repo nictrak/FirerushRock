@@ -9,9 +9,11 @@ public class Throwable : MonoBehaviour
     private Rigidbody2D rigidbody;
     private BoxCollider2D collider;
     private bool isBreakActive;
+    private PlayerGrab thrower;
     public bool IsThrowed { get => isThrowed; set => isThrowed = value; }
     public Vector2 ThrowVector { get => throwVector; set => throwVector = value; }
     public bool IsBreakActive { get => isBreakActive; set => isBreakActive = value; }
+    public PlayerGrab Thrower { get => thrower; set => thrower = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -33,11 +35,21 @@ public class Throwable : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         BreakThrow breakThrow = collision.gameObject.GetComponent<BreakThrow>();
-        if(breakThrow != null && throwVector.magnitude > 0.00001)
+        PlayerGrab playerGrab = collision.gameObject.GetComponent<PlayerGrab>();
+        if (breakThrow != null && throwVector.magnitude > 0.00001)
         {
             isThrowed = false;
             throwVector = new Vector2();
-            collider.isTrigger = true;
+            collider.isTrigger = false;
+        }
+        if(playerGrab != null)
+        {
+            if(playerGrab != thrower)
+            if (playerGrab.Grab(this.GetComponent<Grabbable>()))
+            {
+                isThrowed = false;
+                throwVector = new Vector2();
+            }
         }
     }
     private void SyncIsBreak()

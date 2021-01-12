@@ -62,17 +62,18 @@ public class PlayerGrab : MonoBehaviour
             usedGrab = DownGrab;
         }
     }
-    private void Grab()
+    public bool Grab(Grabbable grabed)
     {
-        Grabbable grabed = usedGrab.CalNearest();
-        if (grabed != null)
+        if (grabed != null && grabedObject == null)
         {
             if (grabed.IsGrabbable)
             {
                 grabedObject = grabed;
                 grabedObject.Grabed(this);
+                return true;
             }
         }
+        return false;
     }
     private void Release()
     {
@@ -92,6 +93,7 @@ public class PlayerGrab : MonoBehaviour
             {
                 grabedObject.Released(true);
                 throwed.IsThrowed = true;
+                throwed.Thrower = this;
                 if (playerDirection.Direction == "left")
                 {
                     throwVector = new Vector2(-ThrowSpeed, 0);
@@ -119,7 +121,8 @@ public class PlayerGrab : MonoBehaviour
         {
             if (grabedObject == null)
             {
-                Grab();
+                Grabbable grabed = usedGrab.CalNearest();
+                Grab(grabed);
             }
             else
             {
