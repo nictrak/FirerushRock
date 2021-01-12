@@ -43,7 +43,9 @@ public class PCG : MonoBehaviour
     private static FurniturePreset CAT  = new FurniturePreset(-7, 0, 0, 0, new Point(1, 1), ORIGIN, ORIGIN);
     private static FurniturePreset PAINTING = new FurniturePreset(-8, 0, 0, 0, new Point(1, 1), ORIGIN, ORIGIN);
 
-    private static Dictionary<int, RoomPreset> roomPresetDictionary;
+    private static Dictionary<int, RoomPreset> ROOM_PRESET;
+
+    private static List<int> ORIENTATION_MAPPING;
 
     private static bool INIT_FLAG = false;
 
@@ -207,7 +209,7 @@ public class PCG : MonoBehaviour
         {
             if (preset.type < 0)
                 return 0;
-            return roomType * 1000 + preset.type * 10 + orientation;
+            return roomType * 1000 + preset.type * 10 + ORIENTATION_MAPPING[orientation];
         }
 
     }
@@ -259,7 +261,7 @@ public class PCG : MonoBehaviour
 
     }
 
-    private List<Room> GenerateAreaHierarchy(Area rootArea, List<List<int>> houseHierarchy, Dictionary<int, RoomPreset> roomPresetDictionary)
+    private List<Room> GenerateAreaHierarchy(Area rootArea, List<List<int>> houseHierarchy)
     {
         // list of list : always 2-depth house hierarchy
         List<Room> roomList = new List<Room>();
@@ -270,7 +272,7 @@ public class PCG : MonoBehaviour
             for (int j = 0; j < houseHierarchy[i].Count; j++)
             {
                 Area secondDepthArea = new Area(0.75 + random.NextDouble() / 2);
-                roomList.Add(new Room(roomIndex++, secondDepthArea, roomPresetDictionary[houseHierarchy[i][j]]));
+                roomList.Add(new Room(roomIndex++, secondDepthArea, ROOM_PRESET[houseHierarchy[i][j]]));
                 firstDepthArea.children.Add(secondDepthArea);
             }
             firstDepthArea.children.Sort((firstArea, secondArea) => firstArea.proportion.CompareTo(secondArea.proportion));
@@ -806,7 +808,7 @@ public class PCG : MonoBehaviour
             }
         }
     }
-
+    /*
     // UNUSED
     private void PlaceFire(List<Room> roomList, int fireCount)
     {
@@ -840,7 +842,7 @@ public class PCG : MonoBehaviour
             roomListClone.RemoveAt(index);
         }
     }
-
+    */
     private void PlaceFireAndCat(List<Room> roomList, int fireCount, int catCount)
     {
         List<Room> roomListClone = new List<Room>(roomList);
@@ -1055,7 +1057,7 @@ public class PCG : MonoBehaviour
         {
             painting.Add(new FurniturePreset(0, PLACE_WALL, WALL_UP, ORIENT_WALL_0, new Point(1, 1), new Point(-1, 0)));
         }*/
-        roomPresetDictionary = new Dictionary<int, RoomPreset>();
+        ROOM_PRESET = new Dictionary<int, RoomPreset>();
         {
             List<FurniturePreset> viableFurniture = new List<FurniturePreset>();
             viableFurniture.Add(new FurniturePreset(1, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (2, 2)));
@@ -1063,7 +1065,7 @@ public class PCG : MonoBehaviour
             viableFurniture.Add(new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 2)));
             viableFurniture.Add(new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)));
             viableFurniture.Add(new FurniturePreset(5, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 2)));
-            roomPresetDictionary[1] = new RoomPreset(1, 0, viableFurniture);
+            ROOM_PRESET[1] = new RoomPreset(1, 0, viableFurniture);
         }
         {
             List<FurniturePreset> viableFurniture = new List<FurniturePreset>();
@@ -1071,7 +1073,7 @@ public class PCG : MonoBehaviour
             viableFurniture.Add(new FurniturePreset(2, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 2)));
             viableFurniture.Add(new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)));
             viableFurniture.Add(new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)));
-            roomPresetDictionary[2] = new RoomPreset(2, 9, viableFurniture);
+            ROOM_PRESET[2] = new RoomPreset(2, 9, viableFurniture);
         }
         {
             List<FurniturePreset> viableFurniture = new List<FurniturePreset>();
@@ -1083,7 +1085,14 @@ public class PCG : MonoBehaviour
             viableFurniture.Add(new FurniturePreset(6, PLACE_ANY, WALL_ANY, ORIENT_ANY, (2, 4)));
             viableFurniture.Add(new FurniturePreset(7, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)));
             viableFurniture.Add(new FurniturePreset(8, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)));
-            roomPresetDictionary[3] = new RoomPreset(3, 0, viableFurniture);
+            ROOM_PRESET[3] = new RoomPreset(3, 0, viableFurniture);
+        }
+        {
+            ORIENTATION_MAPPING = new List<int>();
+            ORIENTATION_MAPPING.Add(2);
+            ORIENTATION_MAPPING.Add(4);
+            ORIENTATION_MAPPING.Add(3);
+            ORIENTATION_MAPPING.Add(1);
         }
         INIT_FLAG = true;
     }
@@ -1095,7 +1104,7 @@ public class PCG : MonoBehaviour
             InitializePCG();
 
         Area rootArea = new Area(1);
-        List<Room> roomList = GenerateAreaHierarchy(rootArea, houseHierarchy, roomPresetDictionary) ;
+        List<Room> roomList = GenerateAreaHierarchy(rootArea, houseHierarchy) ;
         //Debug.Log(roomList.Count);
 
         Rectangle boundary = new Rectangle(0, 0, width, height);
