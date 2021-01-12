@@ -2,22 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class MenuAudioManager : MonoBehaviour
 {
-    
     public AudioSource BGM;
-    public AudioClip BaseMusic;
-
     // Start is called before the first frame update
     void Start()
     {
-        ChangeBGM(GameConfig.Music);
-        /*
-        if(GameConfig.Music == null)
-        {
-            ChangeBGM(BaseMusic);
-        }
-        */
+        BGM.Play();
     }
 
     // Update is called once per frame
@@ -25,7 +16,6 @@ public class AudioManager : MonoBehaviour
     {
         
     }
-
     public void ChangeBGM(AudioClip Music)
     {
         BGM.Stop();
@@ -33,6 +23,7 @@ public class AudioManager : MonoBehaviour
         BGM.Play();
 
     }
+
     public void StopBGM()
     {
         BGM.Stop();

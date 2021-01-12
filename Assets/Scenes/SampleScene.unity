@@ -340,6 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BGM: {fileID: 179776433}
+  BaseMusic: {fileID: 8300000, guid: 93ecb1a5bd7ae704ba177d15752d593a, type: 3}
 --- !u!82 &179776433
 AudioSource:
   m_ObjectHideFlags: 0
@@ -354,7 +355,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -537,7 +538,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1134,7 +1135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56897625a30d344caaac7cd30c9cc5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 0
 --- !u!61 &1030994770
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1285,7 +1285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveVelocityHorizontal: 0.14
-  moveVelocityVertical: 0.2
+  moveVelocityVertical: 0.18
   isEnable: 1
 --- !u!50 &1142001386
 Rigidbody2D:
@@ -1370,8 +1370,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.05000005, y: -0.9}
-  m_Size: {x: 2.3, y: 2.3}
+  m_Offset: {x: -0.026127497, y: -1.0731125}
+  m_Size: {x: 1.7878659, y: 1.7878659}
   m_Direction: 0
 --- !u!114 &1142001391
 MonoBehaviour:
