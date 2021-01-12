@@ -880,7 +880,7 @@ public class PCG : MonoBehaviour
                 if (furniture.preset.type == DOOR_3.type)
                     doorY.Add(furniture.position.y);
             }
-            double currentY = room.area.rectangle.y1;
+            double currentY = room.area.rectangle.y1 + 1;
             while (currentY + 6 < room.area.rectangle.y2)
             {
                 double paintingY = currentY + 5 * random.NextDouble();
