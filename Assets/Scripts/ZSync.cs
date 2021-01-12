@@ -5,15 +5,16 @@ using UnityEngine;
 public class ZSync : MonoBehaviour
 {
     private float lavitateHeight;
-
+    private bool isEnable;
     public float SpriteHeight;
 
     public float LavitateHeight { get => lavitateHeight; set => lavitateHeight = value; }
+    public bool IsEnable { get => isEnable; set => isEnable = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        isEnable = true;
     }
 
     // Update is called once per frame
@@ -23,8 +24,11 @@ public class ZSync : MonoBehaviour
     }
     private void Sync()
     {
-        Vector3 presentPosition = transform.position;
-        transform.position = new Vector3(presentPosition.x, presentPosition.y, CalZ());
+        if (isEnable)
+        {
+            Vector3 presentPosition = transform.position;
+            transform.position = new Vector3(presentPosition.x, presentPosition.y, CalZ());
+        }
     }
     private float CalZ()
     {

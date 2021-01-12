@@ -45,14 +45,6 @@ public class PlayerControl : MonoBehaviour
     {
         if (isEnable)
         {
-            if(GetComponent<PlayerGrab>() != null)
-            {
-                Grabbable grabbable = GetComponent<PlayerGrab>().GrabedObject;
-                if (grabbable != null)
-                {
-                    grabbable.GetComponent<Rigidbody2D>().position = rigidbody.position - new Vector2(0, 0.2f);
-                }
-            }
             rigidbody.MovePosition(rigidbody.position + moveVector);
             if (moveVector.magnitude > 0.0001)
             {

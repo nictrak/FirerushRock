@@ -5,18 +5,29 @@ using UnityEngine;
 public class Grabbable : MonoBehaviour
 {
     private bool isGrabed;
+    private bool isGrabbable;
     private PlayerGrab grabber;
     private Rigidbody2D rigidbody;
+    private ZSync zSync;
+    private BoxCollider2D collider2D;
 
     public float SpeedMultiplier;
     public bool IsGrabed { get => isGrabed; set => isGrabed = value; }
     public PlayerGrab Grabber { get => grabber; set => grabber = value; }
+    public ZSync ZSync { get => zSync; set => zSync = value; }
+    public BoxCollider2D Collider2D { get => collider2D; set => collider2D = value; }
+    public bool IsGrabbable { get => isGrabbable; set => isGrabbable = value; }
+
+    public Vector3 GrabedPostion;
 
     // Start is called before the first frame update
     void Start()
     {
         isGrabed = false;
         rigidbody = GetComponent<Rigidbody2D>();
+        zSync = GetComponent<ZSync>();
+        collider2D = GetComponent<BoxCollider2D>();
+        isGrabbable = true;
     }
 
     // Update is called once per frame
@@ -30,6 +41,24 @@ public class Grabbable : MonoBehaviour
     public void Use()
     {
 
+    }
+    public void Grabed(PlayerGrab grabber)
+    {
+        IsGrabed = true;
+        this.grabber = grabber;
+        collider2D.isTrigger = true;
+        transform.parent = grabber.transform;
+        zSync.IsEnable = false;
+        transform.localPosition = GrabedPostion;
+    }
+    public void Released(bool newIsTrigger)
+    {
+        IsGrabed = false;
+        transform.position = grabber.transform.position;
+        collider2D.isTrigger = newIsTrigger;
+        transform.parent = null;
+        zSync.IsEnable = true;
+        this.grabber = null;
     }
     private void MoveWhenGrabed()
     {

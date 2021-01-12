@@ -5,7 +5,7 @@ using UnityEngine;
 public class Survivor : MonoBehaviour
 {
     private bool isRescued;
-
+    private Grabbable grabbable;
     public bool IsRescued { get => isRescued; set => isRescued = value; }
 
     // Start is called before the first frame update
@@ -13,6 +13,7 @@ public class Survivor : MonoBehaviour
     void Start()
     {
         isRescued = false;
+        grabbable = GetComponent<Grabbable>();
     }
 
     // Update is called once per frame
@@ -21,12 +22,22 @@ public class Survivor : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<RescueZone>() != null)
         {
             //Destroy(this.gameObject);
             isRescued = true;
+            grabbable.IsGrabbable = false;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<RescueZone>() != null)
+        {
+            //Destroy(this.gameObject);
+            isRescued = false;
+            grabbable.IsGrabbable = true;
         }
     }
 }

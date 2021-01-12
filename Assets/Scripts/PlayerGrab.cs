@@ -65,33 +65,20 @@ public class PlayerGrab : MonoBehaviour
     private void Grab()
     {
         Grabbable grabed = usedGrab.CalNearest();
-        Rigidbody2D grabedRigidbody;
         if (grabed != null)
         {
-            grabedObject = grabed;
-            grabedObject.IsGrabed = true;
-            grabedObject.Grabber = this;
-            grabedObject.transform.position = transform.position;
-            grabedObject.GetComponent<ZSync>().LavitateHeight = GetComponent<ZSync>().SpriteHeight / 2 + 0.2f;
-            grabedObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            grabedObject.transform.position = transform.position;
-            Debug.Log(grabedObject.transform.localScale);
-            memGrabScale = grabedObject.transform.localScale;
-            grabedObject.transform.localScale = transform.localScale * GrabScale;
-            Debug.Log(grabedObject.transform.localScale);
+            if (grabed.IsGrabbable)
+            {
+                grabedObject = grabed;
+                grabedObject.Grabed(this);
+            }
         }
     }
     private void Release()
     {
-        float releasePositionY = transform.position.y - GetComponent<ZSync>().SpriteHeight / 2 + grabedObject.GetComponent<ZSync>().SpriteHeight / 2 - 0.0001f;
         if (grabedObject != null)
         {
-            grabedObject.IsGrabed = false;
-            grabedObject.Grabber = null;
-            grabedObject.transform.position = new Vector2(transform.position.x ,releasePositionY);
-            Debug.Log(grabedObject.transform.localScale);
-            grabedObject.transform.localScale = memGrabScale;
-            grabedObject.GetComponent<ZSync>().LavitateHeight = 0;
+            grabedObject.Released(false);
             grabedObject = null;
         }
     }
@@ -103,13 +90,9 @@ public class PlayerGrab : MonoBehaviour
             Vector2 throwVector;
             if (grabedObject.GetComponent<Throwable>() != null)
             {
-                grabedObject.IsGrabed = false;
-                grabedObject.Grabber = null;
-                grabedObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                grabedObject.transform.localScale = memGrabScale;
-                //grabedObject.GetComponent<BoxCollider2D>().isTrigger = false;
+                grabedObject.Released(true);
                 throwed.IsThrowed = true;
-                if(playerDirection.Direction == "left")
+                if (playerDirection.Direction == "left")
                 {
                     throwVector = new Vector2(-ThrowSpeed, 0);
                 }
@@ -126,7 +109,6 @@ public class PlayerGrab : MonoBehaviour
                     throwVector = new Vector2(0, -ThrowSpeed);
                 }
                 throwed.ThrowVector = throwVector;
-                grabedObject.GetComponent<ZSync>().LavitateHeight = 0;
                 grabedObject = null;
             }
         }

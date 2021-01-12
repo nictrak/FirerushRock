@@ -103,9 +103,9 @@ public class Cell : MonoBehaviour
         double fire1 = FireSystem.fire_1_array[(int)gridPosition.y, (int)gridPosition.x];
         double fire2 = FireSystem.fire_2_array[(int)gridPosition.y, (int)gridPosition.x];
         double fire3 = FireSystem.fire_3_array[(int)gridPosition.y, (int)gridPosition.x];
-        bool isFire1 = fire1 > 0;
-        bool isFire2 = fire2 > 0;
-        bool isFire3 = fire3 > 0;
+        bool isFire1 = fire1 > 0 && !door;
+        bool isFire2 = fire2 > 0 && !door;
+        bool isFire3 = fire3 > 0 && !door;
         if (empty_space) { 
             if (Mathf.Abs((float)(lastHeat - heat)) > 0.001)
             {
