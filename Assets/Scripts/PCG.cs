@@ -75,7 +75,6 @@ public class PCG : MonoBehaviour
         }
 
     }
-
     private class Rectangle
     {
 
@@ -127,7 +126,6 @@ public class PCG : MonoBehaviour
         }
 
     }
-
     private class Graph<NodeType, EdgeType>
     {
 
@@ -143,7 +141,7 @@ public class PCG : MonoBehaviour
         }
 
     }
-
+    
     private class Area
     {
 
@@ -158,7 +156,6 @@ public class PCG : MonoBehaviour
         }
 
     }
-
     private class Room
     {
 
@@ -188,7 +185,6 @@ public class PCG : MonoBehaviour
         }
 
     }
-
     private class Furniture
     {
 
@@ -231,7 +227,6 @@ public class PCG : MonoBehaviour
         }
 
     }
-
     private class FurniturePreset
     {
 
@@ -269,10 +264,10 @@ public class PCG : MonoBehaviour
         int roomIndex = 0;
         for (int i = 0; i < houseHierarchy.Count; i++)
         {
-            Area firstDepthArea = new Area(0.75 + random.NextDouble() / 2);
+            Area firstDepthArea = new Area((0.5 + random.NextDouble()) * houseHierarchy[i].Count);
             for (int j = 0; j < houseHierarchy[i].Count; j++)
             {
-                Area secondDepthArea = new Area(0.75 + random.NextDouble() / 2);
+                Area secondDepthArea = new Area(0.75 + 0.5 * random.NextDouble());
                 roomList.Add(new Room(roomIndex++, secondDepthArea, ROOM_PRESET[houseHierarchy[i][j]]));
                 firstDepthArea.children.Add(secondDepthArea);
             }
@@ -1130,7 +1125,7 @@ public class PCG : MonoBehaviour
     void Start()
     {
 
-        List<List<int>> houseHierarchy = DebugHouseHierarchy(11, 3);
+        List<List<int>> houseHierarchy = DebugHouseHierarchy(25, 7);
         string houseHierarchyString = "";
         for (int i = 0; i < houseHierarchy.Count; i++)
         {
