@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpeedMultiplier: 0
-  GrabedPostion: {x: 0, y: 0, z: 0}
+  GrabedPostion: {x: 0, y: 0, z: -0.1}
 --- !u!114 &7105662092783039447
 MonoBehaviour:
   m_ObjectHideFlags: 0
