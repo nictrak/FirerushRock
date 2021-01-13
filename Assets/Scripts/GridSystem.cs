@@ -9,9 +9,13 @@ public class GridSystem : MonoBehaviour
     public Vector2 GridSize;
     public Cell GridPrefab;
     public float BaseZ;
+
+    public LevelControl LevelControl;
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("asd");
+        Debug.Log(FireSystem.wall_array);
         grids = new List<List<Cell>>();
         for (int j = 0; j < GridSize.y; j++)
         {

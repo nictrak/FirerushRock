@@ -1096,7 +1096,6 @@ public class PCG : MonoBehaviour
             (roomArray, doorArray, furnitureArray, fireArray) = GenerateHouse(gen.GenRoom(), width, height, 4, gen.GenDoor(), gen.GenFire(), gen.GenSurvivor());
             Debug.Log(("HI",gen.GenDoor(), gen.GenFire(), gen.GenSurvivor()));
         }
-
         string arrayString = "";
         List<(char, string)> furnitureList = new List<(char, string)>();
         char furniture = 'A';
