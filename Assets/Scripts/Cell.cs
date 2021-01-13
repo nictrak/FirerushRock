@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using NumSharp;
 using System.Runtime;
-
+using Mirror;
 [RequireComponent(typeof(SpriteRenderer))]
-public class Cell : MonoBehaviour
+public class Cell : NetworkBehaviour
 {
     private string houseMap;
     private double heat;
@@ -70,24 +70,28 @@ public class Cell : MonoBehaviour
         {
             GameObject newFurniture = Instantiate(Furniture);
             newFurniture.transform.position = this.transform.position;
+            NetworkServer.Spawn(newFurniture);
         }
 
         if (survivor)
         {
             GameObject newSurvivor = Instantiate(Survivor);
             newSurvivor.transform.position = this.transform.position;
+            NetworkServer.Spawn(newSurvivor);
         }
 
         if (wall)
         {
             GameObject newWall = Instantiate(Wall);
             newWall.transform.position = this.transform.position;
+            NetworkServer.Spawn(newWall);
         }
 
         if (door)
         {
             GameObject newDoor = Instantiate(Door);
             newDoor.transform.position = this.transform.position;
+            NetworkServer.Spawn(newDoor);
         }
 
     }
