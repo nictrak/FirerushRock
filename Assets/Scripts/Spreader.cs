@@ -22,6 +22,8 @@ public class Spreader : MonoBehaviour
     private float load;
     private PlayerDirection playerDirection;
     private float maxLocalScaleX;
+    private bool isFillable;
+    private Valve valve;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,7 @@ public class Spreader : MonoBehaviour
             SpawnLoop();
             spawnCounter = 0;
         }
+        FillLoop();
     }
     private void SyncPlayerDirection()
     {
@@ -109,6 +112,39 @@ public class Spreader : MonoBehaviour
                 water.LifeTime = LifeTime;
                 load -= UseRate;
             }
+        }
+    }
+    public void Fill(float amount)
+    {
+        load += amount;
+        if(load > MaxLoad)
+        {
+            load = MaxLoad;
+        }
+    }
+    private void FillLoop()
+    {
+        if (Input.GetKeyDown(KeyCode.K) && isFillable)
+        {
+            valve.Fill(this);
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Valve valve = collision.gameObject.GetComponent<Valve>();
+        if(valve != null)
+        {
+            isFillable = true;
+            this.valve = valve;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Valve valve = collision.gameObject.GetComponent<Valve>();
+        if (valve != null)
+        {
+            isFillable = false;
+            this.valve = valve;
         }
     }
 }
