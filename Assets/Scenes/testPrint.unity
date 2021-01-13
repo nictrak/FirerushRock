@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Day: 1
-  Gen: {fileID: 1321967578429164083}
+  gen: {fileID: 1321967578429164083}
   pcg: {fileID: 2066126498}
 --- !u!4 &342816427
 Transform:
