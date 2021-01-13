@@ -49,7 +49,7 @@ public class PCG : MonoBehaviour
 
     private static bool INIT_FLAG = false;
 
-    private System.Random random;
+    private System.Random random = new System.Random();
 
 
     private class Point
@@ -261,6 +261,7 @@ public class PCG : MonoBehaviour
 
     }
 
+
     private List<Room> GenerateAreaHierarchy(Area rootArea, List<List<int>> houseHierarchy)
     {
         // list of list : always 2-depth house hierarchy
@@ -281,7 +282,6 @@ public class PCG : MonoBehaviour
         rootArea.children.Sort((firstArea, secondArea) => -firstArea.proportion.CompareTo(secondArea.proportion));
         return roomList;
     }
-
     private void Partition(int recursion, List<Area> areaHierarchy, Rectangle boundary, Dictionary<double, SortedSet<double>> interceptX, Dictionary<double, SortedSet<double>> interceptY)
     {
         if (interceptX.ContainsKey(boundary.x1) == false)
@@ -389,7 +389,6 @@ public class PCG : MonoBehaviour
             Partition(recursion, areaHierarchy.GetRange(partitionCount, areaHierarchy.Count - partitionCount), remainingPartitionRectangle, interceptX, interceptY);
         }
     }
-
     private bool VerifyPartition(List<Room> roomList)
     {
         foreach (Room room in roomList)
@@ -399,7 +398,6 @@ public class PCG : MonoBehaviour
         }
         return true;
     }
-
     private Dictionary<Point, HashSet<Room>> Geometrize(List<Room> roomList, Dictionary<double, SortedSet<double>> interceptX, Dictionary<double, SortedSet<double>> interceptY)
     {
         Dictionary<Point, HashSet<Room>> roomPointDictionary = new Dictionary<Point, HashSet<Room>>();
@@ -545,7 +543,6 @@ public class PCG : MonoBehaviour
         }
         return roomGraph;
     }
-
     private void GenerateAdditionalConnection(Room rootRoom, List<Room> roomList, Dictionary<Point, HashSet<Room>> roomPointDictionary, Graph<Room, (Point, Point)> roomGraph, int connectingPathLength)
     {
         Dictionary<Room, int> depthRoomDictionary = new Dictionary<Room, int>();
@@ -703,7 +700,6 @@ public class PCG : MonoBehaviour
             }
         }
     }
-
     private void PlaceFurniture(List<Room> roomList, int attemptPerRoom)
     {
         foreach (Room room in roomList)
@@ -808,41 +804,6 @@ public class PCG : MonoBehaviour
             }
         }
     }
-    /*
-    // UNUSED
-    private void PlaceFire(List<Room> roomList, int fireCount)
-    {
-        List<Room> roomListClone = new List<Room>(roomList);
-        for (int i = 0; i < fireCount; i++)
-        {
-            if (roomListClone.Count == 0)
-                break;
-            int index = random.Next(roomListClone.Count);
-            Room firedRoom = roomListClone[index];
-            double fireX = (firedRoom.area.rectangle.x1 + 3) + (firedRoom.area.rectangle.GetWidth() - 6) * random.NextDouble();
-            double fireY = (firedRoom.area.rectangle.y1 + 1) + (firedRoom.area.rectangle.GetHeight() - 4) * random.NextDouble();
-            firedRoom.furniture.Add(new Furniture(FIRE, new Point(fireX, fireY), 0, new Rectangle(fireX, fireY, fireX + 3, fireY + 3)));
-            roomListClone.RemoveAt(index);
-        }
-    }
-
-    // UNUSED
-    private void PlaceCat(List<Room> roomList, int catCount)
-    {
-        List<Room> roomListClone = new List<Room>(roomList);
-        for (int i = 0; i < catCount; i++)
-        {
-            if (roomListClone.Count == 0)
-                break;
-            int index = random.Next(roomListClone.Count);
-            Room catRoom = roomListClone[index];
-            double catX = (catRoom.area.rectangle.x1 + 3) + (catRoom.area.rectangle.GetWidth() - 6) * random.NextDouble();
-            double catY = (catRoom.area.rectangle.y1 + 1) + (catRoom.area.rectangle.GetHeight() - 4) * random.NextDouble();
-            catRoom.furniture.Add(new Furniture(CAT, new Point(catX, catY), 0, new Rectangle(catX, catY, catX + 1, catY + 1)));
-            roomListClone.RemoveAt(index);
-        }
-    }
-    */
     private void PlaceFireAndCat(List<Room> roomList, int fireCount, int catCount)
     {
         List<Room> roomListClone = new List<Room>(roomList);
@@ -870,7 +831,6 @@ public class PCG : MonoBehaviour
             roomListClone.RemoveAt(choice);
         }
     }
-
     private void PlacePainting(List<Room> roomList)
     {
         foreach (Room room in roomList)
@@ -905,7 +865,7 @@ public class PCG : MonoBehaviour
             }
         }
     }
-
+    
     private void DrawRoom(NDArray roomArray, List<Room> roomList)
     {
         foreach (Room room in roomList)
@@ -941,7 +901,6 @@ public class PCG : MonoBehaviour
             }
         }
     }
-
     private void DrawDoor(NDArray doorArray, List<Room> roomList, int doorCount)
     {
         List<Point> doorPixel = new List<Point>();
@@ -949,20 +908,20 @@ public class PCG : MonoBehaviour
         {
             foreach (Furniture furniture in room.furniture)
             {
-                /*if (furniture.preset.type == -5)
+                if (furniture.preset.type == -5)
                 {
                     int x = Convert.ToInt32(furniture.position.x) + 2;
                     int y = Convert.ToInt32(furniture.position.y);
-                    doorArray[x.ToString() + ":" + (x + 2).ToString() + ", " + y.ToString()] = 1;
-                }*/ // skip entrance
-                if (furniture.preset.type == -1)
+                    doorArray[x.ToString() + ", " + y.ToString()] = 8;
+                }
+                else if (furniture.preset.type == -1)
                 {
                     int x = Convert.ToInt32(furniture.position.x) + 2;
                     int y = Convert.ToInt32(furniture.position.y);
                     doorArray[x.ToString() + ", " + y.ToString()] = 1;
                     doorPixel.Add(new Point(x, y));
                 }
-                if (furniture.preset.type == -4)
+                else if (furniture.preset.type == -4)
                 {
                     int x = Convert.ToInt32(furniture.position.x) + 2;
                     int y = Convert.ToInt32(furniture.position.y) + 1;
@@ -978,7 +937,6 @@ public class PCG : MonoBehaviour
             doorPixel.RemoveAt(index); // O(n) intensify
         }
     }
-
     private void DrawFurniture(NDArray furnitureArray, List<Room> roomList)
     {
         foreach (Room room in roomList)
@@ -1005,7 +963,6 @@ public class PCG : MonoBehaviour
             }
         }
     }
-
     private void DrawFire(NDArray fireArray, List<Room> roomList, int fireCount)
     {
         foreach (Room room in roomList)
@@ -1020,10 +977,9 @@ public class PCG : MonoBehaviour
             }
         }
     }
+    // private void DrawEverything(); // nah
 
-    // private void DrawEverything();
-
-    private List<List<int>> DebugHouseHierarchy(int roomCount, int firstBreadth)
+    public List<List<int>> DebugHouseHierarchy(int roomCount, int firstBreadth)
     {
         List<List<int>> houseHierarchy = new List<List<int>>();
         List<double> tempList1 = new List<double>();
@@ -1050,13 +1006,8 @@ public class PCG : MonoBehaviour
         return houseHierarchy;
     }
 
-
     private static void InitializePCG()
     {
-        /*List<FurniturePreset> painting = new List<FurniturePreset>();
-        {
-            painting.Add(new FurniturePreset(0, PLACE_WALL, WALL_UP, ORIENT_WALL_0, new Point(1, 1), new Point(-1, 0)));
-        }*/
         ROOM_PRESET = new Dictionary<int, RoomPreset>();
         {
             List<FurniturePreset> viableFurniture = new List<FurniturePreset>();
@@ -1097,7 +1048,7 @@ public class PCG : MonoBehaviour
         INIT_FLAG = true;
     }
 
-    public (NDArray, NDArray, NDArray, NDArray) GenerateHouse(List<List<int>> houseHierarchy, double width, double height, int connectingPathLength, int doorCount, int fireCount, int catCount)
+    public (NDArray, NDArray, NDArray, NDArray) GenerateHouse1(List<List<int>> houseHierarchy, double width, double height, int connectingPathLength, int doorCount, int fireCount, int catCount)
     {
 
         if (INIT_FLAG == false)
@@ -1148,15 +1099,36 @@ public class PCG : MonoBehaviour
         return (roomArray, doorArray, furnitureArray, fireArray);
 
     }
+    public (NDArray, NDArray, NDArray, NDArray) GenerateHouse2(List<List<int>> houseHierarchy, int doorCount, int fireCount, int catCount)
+    {
+        int roomCount = 0;
+        foreach (List<int> roomset in houseHierarchy)
+            roomCount += roomset.Count;
+        double length = roomCount * 2.5;
+        int attempt = 0;
+        while (true)
+        {
+            double width = 0.75 * length + 0.25 * random.NextDouble();
+            double height = 0.75 * length + 0.25 * random.NextDouble();
+            (NDArray roomArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = GenerateHouse1(houseHierarchy, width, height, 4, doorCount, fireCount, catCount);
+            attempt++;
+            if (doorArray == null)
+            {
+                length *= 1.125;
+                continue;
+            }
+            else
+            {
+                //Debug.Log(attempt);
+                //Debug.Log(roomArray.Shape);
+                return (roomArray, doorArray, furnitureArray, fireArray);
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-
-        Debug.Log("Hello World!");
-
-        //int seed = 3;
-        random = new System.Random(/*seed*/);
 
         List<List<int>> houseHierarchy = DebugHouseHierarchy(11, 3);
         string houseHierarchyString = "";
@@ -1176,7 +1148,9 @@ public class PCG : MonoBehaviour
         }
         Debug.Log(houseHierarchyString);
 
-        int halfLength = 25;
+        (NDArray roomArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = GenerateHouse2(houseHierarchy, 5, 5, 5);
+
+        /*int halfLength = 25;
         double width = halfLength + halfLength * random.NextDouble();
         double height = halfLength + halfLength * random.NextDouble();
         (NDArray roomArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = GenerateHouse(houseHierarchy, width, height, 4, 5, 5, 5);
@@ -1187,7 +1161,7 @@ public class PCG : MonoBehaviour
             width = halfLength + halfLength * random.NextDouble();
             height = halfLength + halfLength * random.NextDouble();
             (roomArray, doorArray, furnitureArray, fireArray) = GenerateHouse(houseHierarchy, width, height, 4, 5, 5, 5);
-        }
+        }*/
 
         string arrayString = "";
         List<(char, string)> furnitureList = new List<(char, string)>();
