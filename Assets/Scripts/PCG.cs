@@ -1103,8 +1103,8 @@ public class PCG : MonoBehaviour
         int attempt = 0;
         while (true)
         {
-            double width = 0.75 * length + 0.25 * random.NextDouble();
-            double height = 0.75 * length + 0.25 * random.NextDouble();
+            double width = 0.75 * length + 0.25 * length * random.NextDouble();
+            double height = 0.75 * length + 0.25 * length * random.NextDouble();
             (NDArray roomArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = GenerateHouse1(houseHierarchy, width, height, 4, doorCount, fireCount, catCount);
             attempt++;
             if (doorArray == null)
