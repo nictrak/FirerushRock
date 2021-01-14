@@ -26,7 +26,6 @@ public class LevelScriptController : MonoBehaviour
     public void startScript()
     {
         ParameterGenerator.SetDay(GameConfig.Day);
-
         (NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = PCG.GenerateHouse2(ParameterGenerator.GenRoom(), ParameterGenerator.GenDoor(), ParameterGenerator.GenFire(), ParameterGenerator.GenSurvivor());
 
         int height = wallArray.shape[0];
@@ -41,9 +40,7 @@ public class LevelScriptController : MonoBehaviour
         Debug.Log(furnitureArray);
         Debug.Log(fireArray);
         */
-
-        Debug.Log(wallArray);
-
+        Debug.Log(furnitureArray);
         FireSystem.startF(wallArray, doorArray, furnitureArray, fireArray,width,height);
         /*
         Debug.Log(FireSystem.fire_source_array);

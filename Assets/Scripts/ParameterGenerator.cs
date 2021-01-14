@@ -65,7 +65,26 @@ public class ParameterGenerator : MonoBehaviour
                 List<int> RoomList = new List<int>();
                 for (int j = 0; j < roomContain; j++)
                 {
-                    RoomList.Add(Random.Range(1, 4));
+                    int rand = Random.Range(1, 11);
+                    //toilet
+                    if (rand <= 2)
+                    {
+                        RoomList.Add(2);
+                    }
+                    else
+                    {
+                        //bedroom
+                        if(rand <= 5)
+                        {
+                            RoomList.Add(1);
+                        }
+                        else
+                        {
+                            //livingroom
+                            RoomList.Add(3);
+                        }
+                    }
+                    //RoomList.Add(Random.Range(1, 4));
                 }
                 bigRoomList.Add(RoomList);
             }
@@ -80,14 +99,52 @@ public class ParameterGenerator : MonoBehaviour
                 {
                     for (int j = 0; j < roomContain; j++)
                     {
-                        RoomList.Add(Random.Range(1, 4));
+                        int rand = Random.Range(1, 11);
+                        //toilet
+                        if (rand <= 2)
+                        {
+                            RoomList.Add(2);
+                        }
+                        else
+                        {
+                            //bedroom
+                            if (rand <= 5)
+                            {
+                                RoomList.Add(1);
+                            }
+                            else
+                            {
+                                //livingroom
+                                RoomList.Add(3);
+                            }
+                        }
+                        //RoomList.Add(Random.Range(1, 4));
                     }
                 }
                 else
                 {
                     for (int e = 0; e < room % roomContain; e++)
                     {
-                        RoomList.Add(Random.Range(1, 4));
+                        int rand = Random.Range(1, 11);
+                        //toilet
+                        if (rand <= 2)
+                        {
+                            RoomList.Add(2);
+                        }
+                        else
+                        {
+                            //bedroom
+                            if (rand <= 5)
+                            {
+                                RoomList.Add(1);
+                            }
+                            else
+                            {
+                                //livingroom
+                                RoomList.Add(3);
+                            }
+                        }
+                        //RoomList.Add(Random.Range(1, 4));
                     }
                 }
                 bigRoomList.Add(RoomList);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class GridSystem : MonoBehaviour
 {
+    public FurnitureCatalog FurnitureCatalog;
     private List<List<Cell>> grids;
     public Vector3 OriginPosition;
     public Vector2 CellSize;
@@ -26,6 +27,7 @@ public class GridSystem : MonoBehaviour
                 Cell newGrid = Instantiate<Cell>(GridPrefab);
                 newGrid.transform.position = instatiatePosition;
                 newGrid.GridPosition = new Vector2(i, j);
+                newGrid.setFurnitureCatalog(FurnitureCatalog);
                 newRow.Add(newGrid);
             }
             grids.Add(newRow);

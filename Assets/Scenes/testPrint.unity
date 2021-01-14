@@ -249,6 +249,11 @@ PrefabInstance:
       propertyPath: LevelControl
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8345127587767532831, guid: 8472de882c098724d8164ab82796f067,
+        type: 3}
+      propertyPath: FurnitureCatalog
+      value: 
+      objectReference: {fileID: 633479749}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8472de882c098724d8164ab82796f067, type: 3}
 --- !u!4 &369200065 stripped
@@ -300,6 +305,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9173c67781443e47b9fc7fb3f9fe65e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &633479747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 633479748}
+  - component: {fileID: 633479749}
+  m_Layer: 0
+  m_Name: FurnitureCatalog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &633479748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633479747}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 31.197664, y: -5.400613, z: -6.446202}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &633479749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633479747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 249a321c0c1b7074f9a7885b41f6bd4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BigBed_up: {fileID: 0}
+  BigBed_left: {fileID: 0}
+  BigBed_right: {fileID: 0}
+  SmallBed_up: {fileID: 0}
+  SmallBed_left: {fileID: 0}
+  SmallBed_right: {fileID: 0}
+  Closet: {fileID: 0}
+  BookShelf: {fileID: 0}
+  SmallChairAndTable_up: {fileID: 0}
+  SmallChairAndTable_left: {fileID: 0}
+  SmallChairAndTable_right: {fileID: 0}
+  SmallChairAndTable_down: {fileID: 0}
+  FlushToilet_up: {fileID: 0}
+  FlushToilet_left: {fileID: 0}
+  FlushToilet_right: {fileID: 0}
+  Bathtub_ver: {fileID: 0}
+  Bathtub_hor: {fileID: 0}
+  ShowerBox: {fileID: 0}
+  SinkAndMirror: {fileID: 0}
+  Wall_1: {fileID: 0}
+  Wall_2: {fileID: 0}
+  Wall_3: {fileID: 0}
+  Wall_4: {fileID: 0}
+  Wall_5: {fileID: 0}
+  Wall_6: {fileID: 0}
+  Survivor_1: {fileID: 0}
+  Survivor_2: {fileID: 0}
+  Survivor_3: {fileID: 0}
+  Survivor_4: {fileID: 0}
 --- !u!114 &1373050661 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8345127587767532831, guid: 8472de882c098724d8164ab82796f067,
@@ -408,7 +485,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.539487
+  orthographic size: 27.097439
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -432,7 +509,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2126597168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.9, y: -12.4, z: -10}
+  m_LocalPosition: {x: 20.9, y: -7.23, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

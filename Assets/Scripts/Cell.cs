@@ -42,6 +42,8 @@ public class Cell : MonoBehaviour
     public bool LevelThreeFire { get => levelThreeFire; set => levelThreeFire = value; }
     public Vector2 GridPosition { get => gridPosition; set => gridPosition = value; }
 
+    private FurnitureCatalog FurnitureCatalog;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +77,7 @@ public class Cell : MonoBehaviour
         //if (survivor) spriteRenderer.color = Color.white;
         */
 
-        if (furniture_survivor >0)
+        if (furniture_survivor > 0)
         {
             GameObject newFurniture = Instantiate(Furniture);
             newFurniture.transform.position = this.transform.position;
@@ -114,6 +116,11 @@ public class Cell : MonoBehaviour
             newDoor.transform.position = this.transform.position;
         }
 
+    }
+
+    private GameObject furniture_survivor_instantiate(int furnitureID)
+    {
+        return FurnitureCatalog.Furniture(furnitureID);
     }
 
     // Update is called once per frame
@@ -156,5 +163,10 @@ public class Cell : MonoBehaviour
         Fire1.enabled = isFire1;
         Fire2.enabled = isFire2;
         Fire3.enabled = isFire3;
+    }
+
+    public void setFurnitureCatalog(FurnitureCatalog furnitureCatalog)
+    {
+        this.FurnitureCatalog = furnitureCatalog;
     }
 }

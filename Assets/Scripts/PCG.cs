@@ -1031,6 +1031,7 @@ public class PCG : MonoBehaviour
             viableFurniture.Add(new FurniturePreset(6, PLACE_ANY, WALL_ANY, ORIENT_ANY, (2, 4)));
             viableFurniture.Add(new FurniturePreset(7, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)));
             viableFurniture.Add(new FurniturePreset(8, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)));
+            viableFurniture.Add(new FurniturePreset(9, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 1)));
             ROOM_PRESET[3] = new RoomPreset(3, 0, viableFurniture);
         }
         {
