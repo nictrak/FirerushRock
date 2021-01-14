@@ -32,8 +32,6 @@ public class FireSystem : MonoBehaviour
     private (int, int) gridsize;
     private NDArray zero_array;
 
-    public LevelControl LevelControl;
-
     // Start is called before the first frame update
 
 
@@ -43,10 +41,7 @@ public class FireSystem : MonoBehaviour
     {
         framerate_counter = 0;
         //initial array
-        LevelControl.Day = 10;
-        grid.GridSize.x = (float) LevelControl.getHouseWidth();
-        grid.GridSize.y = (float) LevelControl.getHouseHeight();
-
+        
         gridsize = ((int)grid.GridSize.x, (int)grid.GridSize.y);
         zero_array = np.zeros(gridsize);
         heat_array = np.zeros(gridsize);
@@ -56,9 +51,8 @@ public class FireSystem : MonoBehaviour
         wall_array = np.zeros(gridsize);
         fire_source_array = np.zeros(gridsize);
 
-        Debug.Log(1);
         //initial heat
-        //(wall_array, door_array, furniture_array, fire_source_array) = LevelControl.GenMap();
+        
         heat_array = fire_source_array * 100;
         /*
         fire_source_array = new int[,] {
