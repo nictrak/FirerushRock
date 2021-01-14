@@ -10,8 +10,10 @@ public class GridSystem : MonoBehaviour
     public Cell GridPrefab;
     public float BaseZ;
     // Start is called before the first frame update
-    void Start()
+    public void startF(int height, int width)
     {
+        GridSize.x = width;
+        GridSize.y = height;
         grids = new List<List<Cell>>();
         for (int j = 0; j < GridSize.y; j++)
         {

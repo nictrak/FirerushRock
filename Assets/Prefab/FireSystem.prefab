@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2752067951631804119
+--- !u!1 &8867884543654706671
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,36 +8,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2314707913924973724}
-  - component: {fileID: 6065324102939655918}
+  - component: {fileID: 9025002202669748132}
+  - component: {fileID: 651928036859586006}
   m_Layer: 0
   m_Name: FireSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2314707913924973724
+  m_IsActive: 0
+--- !u!4 &9025002202669748132
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2752067951631804119}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 8867884543654706671}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -526.93994, y: -225.71184, z: 1268.9375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6065324102939655918
+--- !u!114 &651928036859586006
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2752067951631804119}
+  m_GameObject: {fileID: 8867884543654706671}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8168d55874ad43640b833177e2a6e556, type: 3}
@@ -48,11 +48,10 @@ MonoBehaviour:
   fire_1_size: 20
   fire_2_size: 40
   fire_3_size: 60
-  fire_1_start_point: 30
-  fire_2_start_point: 60
-  fire_3_start_point: 90
+  fire_1_start_point: 20
+  fire_2_start_point: 40
+  fire_3_start_point: 70
   max_heat_point: 120
   heat_decay: -2
   fire2_add_heat: 2
   fire3_add_heat: 1
-  LevelControl: {fileID: 0}

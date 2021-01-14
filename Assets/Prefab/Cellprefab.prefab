@@ -573,7 +573,8 @@ MonoBehaviour:
   WallColor: {r: 1, g: 0.6044712, b: 0.3066038, a: 1}
   HeatSprite: {fileID: 6914294050389124009}
   Wall: {fileID: 8589663800469107184, guid: 4733831ff480b944282cb40d193f704d, type: 3}
-  Door: {fileID: 4421806067456995320, guid: c9c2191c1978ed649acc99111856ad59, type: 3}
+  Wall2: {fileID: 3569253757177329900, guid: 2e0f52e102ea05342bc2ba2b138bbe25, type: 3}
+  Door: {fileID: 6648184319647030216, guid: d14033e60100e03429216bc8832ada7d, type: 3}
   Survivor: {fileID: 9033900264385998663, guid: 2ff73c4935f08c2468c4527b8a09a8c9,
     type: 3}
   Furniture: {fileID: 3583791644520692933, guid: 06c482aced2f7754b89d091bb076bfb2,

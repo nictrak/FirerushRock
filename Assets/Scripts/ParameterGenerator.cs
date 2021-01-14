@@ -14,9 +14,6 @@ public class ParameterGenerator : MonoBehaviour
     public int DayAddFire;
     public int BaseSurvivor;
     public int DayAddSurvivor;
-    public int BaseMaxHouseWeight;
-    public int BaseMinHouseWeight;
-    public int DayAddHouse;
 
     private int Day;
     // Start is called before the first frame update
@@ -34,15 +31,6 @@ public class ParameterGenerator : MonoBehaviour
     public void SetDay(int day)
     {
         Day = day;
-    }
-    public int GenHouseHeight()
-    {
-        return param(Random.Range(BaseMinHouseWeight,BaseMaxHouseWeight), DayAddHouse, this.Day);
-    }
-
-    public int GenHouseWeight()
-    {
-        return param(Random.Range(BaseMinHouseWeight, BaseMaxHouseWeight), DayAddHouse, this.Day);
     }
 
     public int GenDoor()
