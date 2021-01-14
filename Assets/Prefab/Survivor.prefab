@@ -246,8 +246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0c7cead65fea94daeedabdbe9a79bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxLifePoint: 100
+  MaxLifePoint: 1000
   LifeBar: {fileID: 0}
   Entity: {fileID: 9033900264385998663}
   RegenPoint: 0
   NonRegenTime: 0
+  IsPlayer: 0

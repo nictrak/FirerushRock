@@ -42,6 +42,8 @@ public class LevelScriptController : MonoBehaviour
         Debug.Log(fireArray);
         */
 
+        Debug.Log(wallArray);
+
         FireSystem.startF(wallArray, doorArray, furnitureArray, fireArray,width,height);
         /*
         Debug.Log(FireSystem.fire_source_array);

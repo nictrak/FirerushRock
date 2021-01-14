@@ -33,6 +33,7 @@ public class Cell : MonoBehaviour
     public SpriteRenderer Fire1;
     public SpriteRenderer Fire2;
     public SpriteRenderer Fire3;
+    public SpriteRenderer toilet_floor;
     public bool IsShowHeat;
     public string HouseMap { get => houseMap; set => houseMap = value; }
     public double Heat { get => heat; set => heat = value; }
@@ -52,6 +53,9 @@ public class Cell : MonoBehaviour
         lastHeat = 0;
         heat = 0;
         HeatSprite.transform.localScale = new Vector3(0f, 0f, 1f);
+        toilet_floor.enabled = false;
+
+        Debug.Log(FireSystem.wall_array);
         
         furniture_survivor = FireSystem.furniture_array[(int)gridPosition.y, (int)gridPosition.x];
         door = FireSystem.door_array[(int)gridPosition.y, (int)gridPosition.x];
@@ -84,7 +88,7 @@ public class Cell : MonoBehaviour
         }
         */
 
-        if (wall > 0)
+        if (wall != 0)
         {
             if (wall == 1) { 
                 GameObject newWall = Instantiate(Wall);
@@ -96,10 +100,15 @@ public class Cell : MonoBehaviour
                 GameObject newWall = Instantiate(Wall2);
                 newWall.transform.position = this.transform.position;
             }
+
+            if (wall == -1)
+            {
+                toilet_floor.enabled = true;
+            }
             
         }
 
-        if (door>0)
+        if (door == 1 | door == 2)
         {
             GameObject newDoor = Instantiate(Door);
             newDoor.transform.position = this.transform.position;
