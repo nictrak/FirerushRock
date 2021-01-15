@@ -122,7 +122,7 @@ public class Cell : MonoBehaviour
     private GameObject get_furniture_survivor_gameobject(double furnitureID)
     {
         int ID = (int) furnitureID;
-        Debug.Log(ID);
+        //Debug.Log(ID);
         return FurnitureCatalog.Furniture(ID);
     }
 

@@ -31,7 +31,8 @@ public class LevelScriptController : MonoBehaviour
 
         int height = wallArray.shape[0];
         int width = wallArray.shape[1];
-
+        Debug.Log(height);
+        Debug.Log(width);
         /*
         Debug.Log(height);
         Debug.Log(width);
@@ -41,7 +42,7 @@ public class LevelScriptController : MonoBehaviour
         Debug.Log(furnitureArray);
         Debug.Log(fireArray);
         */
-        Debug.Log(furnitureArray);
+        //Debug.Log(furnitureArray);
         FireSystem.startF(wallArray, doorArray, furnitureArray, fireArray,width,height);
         /*
         Debug.Log(FireSystem.fire_source_array);
