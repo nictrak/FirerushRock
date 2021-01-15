@@ -718,8 +718,6 @@ public class PCG : MonoBehaviour
                 int placement = (preset.placementFlag == 3) ? 1 + random.Next(2) : preset.placementFlag;
                 if (placement == PLACE_FLOOR)
                 {
-                    furnitureX = (room.area.rectangle.x1 + 4) + (room.area.rectangle.GetWidth() - preset.size.x - 5) *random.NextDouble();
-                    furnitureY = (room.area.rectangle.y1 + 2) + (room.area.rectangle.GetHeight() - preset.size.y - 3) * random.NextDouble();
                     List<int> allowedOrientation = new List<int>();
                     for (int j = 0; j < 4; j++)
                     {
@@ -730,11 +728,19 @@ public class PCG : MonoBehaviour
                     }
                     choice = random.Next(allowedOrientation.Count);
                     furnitureOrientation = allowedOrientation[choice];
+                    if (furnitureOrientation % 2 == 0)
+                    {
+                        furnitureX = (room.area.rectangle.x1 + 4) + (room.area.rectangle.GetWidth() - preset.size.x - 5) * random.NextDouble();
+                        furnitureY = (room.area.rectangle.y1 + 2) + (room.area.rectangle.GetHeight() - preset.size.y - 3) * random.NextDouble();
+                    }
+                    else
+                    {
+                        furnitureX = (room.area.rectangle.x1 + 4) + (room.area.rectangle.GetWidth() - preset.size.y - 5) * random.NextDouble();
+                        furnitureY = (room.area.rectangle.y1 + 2) + (room.area.rectangle.GetHeight() - preset.size.x - 3) * random.NextDouble();
+                    }
                 }
                 else
                 {
-                    /*if (random.NextDouble() < 0.75)
-                        continue;*/ // room 1 suck hard
                     List<int> allowedWallside = new List<int>();
                     for (int j = 0; j < 4; j++)
                     {
@@ -743,26 +749,6 @@ public class PCG : MonoBehaviour
                     }
                     choice = random.Next(allowedWallside.Count);
                     int wallside = allowedWallside[choice];
-                    if (wallside == 0)
-                    {
-                        furnitureX = (room.area.rectangle.x1 + 3) + (room.area.rectangle.GetWidth() - preset.size.x - 3) * random.NextDouble();
-                        furnitureY = room.area.rectangle.y1 + 1;
-                    }
-                    else if (wallside == 1)
-                    {
-                        furnitureX = room.area.rectangle.x2 - preset.size.x;
-                        furnitureY = (room.area.rectangle.y1 + 1) + (room.area.rectangle.GetHeight() - preset.size.y - 1) * random.NextDouble();
-                    }
-                    else if (wallside == 2)
-                    {
-                        furnitureX = (room.area.rectangle.x1 + 3) + (room.area.rectangle.GetWidth() - preset.size.x - 3) * random.NextDouble();
-                        furnitureY = room.area.rectangle.y2 - preset.size.y;
-                    }
-                    else /*(allowedWallside[side] == 3)*/
-                    {
-                        furnitureX = room.area.rectangle.x1 + 3;
-                        furnitureY = (room.area.rectangle.y1 + 1) + (room.area.rectangle.GetHeight() - preset.size.y - 1) * random.NextDouble();
-                    }
                     List<int> allowedOrientation = new List<int>();
                     for (int j = 0; j < 8; j++)
                     {
@@ -776,9 +762,44 @@ public class PCG : MonoBehaviour
                     }
                     choice = random.Next(allowedOrientation.Count);
                     furnitureOrientation = allowedOrientation[choice];
+                    double presetX, presetY;
+                    if (furnitureOrientation % 2 == 0)
+                    {
+                        presetX = preset.size.x;
+                        presetY = preset.size.y;
+                    }
+                    else
+                    {
+                        presetX = preset.size.y;
+                        presetY = preset.size.x;
+                    }
+                    if (wallside == 0)
+                    {
+                        furnitureX = (room.area.rectangle.x1 + 3) + (room.area.rectangle.GetWidth() - presetX - 3) * random.NextDouble();
+                        furnitureY = room.area.rectangle.y1 + 1;
+                    }
+                    else if (wallside == 1)
+                    {
+                        furnitureX = room.area.rectangle.x2 - presetX;
+                        furnitureY = (room.area.rectangle.y1 + 1) + (room.area.rectangle.GetHeight() - presetY - 1) * random.NextDouble();
+                    }
+                    else if (wallside == 2)
+                    {
+                        furnitureX = (room.area.rectangle.x1 + 3) + (room.area.rectangle.GetWidth() - presetX - 3) * random.NextDouble();
+                        furnitureY = room.area.rectangle.y2 - presetY;
+                    }
+                    else /*(allowedWallside[side] == 3)*/
+                    {
+                        furnitureX = room.area.rectangle.x1 + 3;
+                        furnitureY = (room.area.rectangle.y1 + 1) + (room.area.rectangle.GetHeight() - presetY - 1) * random.NextDouble();
+                    }
                 }
                 Point furniturePosition = new Point(furnitureX, furnitureY);
-                Rectangle furnitureBoundary = new Rectangle(furnitureX - preset.offset.x, furnitureY - preset.offset.y, furnitureX - preset.offset.x + preset.bound.x, furnitureY - preset.offset.y + preset.bound.y);
+                Rectangle furnitureBoundary;
+                if (furnitureOrientation % 2 == 0)
+                    furnitureBoundary = new Rectangle(furnitureX - preset.offset.x, furnitureY - preset.offset.y, furnitureX - preset.offset.x + preset.bound.x, furnitureY - preset.offset.y + preset.bound.y);
+                else
+                    furnitureBoundary = new Rectangle(furnitureX - preset.offset.y, furnitureY - preset.offset.x, furnitureX - preset.offset.y + preset.bound.y, furnitureY - preset.offset.x + preset.bound.x);
                 bool collide = false;
                 foreach (Furniture placedFurniture in room.furniture)
                 {
@@ -948,12 +969,12 @@ public class PCG : MonoBehaviour
                 {
                     furnitureArray[x.ToString() + ", " + y.ToString()] = 41 + random.Next(6);
                 }
-                else if (furniture.preset.type >= 0 /*!= FIRE_TYPE*/)
+                else if (furniture.preset.type >= 0)
                 {
-                    int width = Convert.ToInt32(furniture.boundary.GetWidth());
-                    int height = Convert.ToInt32(furniture.boundary.GetHeight());
-                    furnitureArray[x.ToString() + ", " + y.ToString()] = furniture.GetID(room.preset.type);
-                    //furnitureArray[x.ToString() + ":" + (x + width).ToString() + ", " + y.ToString() + ":" + (y + height).ToString()] = furniture.GetID(room.preset.type);
+                    int width = Convert.ToInt32(furniture.boundary.GetWidth()) - 2;
+                    int height = Convert.ToInt32(furniture.boundary.GetHeight()) - 2;
+                    //furnitureArray[x.ToString() + ", " + y.ToString()] = furniture.GetID(room.preset.type);
+                    furnitureArray[x.ToString() + ":" + (x + width).ToString() + ", " + y.ToString() + ":" + (y + height).ToString()] = furniture.GetID(room.preset.type);
                 }
             }
         }
@@ -1175,11 +1196,11 @@ public class PCG : MonoBehaviour
                     arrayString += "/\\"; // /\ is fire
                 else if (furnitureString != "0")
                 {
-                    arrayString += ++ furniture + " "; // so funny haha
+                    /*arrayString += ++ furniture + " "; // so funny haha
                     furnitureList.Add((furniture, furnitureString));
                     if (furniture == '~')
-                        furniture = ' ';
-                    //arrayString += "O ";
+                        furniture = ' ';*/
+                    arrayString += "O ";
                 }
                 else if (doorString != "0")
                     arrayString += doorString + " ";
@@ -1197,10 +1218,10 @@ public class PCG : MonoBehaviour
             }
             arrayString += "\n";
         }
-        foreach ((char c, string s) in furnitureList)
+        /*foreach ((char c, string s) in furnitureList)
         {
             arrayString += c + " " + s + "\n";
-        }
+        }*/
         Debug.Log(arrayString);
 
     }
