@@ -43,14 +43,27 @@ public class PCG : MonoBehaviour
     private static FurniturePreset CAT  = new FurniturePreset(-7, 0, 0, 0, new Point(1, 1), ORIGIN, ORIGIN);
     private static FurniturePreset PAINTING = new FurniturePreset(-8, 0, 0, 0, new Point(1, 1), ORIGIN, ORIGIN);
 
-    private static Dictionary<int, RoomPreset> ROOM_PRESET;
-
+    private static Dictionary<int, List<RoomPreset>> ROOM_PRESET_DICTIONARY;
     private static List<int> ORIENTATION_MAPPING;
 
     private static bool INIT_FLAG = false;
 
+
     private System.Random random = new System.Random();
 
+
+    private T RandomChoice<T>(List<T> list)
+    {
+        int choice = random.Next(list.Count);
+        return list[choice];
+    }
+    private T RandomChoicePop<T>(List<T> list)
+    {
+        int choice = random.Next(list.Count);
+        T item = list[choice];
+        list.RemoveAt(choice);
+        return item;
+    }
 
     private class Point
     {
@@ -149,6 +162,10 @@ public class PCG : MonoBehaviour
         public List<Area> children;
         public Rectangle rectangle;
 
+        public Area()
+        {
+            children = new List<Area>();
+        }
         public Area(double proportion)
         {
             this.proportion = proportion;
@@ -217,9 +234,9 @@ public class PCG : MonoBehaviour
         public int tile;
         public int connectionCount;
         public int furnitureCount;
-        public List<FurniturePreset> viableFurniture;
+        public List<(FurniturePreset preset, int min, int max)> viableFurniture;
 
-        public RoomPreset(int type, int tile, List<FurniturePreset> viableFurniture)
+        public RoomPreset(int type, int tile, List<(FurniturePreset, int, int)> viableFurniture)
         {
             this.type = type;
             this.tile = tile;
@@ -268,7 +285,7 @@ public class PCG : MonoBehaviour
             for (int j = 0; j < houseHierarchy[i].Count; j++)
             {
                 Area secondDepthArea = new Area(0.75 + 0.5 * random.NextDouble());
-                roomList.Add(new Room(roomIndex++, secondDepthArea, ROOM_PRESET[houseHierarchy[i][j]]));
+                roomList.Add(new Room(roomIndex++, secondDepthArea, ROOM_PRESET_DICTIONARY[houseHierarchy[i][j]][0]));
                 firstDepthArea.children.Add(secondDepthArea);
             }
             firstDepthArea.children.Sort((firstArea, secondArea) => firstArea.proportion.CompareTo(secondArea.proportion));
@@ -707,7 +724,7 @@ public class PCG : MonoBehaviour
                 attempt++;
                 int choice;
                 choice = random.Next(room.preset.viableFurniture.Count);
-                FurniturePreset preset = room.preset.viableFurniture[choice];
+                FurniturePreset preset = room.preset.viableFurniture[choice].preset;
                 if (room.area.rectangle.GetWidth() - 3 <= preset.size.x || room.area.rectangle.GetHeight() - 5 <= preset.size.y)
                 {
                     //Debug.Log("Room too small");
@@ -819,6 +836,174 @@ public class PCG : MonoBehaviour
                 successFurniture++;
             }
         }
+    }
+    private bool PlaceFurniture2(List<Room> roomList, int attemptPerRoom)
+    {
+        int choice;
+        foreach (Room room in roomList)
+        {
+            int attempt = 0;
+            int successFurniture = 0;
+            int preferedFurnitureCount = Convert.ToInt32(room.area.rectangle.GetWidth() * room.area.rectangle.GetHeight() / 10);
+            List<(FurniturePreset preset, int min, int max)> furnitureChoice = new List<(FurniturePreset, int, int)>(room.preset.viableFurniture); // the only good constructor is a copy constructor
+            List<int> furnitureTally = new List<int>(furnitureChoice.Count); // capacity >= count
+            Stack<FurniturePreset> requiredFurniture = new Stack<FurniturePreset>();
+            for (int i = 0; i < furnitureChoice.Count; i++)
+            {
+                for (int j = 0; j < furnitureChoice[i].min; j++)
+                    requiredFurniture.Push(furnitureChoice[i].preset);
+                furnitureTally.Add(furnitureChoice[i].max - furnitureChoice[i].min);
+            }
+            while (attempt < attemptPerRoom * Math.Max(1, preferedFurnitureCount - successFurniture))
+            {
+                attempt++;
+                FurniturePreset preset;
+                int furnitureChoiceIndex = -1;
+                if (requiredFurniture.Count > 0)
+                    preset = requiredFurniture.Peek();
+                else
+                {
+                    if (furnitureChoice.Count == 0)
+                        break;
+                    choice = random.Next(furnitureChoice.Count);
+                    if (furnitureTally[choice] == 0) // == is intended
+                    {
+                        furnitureTally.RemoveAt(choice);
+                        furnitureChoice.RemoveAt(choice);
+                        continue;
+                    }
+                    furnitureChoiceIndex = choice;
+                    preset = furnitureChoice[choice].preset;
+                }
+                double furnitureX, furnitureY;
+                int furnitureOrientation;
+                int placement = (preset.placementFlag == 3) ? 1 + random.Next(2) : preset.placementFlag;
+                if (placement == PLACE_FLOOR)
+                {
+                    List<int> allowedOrientation = new List<int>();
+                    for (int j = 0; j < 4; j++)
+                    {
+                        if (((preset.orientationFlag >> j) & 1) > 0)
+                        {
+                            allowedOrientation.Add(j);
+                        }
+                    }
+                    choice = random.Next(allowedOrientation.Count);
+                    furnitureOrientation = allowedOrientation[choice];
+                    if (furnitureOrientation % 2 == 0)
+                    {
+                        furnitureX = (room.area.rectangle.x1 + 4) + (room.area.rectangle.GetWidth() - preset.size.x - 5) * random.NextDouble();
+                        furnitureY = (room.area.rectangle.y1 + 2) + (room.area.rectangle.GetHeight() - preset.size.y - 3) * random.NextDouble();
+                    }
+                    else
+                    {
+                        furnitureX = (room.area.rectangle.x1 + 4) + (room.area.rectangle.GetWidth() - preset.size.y - 5) * random.NextDouble();
+                        furnitureY = (room.area.rectangle.y1 + 2) + (room.area.rectangle.GetHeight() - preset.size.x - 3) * random.NextDouble();
+                    }
+                }
+                else
+                {
+                    List<int> allowedWallside = new List<int>();
+                    for (int j = 0; j < 4; j++)
+                    {
+                        if (((preset.wallsideFlag >> j) & 1) > 0)
+                            allowedWallside.Add(j);
+                    }
+                    choice = random.Next(allowedWallside.Count);
+                    int wallside = allowedWallside[choice];
+                    List<int> allowedOrientation = new List<int>();
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (((preset.orientationFlag >> j) & 1) > 0)
+                        {
+                            if (j < 4)
+                                allowedOrientation.Add(j);
+                            else
+                                allowedOrientation.Add((j + wallside) % 4);
+                        }
+                    }
+                    choice = random.Next(allowedOrientation.Count);
+                    furnitureOrientation = allowedOrientation[choice];
+                    double presetX, presetY;
+                    if (furnitureOrientation % 2 == 0)
+                    {
+                        presetX = preset.size.x;
+                        presetY = preset.size.y;
+                    }
+                    else
+                    {
+                        presetX = preset.size.y;
+                        presetY = preset.size.x;
+                    }
+                    if (wallside == 0)
+                    {
+                        furnitureX = (room.area.rectangle.x1 + 3) + (room.area.rectangle.GetWidth() - presetX - 3) * random.NextDouble();
+                        furnitureY = room.area.rectangle.y1 + 1;
+                    }
+                    else if (wallside == 1)
+                    {
+                        furnitureX = room.area.rectangle.x2 - presetX;
+                        furnitureY = (room.area.rectangle.y1 + 1) + (room.area.rectangle.GetHeight() - presetY - 1) * random.NextDouble();
+                    }
+                    else if (wallside == 2)
+                    {
+                        furnitureX = (room.area.rectangle.x1 + 3) + (room.area.rectangle.GetWidth() - presetX - 3) * random.NextDouble();
+                        furnitureY = room.area.rectangle.y2 - presetY;
+                    }
+                    else /*(allowedWallside[side] == 3)*/
+                    {
+                        furnitureX = room.area.rectangle.x1 + 3;
+                        furnitureY = (room.area.rectangle.y1 + 1) + (room.area.rectangle.GetHeight() - presetY - 1) * random.NextDouble();
+                    }
+                }
+                Point furniturePosition = new Point(furnitureX, furnitureY);
+                Rectangle furnitureBoundary;
+                if (furnitureOrientation % 2 == 0)
+                {
+                    if (room.area.rectangle.GetWidth() - 5 <= preset.size.x || room.area.rectangle.GetHeight() - 3 <= preset.size.y)
+                    {
+                        if (requiredFurniture.Count > 0)
+                            return false;
+                        continue;
+                    }
+                    furnitureBoundary = new Rectangle(furnitureX - preset.offset.x, furnitureY - preset.offset.y, furnitureX - preset.offset.x + preset.bound.x, furnitureY - preset.offset.y + preset.bound.y);
+                }
+                else
+                {
+                    if (room.area.rectangle.GetWidth() - 5 <= preset.size.y || room.area.rectangle.GetHeight() - 3 <= preset.size.x)
+                    {
+                        if (requiredFurniture.Count > 0)
+                            return false;
+                        continue;
+                    }
+                    furnitureBoundary = new Rectangle(furnitureX - preset.offset.y, furnitureY - preset.offset.x, furnitureX - preset.offset.y + preset.bound.y, furnitureY - preset.offset.x + preset.bound.x);
+                }
+                bool collide = false;
+                foreach (Furniture placedFurniture in room.furniture)
+                {
+                    if (placedFurniture.boundary.Collide(furnitureBoundary))
+                    {
+                        //Debug.Log(placedFurniture.boundary.GetWidth() + ", " + placedFurniture.boundary.GetHeight());
+                        collide = true;
+                        break;
+                    }
+                }
+                if (collide)
+                {
+                    //Debug.Log("Collide");
+                    continue;
+                }
+                room.furniture.Add(new Furniture(preset, furniturePosition, furnitureOrientation, furnitureBoundary));
+                if (requiredFurniture.Count > 0)
+                    requiredFurniture.Pop();
+                else /*if (furnitureChoiceIndex != -1)*/
+                    --furnitureTally[furnitureChoiceIndex];
+                successFurniture++;
+            }
+            if (requiredFurniture.Count > 0)
+                return false;
+        }
+        return true;
     }
     private void PlaceFireAndCat(List<Room> roomList, int fireCount, int catCount)
     {
@@ -973,8 +1158,9 @@ public class PCG : MonoBehaviour
                 {
                     int width = Convert.ToInt32(furniture.boundary.GetWidth()) - 2;
                     int height = Convert.ToInt32(furniture.boundary.GetHeight()) - 2;
-                    //furnitureArray[x.ToString() + ", " + y.ToString()] = furniture.GetID(room.preset.type);
-                    furnitureArray[x.ToString() + ":" + (x + width).ToString() + ", " + y.ToString() + ":" + (y + height).ToString()] = furniture.GetID(room.preset.type);
+                    furnitureArray[x.ToString() + ", " + y.ToString()] = furniture.GetID(room.preset.type);
+                    // DEBUG
+                    //furnitureArray[x.ToString() + ":" + (x + width).ToString() + ", " + y.ToString() + ":" + (y + height).ToString()] = furniture.GetID(room.preset.type);
                 }
             }
         }
@@ -1024,35 +1210,41 @@ public class PCG : MonoBehaviour
 
     private static void InitializePCG()
     {
-        ROOM_PRESET = new Dictionary<int, RoomPreset>();
+        ROOM_PRESET_DICTIONARY = new Dictionary<int, List<RoomPreset>>();
+        ROOM_PRESET_DICTIONARY[1] = new List<RoomPreset>();
+        ROOM_PRESET_DICTIONARY[2] = new List<RoomPreset>();
+        ROOM_PRESET_DICTIONARY[3] = new List<RoomPreset>();
         {
-            List<FurniturePreset> viableFurniture = new List<FurniturePreset>();
-            viableFurniture.Add(new FurniturePreset(1, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (2, 2)));
-            viableFurniture.Add(new FurniturePreset(2, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (1, 2)));
-            viableFurniture.Add(new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 2)));
-            viableFurniture.Add(new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)));
-            viableFurniture.Add(new FurniturePreset(5, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 2)));
-            ROOM_PRESET[1] = new RoomPreset(1, 0, viableFurniture);
+            List<(FurniturePreset, int, int)> viableFurniture = new List<(FurniturePreset, int, int)>();
+            viableFurniture.Add((new FurniturePreset(1, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (2, 2)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(2, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (1, 2)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 2)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(5, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 2)), 1, 1));
+            viableFurniture.Sort((first, second) => (first.Item2 * first.Item3).CompareTo(second.Item2 * second.Item3));
+            ROOM_PRESET_DICTIONARY[1].Add(new RoomPreset(1, 0, viableFurniture));
         }
         {
-            List<FurniturePreset> viableFurniture = new List<FurniturePreset>();
-            viableFurniture.Add(new FurniturePreset(1, PLACE_ANY, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_RIGHT | ORIENT_FLOOR_UP | ORIENT_WALL_0, (1, 1)));
-            viableFurniture.Add(new FurniturePreset(2, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 2)));
-            viableFurniture.Add(new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)));
-            viableFurniture.Add(new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)));
-            ROOM_PRESET[2] = new RoomPreset(2, -1, viableFurniture);
+            List<(FurniturePreset, int, int)> viableFurniture = new List<(FurniturePreset, int, int)>();
+            viableFurniture.Add((new FurniturePreset(1, PLACE_ANY, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_RIGHT | ORIENT_FLOOR_UP | ORIENT_WALL_0, (1, 1)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(2, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 2)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 1, 1));
+            viableFurniture.Sort((first, second) => (first.Item2 * first.Item3).CompareTo(second.Item2 * second.Item3));
+            ROOM_PRESET_DICTIONARY[2].Add(new RoomPreset(2, -1, viableFurniture));
         }
         {
-            List<FurniturePreset> viableFurniture = new List<FurniturePreset>();
-            viableFurniture.Add(new FurniturePreset(1, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (4, 2)));
-            viableFurniture.Add(new FurniturePreset(2, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)));
-            viableFurniture.Add(new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)));
-            viableFurniture.Add(new FurniturePreset(4, PLACE_ANY, WALL_ANY, ORIENT_ANY, (1, 1)));
-            viableFurniture.Add(new FurniturePreset(5, PLACE_ANY, WALL_ANY, ORIENT_ANY, (1, 2)));
-            viableFurniture.Add(new FurniturePreset(6, PLACE_ANY, WALL_ANY, ORIENT_ANY, (2, 4)));
-            viableFurniture.Add(new FurniturePreset(7, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)));
-            viableFurniture.Add(new FurniturePreset(8, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)));
-            ROOM_PRESET[3] = new RoomPreset(3, 0, viableFurniture);
+            List<(FurniturePreset, int, int)> viableFurniture = new List<(FurniturePreset, int, int)>();
+            viableFurniture.Add((new FurniturePreset(1, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (4, 2)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(2, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(4, PLACE_ANY, WALL_ANY, ORIENT_ANY, (1, 1)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(5, PLACE_ANY, WALL_ANY, ORIENT_ANY, (1, 2)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(6, PLACE_ANY, WALL_ANY, ORIENT_ANY, (2, 4)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(7, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(8, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 1, 1));
+            viableFurniture.Sort((first, second) => (first.Item2 * first.Item3).CompareTo(second.Item2 * second.Item3));
+            ROOM_PRESET_DICTIONARY[3].Add(new RoomPreset(3, 0, viableFurniture));
         }
         {
             ORIENTATION_MAPPING = new List<int>();
@@ -1141,12 +1333,113 @@ public class PCG : MonoBehaviour
             }
         }
     }
+    public (NDArray, NDArray, NDArray, NDArray) GenerateHouse3(List<List<int>> houseHierarchy, double width, double height, int doorCount, int fireCount, int catCount)
+    {
+
+        if (INIT_FLAG == false)
+            InitializePCG();
+
+        double widthIncrement = 1;
+        double heightIncrement = 1;
+        if (width > height)
+            widthIncrement *= width / height;
+        else
+            heightIncrement *= height / width;
+
+        int failsafe = 64;
+        while (true)
+        {
+            --failsafe;
+            if (failsafe < 0)
+            {
+                Debug.Log(failsafe);
+                return (null, null, null, null);
+            }
+
+            Area rootArea = new Area(1);
+            List<Room> roomList = new List<Room>();
+            int roomIndex = 0;
+            for (int i = 0; i < houseHierarchy.Count; i++)
+            {
+                Area firstDepthArea = new Area();
+                int firstDepthProportion = 0;
+                for (int j = 0; j < houseHierarchy[i].Count; j++)
+                {
+                    Area secondDepthArea = new Area(houseHierarchy[i][j] % 100);
+                    firstDepthProportion += houseHierarchy[i][j] % 100;
+                    roomList.Add(new Room(roomIndex++, secondDepthArea, RandomChoice(ROOM_PRESET_DICTIONARY[houseHierarchy[i][j] / 100])));
+                    firstDepthArea.children.Add(secondDepthArea);
+                }
+                firstDepthArea.proportion = firstDepthProportion;
+                firstDepthArea.children.Sort((firstArea, secondArea) => firstArea.proportion.CompareTo(secondArea.proportion));
+                rootArea.children.Add(firstDepthArea);
+            }
+            rootArea.children.Sort((firstArea, secondArea) => -firstArea.proportion.CompareTo(secondArea.proportion));
+
+            Rectangle boundary = new Rectangle(0, 0, width, height);
+            Dictionary<double, SortedSet<double>> interceptX = new Dictionary<double, SortedSet<double>>();
+            Dictionary<double, SortedSet<double>> interceptY = new Dictionary<double, SortedSet<double>>();
+            Partition(0, rootArea.children, boundary, interceptX, interceptY);
+
+            if (VerifyPartition(roomList) == false)
+            {
+                Debug.Log("enlarge: too small room");
+                width += widthIncrement;
+                height += heightIncrement;
+                continue;
+            }
+
+            Dictionary<Point, HashSet<Room>> roomPointDictionary = Geometrize(roomList, interceptX, interceptY);
+
+            Room rootRoom = roomList[0];
+            Graph<Room, (Point, Point)> roomGraph = GenerateTreeConnection(rootRoom, roomList, roomPointDictionary);
+
+            int connectingPathLength = 4;
+            GenerateAdditionalConnection(rootRoom, roomList, roomPointDictionary, roomGraph, connectingPathLength);
+
+            PlaceDoor(interceptY, roomPointDictionary, roomGraph, width, height);
+
+            int attemptPerRoom = 256;
+            if (PlaceFurniture2(roomList, attemptPerRoom) == false)
+            {
+                Debug.Log("enlarge: furniture requirement unfulfilled");
+                width += widthIncrement;
+                height += heightIncrement;
+                continue;
+            }
+
+            PlaceFireAndCat(roomList, fireCount, catCount);
+
+            PlacePainting(roomList);
+
+            NDArray roomArray = np.ones((Convert.ToInt32(width + 1), Convert.ToInt32(height + 1)));
+            DrawRoom(roomArray, roomList);
+
+            NDArray doorArray = np.zeros((Convert.ToInt32(width + 1), Convert.ToInt32(height + 1)));
+            DrawDoor(doorArray, roomList, doorCount);
+
+            NDArray furnitureArray = np.zeros((Convert.ToInt32(width + 1), Convert.ToInt32(height + 1)));
+            DrawFurniture(furnitureArray, roomList);
+
+            NDArray fireArray = np.zeros((Convert.ToInt32(width + 1), Convert.ToInt32(height + 1)));
+            DrawFire(fireArray, roomList, fireCount);
+
+            return (roomArray, doorArray, furnitureArray, fireArray);
+
+        }
+
+    }
 
     // Start is called before the first frame update
     void Start()
     {
 
-        List<List<int>> houseHierarchy = DebugHouseHierarchy(25, 7);
+        List<List<int>> houseHierarchy = DebugHouseHierarchy(11, 4); // TODO: sorting intensify
+        foreach (List<int> list in houseHierarchy)
+        {
+            for (int i = 0; i < list.Count; i++)
+                list[i] = list[i] * 100 + 25 + Convert.ToInt32(50 * random.NextDouble());
+        }
         string houseHierarchyString = "";
         for (int i = 0; i < houseHierarchy.Count; i++)
         {
@@ -1164,7 +1457,7 @@ public class PCG : MonoBehaviour
         }
         Debug.Log(houseHierarchyString);
 
-        (NDArray roomArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = GenerateHouse2(houseHierarchy, 5, 5, 5);
+        (NDArray roomArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = GenerateHouse3(houseHierarchy, 25, 25, 5, 5, 5);
 
         /*int halfLength = 25;
         double width = halfLength + halfLength * random.NextDouble();
@@ -1196,11 +1489,11 @@ public class PCG : MonoBehaviour
                     arrayString += "/\\"; // /\ is fire
                 else if (furnitureString != "0")
                 {
-                    /*arrayString += ++ furniture + " "; // so funny haha
+                    arrayString += ++ furniture + " "; // so funny haha
                     furnitureList.Add((furniture, furnitureString));
                     if (furniture == '~')
-                        furniture = ' ';*/
-                    arrayString += "O ";
+                        furniture = ' ';
+                    //arrayString += "O ";
                 }
                 else if (doorString != "0")
                     arrayString += doorString + " ";
@@ -1218,10 +1511,10 @@ public class PCG : MonoBehaviour
             }
             arrayString += "\n";
         }
-        /*foreach ((char c, string s) in furnitureList)
+        foreach ((char c, string s) in furnitureList)
         {
             arrayString += c + " " + s + "\n";
-        }*/
+        }
         Debug.Log(arrayString);
 
     }
