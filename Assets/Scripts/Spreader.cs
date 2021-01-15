@@ -20,7 +20,8 @@ public class Spreader : MonoBehaviour
 
     private int spawnCounter;
     private float load;
-    private PlayerDirection playerDirection;
+    private bool beingGrab = false;
+    private float playerDirection = 0;
     private float maxLocalScaleX;
     private bool isFillable;
     private Valve valve;
@@ -55,63 +56,39 @@ public class Spreader : MonoBehaviour
     private void SyncPlayerDirection()
     {
         Grabbable grabbable = GetComponent<Grabbable>();
-        bool isFind = false;
-        if(grabbable != null)
+        if (grabbable != null && grabbable.Grabber != null)
         {
-            if(grabbable.Grabber != null)
-            {
-                PlayerDirection temp = grabbable.Grabber.GetComponent<PlayerDirection>();
-                if (temp != null)
-                {
-                    playerDirection = temp;
-                    isFind = true;
-                }
-            }
+            beingGrab = true;
+            int x = 0;
+            int y = 0;
+            if (Input.GetKey(KeyCode.W))
+                y++;
+            if (Input.GetKey(KeyCode.A))
+                x--;
+            if (Input.GetKey(KeyCode.S))
+                y--;
+            if (Input.GetKey(KeyCode.D))
+                x++;
+            if (x != 0 || y != 0)
+                playerDirection = Mathf.Atan2(y, x);
         }
-        if (!isFind)
-        {
-            playerDirection = null;
-        }
+        else
+            beingGrab = false;
     }
     private void SpawnLoop()
     {
-        if (Input.GetKey(KeyCode.Space) && load > 0)
+        if (Input.GetKey(KeyCode.Space) && load > 0 && beingGrab)
         {
-            if (playerDirection != null)
-            {
-                Vector2 temp;
-                float usedAngle = Angle / 2 * Mathf.Deg2Rad;
-                float usedRange = Range / 2;
-                usedAngle = Random.Range(-usedAngle, usedAngle);
-                usedRange = Random.Range(-usedRange, usedRange);
-                HeatReducer water = Instantiate<HeatReducer>(HeatReducerPrefab);
-                if (playerDirection.Direction == "left")
-                {
-                    water.transform.position = transform.position + LeftSpawnVector + new Vector3(0, usedRange, 0);
-                    temp = new Vector2(-Mathf.Cos(usedAngle) * WaterVelocity, Mathf.Sin(usedAngle) * WaterVelocity);
-                    water.MoveVector = temp;
-                }
-                if (playerDirection.Direction == "right")
-                {
-                    water.transform.position = transform.position + RightSpawnVector + new Vector3(0, usedRange, 0); ;
-                    temp = new Vector2(Mathf.Cos(usedAngle) * WaterVelocity, Mathf.Sin(usedAngle) * WaterVelocity);
-                    water.MoveVector = temp;
-                }
-                if (playerDirection.Direction == "up")
-                {
-                    water.transform.position = transform.position + UpSpawnVector + new Vector3(usedRange, 0, 0);
-                    temp = new Vector2(Mathf.Sin(usedAngle) * WaterVelocity, Mathf.Cos(usedAngle) * WaterVelocity);
-                    water.MoveVector = temp;
-                }
-                if (playerDirection.Direction == "down")
-                {
-                    water.transform.position = transform.position + DownSpawnVector + new Vector3(usedRange, 0, 0);
-                    temp = new Vector2(Mathf.Sin(usedAngle) * WaterVelocity, -Mathf.Cos(usedAngle) * WaterVelocity);
-                    water.MoveVector = temp;
-                }
-                water.LifeTime = LifeTime;
-                load -= UseRate;
-            }
+            float usedAngle = Angle * Mathf.Deg2Rad / 2;
+            float usedRange = Range / 2;
+            usedAngle = Random.Range(playerDirection - usedAngle, playerDirection + usedAngle);
+            usedRange = Random.Range(-usedRange, usedRange);
+            HeatReducer water = Instantiate<HeatReducer>(HeatReducerPrefab);
+            Vector2 directionalVector = new Vector2(Mathf.Cos(usedAngle), Mathf.Sin(usedAngle));
+            water.transform.position = transform.position + new Vector3(directionalVector.x, directionalVector.y, 0);
+            water.MoveVector = directionalVector * WaterVelocity;
+            water.LifeTime = LifeTime;
+            load -= UseRate;
         }
     }
     public void Fill(float amount)
