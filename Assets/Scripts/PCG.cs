@@ -1040,7 +1040,7 @@ public class PCG : MonoBehaviour
             viableFurniture.Add(new FurniturePreset(2, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 2)));
             viableFurniture.Add(new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)));
             viableFurniture.Add(new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)));
-            ROOM_PRESET[2] = new RoomPreset(2, 9, viableFurniture);
+            ROOM_PRESET[2] = new RoomPreset(2, -1, viableFurniture);
         }
         {
             List<FurniturePreset> viableFurniture = new List<FurniturePreset>();
