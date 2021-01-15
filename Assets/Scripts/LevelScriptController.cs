@@ -13,6 +13,7 @@ public class LevelScriptController : MonoBehaviour
 
     void Start()
     {
+
         GameConfig.Day = 1;
         startScript();
     }

@@ -79,7 +79,8 @@ public class Cell : MonoBehaviour
 
         if (furniture_survivor > 0)
         {
-            GameObject newFurniture = Instantiate(Furniture);
+            GameObject selectedFurniture = get_furniture_survivor_gameobject(furniture_survivor);
+            GameObject newFurniture = Instantiate(selectedFurniture);
             newFurniture.transform.position = this.transform.position;
         }
         /*
@@ -118,9 +119,11 @@ public class Cell : MonoBehaviour
 
     }
 
-    private GameObject furniture_survivor_instantiate(int furnitureID)
+    private GameObject get_furniture_survivor_gameobject(double furnitureID)
     {
-        return FurnitureCatalog.Furniture(furnitureID);
+        int ID = (int) furnitureID;
+        Debug.Log(ID);
+        return FurnitureCatalog.Furniture(ID);
     }
 
     // Update is called once per frame
