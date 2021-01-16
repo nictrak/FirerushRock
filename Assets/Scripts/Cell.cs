@@ -8,11 +8,16 @@ using Mirror;
 public class Cell : NetworkBehaviour
 {
     private string houseMap;
+    [SyncVar]
     private double heat;
+    [SyncVar]
     private bool levelOneFire;
+    [SyncVar]
     private bool levelTwoFire;
+    [SyncVar]
     private bool levelThreeFire;
     private Vector2 gridPosition;
+    [SyncVar]
     private double lastHeat;
     private bool furniture;
     private bool survivor;
@@ -43,6 +48,25 @@ public class Cell : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SpawnHouse();
+        HeatSprite.transform.localScale = new Vector3(0f, 0f, 1f);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+    private void FixedUpdate()
+    {
+        HeatAndFireSync();
+        ShowFire();
+        ShowHeat();
+        UpdateLastHeat();
+    }
+    [ServerCallback]
+    private void SpawnHouse()
+    {
         houseMap = "Normal";
         heat = 0;
         levelOneFire = false;
@@ -50,7 +74,6 @@ public class Cell : NetworkBehaviour
         levelThreeFire = false;
         lastHeat = 0;
         heat = 0;
-        HeatSprite.transform.localScale = new Vector3(0f, 0f, 1f);
 
         furniture = (FireSystem.furniture_array[(int)gridPosition.y, (int)gridPosition.x] == 1);
         door = (FireSystem.door_array[(int)gridPosition.y, (int)gridPosition.x] == 1);
@@ -58,7 +81,6 @@ public class Cell : NetworkBehaviour
         wall = (FireSystem.wall_array[(int)gridPosition.y, (int)gridPosition.x] == 1);
         empty_space = false;
         if (!wall & !furniture & !door & !survivor) empty_space = true;
-
 
         //color
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -93,24 +115,33 @@ public class Cell : NetworkBehaviour
             newDoor.transform.position = this.transform.position;
             NetworkServer.Spawn(newDoor);
         }
-
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    private void FixedUpdate()
+    [ServerCallback]
+    private void HeatAndFireSync()
     {
         heat = FireSystem.heat_array[(int)gridPosition.y, (int)gridPosition.x];
         double fire1 = FireSystem.fire_1_array[(int)gridPosition.y, (int)gridPosition.x];
         double fire2 = FireSystem.fire_2_array[(int)gridPosition.y, (int)gridPosition.x];
         double fire3 = FireSystem.fire_3_array[(int)gridPosition.y, (int)gridPosition.x];
-        bool isFire1 = fire1 > 0 && !door;
-        bool isFire2 = fire2 > 0 && !door;
-        bool isFire3 = fire3 > 0 && !door;
-        if (empty_space) { 
+        levelOneFire = fire1 > 0 && !door;
+        levelTwoFire = fire2 > 0 && !door;
+        levelThreeFire = fire3 > 0 && !door;
+    }
+    [ServerCallback]
+    private void UpdateLastHeat()
+    {
+        lastHeat = heat;
+    }
+    private void ShowFire()
+    {
+        Fire1.enabled = levelOneFire;
+        Fire2.enabled = levelTwoFire;
+        Fire3.enabled = levelThreeFire;
+    }
+    private void ShowHeat()
+    {
+        if (empty_space)
+        {
             if (Mathf.Abs((float)(lastHeat - heat)) > 0.001)
             {
                 float heatScale;
@@ -133,8 +164,5 @@ public class Cell : NetworkBehaviour
                 lastHeat = heat;
             }
         }
-        Fire1.enabled = isFire1;
-        Fire2.enabled = isFire2;
-        Fire3.enabled = isFire3;
     }
 }

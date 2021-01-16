@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerDirection : MonoBehaviour
+public class PlayerDirection : NetworkBehaviour
 {
     private string direction;
 
@@ -16,7 +17,7 @@ public class PlayerDirection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SelectDirection();
+        if(isLocalPlayer) SelectDirection();
     }
 
     private void SelectDirection()

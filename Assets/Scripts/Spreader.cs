@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Spreader : MonoBehaviour
+public class Spreader : NetworkBehaviour
 {
     public HeatReducer HeatReducerPrefab;
     public Vector3 LeftSpawnVector;
@@ -41,17 +42,10 @@ public class Spreader : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (spawnCounter < SpreadRate)
-        {
-            spawnCounter += 1;
-        }
-        else
-        {
-            SpawnLoop();
-            spawnCounter = 0;
-        }
-        FillLoop();
+        SpawnLoop();
+        //FillLoop();
     }
+    [ClientCallback]
     private void SyncPlayerDirection()
     {
         Grabbable grabbable = GetComponent<Grabbable>();
@@ -73,46 +67,54 @@ public class Spreader : MonoBehaviour
             playerDirection = null;
         }
     }
+    [ClientCallback]
     private void SpawnLoop()
     {
-        if (Input.GetKey(KeyCode.Space) && load > 0)
+        if(playerDirection != null)
         {
-            if (playerDirection != null)
+            if (Input.GetKey(KeyCode.Space) && load > 0 && playerDirection.isLocalPlayer)
             {
-                Vector2 temp;
-                float usedAngle = Angle / 2 * Mathf.Deg2Rad;
-                float usedRange = Range / 2;
-                usedAngle = Random.Range(-usedAngle, usedAngle);
-                usedRange = Random.Range(-usedRange, usedRange);
-                HeatReducer water = Instantiate<HeatReducer>(HeatReducerPrefab);
-                if (playerDirection.Direction == "left")
-                {
-                    water.transform.position = transform.position + LeftSpawnVector + new Vector3(0, usedRange, 0);
-                    temp = new Vector2(-Mathf.Cos(usedAngle) * WaterVelocity, Mathf.Sin(usedAngle) * WaterVelocity);
-                    water.MoveVector = temp;
-                }
-                if (playerDirection.Direction == "right")
-                {
-                    water.transform.position = transform.position + RightSpawnVector + new Vector3(0, usedRange, 0); ;
-                    temp = new Vector2(Mathf.Cos(usedAngle) * WaterVelocity, Mathf.Sin(usedAngle) * WaterVelocity);
-                    water.MoveVector = temp;
-                }
-                if (playerDirection.Direction == "up")
-                {
-                    water.transform.position = transform.position + UpSpawnVector + new Vector3(usedRange, 0, 0);
-                    temp = new Vector2(Mathf.Sin(usedAngle) * WaterVelocity, Mathf.Cos(usedAngle) * WaterVelocity);
-                    water.MoveVector = temp;
-                }
-                if (playerDirection.Direction == "down")
-                {
-                    water.transform.position = transform.position + DownSpawnVector + new Vector3(usedRange, 0, 0);
-                    temp = new Vector2(Mathf.Sin(usedAngle) * WaterVelocity, -Mathf.Cos(usedAngle) * WaterVelocity);
-                    water.MoveVector = temp;
-                }
-                water.LifeTime = LifeTime;
-                load -= UseRate;
+
+                CmdSpawnWater(playerDirection.Direction);
             }
         }
+    }
+    [Command(ignoreAuthority = true)]
+    private void CmdSpawnWater(string direction)
+    {
+        Vector2 temp;
+        float usedAngle = Angle / 2 * Mathf.Deg2Rad;
+        float usedRange = Range / 2;
+        usedAngle = Random.Range(-usedAngle, usedAngle);
+        usedRange = Random.Range(-usedRange, usedRange);
+        HeatReducer water = Instantiate<HeatReducer>(HeatReducerPrefab);
+        if (direction == "left")
+        {
+            water.transform.position = transform.position + LeftSpawnVector + new Vector3(0, usedRange, 0);
+            temp = new Vector2(-Mathf.Cos(usedAngle) * WaterVelocity, Mathf.Sin(usedAngle) * WaterVelocity);
+            water.MoveVector = temp;
+        }
+        if (direction == "right")
+        {
+            water.transform.position = transform.position + RightSpawnVector + new Vector3(0, usedRange, 0); ;
+            temp = new Vector2(Mathf.Cos(usedAngle) * WaterVelocity, Mathf.Sin(usedAngle) * WaterVelocity);
+            water.MoveVector = temp;
+        }
+        if (direction == "up")
+        {
+            water.transform.position = transform.position + UpSpawnVector + new Vector3(usedRange, 0, 0);
+            temp = new Vector2(Mathf.Sin(usedAngle) * WaterVelocity, Mathf.Cos(usedAngle) * WaterVelocity);
+            water.MoveVector = temp;
+        }
+        if (direction == "down")
+        {
+            water.transform.position = transform.position + DownSpawnVector + new Vector3(usedRange, 0, 0);
+            temp = new Vector2(Mathf.Sin(usedAngle) * WaterVelocity, -Mathf.Cos(usedAngle) * WaterVelocity);
+            water.MoveVector = temp;
+        }
+        water.LifeTime = LifeTime;
+        load -= UseRate;
+        NetworkServer.Spawn(water.gameObject);
     }
     public void Fill(float amount)
     {

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Dispenser : MonoBehaviour
+public class Dispenser : NetworkBehaviour
 {
     public GameObject DispensedPrefab;
 
@@ -20,13 +21,14 @@ public class Dispenser : MonoBehaviour
         DispenseLoop();
         SyncAlive();
     }
-
+    [ServerCallback]
     private void DispenseLoop()
     {
         if(aliveObject == null)
         {
             aliveObject = Instantiate<GameObject>(DispensedPrefab);
             aliveObject.transform.position = transform.position;
+            NetworkServer.Spawn(aliveObject);
         }
     }
     private void SyncAlive()

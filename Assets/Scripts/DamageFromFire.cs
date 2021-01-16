@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class DamageFromFire : MonoBehaviour
+public class DamageFromFire : NetworkBehaviour
 {
     private float fire1Damage;
     private float fire2Damage;
@@ -34,6 +35,7 @@ public class DamageFromFire : MonoBehaviour
             Damage(cells[i]);
         }
     }
+    [ServerCallback]
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Cell cell = collision.gameObject.GetComponent<Cell>();
@@ -42,6 +44,7 @@ public class DamageFromFire : MonoBehaviour
             cells.Add(cell);
         }
     }
+    [ServerCallback]
     private void OnTriggerExit2D(Collider2D collision)
     {
         Cell cell = collision.gameObject.GetComponent<Cell>();
@@ -50,6 +53,7 @@ public class DamageFromFire : MonoBehaviour
             cells.Remove(cell);
         }
     }
+    [ServerCallback]
     private void Damage(Cell cell)
     {
         int x = (int)cell.GridPosition.x;

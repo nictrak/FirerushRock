@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Mirror;
 
-public class Life : MonoBehaviour
+public class Life : NetworkBehaviour
 {
+    [SyncVar]
     private float lifePoint;
     private float maxLocalScale;
     private bool isRegen;
@@ -13,7 +15,6 @@ public class Life : MonoBehaviour
 
     public float MaxLifePoint;
     public GameObject LifeBar;
-    public GameObject Entity;
     public float RegenPoint;
     public int NonRegenTime;
     public bool IsPlayer;
@@ -39,25 +40,25 @@ public class Life : MonoBehaviour
         RegenLifePoint();
         SyncLifeBar();
     }
+    [ServerCallback]
     public void Damage(float damagePoint)
     {
         lifePoint -= damagePoint;
         if(lifePoint <= 0)
         {
-            Debug.Log("Destroy");
-            Destroy(Entity);
-            if(IsPlayer) SceneManager.LoadScene("Menu");
+            if(!IsPlayer) Destroy(gameObject);
+            //if(IsPlayer) SceneManager.LoadScene("Menu");
         }
         isRegen = false;
         regenCounter = 0;
     }
-
+    [ServerCallback]
     private void SyncLifeBar()
     {
         if(LifeBar != null)
         LifeBar.transform.localScale = new Vector3(lifePoint / MaxLifePoint * maxLocalScale, LifeBar.transform.localScale.y, 1);
     }
-
+    [ServerCallback]
     private void RegenLifePoint()
     {
         if(lifePoint < MaxLifePoint && isRegen)
@@ -69,6 +70,7 @@ public class Life : MonoBehaviour
             }
         }
     }
+    [ServerCallback]
     private void OpenRegen()
     {
         if (!isRegen)
