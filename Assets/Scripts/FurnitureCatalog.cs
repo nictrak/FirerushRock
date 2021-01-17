@@ -121,16 +121,16 @@ public class FurnitureCatalog : MonoBehaviour
             case 2012: return FlushToilet_left;
             case 2013: return FlushToilet_right;
 
-            case 2021: return Bathtub_ver;
-            case 2022: return Bathtub_hor;
+            case 2022: return Bathtub_ver;
+            case 2021: return Bathtub_hor;
 
             case 2031: return ShowerBox;
 
             case 2041: return SinkAndMirror;
 
             //livingroom
-            case 3011: return Chair22BigTable_ver;
-            case 3012: return Chair22BigTable_hor;
+            case 3012: return Chair22BigTable_ver;
+            case 3011: return Chair22BigTable_hor;
 
             case 3021: return BookShelf;
 
@@ -151,11 +151,11 @@ public class FurnitureCatalog : MonoBehaviour
             case 3063: return TwoSofaAndLongSofaAndTable_right;
             case 3064: return TwoSofaAndLongSofaAndTable_down;
 
-            case 3071: return TwoChairAndTable_ver;
-            case 3072: return TwoChairAndTable_hor;
+            case 3072: return TwoChairAndTable_ver;
+            case 3071: return TwoChairAndTable_hor;
 
-            case 3081: return TwoSofaAndRoundTable_ver;
-            case 3082: return TwoSofaAndRoundTable_hor;
+            case 3082: return TwoSofaAndRoundTable_ver;
+            case 3081: return TwoSofaAndRoundTable_hor;
 
             case 3091: return Drawer;
 

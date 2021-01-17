@@ -23,7 +23,6 @@ public class GridSystem : NetworkBehaviour
     {
         
     }
-    [ServerCallback]
     private void GenerateGrid(int height, int width)
     {
         GridSize.x = width;

@@ -174,9 +174,9 @@ public class ParameterGenerator : MonoBehaviour
     private int GenRoomWithSize(int roomtype)
     {
         int size = 20;
-        if (roomtype == 1) size = Random.Range(10, 20);
-        if (roomtype == 2) size = Random.Range(20, 35);
-        if (roomtype == 2) size = Random.Range(30, 45);
+        if (roomtype == 1) size = Random.Range(20, 35);
+        if (roomtype == 2) size = Random.Range(10, 20);
+        if (roomtype == 3) size = Random.Range(30, 45);
         Debug.Log((roomtype * 100) + size);
         return (roomtype * 100) + size;
     }

@@ -29,10 +29,11 @@ public class LevelScriptController : MonoBehaviour
         ParameterGenerator.SetDay(GameConfig.Day);
         (int h, int w) = ParameterGenerator.GenHouseLength();
         Debug.Log("h =" + h + " w =" + w);
-        (NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = PCG.GenerateHouse2(ParameterGenerator.GenRoom(), ParameterGenerator.GenDoor(), ParameterGenerator.GenFire(), ParameterGenerator.GenSurvivor());
-
+        (NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = PCG.GenerateHouse3(ParameterGenerator.GenRoom(), w, h, ParameterGenerator.GenDoor(), ParameterGenerator.GenFire(), ParameterGenerator.GenSurvivor());
+        Debug.Log("PCG complete");
         int height = wallArray.shape[0];
         int width = wallArray.shape[1];
+        Debug.Log(wallArray);
         Debug.Log(height);
         Debug.Log(width);
         /*
@@ -46,6 +47,7 @@ public class LevelScriptController : MonoBehaviour
         */
         //Debug.Log(furnitureArray);
         FireSystem.startF(wallArray, doorArray, furnitureArray, fireArray,width,height);
+        Debug.Log("Start Fire System");
         /*
         Debug.Log(FireSystem.fire_source_array);
         Debug.Log(FireSystem.heat_array);
@@ -53,6 +55,7 @@ public class LevelScriptController : MonoBehaviour
         Debug.Log(FireSystem.door_array);
         */
         GridSystem.startF(height, width);
+        Debug.Log("Start Grid System");
 
 
 

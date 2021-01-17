@@ -5,19 +5,14 @@ using NumSharp;
 using System.Runtime;
 using Mirror;
 [RequireComponent(typeof(SpriteRenderer))]
-public class Cell : NetworkBehaviour
+public class Cell : MonoBehaviour
 {
     private string houseMap;
-    [SyncVar]
     private double heat;
-    [SyncVar]
     private bool levelOneFire;
-    [SyncVar]
     private bool levelTwoFire;
-    [SyncVar]
     private bool levelThreeFire;
     private Vector2 gridPosition;
-    [SyncVar]
     private double lastHeat;
     private double furniture_survivor;
     //private bool survivor;
@@ -68,7 +63,6 @@ public class Cell : NetworkBehaviour
         ShowHeat();
         UpdateLastHeat();
     }
-    [ServerCallback]
     private void SpawnHouse()
     {
         houseMap = "Normal";
@@ -159,7 +153,6 @@ public class Cell : NetworkBehaviour
     }
 
 
-    [ServerCallback]
     private void HeatAndFireSync()
     {
         heat = FireSystem.heat_array[(int)gridPosition.y, (int)gridPosition.x];
@@ -170,7 +163,6 @@ public class Cell : NetworkBehaviour
         levelTwoFire = fire2 > 0 && door == 0;
         levelThreeFire = fire3 > 0 && door == 0;
     }
-    [ServerCallback]
     private void UpdateLastHeat()
     {
         lastHeat = heat;
