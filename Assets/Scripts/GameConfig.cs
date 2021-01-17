@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameConfig : MonoBehaviour
 {
     public static AudioClip Music;
+    public static int Day;
+    public static int ContinueDay;
     // Start is called before the first frame update
     void Start()
     {

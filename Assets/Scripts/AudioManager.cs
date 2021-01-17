@@ -6,11 +6,18 @@ public class AudioManager : MonoBehaviour
 {
     
     public AudioSource BGM;
+    public AudioClip BaseMusic;
 
     // Start is called before the first frame update
     void Start()
     {
         ChangeBGM(GameConfig.Music);
+        /*
+        if(GameConfig.Music == null)
+        {
+            ChangeBGM(BaseMusic);
+        }
+        */
     }
 
     // Update is called once per frame
@@ -25,5 +32,14 @@ public class AudioManager : MonoBehaviour
         BGM.clip = Music;
         BGM.Play();
 
+    }
+    public void StopBGM()
+    {
+        BGM.Stop();
+    }
+
+    public void PlayBGM()
+    {
+        BGM.Play();
     }
 }

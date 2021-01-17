@@ -31,6 +31,8 @@ public class FireSystem : MonoBehaviour
     public float fire3_add_heat;
     private (int, int) gridsize;
     private NDArray zero_array;
+    private bool isRun;
+    private NDArray wall_array_clip;
 
     // Start is called before the first frame update
 
@@ -40,8 +42,16 @@ public class FireSystem : MonoBehaviour
     void Awake()
     {
         framerate_counter = 0;
-    //initial array
-        gridsize = ((int)grid.GridSize.x, (int)grid.GridSize.y);
+        isRun = false;
+    }
+
+    public void startF(NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray, int height, int width)
+    {
+        isRun = true;
+        framerate_counter = 0;
+        //initial array
+
+        gridsize = (width, height);
         zero_array = np.zeros(gridsize);
         heat_array = np.zeros(gridsize);
         fire_1_array = np.zeros(gridsize);
@@ -51,7 +61,14 @@ public class FireSystem : MonoBehaviour
         fire_source_array = np.zeros(gridsize);
 
         //initial heat
-        
+        fire_source_array = fireArray + shift_right(fireArray) + shift_down(fireArray) + shift_down(shift_right(fireArray));
+        heat_array = fire_source_array * max_heat_point;
+
+        wall_array = wallArray;
+        wall_array_clip = np.clip(wall_array, 0, 1);
+        door_array = doorArray;
+        furniture_array = furnitureArray;
+        /*
         fire_source_array = new int[,] {
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -173,32 +190,45 @@ public class FireSystem : MonoBehaviour
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
         };
+        */
     }
 
     private void FixedUpdate()
     {
-        if (framerate_counter >= fire_spread_counter)
+        if (isRun)
         {
-            fire_1_array = update_fire_array(heat_array, fire_1_array, fire_1_start_point, fire_1_size);
-            fire_2_array = update_fire_array(heat_array, fire_2_array, fire_2_start_point, fire_2_size);
-            fire_3_array = update_fire_array(heat_array, fire_3_array, fire_3_start_point, fire_3_size);
-
-            heat_array += heat_decay;
-            heat_array = spread(heat_array, fire_2_array, fire2_add_heat);
-            heat_array = spread(heat_array, fire_3_array, fire3_add_heat);
-            heat_array = heat_array - wall_array * int.MaxValue;
-            heat_array = np.clip(heat_array, (NDArray)0, (NDArray)max_heat_point);
-            //Debug.Log(GetHeat(new Vector2(0,0)));
-            framerate_counter = 0;
-
-            if (fire_2_array.Equals(zero_array))
+            if (framerate_counter >= fire_spread_counter)
             {
-                //SceneManager.LoadScene("Menu");
-            }
-        }
-        framerate_counter += 1;
-    }
+                fire_1_array = update_fire_array(heat_array, fire_1_array, fire_1_start_point, fire_1_size);
+                fire_2_array = update_fire_array(heat_array, fire_2_array, fire_2_start_point, fire_2_size);
+                fire_3_array = update_fire_array(heat_array, fire_3_array, fire_3_start_point, fire_3_size);
 
+                heat_array += heat_decay;
+                heat_array = spread(heat_array, fire_2_array, fire2_add_heat);
+                heat_array = spread(heat_array, fire_3_array, fire3_add_heat);
+                heat_array = heat_array - wall_array_clip * int.MaxValue;
+                heat_array = np.clip(heat_array, (NDArray)0, (NDArray)max_heat_point);
+                //Debug.Log(GetHeat(new Vector2(0,0)));
+                framerate_counter = 0;
+                /*
+                if (zero_array.Equals(np.zeros(fire_2_array.shape)))
+                {
+                    Debug.Log("yesssss");
+                }
+                else
+                {
+                    Debug.Log("noooooo");
+                }
+                */
+                
+                if (fire_2_array.Equals(zero_array))
+                {
+                    SceneManager.LoadScene("Menu");
+                }
+            }
+            framerate_counter += 1;
+        }
+    }
 
     // Update is called once per frame
     void Update()

@@ -29,6 +29,7 @@ public class PCG : MonoBehaviour
 
     private static int FIRE_TYPE     = -6;
     private static int CAT_TYPE      = -7;
+
     private static int PAINTING_TYPE = -8;
 
     private static Point ORIGIN = new Point(0, 0);
@@ -40,14 +41,15 @@ public class PCG : MonoBehaviour
     private static FurniturePreset DOOR_3 = new FurniturePreset(-4, 0, 0, 0, new Point(1, 3), new Point(5, 3), new Point(0, 0));
     private static FurniturePreset ENTRANCE = new FurniturePreset(-5, 0, 0, 0, ORIGIN, ORIGIN, ORIGIN);
     private static FurniturePreset FIRE = new FurniturePreset(-6, 0, 0, 0, new Point(3, 3), ORIGIN, ORIGIN);
+
     private static FurniturePreset CAT  = new FurniturePreset(-7, 0, 0, 0, new Point(1, 1), ORIGIN, ORIGIN);
     private static FurniturePreset PAINTING = new FurniturePreset(-8, 0, 0, 0, new Point(1, 1), ORIGIN, ORIGIN);
 
     private static Dictionary<int, List<RoomPreset>> ROOM_PRESET_DICTIONARY;
+
     private static List<int> ORIENTATION_MAPPING;
 
     private static bool INIT_FLAG = false;
-
 
     private System.Random random = new System.Random();
 
@@ -64,6 +66,7 @@ public class PCG : MonoBehaviour
         list.RemoveAt(choice);
         return item;
     }
+
 
     private class Point
     {
@@ -154,7 +157,7 @@ public class PCG : MonoBehaviour
         }
 
     }
-    
+
     private class Area
     {
 
@@ -166,6 +169,7 @@ public class PCG : MonoBehaviour
         {
             children = new List<Area>();
         }
+
         public Area(double proportion)
         {
             this.proportion = proportion;
@@ -237,6 +241,7 @@ public class PCG : MonoBehaviour
         public List<(FurniturePreset preset, int min, int max)> viableFurniture;
 
         public RoomPreset(int type, int tile, List<(FurniturePreset, int, int)> viableFurniture)
+
         {
             this.type = type;
             this.tile = tile;
@@ -286,6 +291,7 @@ public class PCG : MonoBehaviour
             {
                 Area secondDepthArea = new Area(0.75 + 0.5 * random.NextDouble());
                 roomList.Add(new Room(roomIndex++, secondDepthArea, ROOM_PRESET_DICTIONARY[houseHierarchy[i][j]][0]));
+
                 firstDepthArea.children.Add(secondDepthArea);
             }
             firstDepthArea.children.Sort((firstArea, secondArea) => firstArea.proportion.CompareTo(secondArea.proportion));
@@ -349,14 +355,17 @@ public class PCG : MonoBehaviour
         int partitionCount = 1;
         double partitionProportion = cumulativeProportion;
         double bestPartitionWidthLength = (cumulativeProportion / totalProportion) * boundaryWidthLength;
+
         List<double> bestPartitionHeightList = new List<double>();
         //bestPartitionHeightList.Add(boundaryHeightStart);
         //bestPartitionHeightList.Add(boundaryHeightEnd);
+
         double bestRatioError = Math.Abs(Math.Log(boundaryHeightLength / bestPartitionWidthLength));
         for (int i = 1; i < areaHierarchy.Count; i++)
         {
             cumulativeProportion += areaHierarchy[i].proportion;
             double currentPartitionWidthLength = (cumulativeProportion / totalProportion) * boundaryWidthLength;
+
             List<double> currentPartitionHeightList = new List<double>();
             //currentPartitionHeightList.Add(boundaryHeightStart);
             //currentPartitionHeightList.Add(boundaryHeightEnd);
@@ -371,12 +380,15 @@ public class PCG : MonoBehaviour
             }
             currentRatioError /= (partitionCount + 1);
             //double currentRatioError = Math.Abs(Math.Log(boundaryHeightLength / (currentPartitionWidthLength * (i + 1))));
+
             if (currentRatioError <= bestRatioError)
             {
                 partitionCount++;
                 partitionProportion = cumulativeProportion;
                 bestPartitionWidthLength = currentPartitionWidthLength;
+
                 bestPartitionHeightList = currentPartitionHeightList;
+
                 bestRatioError = currentRatioError;
             }
             else
@@ -389,12 +401,7 @@ public class PCG : MonoBehaviour
             partitionWidth = boundaryWidthEnd;
         List<double> partitionHeightList = new List<double>();
         partitionHeightList.Add(boundaryHeightStart);
-        /*cumulativeProportion = 0;
-        for (int i = 0; i < partitionCount - 1; i++)
-        {
-            cumulativeProportion += areaHierarchy[i].proportion;
-            partitionHeightList.Add(boundaryHeightStart + (cumulativeProportion / partitionProportion) * boundaryHeightLength);
-        }*/
+
         partitionHeightList.AddRange(bestPartitionHeightList);
         partitionHeightList.Add(boundaryHeightEnd);
         for (int i = 0; i < partitionCount; i++)
@@ -543,7 +550,9 @@ public class PCG : MonoBehaviour
                 keyEnumerator.MoveNext();
             Room secondRoom = keyEnumerator.Current;
             choice = random.Next(availableConnection[secondRoom].Count);
+
             (Room firstRoom, Point firstPoint, Point  secondPoint) = availableConnection[secondRoom][choice];
+
             roomGraph.Connect(firstRoom, secondRoom, (firstPoint, secondPoint));
             roomGraph.Connect(secondRoom, firstRoom, (secondPoint, firstPoint));
             connected.Add(secondRoom);
@@ -742,6 +751,7 @@ public class PCG : MonoBehaviour
                 int choice;
                 choice = random.Next(room.preset.viableFurniture.Count);
                 FurniturePreset preset = room.preset.viableFurniture[choice].preset;
+
                 if (room.area.rectangle.GetWidth() - 3 <= preset.size.x || room.area.rectangle.GetHeight() - 5 <= preset.size.y)
                 {
                     //Debug.Log("Room too small");
@@ -775,6 +785,7 @@ public class PCG : MonoBehaviour
                 }
                 else
                 {
+
                     List<int> allowedWallside = new List<int>();
                     for (int j = 0; j < 4; j++)
                     {
@@ -814,6 +825,7 @@ public class PCG : MonoBehaviour
                     }
                     else if (wallside == 1)
                     {
+
                         furnitureX = room.area.rectangle.x2 - presetX;
                         furnitureY = (room.area.rectangle.y1 + 1) + (room.area.rectangle.GetHeight() - presetY - 1) * random.NextDouble();
                     }
@@ -821,6 +833,7 @@ public class PCG : MonoBehaviour
                     {
                         furnitureX = (room.area.rectangle.x1 + 3) + (room.area.rectangle.GetWidth() - presetX - 3) * random.NextDouble();
                         furnitureY = room.area.rectangle.y2 - presetY;
+
                     }
                     else /*(allowedWallside[side] == 3)*/
                     {
@@ -1084,7 +1097,8 @@ public class PCG : MonoBehaviour
             }
         }
     }
-    
+
+
     private void DrawRoom(NDArray roomArray, List<Room> roomList)
     {
         foreach (Room room in roomList)
@@ -1177,8 +1191,6 @@ public class PCG : MonoBehaviour
                     int width = Convert.ToInt32(furniture.boundary.GetWidth()) - 2;
                     int height = Convert.ToInt32(furniture.boundary.GetHeight()) - 2;
                     furnitureArray[x.ToString() + ", " + y.ToString()] = furniture.GetID(room.preset.type);
-                    // DEBUG
-                    //furnitureArray[x.ToString() + ":" + (x + width).ToString() + ", " + y.ToString() + ":" + (y + height).ToString()] = furniture.GetID(room.preset.type);
                 }
             }
         }
@@ -1261,6 +1273,7 @@ public class PCG : MonoBehaviour
             viableFurniture.Add((new FurniturePreset(6, PLACE_ANY, WALL_ANY, ORIENT_ANY, (2, 4)), 0, -1));
             viableFurniture.Add((new FurniturePreset(7, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 0, -1));
             viableFurniture.Add((new FurniturePreset(8, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 0, -1));
+            viableFurniture.Add((new FurniturePreset(9, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 1)), 0, -1));
             viableFurniture.Sort((first, second) => (first.Item2 * first.Item3).CompareTo(second.Item2 * second.Item3));
             ROOM_PRESET_DICTIONARY[3].Add(new RoomPreset(3, 0, viableFurniture));
         }
@@ -1296,7 +1309,7 @@ public class PCG : MonoBehaviour
 
         Room rootRoom = roomList[0];
         Graph<Room, (Point, Point)> roomGraph = GenerateTreeConnection(rootRoom, roomList, roomPointDictionary);
-        
+
         GenerateAdditionalConnection(rootRoom, roomList, roomPointDictionary, roomGraph, connectingPathLength);
 
         PlaceDoor(interceptY, roomPointDictionary, roomGraph, width, height);

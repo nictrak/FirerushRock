@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 public class GridSystem : NetworkBehaviour
 {
+    public FurnitureCatalog FurnitureCatalog;
     private List<List<Cell>> grids;
     public Vector3 OriginPosition;
     public Vector2 CellSize;
@@ -12,7 +13,7 @@ public class GridSystem : NetworkBehaviour
     public float BaseZ;
 
     // Start is called before the first frame update
-    void Start()
+    public void startF(int height, int width)
     {
         GenerateGrid();
     }
@@ -25,6 +26,8 @@ public class GridSystem : NetworkBehaviour
     [ServerCallback]
     private void GenerateGrid()
     {
+        GridSize.x = width;
+        GridSize.y = height;
         grids = new List<List<Cell>>();
         for (int j = 0; j < GridSize.y; j++)
         {
@@ -37,6 +40,7 @@ public class GridSystem : NetworkBehaviour
                 Cell newGrid = Instantiate<Cell>(GridPrefab);
                 newGrid.transform.position = instatiatePosition;
                 newGrid.GridPosition = new Vector2(i, j);
+                newGrid.setFurnitureCatalog(FurnitureCatalog);
                 newRow.Add(newGrid);
                 NetworkServer.Spawn(newGrid.gameObject);
             }
