@@ -20,6 +20,7 @@ public class Spreader : NetworkBehaviour
     public GameObject Bar;
 
     private int spawnCounter;
+    [SyncVar]
     private float load;
     private PlayerDirection playerDirection;
     private float maxLocalScaleX;

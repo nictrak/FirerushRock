@@ -26,6 +26,7 @@ public class Breakable : NetworkBehaviour
     {
         Throwable throwable = collision.gameObject.GetComponent<Throwable>();
         BreakThrow breakThrow = collision.gameObject.GetComponent<BreakThrow>();
+        Grabbable grabbable = collision.gameObject.GetComponent<Grabbable>();
         if (throwable != null)
         {
             if (throwable.IsBreakActive)

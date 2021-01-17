@@ -4,7 +4,9 @@ using UnityEngine;
 using Mirror;
 public class Grabbable : NetworkBehaviour
 {
+    [SyncVar]
     private bool isGrabed;
+    [SyncVar]
     private bool isGrabbable;
     private PlayerGrab grabber;
     private Rigidbody2D rigidbody;

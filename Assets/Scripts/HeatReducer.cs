@@ -7,6 +7,7 @@ public class HeatReducer : NetworkBehaviour
 {
     public double ReduceRate;
     private List<Cell> cells;
+    [SyncVar]
     private Vector2 moveVector;
     private int lifeTime;
     private Rigidbody2D rigidbody;
@@ -29,19 +30,28 @@ public class HeatReducer : NetworkBehaviour
     void Update()
     {
     }
-    [ServerCallback]
     private void FixedUpdate()
     {
-        if(timeCounter == LifeTime)
+        CheckLifeTimeLoop();
+        ReduceHeat();
+        rigidbody.position += moveVector;
+    }
+    [ServerCallback]
+    private void CheckLifeTimeLoop()
+    {
+        if (timeCounter == LifeTime)
         {
             Destroy(this.gameObject);
         }
+        timeCounter += 1;
+    }
+    [ServerCallback]
+    private void ReduceHeat()
+    {
         for (int i = 0; i < cells.Count; i++)
         {
             HeatReduce(cells[i]);
         }
-        rigidbody.position += moveVector;
-        timeCounter += 1;
     }
     [ServerCallback]
     private void OnTriggerEnter2D(Collider2D collision)

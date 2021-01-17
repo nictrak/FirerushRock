@@ -5,10 +5,13 @@ using Mirror;
 
 public class Throwable : NetworkBehaviour
 {
+    [SyncVar]
     private bool isThrowed;
+    [SyncVar]
     private Vector2 throwVector;
     private Rigidbody2D rigidbody;
     private BoxCollider2D collider;
+    [SyncVar]
     private bool isBreakActive;
     private NetworkIdentity thrower;
     public bool IsThrowed { get => isThrowed; set => isThrowed = value; }
@@ -32,11 +35,12 @@ public class Throwable : NetworkBehaviour
         SyncIsBreak();
         ThrowedMove();
     }
+    [ServerCallback]
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*BreakThrow breakThrow = collision.gameObject.GetComponent<BreakThrow>();
+        BreakThrow breakThrow = collision.gameObject.GetComponent<BreakThrow>();
         PlayerGrab playerGrab = collision.gameObject.GetComponent<PlayerGrab>();
-        if (breakThrow != null && throwVector.magnitude > 0.00001)
+        /*if (breakThrow != null && throwVector.magnitude > 0.00001)
         {
             isThrowed = false;
             throwVector = new Vector2();
@@ -44,7 +48,7 @@ public class Throwable : NetworkBehaviour
         }
         if(playerGrab != null)
         {
-            if(playerGrab != thrower)
+            if(playerGrab.netIdentity != thrower && playerGrab.GrabedObject == null)
             if (playerGrab.Grab(this.GetComponent<Grabbable>()))
             {
                 isThrowed = false;
@@ -64,7 +68,7 @@ public class Throwable : NetworkBehaviour
             isBreakActive = false;
         }
     }
-    [ServerCallback]
+    [ClientCallback]
     private void ThrowedMove()
     {
         if (isThrowed)
