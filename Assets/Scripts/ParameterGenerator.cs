@@ -130,6 +130,17 @@ public class ParameterGenerator : MonoBehaviour
                 bigRoomList.Add(RoomList);
             }
         }
+        Debug.Log("test test");
+        Debug.Log(bigRoomList.Count);
+        Debug.Log(bigRoomList[0].Count);
+        Debug.Log(bigRoomList[1].Count);
+        Debug.Log(bigRoomList[2].Count);
+        Debug.Log(bigRoomList[0][0]);
+        Debug.Log(bigRoomList[0][1]);
+        Debug.Log(bigRoomList[1][0]);
+        Debug.Log(bigRoomList[1][1]);
+        Debug.Log(bigRoomList[2][0]);
+
         return bigRoomList;
 
 
@@ -176,7 +187,7 @@ public class ParameterGenerator : MonoBehaviour
         int size = 20;
         if (roomtype == 1) size = Random.Range(10, 20);
         if (roomtype == 2) size = Random.Range(20, 35);
-        if (roomtype == 2) size = Random.Range(30, 45);
+        if (roomtype == 3) size = Random.Range(30, 45);
         Debug.Log((roomtype * 100) + size);
         return (roomtype * 100) + size;
     }
