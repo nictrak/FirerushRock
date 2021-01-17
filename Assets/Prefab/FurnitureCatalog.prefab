@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &391094266999957700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 391094266999957699}
+  - component: {fileID: 391094266999957698}
+  m_Layer: 0
+  m_Name: FurnitureCatalog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &391094266999957699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391094266999957700}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 31.197664, y: -5.400613, z: -6.446202}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &391094266999957698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391094266999957700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 249a321c0c1b7074f9a7885b41f6bd4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BigBed_up: {fileID: 6903285152530594999, guid: 04e5c713e65c09248a751c0e2b799eac,
+    type: 3}
+  BigBed_left: {fileID: 9112273938319291349, guid: 526c2c1d88d178e42a1de8fcd0636286,
+    type: 3}
+  BigBed_right: {fileID: 8749577820797985607, guid: 7e41e0fbeebfcd74e86f5e381bf3f2d4,
+    type: 3}
+  SmallBed_up: {fileID: 7054550931542078478, guid: 599a7dd3b95cad44985246c79d2019c5,
+    type: 3}
+  SmallBed_left: {fileID: 7107048693464852925, guid: 5ae7f99c88daec74e88a4baa6b58e47a,
+    type: 3}
+  SmallBed_right: {fileID: 2449755808478267189, guid: af62aef723b0e21499365f7f949b5668,
+    type: 3}
+  Closet: {fileID: 5820200893836135390, guid: 591f9b59c1f865048b013e2920a73ec8, type: 3}
+  BookShelf: {fileID: 7414927639698295242, guid: a5a91e521adef994da90ee4d0f866c0b,
+    type: 3}
+  SmallChairAndTable_up: {fileID: 3664882882899502469, guid: ce571aea36f7369429e3ba732cef321b,
+    type: 3}
+  SmallChairAndTable_left: {fileID: 3671974518730836525, guid: 603acfe6877abfd4ca2a94c6449fbf3a,
+    type: 3}
+  SmallChairAndTable_right: {fileID: 6897933157116501616, guid: 558935899a2d0b744a00cf16ea91cc0f,
+    type: 3}
+  SmallChairAndTable_down: {fileID: 3466459278532675969, guid: 93186123a1999364c8196101853fab43,
+    type: 3}
+  FlushToilet_up: {fileID: 7055465457658044074, guid: 2cc3b6c89dbcbba4684e629300007768,
+    type: 3}
+  FlushToilet_left: {fileID: 7055465457658044074, guid: 2cc3b6c89dbcbba4684e629300007768,
+    type: 3}
+  FlushToilet_right: {fileID: 7055465457658044074, guid: 2cc3b6c89dbcbba4684e629300007768,
+    type: 3}
+  Bathtub_ver: {fileID: 9144593799146705511, guid: 6a9bcab20ce149447911fb3a6cfc8ce7,
+    type: 3}
+  Bathtub_hor: {fileID: 1581245452931475789, guid: f7b206065be312d4d94adcbdcd714b2f,
+    type: 3}
+  ShowerBox: {fileID: 2392787391720720750, guid: 0c502ec4fd0893b45a5f086d7bbc9152,
+    type: 3}
+  SinkAndMirror: {fileID: 4698774756568949280, guid: 64b39581d0c614e41aeeb598e6387f2d,
+    type: 3}
+  Chair22BigTable_ver: {fileID: 4062703054121576393, guid: fb21d57f627ba5a43aa09d9b54ebabb1,
+    type: 3}
+  Chair22BigTable_hor: {fileID: 481792068503461421, guid: 83c1dd8aa90a94045a214ff7d3f2a066,
+    type: 3}
+  Plant: {fileID: 6824616748056173137, guid: 03e2be1771baea84f9bdd5c02a49dd66, type: 3}
+  SmallSofa_up: {fileID: 6385878298022911092, guid: 7f3ac25cd9a61834cb19fdafc81a9de8,
+    type: 3}
+  SmallSofa_left: {fileID: 7557077326426169675, guid: 324b8d4612d81dc40beaeef286da0836,
+    type: 3}
+  SmallSofa_right: {fileID: 443850022821061494, guid: ef70c2b5a03a5d14b96a31d3f60853ae,
+    type: 3}
+  SmallSofa_down: {fileID: 6720787394946170545, guid: 283497d3ebd71024899c21907d6b5f84,
+    type: 3}
+  LongSofa_up: {fileID: 8186669694396806698, guid: 7c08ecaf703264341b15e4562ea398cb,
+    type: 3}
+  LongSofa_left: {fileID: 4112254478022957643, guid: 7f9dd1e89a736dd4cbaf45f6bf2848ef,
+    type: 3}
+  LongSofa_right: {fileID: 2443085899465608751, guid: 61fb666c64c05954780198e21259e517,
+    type: 3}
+  LongSofa_down: {fileID: 6254042090197088702, guid: f4c233f9a57010c46896b8d1ef9b09b9,
+    type: 3}
+  TwoSofaAndLongSofaAndTable_up: {fileID: 8634162401349219182, guid: 2d097d2dba4ae834fbb7d22e53dea8d6,
+    type: 3}
+  TwoSofaAndLongSofaAndTable_left: {fileID: 2483882813768213892, guid: 8a3a23b92d14ef841b4e63a4c32bd4a4,
+    type: 3}
+  TwoSofaAndLongSofaAndTable_right: {fileID: 633162086122329078, guid: e236d1f001e28564cb7f75b50d758469,
+    type: 3}
+  TwoSofaAndLongSofaAndTable_down: {fileID: 1947113726181225176, guid: 0c0b0e928a0d1b248bf8921370f42a0b,
+    type: 3}
+  TwoChairAndTable_ver: {fileID: 8171551630562541736, guid: f5e18292305d6164d83491b92138ef55,
+    type: 3}
+  TwoChairAndTable_hor: {fileID: 8788913250424814299, guid: 9f665a65e9f74b546ae1f387d93ce664,
+    type: 3}
+  TwoSofaAndRoundTable_ver: {fileID: 7017544070111299850, guid: 9ba2cf81ea90aca498c9d41a9d1d7d9b,
+    type: 3}
+  TwoSofaAndRoundTable_hor: {fileID: 8704588225807766041, guid: 539721c40cffe3f4ba8aeebe21c8ae99,
+    type: 3}
+  Drawer: {fileID: 1940722032405602655, guid: cbd2d52c9f3836145a3c4d8ec6100482, type: 3}
+  Wall_1: {fileID: 7487893518172031911, guid: 98e4fa4b2f0efab4b8424a122caebb66, type: 3}
+  Wall_2: {fileID: 237191275958373652, guid: 7497c62519c87864cbae623f8bc3c63f, type: 3}
+  Wall_3: {fileID: 2080386602934285685, guid: e979727a2a94e0945ae29d97137fd31d, type: 3}
+  Wall_4: {fileID: 3592270442169756119, guid: 896f1e74e32ea3e4fa8808948e9cc7bf, type: 3}
+  Wall_5: {fileID: 8051979321363196085, guid: fcae6a5cc460eed43be6a417f17a8be8, type: 3}
+  Wall_6: {fileID: 5758608218738241401, guid: 7c2acc085bc24d04cbff05afd35e760f, type: 3}
+  Survivor_1: {fileID: 9033900264385998663, guid: 2ff73c4935f08c2468c4527b8a09a8c9,
+    type: 3}
+  Survivor_2: {fileID: 9033900264385998663, guid: 2ff73c4935f08c2468c4527b8a09a8c9,
+    type: 3}
+  Survivor_3: {fileID: 9033900264385998663, guid: 2ff73c4935f08c2468c4527b8a09a8c9,
+    type: 3}
+  Survivor_4: {fileID: 9033900264385998663, guid: 2ff73c4935f08c2468c4527b8a09a8c9,
+    type: 3}
