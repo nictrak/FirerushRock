@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class HeatReducer : MonoBehaviour
+public class HeatReducer : NetworkBehaviour
 {
     public double ReduceRate;
     private List<Cell> cells;
+    [SyncVar]
     private Vector2 moveVector;
     private int lifeTime;
     private Rigidbody2D rigidbody;
@@ -30,17 +32,28 @@ public class HeatReducer : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(timeCounter == LifeTime)
+        CheckLifeTimeLoop();
+        ReduceHeat();
+        rigidbody.position += moveVector;
+    }
+    [ServerCallback]
+    private void CheckLifeTimeLoop()
+    {
+        if (timeCounter == LifeTime)
         {
             Destroy(this.gameObject);
         }
+        timeCounter += 1;
+    }
+    [ServerCallback]
+    private void ReduceHeat()
+    {
         for (int i = 0; i < cells.Count; i++)
         {
             HeatReduce(cells[i]);
         }
-        rigidbody.position += moveVector;
-        timeCounter += 1;
     }
+    [ServerCallback]
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<BreakWater>() != null)
@@ -55,6 +68,7 @@ public class HeatReducer : MonoBehaviour
             cells.Add(cell);
         }
     }
+    [ServerCallback]
     private void OnTriggerExit2D(Collider2D collision)
     {
         Cell cell = collision.gameObject.GetComponent<Cell>();
@@ -63,6 +77,7 @@ public class HeatReducer : MonoBehaviour
             cells.Remove(cell);
         }
     }
+    [ServerCallback]
     private void HeatReduce(Cell cell)
     {
         double heat = FireSystem.heat_array[(int)cell.GridPosition.y, (int)cell.GridPosition.x];

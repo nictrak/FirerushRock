@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class FirefighterAnimationController : MonoBehaviour
+public class FirefighterAnimationController : NetworkBehaviour
 {
     private bool isMove;
     private int direction;
@@ -20,24 +21,27 @@ public class FirefighterAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isMove = playerControl.IsMove;
-        if(playerDirection.Direction == "left")
+        if (isLocalPlayer)
         {
-            direction = 0;
+            isMove = playerControl.IsMove;
+            if (playerDirection.Direction == "left")
+            {
+                direction = 0;
+            }
+            else if (playerDirection.Direction == "right")
+            {
+                direction = 1;
+            }
+            else if (playerDirection.Direction == "up")
+            {
+                direction = 2;
+            }
+            else if (playerDirection.Direction == "down")
+            {
+                direction = 3;
+            }
+            animator.SetBool("IsMove", isMove);
+            animator.SetInteger("Direction", direction);
         }
-        else if (playerDirection.Direction == "right")
-        {
-            direction = 1;
-        }
-        else if (playerDirection.Direction == "up")
-        {
-            direction = 2;
-        }
-        else if (playerDirection.Direction == "down")
-        {
-            direction = 3;
-        }
-        animator.SetBool("IsMove", isMove);
-        animator.SetInteger("Direction", direction);
     }
 }

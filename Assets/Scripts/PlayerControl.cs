@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : NetworkBehaviour
 {
     private Rigidbody2D rigidbody;
     private Vector2 leftVector;
@@ -39,7 +40,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Move();
+        if(isLocalPlayer) Move();
     }
     private void Move()
     {

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class PlayerGrab : MonoBehaviour
+public class PlayerGrab : NetworkBehaviour
 {
     private GrabHitbox usedGrab;
     private Grabbable grabedObject;
@@ -28,8 +29,11 @@ public class PlayerGrab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SelectGrab();
-        GrabControl();
+        if (isLocalPlayer)
+        {
+            SelectGrab();
+            GrabControl();
+        }
     }
 
     
@@ -69,19 +73,33 @@ public class PlayerGrab : MonoBehaviour
             if (grabed.IsGrabbable)
             {
                 grabedObject = grabed;
-                grabedObject.Grabed(this);
+                CmdGrab(netIdentity, grabed.netIdentity);
                 return true;
             }
         }
         return false;
     }
+    [Command]
+    private void CmdGrab(NetworkIdentity grabberIdentity, NetworkIdentity grabedIdentity)
+    {
+        PlayerGrab playerGrab = grabberIdentity.GetComponent<PlayerGrab>();
+        Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
+        grabed.Grabed(playerGrab);
+
+    }
     private void Release()
     {
         if (grabedObject != null)
         {
-            grabedObject.Released(false);
+            CmdRelease(grabedObject.netIdentity, false);
             grabedObject = null;
         }
+    }
+    [Command]
+    private void CmdRelease(NetworkIdentity grabedIdentity, bool newIsTrigger)
+    {
+        Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
+        grabed.Released(newIsTrigger);
     }
     private void Throw()
     {
@@ -91,29 +109,17 @@ public class PlayerGrab : MonoBehaviour
             Vector2 throwVector;
             if (grabedObject.GetComponent<Throwable>() != null)
             {
-                grabedObject.Released(true);
-                throwed.IsThrowed = true;
-                throwed.Thrower = this;
-                if (playerDirection.Direction == "left")
-                {
-                    throwVector = new Vector2(-ThrowSpeed, 0);
-                }
-                else if (playerDirection.Direction == "right")
-                {
-                    throwVector = new Vector2(ThrowSpeed, 0);
-                }
-                else if (playerDirection.Direction == "up")
-                {
-                    throwVector = new Vector2(0, ThrowSpeed);
-                }
-                else
-                {
-                    throwVector = new Vector2(0, -ThrowSpeed);
-                }
-                throwed.ThrowVector = throwVector;
+                CmdRelease(grabedObject.netIdentity, true);
+                CmdThrow(netIdentity, grabedObject.netIdentity, playerDirection.Direction, ThrowSpeed);
                 grabedObject = null;
             }
         }
+    }
+    [Command]
+    private void CmdThrow(NetworkIdentity throwerIdentity, NetworkIdentity throwedIdentity, string direction, float throwSpeed)
+    {
+        Throwable throwed = throwedIdentity.GetComponent<Throwable>();
+        throwed.Throwed(throwerIdentity, direction, throwSpeed);
     }
     private void GrabControl()
     {

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Grabbable : MonoBehaviour
+using Mirror;
+public class Grabbable : NetworkBehaviour
 {
+    [SyncVar]
     private bool isGrabed;
+    [SyncVar]
     private bool isGrabbable;
     private PlayerGrab grabber;
     private Rigidbody2D rigidbody;
@@ -17,6 +19,7 @@ public class Grabbable : MonoBehaviour
     public ZSync ZSync { get => zSync; set => zSync = value; }
     public BoxCollider2D Collider2D { get => collider2D; set => collider2D = value; }
     public bool IsGrabbable { get => isGrabbable; set => isGrabbable = value; }
+    public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
 
     public Vector3 GrabedPostion;
 
@@ -42,6 +45,7 @@ public class Grabbable : MonoBehaviour
     {
 
     }
+    [ClientRpc]
     public void Grabed(PlayerGrab grabber)
     {
         IsGrabed = true;
@@ -51,6 +55,7 @@ public class Grabbable : MonoBehaviour
         zSync.IsEnable = false;
         transform.localPosition = GrabedPostion;
     }
+    [ClientRpc]
     public void Released(bool newIsTrigger)
     {
         IsGrabed = false;

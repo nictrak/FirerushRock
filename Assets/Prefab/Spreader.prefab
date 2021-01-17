@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 8984592757236301244}
   - component: {fileID: 2521464223037957949}
   - component: {fileID: 1225341857224461739}
+  - component: {fileID: -2698059487946537292}
   m_Layer: 0
   m_Name: Spreader
   m_TagString: Untagged
@@ -244,6 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728c91773a7dac458515aea1d30a919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   SpeedMultiplier: 0
   GrabedPostion: {x: 0, y: 0, z: -0.1}
 --- !u!114 &7105662092783039447
@@ -271,6 +274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7421d04bf448a0d40beea7859851ee05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &8984592757236301244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e313566bf1c7dd4b934b44ed27ec8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   MaxToughness: 1
   BangPrefab: {fileID: 8153818935634040573, guid: 112431dabba685c45b309907f236c73a,
     type: 3}
@@ -310,6 +317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758c75e079e24a642b1df10377fc6c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HeatReducerPrefab: {fileID: 7125382727417787545, guid: bbebd534910b0454ca667fd9bc598986,
     type: 3}
   LeftSpawnVector: {x: -0.5, y: 0, z: 0}
@@ -324,3 +333,19 @@ MonoBehaviour:
   UseRate: 1
   MaxLoad: 200
   Bar: {fileID: 1225341857787436220}
+--- !u!114 &-2698059487946537292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2359154403037820963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0

@@ -51,11 +51,14 @@ public class GrabHitbox : MonoBehaviour
             temp = grabbables[i];
             if(temp != null)
             {
-                distance = CalDistance(temp.transform.position);
-                if (shortestDistance > distance)
+                if (!temp.IsGrabed)
                 {
-                    shortestDistance = distance;
-                    index = i;
+                    distance = CalDistance(temp.transform.position);
+                    if (shortestDistance > distance)
+                    {
+                        shortestDistance = distance;
+                        index = i;
+                    }
                 }
             }
             else
@@ -63,7 +66,11 @@ public class GrabHitbox : MonoBehaviour
                 grabbables.RemoveAt(i);
             }
         }
-        return grabbables[index];
+        if (index >= 0)
+        {
+            return grabbables[index];
+        }
+        return null;
     }
     private float CalDistance(Vector3 position)
     {

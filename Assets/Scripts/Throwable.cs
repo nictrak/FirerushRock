@@ -1,19 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Throwable : MonoBehaviour
+public class Throwable : NetworkBehaviour
 {
+    [SyncVar]
     private bool isThrowed;
+    [SyncVar]
     private Vector2 throwVector;
     private Rigidbody2D rigidbody;
     private BoxCollider2D collider;
+    [SyncVar]
     private bool isBreakActive;
-    private PlayerGrab thrower;
+    private NetworkIdentity thrower;
     public bool IsThrowed { get => isThrowed; set => isThrowed = value; }
     public Vector2 ThrowVector { get => throwVector; set => throwVector = value; }
     public bool IsBreakActive { get => isBreakActive; set => isBreakActive = value; }
-    public PlayerGrab Thrower { get => thrower; set => thrower = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -32,11 +35,12 @@ public class Throwable : MonoBehaviour
         SyncIsBreak();
         ThrowedMove();
     }
+    [ServerCallback]
     private void OnTriggerEnter2D(Collider2D collision)
     {
         BreakThrow breakThrow = collision.gameObject.GetComponent<BreakThrow>();
         PlayerGrab playerGrab = collision.gameObject.GetComponent<PlayerGrab>();
-        if (breakThrow != null && throwVector.magnitude > 0.00001)
+        /*if (breakThrow != null && throwVector.magnitude > 0.00001)
         {
             isThrowed = false;
             throwVector = new Vector2();
@@ -44,14 +48,15 @@ public class Throwable : MonoBehaviour
         }
         if(playerGrab != null)
         {
-            if(playerGrab != thrower)
+            if(playerGrab.netIdentity != thrower && playerGrab.GrabedObject == null)
             if (playerGrab.Grab(this.GetComponent<Grabbable>()))
             {
                 isThrowed = false;
                 throwVector = new Vector2();
             }
-        }
+        }*/
     }
+    [ServerCallback]
     private void SyncIsBreak()
     {
         if (throwVector.magnitude > 0.00001)
@@ -63,11 +68,35 @@ public class Throwable : MonoBehaviour
             isBreakActive = false;
         }
     }
+    [ClientCallback]
     private void ThrowedMove()
     {
         if (isThrowed)
         {
             rigidbody.position += throwVector;
         }
+    }
+    public void Throwed(NetworkIdentity throwerIdentity, string direction, float throwSpeed)
+    {
+        Vector2 throwVector;
+        isThrowed = true;
+        thrower = throwerIdentity;
+        if (direction == "left")
+        {
+            throwVector = new Vector2(-throwSpeed, 0);
+        }
+        else if (direction == "right")
+        {
+            throwVector = new Vector2(throwSpeed, 0);
+        }
+        else if (direction == "up")
+        {
+            throwVector = new Vector2(0, throwSpeed);
+        }
+        else
+        {
+            throwVector = new Vector2(0, -throwSpeed);
+        }
+        this.throwVector = throwVector;
     }
 }

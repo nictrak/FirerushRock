@@ -18,8 +18,9 @@ GameObject:
   - component: {fileID: 7662863468016674956}
   - component: {fileID: 7903507764010875226}
   - component: {fileID: 3746787870199620571}
-  - component: {fileID: 2031229615447611672}
-  - component: {fileID: 7166673007799165553}
+  - component: {fileID: 5197000810407354718}
+  - component: {fileID: -1908004019822553508}
+  - component: {fileID: -174076012013182775}
   m_Layer: 0
   m_Name: Grabbable
   m_TagString: Untagged
@@ -163,6 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7728c91773a7dac458515aea1d30a919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   SpeedMultiplier: 0
   GrabedPostion: {x: 0, y: 3.3, z: 0.0001}
 --- !u!114 &8330863177608705841
@@ -190,6 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7421d04bf448a0d40beea7859851ee05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!114 &7903507764010875226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e313566bf1c7dd4b934b44ed27ec8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   MaxToughness: 1
   BangPrefab: {fileID: 8153818935634040573, guid: 112431dabba685c45b309907f236c73a,
     type: 3}
@@ -217,7 +224,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23f11ba197856147b3f45c231f0c421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2031229615447611672
+--- !u!114 &5197000810407354718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3583791644520692933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
+--- !u!114 &-1908004019822553508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,13 +252,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0c7cead65fea94daeedabdbe9a79bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   MaxLifePoint: 100
   LifeBar: {fileID: 0}
-  Entity: {fileID: 3583791644520692933}
   RegenPoint: 0
   NonRegenTime: 0
   IsPlayer: 0
---- !u!114 &7166673007799165553
+--- !u!114 &-174076012013182775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,3 +271,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56897625a30d344caaac7cd30c9cc5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1

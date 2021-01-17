@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Spreader : MonoBehaviour
+public class Spreader : NetworkBehaviour
 {
     public HeatReducer HeatReducerPrefab;
     public Vector3 LeftSpawnVector;
@@ -19,6 +20,7 @@ public class Spreader : MonoBehaviour
     public GameObject Bar;
 
     private int spawnCounter;
+    [SyncVar]
     private float load;
     private bool beingGrab = false;
     private float playerDirection = 0;
@@ -42,19 +44,13 @@ public class Spreader : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (spawnCounter < SpreadRate)
-        {
-            spawnCounter += 1;
-        }
-        else
-        {
-            SpawnLoop();
-            spawnCounter = 0;
-        }
-        FillLoop();
+        SpawnLoop();
+        //FillLoop();
     }
+    [ClientCallback]
     private void SyncPlayerDirection()
     {
+        //TODO Add LocalPlayer checking
         Grabbable grabbable = GetComponent<Grabbable>();
         if (grabbable != null && grabbable.Grabber != null)
         {
@@ -75,21 +71,28 @@ public class Spreader : MonoBehaviour
         else
             beingGrab = false;
     }
+    [ClientCallback]
     private void SpawnLoop()
     {
         if (Input.GetKey(KeyCode.Space) && load > 0 && beingGrab)
         {
-            float usedAngle = Angle * Mathf.Deg2Rad / 2;
-            float usedRange = Range / 2;
-            usedAngle = Random.Range(playerDirection - usedAngle, playerDirection + usedAngle);
-            usedRange = Random.Range(-usedRange, usedRange);
-            HeatReducer water = Instantiate<HeatReducer>(HeatReducerPrefab);
-            Vector2 directionalVector = new Vector2(Mathf.Cos(usedAngle), Mathf.Sin(usedAngle));
-            water.transform.position = transform.position + new Vector3(directionalVector.x, directionalVector.y, 0);
-            water.MoveVector = directionalVector * WaterVelocity;
-            water.LifeTime = LifeTime;
-            load -= UseRate;
+            CmdSpawnWater(playerDirection.Direction);
         }
+    }
+    [Command(ignoreAuthority = true)]
+    private void CmdSpawnWater(string direction)
+    {
+        float usedAngle = Angle * Mathf.Deg2Rad / 2;
+        float usedRange = Range / 2;
+        usedAngle = Random.Range(playerDirection - usedAngle, playerDirection + usedAngle);
+        usedRange = Random.Range(-usedRange, usedRange);
+        HeatReducer water = Instantiate<HeatReducer>(HeatReducerPrefab);
+        Vector2 directionalVector = new Vector2(Mathf.Cos(usedAngle), Mathf.Sin(usedAngle));
+        water.transform.position = transform.position + new Vector3(directionalVector.x, directionalVector.y, 0);
+        water.MoveVector = directionalVector * WaterVelocity;
+        water.LifeTime = LifeTime;
+        load -= UseRate;
+        NetworkServer.Spawn(water.gameObject);
     }
     public void Fill(float amount)
     {

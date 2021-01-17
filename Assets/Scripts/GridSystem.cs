@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class GridSystem : MonoBehaviour
+using Mirror;
+public class GridSystem : NetworkBehaviour
 {
     private List<List<Cell>> grids;
     public Vector3 OriginPosition;
@@ -9,8 +10,20 @@ public class GridSystem : MonoBehaviour
     public Vector2 GridSize;
     public Cell GridPrefab;
     public float BaseZ;
+
     // Start is called before the first frame update
     void Start()
+    {
+        GenerateGrid();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    [ServerCallback]
+    private void GenerateGrid()
     {
         grids = new List<List<Cell>>();
         for (int j = 0; j < GridSize.y; j++)
@@ -25,14 +38,9 @@ public class GridSystem : MonoBehaviour
                 newGrid.transform.position = instatiatePosition;
                 newGrid.GridPosition = new Vector2(i, j);
                 newRow.Add(newGrid);
+                NetworkServer.Spawn(newGrid.gameObject);
             }
             grids.Add(newRow);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
