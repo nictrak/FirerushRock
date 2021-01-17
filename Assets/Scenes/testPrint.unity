@@ -602,6 +602,21 @@ PrefabInstance:
       propertyPath: DayAddHouse
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1321967578473967045, guid: 40fa91cc9aa634944b5e22c05c9a1d54,
+        type: 3}
+      propertyPath: BaseHouseLength
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1321967578473967045, guid: 40fa91cc9aa634944b5e22c05c9a1d54,
+        type: 3}
+      propertyPath: DayAddHouseLength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1321967578473967045, guid: 40fa91cc9aa634944b5e22c05c9a1d54,
+        type: 3}
+      propertyPath: HouseLengthMultiplier
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1321967578473967050, guid: 40fa91cc9aa634944b5e22c05c9a1d54,
         type: 3}
       propertyPath: m_LocalPosition.x
