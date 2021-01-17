@@ -15,7 +15,7 @@ public class GridSystem : NetworkBehaviour
     // Start is called before the first frame update
     public void startF(int height, int width)
     {
-        GenerateGrid();
+        GenerateGrid(height, width);
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class GridSystem : NetworkBehaviour
         
     }
     [ServerCallback]
-    private void GenerateGrid()
+    private void GenerateGrid(int height, int width)
     {
         GridSize.x = width;
         GridSize.y = height;

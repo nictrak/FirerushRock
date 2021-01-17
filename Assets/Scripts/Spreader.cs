@@ -76,11 +76,11 @@ public class Spreader : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && load > 0 && beingGrab)
         {
-            CmdSpawnWater(playerDirection.Direction);
+            CmdSpawnWater(playerDirection);
         }
     }
     [Command(ignoreAuthority = true)]
-    private void CmdSpawnWater(string direction)
+    private void CmdSpawnWater(float playerDirection)
     {
         float usedAngle = Angle * Mathf.Deg2Rad / 2;
         float usedRange = Range / 2;

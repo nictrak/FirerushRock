@@ -119,7 +119,7 @@ public class Cell : NetworkBehaviour
 
         if (wall != 0)
         {
-            GameObject newWall;
+            GameObject newWall = null;
             if (wall == 1) { 
                 newWall = Instantiate(Wall);
                 newWall.transform.position = this.transform.position;
@@ -158,11 +158,7 @@ public class Cell : NetworkBehaviour
         return FurnitureCatalog.Furniture(ID);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
     [ServerCallback]
     private void HeatAndFireSync()
     {
@@ -170,9 +166,9 @@ public class Cell : NetworkBehaviour
         double fire1 = FireSystem.fire_1_array[(int)gridPosition.y, (int)gridPosition.x];
         double fire2 = FireSystem.fire_2_array[(int)gridPosition.y, (int)gridPosition.x];
         double fire3 = FireSystem.fire_3_array[(int)gridPosition.y, (int)gridPosition.x];
-        levelOneFire = fire1 > 0 && !door;
-        levelTwoFire = fire2 > 0 && !door;
-        levelThreeFire = fire3 > 0 && !door;
+        levelOneFire = fire1 > 0 && door == 0;
+        levelTwoFire = fire2 > 0 && door == 0;
+        levelThreeFire = fire3 > 0 && door == 0;
     }
     [ServerCallback]
     private void UpdateLastHeat()
