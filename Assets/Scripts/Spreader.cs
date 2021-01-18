@@ -45,14 +45,14 @@ public class Spreader : NetworkBehaviour
     private void FixedUpdate()
     {
         SpawnLoop();
-        //FillLoop();
+        FillLoop();
     }
     [ClientCallback]
     private void SyncPlayerDirection()
     {
         //TODO Add LocalPlayer checking
         Grabbable grabbable = GetComponent<Grabbable>();
-        if (grabbable != null && grabbable.Grabber != null)
+        if (grabbable != null && grabbable.Grabber != null && grabbable.Grabber.isLocalPlayer)
         {
             beingGrab = true;
             int x = 0;
@@ -94,6 +94,7 @@ public class Spreader : NetworkBehaviour
         load -= UseRate;
         NetworkServer.Spawn(water.gameObject);
     }
+    [Command(ignoreAuthority = true)]
     public void Fill(float amount)
     {
         load += amount;
@@ -104,7 +105,7 @@ public class Spreader : NetworkBehaviour
     }
     private void FillLoop()
     {
-        if (Input.GetKeyDown(KeyCode.K) && isFillable)
+        if (Input.GetKeyDown(KeyCode.K) && isFillable && beingGrab)
         {
             valve.Fill(this);
         }
