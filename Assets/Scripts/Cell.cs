@@ -5,18 +5,22 @@ using NumSharp;
 using System.Runtime;
 using Mirror;
 [RequireComponent(typeof(SpriteRenderer))]
-public class Cell : MonoBehaviour
+public class Cell : NetworkBehaviour
 {
     private string houseMap;
     private double heat;
+    [SyncVar]
     private bool levelOneFire;
+    [SyncVar]
     private bool levelTwoFire;
+    [SyncVar]
     private bool levelThreeFire;
     private Vector2 gridPosition;
     private double lastHeat;
     private double furniture_survivor;
     //private bool survivor;
     private double door;
+    [SyncVar]
     private double wall;
     private bool empty_space;
     public SpriteRenderer spriteRenderer;
@@ -49,20 +53,32 @@ public class Cell : MonoBehaviour
     {
         SpawnHouse();
         HeatSprite.transform.localScale = new Vector3(0f, 0f, 1f);
+        if (wall == -1)
+        {
+            toilet_floor.enabled = true;
+        }
+        else
+        {
+            toilet_floor.enabled = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
     private void FixedUpdate()
     {
+        
+    }
+    private void LateUpdate()
+    {
         HeatAndFireSync();
         ShowFire();
-        ShowHeat();
+        //ShowHeat();
         UpdateLastHeat();
     }
+    [ServerCallback]
     private void SpawnHouse()
     {
         houseMap = "Normal";
@@ -152,7 +168,7 @@ public class Cell : MonoBehaviour
         return FurnitureCatalog.Furniture(ID);
     }
 
-
+    [ServerCallback]
     private void HeatAndFireSync()
     {
         heat = FireSystem.heat_array[(int)gridPosition.y, (int)gridPosition.x];
@@ -163,6 +179,7 @@ public class Cell : MonoBehaviour
         levelTwoFire = fire2 > 0 && door == 0;
         levelThreeFire = fire3 > 0 && door == 0;
     }
+    [ServerCallback]
     private void UpdateLastHeat()
     {
         lastHeat = heat;

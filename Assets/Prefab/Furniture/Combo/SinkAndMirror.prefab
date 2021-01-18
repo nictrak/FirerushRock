@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4698774756568949287}
+  - component: {fileID: -3876844290376453202}
   m_Layer: 0
   m_Name: SinkAndMirror
   m_TagString: Untagged
@@ -32,6 +33,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3876844290376453202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4698774756568949280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1001 &4698774755169728652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39,6 +56,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4698774756568949287}
     m_Modifications:
+    - target: {fileID: -6604866660791079640, guid: 50b259910e5c20a4490353e64b8aa3dd,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8555898362945970236, guid: 50b259910e5c20a4490353e64b8aa3dd,
         type: 3}
       propertyPath: m_Name
@@ -193,6 +215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3870847640786920103, guid: 8cb0917b523d13d48aa338aab2e00565,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cb0917b523d13d48aa338aab2e00565, type: 3}

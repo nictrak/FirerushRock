@@ -223,7 +223,7 @@ public class FireSystem : MonoBehaviour
                 
                 if (fire_2_array.Equals(zero_array))
                 {
-                    SceneManager.LoadScene("Menu");
+                    //SceneManager.LoadScene("Menu");
                 }
             }
             framerate_counter += 1;

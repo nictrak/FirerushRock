@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 633162086122329079}
+  - component: {fileID: -7182942189074996503}
   m_Layer: 0
   m_Name: TwoSofaAndLongSofaAndTable_right
   m_TagString: Untagged
@@ -34,6 +35,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7182942189074996503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633162086122329078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1001 &633162087059282130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41,6 +58,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 633162086122329079}
     m_Modifications:
+    - target: {fileID: 1697794916027079953, guid: 61fb666c64c05954780198e21259e517,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2443085899465608751, guid: 61fb666c64c05954780198e21259e517,
         type: 3}
       propertyPath: m_Name
@@ -116,6 +138,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 633162086122329079}
     m_Modifications:
+    - target: {fileID: -6059506135127503384, guid: 7f3ac25cd9a61834cb19fdafc81a9de8,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6124301078480060508, guid: 7f3ac25cd9a61834cb19fdafc81a9de8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -251,6 +278,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallSofa_down
       objectReference: {fileID: 0}
+    - target: {fileID: 8233965063268888081, guid: 283497d3ebd71024899c21907d6b5f84,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 283497d3ebd71024899c21907d6b5f84, type: 3}
 --- !u!4 &6480301696440952215 stripped
@@ -325,6 +357,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LongTable_ver
+      objectReference: {fileID: 0}
+    - target: {fileID: 9102037567855160199, guid: f0cc7cfbf74fdbe47afc2cc28813c347,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0cc7cfbf74fdbe47afc2cc28813c347, type: 3}

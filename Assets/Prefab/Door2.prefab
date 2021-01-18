@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3506701497164271116}
   - component: {fileID: 6131674493409814084}
   - component: {fileID: 7869476554797943808}
+  - component: {fileID: -6931526783618967969}
   m_Layer: 0
   m_Name: Door2
   m_TagString: Untagged
@@ -49,6 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e313566bf1c7dd4b934b44ed27ec8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   MaxToughness: 2
   BangPrefab: {fileID: 0}
 --- !u!50 &6648184319647030223
@@ -185,3 +188,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpriteHeight: 1
+--- !u!114 &-6931526783618967969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6648184319647030216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0

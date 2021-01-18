@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8634162401349219217}
+  - component: {fileID: 6336672959234284180}
   m_Layer: 0
   m_Name: TwoSofaAndLongSofaAndTable_up
   m_TagString: Untagged
@@ -34,6 +35,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6336672959234284180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8634162401349219182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1001 &8634162400135527395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41,6 +58,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8634162401349219217}
     m_Modifications:
+    - target: {fileID: -2676671239194595275, guid: ef70c2b5a03a5d14b96a31d3f60853ae,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 443850022821061494, guid: ef70c2b5a03a5d14b96a31d3f60853ae,
         type: 3}
       propertyPath: m_Name
@@ -116,6 +138,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8634162401349219217}
     m_Modifications:
+    - target: {fileID: -1798127292968986329, guid: 8a0bb87d449edc84493b8acdd38898f1,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3508817344931294967, guid: 8a0bb87d449edc84493b8acdd38898f1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -191,6 +218,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8634162401349219217}
     m_Modifications:
+    - target: {fileID: 1574293513789228077, guid: 7c08ecaf703264341b15e4562ea398cb,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8186669694396806698, guid: 7c08ecaf703264341b15e4562ea398cb,
         type: 3}
       propertyPath: m_Name
@@ -266,6 +298,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8634162401349219217}
     m_Modifications:
+    - target: {fileID: -1584396130200074848, guid: 324b8d4612d81dc40beaeef286da0836,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7242615937262353763, guid: 324b8d4612d81dc40beaeef286da0836,
         type: 3}
       propertyPath: m_LocalPosition.x

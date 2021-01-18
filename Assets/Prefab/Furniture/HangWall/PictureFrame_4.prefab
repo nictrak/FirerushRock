@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7478238549651886386}
   - component: {fileID: 6929013441066574352}
   - component: {fileID: 8357355480413987363}
+  - component: {fileID: -7008550721779185510}
   m_Layer: 0
   m_Name: PictureFrame_4
   m_TagString: Untagged
@@ -131,3 +132,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpriteHeight: 1.1
+--- !u!114 &-7008550721779185510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3592270442169756119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0

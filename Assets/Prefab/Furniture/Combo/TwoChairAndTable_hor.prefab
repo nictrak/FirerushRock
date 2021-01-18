@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 426472213539948079}
+  - component: {fileID: -5484257183460645279}
   m_Layer: 0
   m_Name: TwoChairAndTable_hor
   m_TagString: Untagged
@@ -33,6 +34,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5484257183460645279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8788913250424814299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1001 &1342445590439751450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,6 +117,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2973530678695314475, guid: 2d3000c6774f1f248938350500ec07bf,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d3000c6774f1f248938350500ec07bf, type: 3}
 --- !u!4 &1861383725814614341 stripped
@@ -115,6 +137,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 426472213539948079}
     m_Modifications:
+    - target: {fileID: -4964166683404724493, guid: adb7384bab8875e429c0cf82f4a46dc6,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1434033832973278930, guid: adb7384bab8875e429c0cf82f4a46dc6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -249,6 +276,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3325701819685802340, guid: bab9e1aa895332a4a8b7d98552fbd33f,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bab9e1aa895332a4a8b7d98552fbd33f, type: 3}

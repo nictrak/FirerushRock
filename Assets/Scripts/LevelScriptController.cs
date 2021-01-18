@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NumSharp;
+using Mirror;
 
-public class LevelScriptController : MonoBehaviour
+public class LevelScriptController : NetworkBehaviour
 {
     // Start is called before the first frame update
     public ParameterGenerator ParameterGenerator;
@@ -23,7 +24,7 @@ public class LevelScriptController : MonoBehaviour
     {
 
     }
-
+    [ServerCallback]
     public void startScript()
     {
         ParameterGenerator.SetDay(GameConfig.Day);

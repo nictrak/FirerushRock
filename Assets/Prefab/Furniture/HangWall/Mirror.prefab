@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8337580991388871945}
   - component: {fileID: 8382833781723389483}
   - component: {fileID: 7459730569242811928}
+  - component: {fileID: 3870847640786920103}
   m_Layer: 0
   m_Name: Mirror
   m_TagString: Untagged
@@ -131,3 +132,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpriteHeight: 1.1
+--- !u!114 &3870847640786920103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713221986242500076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
