@@ -434,7 +434,7 @@ public class PCG : MonoBehaviour
                 if (x == x2)
                     break;
                 else if (x > x2)
-                    Debug.Log("IMPOSSIBLE: FAULTY INTERCEPT");
+                    Debug.Log("PCG IMPOSSIBLE: FAULTY INTERCEPT");
                 room.geometry.Add(new Point(x, y1));
             }
             foreach (double y in interceptX[x2])
@@ -444,7 +444,7 @@ public class PCG : MonoBehaviour
                 if (y == y2)
                     break;
                 else if (y > y2)
-                    Debug.Log("IMPOSSIBLE: FAULTY INTERCEPT");
+                    Debug.Log("PCG IMPOSSIBLE: FAULTY INTERCEPT");
                 room.geometry.Add(new Point(x2, y));
             }
             foreach (double x in interceptY[y2].Reverse())
@@ -454,7 +454,7 @@ public class PCG : MonoBehaviour
                 if (x == x1)
                     break;
                 else if (x < x1)
-                    Debug.Log("IMPOSSIBLE: FAULTY INTERCEPT");
+                    Debug.Log("PCG IMPOSSIBLE: FAULTY INTERCEPT");
                 room.geometry.Add(new Point(x, y2));
             }
             foreach (double y in interceptX[x1].Reverse())
@@ -464,7 +464,7 @@ public class PCG : MonoBehaviour
                 if (y == y1)
                     break;
                 else if (y < y1)
-                    Debug.Log("IMPOSSIBLE: FAULTY INTERCEPT");
+                    Debug.Log("PCG IMPOSSIBLE: FAULTY INTERCEPT");
                 room.geometry.Add(new Point(x1, y));
             }
             foreach (Point point in room.geometry)
@@ -1099,7 +1099,6 @@ public class PCG : MonoBehaviour
             viableFurniture.Add((new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 2)), 0, -1));
             viableFurniture.Add((new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, -1));
             viableFurniture.Add((new FurniturePreset(5, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 2)), 0, -1));
-            //viableFurniture.Sort((first, second) => (first.Item2 * first.Item3).CompareTo(second.Item2 * second.Item3));
             ROOM_PRESET_DICTIONARY[1].Add(new RoomPreset(1, 0, viableFurniture));
         }
         {
@@ -1109,7 +1108,6 @@ public class PCG : MonoBehaviour
             viableFurniture.Add((new FurniturePreset(2, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 2)), 0, -1));
             viableFurniture.Add((new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, -1));
             viableFurniture.Add((new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, -1));
-            //viableFurniture.Sort((first, second) => (first.Item2 * first.Item3).CompareTo(second.Item2 * second.Item3));
             ROOM_PRESET_DICTIONARY[2].Add(new RoomPreset(2, -1, viableFurniture));
         }
         {
@@ -1124,7 +1122,6 @@ public class PCG : MonoBehaviour
             viableFurniture.Add((new FurniturePreset(7, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 0, -1));
             viableFurniture.Add((new FurniturePreset(8, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 0, -1));
             viableFurniture.Add((new FurniturePreset(9, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 1)), 0, -1));
-            //viableFurniture.Sort((first, second) => (first.Item2 * first.Item3).CompareTo(second.Item2 * second.Item3));
             ROOM_PRESET_DICTIONARY[3].Add(new RoomPreset(3, 0, viableFurniture));
         }
         {
@@ -1260,19 +1257,6 @@ public class PCG : MonoBehaviour
 
         if (roomArray == null)
             return;
-
-        /*int halfLength = 25;
-        double width = halfLength + halfLength * random.NextDouble();
-        double height = halfLength + halfLength * random.NextDouble();
-        (NDArray roomArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = GenerateHouse(houseHierarchy, width, height, 4, 5, 5, 5);
-        while (roomArray == null)
-        {
-            halfLength = Math.Max(halfLength + 1, RoundPCG(halfLength * 1.25));
-            //Debug.Log(halfLength);
-            width = halfLength + halfLength * random.NextDouble();
-            height = halfLength + halfLength * random.NextDouble();
-            (roomArray, doorArray, furnitureArray, fireArray) = GenerateHouse(houseHierarchy, width, height, 4, 5, 5, 5);
-        }*/
 
         string arrayString = "";
         List<(char, string)> furnitureList = new List<(char, string)>();
