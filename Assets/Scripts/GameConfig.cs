@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameConfig : MonoBehaviour
 {
     public static AudioClip Music;
+    public static float MusicVolume;
+    public static float SfxVolume;
     // Start is called before the first frame update
     void Start()
     {
