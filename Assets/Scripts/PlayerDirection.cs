@@ -6,18 +6,27 @@ using Mirror;
 public class PlayerDirection : NetworkBehaviour
 {
     private string direction;
+    private string startDirection;
+    public bool IsEnable;
 
     public string Direction { get => direction; set => direction = value; }
     // Start is called before the first frame update
     void Start()
     {
-        direction = "left";
+        direction = "down";
+        startDirection = direction;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isLocalPlayer) SelectDirection();
+        if (IsEnable) {
+            if (isLocalPlayer) SelectDirection();
+        }
+        else
+        {
+            direction = startDirection;
+        }
     }
 
     private void SelectDirection()
