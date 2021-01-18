@@ -6,15 +6,24 @@ public class Breakable : NetworkBehaviour
 {
     [SyncVar]
     private int toughness;
+    [SyncVar]
+    private bool isEnable;
+
+    private Throwable throwable;
 
     public int MaxToughness;
 
-    public SpriteRenderer BangPrefab;
+    private GameObject bangPrefab;
+
+    public bool IsEnable { get => isEnable; set => isEnable = value; }
 
     // Start is called before the first frame update
     void Start()
     {
         toughness = MaxToughness;
+        isEnable = true;
+        throwable = GetComponent<Throwable>();
+        bangPrefab = GameConfig.BangObject;
     }
 
     // Update is called once per frame
@@ -22,30 +31,27 @@ public class Breakable : NetworkBehaviour
     {
     }
     [ServerCallback]
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Throwable throwable = collision.gameObject.GetComponent<Throwable>();
-        BreakThrow breakThrow = collision.gameObject.GetComponent<BreakThrow>();
-        Grabbable grabbable = collision.gameObject.GetComponent<Grabbable>();
-        if (throwable != null)
+        if (isEnable)
         {
-            if (throwable.IsBreakActive)
+            Throwable throwableIncoming = collision.gameObject.GetComponent<Throwable>();
+            Breakable breakableIncoming = collision.gameObject.GetComponent<Breakable>();
+            if (throwableIncoming != null && breakableIncoming != null)
             {
-                Hit();
+                if (throwableIncoming.IsBreakActive)
+                {
+                    breakableIncoming.Hit();
+                    breakableIncoming.InstantiateBang();
+                    Hit();
+                }
             }
+
         }
-        throwable = GetComponent<Throwable>();
-        if (throwable != null && breakThrow != null)
-        {
-            if (throwable.IsBreakActive)
-            {
-                InstantiateBang();
-                Hit();
-            }
-        }
+
     }
     [ServerCallback]
-    private void Hit()
+    public void Hit()
     {
         toughness -= 1;
         if (toughness <= 0)
@@ -54,11 +60,11 @@ public class Breakable : NetworkBehaviour
         }
     }
     [ServerCallback]
-    private void InstantiateBang()
+    public void InstantiateBang()
     {
-        if (BangPrefab != null)
+        if (bangPrefab != null)
         {
-            SpriteRenderer bang = Instantiate<SpriteRenderer>(BangPrefab);
+            GameObject bang = Instantiate<GameObject>(bangPrefab);
             bang.transform.position = transform.position;
             NetworkServer.Spawn(bang.gameObject);
         }

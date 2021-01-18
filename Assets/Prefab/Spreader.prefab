@@ -291,8 +291,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   MaxToughness: 1
-  BangPrefab: {fileID: 8153818935634040573, guid: 112431dabba685c45b309907f236c73a,
-    type: 3}
 --- !u!114 &2521464223037957949
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -84,7 +84,12 @@ public class PlayerGrab : NetworkBehaviour
     {
         PlayerGrab playerGrab = grabberIdentity.GetComponent<PlayerGrab>();
         Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
+        Breakable breakable = grabedIdentity.GetComponent<Breakable>();
         grabed.Grabed(playerGrab);
+        if(breakable != null)
+        {
+            breakable.IsEnable = false;
+        }
 
     }
     private void Release()
@@ -99,14 +104,17 @@ public class PlayerGrab : NetworkBehaviour
     private void CmdRelease(NetworkIdentity grabedIdentity, bool newIsTrigger)
     {
         Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
+        Breakable breakable = grabedIdentity.GetComponent<Breakable>();
         grabed.Released(newIsTrigger);
+        if (breakable != null)
+        {
+            breakable.IsEnable = false;
+        }
     }
     private void Throw()
     {
         if(grabedObject != null)
         {
-            Throwable throwed = grabedObject.GetComponent<Throwable>();
-            Vector2 throwVector;
             if (grabedObject.GetComponent<Throwable>() != null)
             {
                 CmdRelease(grabedObject.netIdentity, true);

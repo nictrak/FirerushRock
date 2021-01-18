@@ -408,7 +408,7 @@ MonoBehaviour:
   RightGrab: {fileID: 1678188936073989809}
   UpGrab: {fileID: 6236120116484776436}
   DownGrab: {fileID: 5816321011900864752}
-  ThrowSpeed: 0.25
+  ThrowSpeed: 0.1
   GrabScale: 0.5
 --- !u!114 &4432602749508946823
 MonoBehaviour:

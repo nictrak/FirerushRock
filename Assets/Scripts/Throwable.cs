@@ -11,6 +11,7 @@ public class Throwable : NetworkBehaviour
     private Vector2 throwVector;
     private Rigidbody2D rigidbody;
     private BoxCollider2D collider;
+    private Breakable breakable;
     [SyncVar]
     private bool isBreakActive;
     private NetworkIdentity thrower;
@@ -23,6 +24,7 @@ public class Throwable : NetworkBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
+        breakable = GetComponent<Breakable>();
     }
 
     // Update is called once per frame
@@ -35,11 +37,36 @@ public class Throwable : NetworkBehaviour
         SyncIsBreak();
         ThrowedMove();
     }
+    [ClientRpc]
+    private void RpcGrap(PlayerGrab playerGrab)
+    {
+        playerGrab.Grab(this.GetComponent<Grabbable>());
+    }
+
     [ServerCallback]
     private void OnTriggerEnter2D(Collider2D collision)
     {
         BreakThrow breakThrow = collision.gameObject.GetComponent<BreakThrow>();
         PlayerGrab playerGrab = collision.gameObject.GetComponent<PlayerGrab>();
+        if (breakThrow != null && throwVector.magnitude > 0.00001)
+        {
+            isThrowed = false;
+            throwVector = new Vector2();
+            collider.isTrigger = false;
+            if(breakable != null)
+            {
+                breakable.IsEnable = true;
+            }
+        }
+        if (playerGrab != null)
+        {
+            if (playerGrab.netIdentity != thrower && playerGrab.GrabedObject == null)
+            {
+                RpcGrap(playerGrab);
+                isThrowed = false;
+                throwVector = new Vector2();
+            }
+        }
         /*if (breakThrow != null && throwVector.magnitude > 0.00001)
         {
             isThrowed = false;
