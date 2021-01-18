@@ -9,6 +9,8 @@ public class GameConfig : MonoBehaviour
     public static int ContinueDay;
     public static GameObject BangObject;
     public GameObject BangPrefab;
+    public static float MusicVolume;
+    public static float SfxVolume;
     // Start is called before the first frame update
     void Start()
     {
