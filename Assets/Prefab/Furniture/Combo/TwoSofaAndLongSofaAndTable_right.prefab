@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 633162086122329079}
   - component: {fileID: -7182942189074996503}
+  - component: {fileID: 2293366233609810838}
   m_Layer: 0
   m_Name: TwoSofaAndLongSofaAndTable_right
   m_TagString: Untagged
@@ -51,6 +52,18 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &2293366233609810838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633162086122329078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d9d681fbbc40b4da73b7101bd729a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &633162087059282130
 PrefabInstance:
   m_ObjectHideFlags: 0

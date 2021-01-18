@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: -1908004019822553508}
   - component: {fileID: -174076012013182775}
   m_Layer: 0
-  m_Name: Grabbable
+  m_Name: aaaGrabbable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,8 +210,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   MaxToughness: 1
-  BangPrefab: {fileID: 8153818935634040573, guid: 112431dabba685c45b309907f236c73a,
-    type: 3}
 --- !u!114 &3746787870199620571
 MonoBehaviour:
   m_ObjectHideFlags: 0
