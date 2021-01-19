@@ -656,7 +656,10 @@ MonoBehaviour:
   HeatSprite: {fileID: 6914294050389124009}
   Wall: {fileID: 8589663800469107184, guid: 4733831ff480b944282cb40d193f704d, type: 3}
   Wall2: {fileID: 3569253757177329900, guid: 2e0f52e102ea05342bc2ba2b138bbe25, type: 3}
-  Door: {fileID: 6648184319647030216, guid: d14033e60100e03429216bc8832ada7d, type: 3}
+  Door_ver: {fileID: 6648184319647030216, guid: d14033e60100e03429216bc8832ada7d,
+    type: 3}
+  Door_hor: {fileID: 3013429047554641504, guid: 77ae32ac437c8a942ac030800cd1b879,
+    type: 3}
   Survivor: {fileID: 9033900264385998663, guid: 2ff73c4935f08c2468c4527b8a09a8c9,
     type: 3}
   Furniture: {fileID: 3583791644520692933, guid: 06c482aced2f7754b89d091bb076bfb2,
