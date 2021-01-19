@@ -169,8 +169,8 @@ GameObject:
   - component: {fileID: 8993211238747811838}
   - component: {fileID: 5750041538200760506}
   m_Layer: 0
-  m_Name: Firefighter (1)
-  m_TagString: Untagged
+  m_Name: Firefighter
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5260377310900317001}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea823d88651e6b0428bd8794b9be9c7f, type: 3}
   m_Name: 

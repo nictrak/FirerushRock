@@ -27,6 +27,8 @@ public class LevelScriptController : NetworkBehaviour
     [ServerCallback]
     public void startScript()
     {
+        //Commend this to test only
+        /*
         ParameterGenerator.SetDay(GameConfig.Day);
         (int h, int w) = ParameterGenerator.GenHouseLength();
         Debug.Log("h =" + h + " w =" + w);
@@ -37,7 +39,7 @@ public class LevelScriptController : NetworkBehaviour
         Debug.Log(wallArray);
         Debug.Log(height);
         Debug.Log(width);
-        /*
+        
         Debug.Log(height);
         Debug.Log(width);
         
@@ -45,21 +47,20 @@ public class LevelScriptController : NetworkBehaviour
         Debug.Log(doorArray);
         Debug.Log(furnitureArray);
         Debug.Log(fireArray);
-        */
-        //Debug.Log(furnitureArray);
+        
+        Debug.Log(furnitureArray);
         FireSystem.startF(wallArray, doorArray, furnitureArray, fireArray,width,height);
         Debug.Log("Start Fire System");
-        /*
+        
         Debug.Log(FireSystem.fire_source_array);
         Debug.Log(FireSystem.heat_array);
         Debug.Log(FireSystem.wall_array);
         Debug.Log(FireSystem.door_array);
-        */
+        
         GridSystem.startF(height, width);
         Debug.Log("Start Grid System");
-
-
-
+        */
 
     }
+
 }
