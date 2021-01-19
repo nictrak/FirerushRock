@@ -26,8 +26,6 @@ public class LevelScriptController : NetworkBehaviour
     [ServerCallback]
     public void startScript()
     {
-        //Commend this to test only
-        /*
         ParameterGenerator.SetDay(GameConfig.Day);
         (int h, int w) = ParameterGenerator.GenHouseLength();
         Debug.Log("h =" + h + " w =" + w);
@@ -45,7 +43,7 @@ public class LevelScriptController : NetworkBehaviour
         Vector2 entrancePosition = PCG.EntranceDoor;
         SpawnGrass.InstantiateSpawn(entrancePosition.x, entrancePosition.y);
 
-        /*
+        
         Debug.Log(height);
         Debug.Log(width);
         
@@ -65,8 +63,9 @@ public class LevelScriptController : NetworkBehaviour
         
         GridSystem.startF(height, width);
         Debug.Log("Start Grid System");
-        */
-        SetupSystem.FirefighterToSpawnPoint(new Vector3());
+
+        Vector3 realEntrancePoint = new Vector3(entrancePosition.x, entrancePosition.y, 0);
+        SetupSystem.FirefighterToSpawnPoint(realEntrancePoint);
     }
 
 }

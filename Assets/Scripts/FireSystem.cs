@@ -225,7 +225,7 @@ public class FireSystem : MonoBehaviour
                 {
                     //TODO Fix this to multiplayer
                     GameConfig.Day ++;
-                    SceneManager.LoadScene("MenuScene");
+                    //SceneManager.LoadScene("MenuScene");
                 }
             }
             framerate_counter += 1;

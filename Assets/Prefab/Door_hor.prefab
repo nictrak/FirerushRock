@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4987894660723252132}
   - component: {fileID: 2344920597369680876}
   - component: {fileID: 1776457372698122664}
+  - component: {fileID: -8822567417810924534}
   m_Layer: 0
   m_Name: Door_hor
   m_TagString: Untagged
@@ -52,7 +53,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   MaxToughness: 2
-  BangPrefab: {fileID: 0}
 --- !u!50 &3013429047554641511
 Rigidbody2D:
   serializedVersion: 4
@@ -187,3 +187,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpriteHeight: 1
+--- !u!114 &-8822567417810924534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3013429047554641504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class SpawnGrass : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class SpawnGrass : MonoBehaviour
     {
         GameObject spawn = Instantiate(SpawnPointTemplate);
         spawn.transform.position = new Vector3(OriginPosition.x + entranceX, OriginPosition.y + entranceY, OriginPosition.z - 1);
+        NetworkServer.Spawn(spawn);
     }
 
     public void PlaceGrass(int houseWidth, int houseHeight)
@@ -28,6 +30,7 @@ public class SpawnGrass : MonoBehaviour
                 float y = OriginPosition.y + (GrassSize * 3) - j * GrassSize;
                 GameObject grass = Instantiate(GrassTemplate);
                 grass.transform.position = new Vector3(x, y, OriginPosition.z);
+                NetworkServer.Spawn(grass);
             }
         }
     }
