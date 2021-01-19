@@ -209,11 +209,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2921306325108692093, guid: a012089402961b84e81aca86a27da92e,
+        type: 3}
+      propertyPath: FurnitureCatalog
+      value: 
+      objectReference: {fileID: 67076376}
+    - target: {fileID: 3320242539675953439, guid: a012089402961b84e81aca86a27da92e,
+        type: 3}
+      propertyPath: SetupSystem
+      value: 
+      objectReference: {fileID: 933442986}
+    - target: {fileID: 4402438854443097613, guid: a012089402961b84e81aca86a27da92e,
+        type: 3}
+      propertyPath: sceneId
+      value: 3270767219
+      objectReference: {fileID: 0}
     - target: {fileID: 5595400817577625848, guid: a012089402961b84e81aca86a27da92e,
         type: 3}
       propertyPath: FurnitureCatalog
       value: 
       objectReference: {fileID: 67076376}
+    - target: {fileID: 8132825424635200398, guid: a012089402961b84e81aca86a27da92e,
+        type: 3}
+      propertyPath: sceneId
+      value: 714582737
+      objectReference: {fileID: 0}
     - target: {fileID: 8748855610061419580, guid: a012089402961b84e81aca86a27da92e,
         type: 3}
       propertyPath: SetupSystem

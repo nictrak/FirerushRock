@@ -53,6 +53,6 @@ MonoBehaviour:
   DayAddFire: 5
   BaseSurvivor: 0
   DayAddSurvivor: 4
-  BaseHouseLength: 20
+  BaseHouseLength: 26
   DayAddHouseLength: 2
-  HouseLengthMultiplier: 5
+  HouseLengthMultiplier: 4
