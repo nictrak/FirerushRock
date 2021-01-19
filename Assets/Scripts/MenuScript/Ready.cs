@@ -9,6 +9,7 @@ public class Ready : NetworkBehaviour
 {
     public Text text;
     private bool isReady;
+    public NetworkManager manager;
 
     [SyncVar]
     private int AlreadyReady;
@@ -28,13 +29,8 @@ public class Ready : NetworkBehaviour
     {
         if(AlreadyReady == NetworkServer.connections.Count)
         {
-            GoToPlayScene();
+            manager.ServerChangeScene("PlayScene");
         }
-    }
-    [ClientRpc]
-    private void GoToPlayScene()
-    {
-        SceneManager.LoadScene("PlayScene");
     }
     public void ToggleReady()
     {

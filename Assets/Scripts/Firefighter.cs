@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Mirror;
 
-public class Firefighter : MonoBehaviour
+public class Firefighter : NetworkBehaviour
 {
     private Rigidbody2D rigidbody;
 
@@ -19,5 +21,14 @@ public class Firefighter : MonoBehaviour
     void Update()
     {
         
+    }
+    private void LateUpdate()
+    {
+        if(SceneManager.GetActiveScene().name == "PlayScene")
+        {
+            if (isLocalPlayer) GetComponent<GenerateCamera>().PlayerCamera.gameObject.SetActive(true);
+            GetComponent<PlayerControl>().isEnable = true;
+            GetComponent<PlayerDirection>().IsEnable = true;
+        }
     }
 }

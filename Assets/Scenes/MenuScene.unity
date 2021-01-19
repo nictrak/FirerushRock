@@ -1968,6 +1968,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   text: {fileID: 1363293058}
+  manager: {fileID: 1966813173}
 --- !u!114 &708404501
 MonoBehaviour:
   m_ObjectHideFlags: 0
