@@ -26,7 +26,8 @@ public class Cell : MonoBehaviour
     public GameObject HeatSprite;
     public GameObject Wall;
     public GameObject Wall2;
-    public GameObject Door;
+    public GameObject Door_ver;
+    public GameObject Door_hor;
     public GameObject Survivor;
     public GameObject Furniture;
     public float BaseZ;
@@ -136,10 +137,17 @@ public class Cell : MonoBehaviour
             }
         }
 
-        if (door == 1 | door == 2)
+        if (door == 1)
         {
-            GameObject newDoor = Instantiate(Door);
+            GameObject newDoor = Instantiate(Door_ver);
             newDoor.transform.position = this.transform.position;
+            NetworkServer.Spawn(newDoor);
+        }
+
+        if (door == 2)
+        {
+            GameObject newDoor = Instantiate(Door_hor);
+            newDoor.transform.position = this.transform.position + new Vector3(0,(float)0.5,0);
             NetworkServer.Spawn(newDoor);
         }
 

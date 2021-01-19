@@ -1,24 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameConfig : MonoBehaviour
+public class skip : MonoBehaviour
 {
-    public static AudioClip Music;
-    public static int Day;
-    public static int ContinueDay;
     // Start is called before the first frame update
     void Start()
     {
-        if (Day == 0)
-        {
-            Day = 1;
-        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.N))
+        {
+            GameConfig.Day++;
+            SceneManager.LoadScene("Loading");
+        }
     }
 }

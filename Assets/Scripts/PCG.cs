@@ -1105,14 +1105,23 @@ public class PCG : MonoBehaviour
             viableFurniture.Add((new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, -1));
             viableFurniture.Add((new FurniturePreset(5, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 2)), 0, -1));
             ROOM_PRESET_DICTIONARY[1].Add(new RoomPreset(1, 0, viableFurniture));
+
         }
         {
             List<(FurniturePreset, int, int)> viableFurniture = new List<(FurniturePreset, int, int)>();
             //viableFurniture.Add((new FurniturePreset(1, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 3)), 1, -1));
             viableFurniture.Add((new FurniturePreset(1, PLACE_ANY, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_RIGHT | ORIENT_FLOOR_UP | ORIENT_WALL_0, (1, 1)), 1, 1));
-            viableFurniture.Add((new FurniturePreset(2, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 2)), 0, -1));
-            viableFurniture.Add((new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, -1));
-            viableFurniture.Add((new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, -1));
+            viableFurniture.Add((new FurniturePreset(2, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 2)), 1, -1));
+            viableFurniture.Add((new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 1, -1));
+            viableFurniture.Add((new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 1, -1));
+            ROOM_PRESET_DICTIONARY[2].Add(new RoomPreset(2, -1, viableFurniture));
+
+            viableFurniture = new List<(FurniturePreset, int, int)>();
+            //viableFurniture.Add((new FurniturePreset(1, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 3)), 1, -1));
+            viableFurniture.Add((new FurniturePreset(1, PLACE_ANY, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_RIGHT | ORIENT_FLOOR_UP | ORIENT_WALL_0, (1, 1)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(2, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 2)), 0, 0));
+            viableFurniture.Add((new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, 0));
+            viableFurniture.Add((new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 1, -1));
             ROOM_PRESET_DICTIONARY[2].Add(new RoomPreset(2, -1, viableFurniture));
         }
         {
@@ -1127,6 +1136,13 @@ public class PCG : MonoBehaviour
             viableFurniture.Add((new FurniturePreset(7, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 0, -1));
             viableFurniture.Add((new FurniturePreset(8, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 0, -1));
             viableFurniture.Add((new FurniturePreset(9, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 1)), 0, -1));
+            ROOM_PRESET_DICTIONARY[3].Add(new RoomPreset(3, 0, viableFurniture));
+
+            viableFurniture = new List<(FurniturePreset, int, int)>();
+            //viableFurniture.Add((new FurniturePreset(1, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 3)), 1, -1));
+            
+            viableFurniture.Add((new FurniturePreset(7, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 0, -1));
+            viableFurniture.Add((new FurniturePreset(8, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 0, -1));
             ROOM_PRESET_DICTIONARY[3].Add(new RoomPreset(3, 0, viableFurniture));
         }
         {
