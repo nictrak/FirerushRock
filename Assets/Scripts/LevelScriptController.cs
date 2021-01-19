@@ -29,6 +29,7 @@ public class LevelScriptController : MonoBehaviour
         ParameterGenerator.SetDay(GameConfig.Day);
         (int h, int w) = ParameterGenerator.GenHouseLength();
         Debug.Log("h =" + h + " w =" + w);
+        Debug.Log(ParameterGenerator.GenSurvivor());
         (NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = PCG.GenerateHouse3(ParameterGenerator.GenRoom(), w, h, ParameterGenerator.GenDoor(), ParameterGenerator.GenFire(), ParameterGenerator.GenSurvivor());
         Debug.Log("PCG complete");
         int height = wallArray.shape[0];
@@ -36,6 +37,7 @@ public class LevelScriptController : MonoBehaviour
         Debug.Log(wallArray);
         Debug.Log(height);
         Debug.Log(width);
+        Debug.Log(furnitureArray);
         /*
         Debug.Log(height);
         Debug.Log(width);

@@ -158,6 +158,10 @@ public class FurnitureCatalog : MonoBehaviour
             case 3081: return TwoSofaAndRoundTable_hor;
 
             case 3091: return Drawer;
+            case 3092: return Drawer;
+            case 3093: return Drawer;
+            case 3094: return Drawer;
+
 
             //wall furniture
             case 41: return Wall_1;
