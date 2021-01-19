@@ -1,19 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GameConfig : MonoBehaviour
+public class DayIntro : MonoBehaviour
 {
-    public static AudioClip Music;
-    public static int Day;
-    public static int ContinueDay;
     // Start is called before the first frame update
+    private Text text;
     void Start()
     {
-        if (Day == 0)
-        {
-            Day = 1;
-        }
+        text = this.GetComponent<Text>();
+        text.text = "Day " + GameConfig.Day;
     }
 
     // Update is called once per frame
