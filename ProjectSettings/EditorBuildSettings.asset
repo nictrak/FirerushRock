@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayScene.unity
     guid: f99ec973f5e30da4c8930c4ad503b010
+  - enabled: 1
+    path: Assets/Scenes/testPrint.unity
+    guid: b320f3ce58baad74fa3fa9314e422ad0
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: f3444158935d74142bb0f163c1b4c4c4
   m_configObjects: {}

@@ -9,13 +9,12 @@ public class LevelScriptController : NetworkBehaviour
     // Start is called before the first frame update
     public ParameterGenerator ParameterGenerator;
     public PCG PCG;
+    public SpawnGrass SpawnGrass;
     public FireSystem FireSystem;
     public GridSystem GridSystem;
     public SetupSystem SetupSystem;
     void Start()
     {
-
-        GameConfig.Day = 1;
         startScript();
     }
 
@@ -32,14 +31,21 @@ public class LevelScriptController : NetworkBehaviour
         ParameterGenerator.SetDay(GameConfig.Day);
         (int h, int w) = ParameterGenerator.GenHouseLength();
         Debug.Log("h =" + h + " w =" + w);
+        //Debug.Log(ParameterGenerator.GenSurvivor());
         (NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = PCG.GenerateHouse3(ParameterGenerator.GenRoom(), w, h, ParameterGenerator.GenDoor(), ParameterGenerator.GenFire(), ParameterGenerator.GenSurvivor());
         Debug.Log("PCG complete");
         int height = wallArray.shape[0];
         int width = wallArray.shape[1];
-        Debug.Log(wallArray);
+        //Debug.Log(wallArray);
         Debug.Log(height);
         Debug.Log(width);
         
+
+        SpawnGrass.PlaceGrass(wallArray.shape[1], wallArray.shape[0]);
+        Vector2 entrancePosition = PCG.EntranceDoor;
+        SpawnGrass.InstantiateSpawn(entrancePosition.x, entrancePosition.y);
+
+        /*
         Debug.Log(height);
         Debug.Log(width);
         

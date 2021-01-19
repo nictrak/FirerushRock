@@ -31,7 +31,7 @@ public class FireSystem : MonoBehaviour
     public float fire3_add_heat;
     private (int, int) gridsize;
     private NDArray zero_array;
-    private bool isRun;
+    private static bool isRun;
     private NDArray wall_array_clip;
 
     // Start is called before the first frame update
@@ -223,7 +223,9 @@ public class FireSystem : MonoBehaviour
                 
                 if (fire_2_array.Equals(zero_array))
                 {
-                    //SceneManager.LoadScene("Menu");
+                    //TODO Fix this to multiplayer
+                    GameConfig.Day ++;
+                    SceneManager.LoadScene("MenuScene");
                 }
             }
             framerate_counter += 1;
@@ -282,6 +284,11 @@ public class FireSystem : MonoBehaviour
         NDArray new_fire = np.clip(value_array - start_point,0,1);
 
         return new_fire * size;
+    }
+
+    public static void setRun(bool run)
+    {
+        isRun = run;
     }
     
 }

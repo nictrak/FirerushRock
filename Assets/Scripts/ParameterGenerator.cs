@@ -72,10 +72,10 @@ public class ParameterGenerator : MonoBehaviour
         int toilet = Mathf.CeilToInt(room * (float)0.2);
         int bedroom = Mathf.CeilToInt(room * (float)0.3);
         int livingroom = room - toilet - bedroom;
-        Debug.Log(room);
+        /*Debug.Log(room);
         Debug.Log(toilet);
         Debug.Log(bedroom);
-        Debug.Log(livingroom);
+        Debug.Log(livingroom);*/
 
         List<List<int>> bigRoomList = new List<List<int>>();
 
@@ -174,10 +174,9 @@ public class ParameterGenerator : MonoBehaviour
     private int GenRoomWithSize(int roomtype)
     {
         int size = 20;
-        if (roomtype == 1) size = Random.Range(20, 35);
-        if (roomtype == 2) size = Random.Range(10, 20);
-        if (roomtype == 3) size = Random.Range(30, 45);
-        Debug.Log((roomtype * 100) + size);
+        if (roomtype == 1) size = Random.Range(25, 40);
+        if (roomtype == 2) size = Random.Range(20, 30);
+        if (roomtype == 3) size = Random.Range(35, 50);
         return (roomtype * 100) + size;
     }
 }

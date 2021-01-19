@@ -15,6 +15,10 @@ public class GameConfig : MonoBehaviour
     void Start()
     {
         BangObject = BangPrefab;
+        if (Day == 0)
+        {
+            Day = 1;
+        }
     }
 
     // Update is called once per frame

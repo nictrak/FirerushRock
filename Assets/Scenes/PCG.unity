@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 1504782139}
   - component: {fileID: 1504782138}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: PCGObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,6 +233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27eaaa122e074764595603ad85919e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugFurnitureBoundary: 1
+  DebugRoomCount: 29
+  DebugRoomGroup: 11
 --- !u!4 &1504782139
 Transform:
   m_ObjectHideFlags: 0
