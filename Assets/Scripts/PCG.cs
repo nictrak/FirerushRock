@@ -7,6 +7,7 @@ using NumSharp;
 public class PCG : MonoBehaviour
 {
 
+    public bool DebugStart = false;
     public bool DebugFurnitureBoundary = false;
     public int DebugRoomCount = 11;
     public int DebugRoomGroup = 3;
@@ -343,20 +344,14 @@ public class PCG : MonoBehaviour
         int partitionCount = 1;
         double partitionProportion = cumulativeProportion;
         double bestPartitionWidthLength = (cumulativeProportion / totalProportion) * boundaryWidthLength;
-
         List<double> bestPartitionHeightList = new List<double>();
-        //bestPartitionHeightList.Add(boundaryHeightStart);
-        //bestPartitionHeightList.Add(boundaryHeightEnd);
-
-        double bestRatioError = Math.Abs(Math.Log(boundaryHeightLength / bestPartitionWidthLength));
+        double bestRatioError = Math.Pow(Math.Log(boundaryHeightLength / bestPartitionWidthLength), 2);
         for (int i = 1; i < areaHierarchy.Count; i++)
         {
             cumulativeProportion += areaHierarchy[i].proportion;
             double currentPartitionWidthLength = (cumulativeProportion / totalProportion) * boundaryWidthLength;
 
             List<double> currentPartitionHeightList = new List<double>();
-            //currentPartitionHeightList.Add(boundaryHeightStart);
-            //currentPartitionHeightList.Add(boundaryHeightEnd);
             double currentRatioError = 0;
             double subCumulativeProportion = 0;
             double previousHeight = boundaryHeightStart;
@@ -364,7 +359,7 @@ public class PCG : MonoBehaviour
             {
                 subCumulativeProportion += areaHierarchy[j].proportion;
                 currentPartitionHeightList.Add(boundaryHeightStart + (subCumulativeProportion / cumulativeProportion) * boundaryHeightLength);
-                currentRatioError += Math.Abs(Math.Log((currentPartitionHeightList[j] - previousHeight) / currentPartitionWidthLength));
+                currentRatioError += Math.Pow(Math.Log((currentPartitionHeightList[j] - previousHeight) / currentPartitionWidthLength), 2);
             }
             currentRatioError /= (partitionCount + 1);
             //double currentRatioError = Math.Abs(Math.Log(boundaryHeightLength / (currentPartitionWidthLength * (i + 1))));
@@ -417,7 +412,7 @@ public class PCG : MonoBehaviour
     {
         foreach (Room room in roomList)
         {
-            if (room.area.rectangle.GetWidth() <= 6 || room.area.rectangle.GetHeight() <= 4)
+            if (room.area.rectangle.GetWidth() < 5 || room.area.rectangle.GetHeight() < 3)
                 return false;
         }
         return true;
@@ -770,8 +765,6 @@ public class PCG : MonoBehaviour
                         furnitureSizeX = preset.size.y;
                         furnitureSizeY = preset.size.x;
                     }
-                    /*if (room.area.rectangle.GetWidth() - 4 <= presetX || room.area.rectangle.GetHeight() - 2 <= presetY)
-                        continue;*/
                     furnitureX = (room.area.rectangle.x1 + 4) + (room.area.rectangle.GetWidth() - furnitureSizeX - 5) * random.NextDouble();
                     furnitureY = (room.area.rectangle.y1 + 2) + (room.area.rectangle.GetHeight() - furnitureSizeY - 3) * random.NextDouble();
                 }
@@ -808,8 +801,6 @@ public class PCG : MonoBehaviour
                         furnitureSizeX = preset.size.y;
                         furnitureSizeY = preset.size.x;
                     }
-                    /*if (room.area.rectangle.GetWidth() - 4 <= presetX || room.area.rectangle.GetHeight() - 2 <= presetY)
-                        continue;*/
                     if (wallside == 0)
                     {
                         furnitureX = (room.area.rectangle.x1 + 3) + (room.area.rectangle.GetWidth() - furnitureSizeX - 3) * random.NextDouble();
@@ -833,9 +824,10 @@ public class PCG : MonoBehaviour
                 }
                 Point furniturePosition = new Point(furnitureX, furnitureY);
                 Rectangle furnitureBoundary;
-                if (room.area.rectangle.GetWidth() - 4 <= furnitureSizeX || room.area.rectangle.GetHeight() - 2 <= furnitureSizeY)
+                if (room.area.rectangle.GetWidth() - 4 < furnitureSizeX || room.area.rectangle.GetHeight() - 2 < furnitureSizeY)
                 {
                     if (requiredFurniture.Count > 0)
+                        // required furniture larger than (roomsize - 1)
                         return false;
                     continue;
                 }
@@ -845,7 +837,6 @@ public class PCG : MonoBehaviour
                 {
                     if (placedFurniture.boundary.Collide(furnitureBoundary))
                     {
-                        //Debug.Log(placedFurniture.boundary.GetWidth() + ", " + placedFurniture.boundary.GetHeight());
                         collide = true;
                         break;
                     }
@@ -863,6 +854,7 @@ public class PCG : MonoBehaviour
                 successFurniture++;
             }
             if (requiredFurniture.Count > 0)
+                // required furniture unfit
                 return false;
         }
         return true;
@@ -1161,15 +1153,35 @@ public class PCG : MonoBehaviour
         if (INIT_FLAG == false)
             InitializePCG();
 
+        string houseHierarchyString = "[";
+        for (int i = 0; i < houseHierarchy.Count; i++)
+        {
+            houseHierarchyString += "[";
+            for (int j = 0; j < houseHierarchy[i].Count; j++)
+            {
+                houseHierarchyString += houseHierarchy[i][j];
+                if (j != houseHierarchy[i].Count - 1)
+                    houseHierarchyString += ", ";
+            }
+            houseHierarchyString += "]";
+            if (i != houseHierarchy.Count - 1)
+                houseHierarchyString += ", [";
+        }
+        houseHierarchyString += "]";
+        Debug.Log("PCG: " + width + " * " + height);
+        Debug.Log("PCG: " + houseHierarchyString);
+
         double widthIncrement = 0 * width / 100;
         double heightIncrement = 0 * height / 100;
 
+        bool LogDebug = true;
         int resizeAttempt = 10;
         while (true)
         {
             if (--resizeAttempt < 0)
             {
-                Debug.Log("fail: too many attempt");
+                if (LogDebug)
+                    Debug.Log("PCG: too many attempts, return null");
                 return (null, null, null, null);
             }
 
@@ -1200,7 +1212,8 @@ public class PCG : MonoBehaviour
 
             if (VerifyPartition(roomList) == false)
             {
-                //Debug.Log("enlarge: too small room");
+                if (LogDebug)
+                    Debug.Log("PCG: room too small");
                 width += widthIncrement;
                 height += heightIncrement;
                 continue;
@@ -1221,7 +1234,8 @@ public class PCG : MonoBehaviour
             int attemptPerRoom = 256;
             if (PlaceFurniture2(roomList, attemptPerRoom) == false)
             {
-                //Debug.Log("enlarge: furniture requirement unfulfilled");
+                if (LogDebug)
+                    Debug.Log("PCG: cannot fit required furniture");
                 width += widthIncrement;
                 height += heightIncrement;
                 continue;
@@ -1251,6 +1265,9 @@ public class PCG : MonoBehaviour
     void Start()
     {
 
+        if (!DebugStart)
+            return;
+
         List<List<int>> houseHierarchy = DebugHouseHierarchy(DebugRoomCount, DebugRoomGroup);
         foreach (List<int> list in houseHierarchy)
         {
@@ -1274,7 +1291,14 @@ public class PCG : MonoBehaviour
         }
         Debug.Log(houseHierarchyString);
 
-        (NDArray roomArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = GenerateHouse3(houseHierarchy, 50, 75, 5, 5, 5);
+        double width = 50, height = 75;
+        (NDArray roomArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = (null, null, null, null);
+        while (roomArray == null)
+        {
+            (roomArray, doorArray, furnitureArray, fireArray) = GenerateHouse3(houseHierarchy, width, height, 5, 5, 5);
+            width *= 1.5;
+            height *= 1.5;
+        }
 
         if (roomArray == null)
             return;

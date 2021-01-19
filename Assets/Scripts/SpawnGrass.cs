@@ -13,19 +13,19 @@ public class SpawnGrass : MonoBehaviour
     public void InstantiateSpawn(float entranceX, float entranceY)
     {
         GameObject spawn = Instantiate(SpawnPointTemplate);
-        spawn.transform.position = new Vector3(OriginPosition.x + entranceX, OriginPosition.y + entranceY, OriginPosition.z);
+        spawn.transform.position = new Vector3(OriginPosition.x + entranceX, OriginPosition.y + entranceY, OriginPosition.z - 1);
     }
 
     public void PlaceGrass(int houseWidth, int houseHeight)
     {
         int grassWidth = Mathf.RoundToInt(houseWidth / GrassSize) + 9;
-        int grassHeight = Mathf.RoundToInt(houseHeight / GrassSize) + 6;
+        int grassHeight = Mathf.RoundToInt(houseHeight / GrassSize) + 8;
         for (int i = 0; i < grassWidth; i++)
         {
             for (int j = 0; j < grassHeight; j++)
             {
                 float x = OriginPosition.x - (GrassSize * 2) + i * GrassSize;
-                float y = OriginPosition.y + (GrassSize * 2) - j * GrassSize;
+                float y = OriginPosition.y + (GrassSize * 3) - j * GrassSize;
                 GameObject grass = Instantiate(GrassTemplate);
                 grass.transform.position = new Vector3(x, y, OriginPosition.z);
             }
