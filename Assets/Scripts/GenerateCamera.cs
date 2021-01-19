@@ -13,10 +13,13 @@ public class GenerateCamera : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Camera cam = Instantiate(CameraPrefab, transform);
-        //cam.gameObject.SetActive(false);
-        cam.transform.localPosition = new Vector3(0, 0, -10);
-        playerCamera = cam;
+        if (isLocalPlayer)
+        {
+            Camera cam = Instantiate(CameraPrefab, transform);
+            //cam.gameObject.SetActive(false);
+            cam.transform.localPosition = new Vector3(0, 0, -10);
+            playerCamera = cam;
+        }
     }
 
     // Update is called once per frame
