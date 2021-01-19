@@ -1031,7 +1031,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414253558}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 66e5c4428346c6a4a8a1cab61964210c, type: 3}
@@ -1833,6 +1833,8 @@ GameObject:
   - component: {fileID: 708404499}
   - component: {fileID: 708404498}
   - component: {fileID: 708404497}
+  - component: {fileID: 708404500}
+  - component: {fileID: 708404501}
   m_Layer: 5
   m_Name: ReadyButton
   m_TagString: Untagged
@@ -1903,9 +1905,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 251594313}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 708404500}
+        m_MethodName: ToggleReady
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1913,17 +1915,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 516684869}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &708404498
 MonoBehaviour:
@@ -1962,6 +1953,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708404495}
   m_CullTransparentMesh: 0
+--- !u!114 &708404500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708404495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be08b4bd3a4b8540b0ec17099a222a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  text: {fileID: 1363293058}
+--- !u!114 &708404501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708404495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 172529672
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &762163547
 GameObject:
   m_ObjectHideFlags: 0
@@ -3931,6 +3953,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1966813173}
+        m_MethodName: StopHost
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1966813173}
+        m_MethodName: StopClient
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1966813170}
         m_MethodName: SetActive
         m_Mode: 6
@@ -5302,6 +5346,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2022807702}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1966813173 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5363365468861744533, guid: 6d2ea012a6b8c3543b8d71c7919d55d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 2022807702}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966813170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1970165375
 GameObject:
   m_ObjectHideFlags: 0

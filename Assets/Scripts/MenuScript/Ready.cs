@@ -8,6 +8,9 @@ public class Ready : NetworkBehaviour
 {
     public Text text;
     private bool isReady;
+
+    [SyncVar]
+    private int AlreadyReady;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +22,31 @@ public class Ready : NetworkBehaviour
     {
         
     }
+    [ServerCallback]
+    private void LateUpdate()
+    {
+        if(AlreadyReady == NetworkServer.connections.Count)
+        {
+            Debug.Log("All ready");
+        }
+    }
     public void ToggleReady()
     {
         isReady = !isReady;
         if (isReady) text.text = "Not Ready";
         else text.text = "Ready";
+        CmdReady(isReady);
+    }
+    [Command(ignoreAuthority = true)]
+    private void CmdReady(bool isReady)
+    {
+        if (isReady)
+        {
+            AlreadyReady += 1;
+        }
+        else
+        {
+            AlreadyReady -= 1;
+        }
     }
 }
