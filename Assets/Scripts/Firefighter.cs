@@ -28,10 +28,10 @@ public class Firefighter : NetworkBehaviour
     {
         /*if(SceneManager.GetActiveScene().name == "PlayScene")
         {
-            if (isLocalPlayer) GetComponent<GenerateCamera>().PlayerCamera.gameObject.SetActive(true);
-            GetComponent<PlayerControl>().isEnable = true;
-            GetComponent<PlayerDirection>().IsEnable = true;
+            
         }*/
+        if(spawnPoint != null && isLocalPlayer)
+        Debug.Log(spawnPoint);
     }
     [ClientRpc]
     public void ToOrigin()
@@ -47,7 +47,8 @@ public class Firefighter : NetworkBehaviour
     [ClientRpc]
     public void ToSpawnPoint()
     {
-        transform.position = spawnPoint;
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
+        transform.position = spawnPoint.transform.position;
     }
     public void Respawn()
     {
