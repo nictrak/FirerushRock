@@ -131,7 +131,7 @@ public class PlayerGrab : NetworkBehaviour
     }
     private void GrabControl()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.Z))
         {
             if (grabedObject == null)
             {
@@ -143,7 +143,7 @@ public class PlayerGrab : NetworkBehaviour
                 Release();
             }
         }
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.C))
         {
             if (grabedObject != null)
             {

@@ -57,13 +57,13 @@ public class Spreader : NetworkBehaviour
             beingGrab = true;
             int x = 0;
             int y = 0;
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
                 y++;
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
                 x--;
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
                 y--;
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                 x++;
             if (x != 0 || y != 0)
                 playerDirection = Mathf.Atan2(y, x);
@@ -105,7 +105,7 @@ public class Spreader : NetworkBehaviour
     }
     private void FillLoop()
     {
-        if (Input.GetKeyDown(KeyCode.K) && isFillable && beingGrab)
+        if ((Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.X)) && isFillable && beingGrab)
         {
             valve.Fill(this);
         }
