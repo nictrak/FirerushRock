@@ -56,7 +56,11 @@ public class PCG : MonoBehaviour
 
     private static bool INIT_FLAG = false;
 
+
     private System.Random random = new System.Random();
+
+    private Vector2 entranceDoor;
+    public Vector2 EntranceDoor { get => entranceDoor; }
 
 
     private T RandomChoice<T>(List<T> list)
@@ -989,6 +993,7 @@ public class PCG : MonoBehaviour
                     int x = RoundPCG(furniture.position.x) + 2;
                     //int y = RoundPCG(furniture.position.y
                     int y = doorArray.shape[1] - 1;
+                    entranceDoor = new Vector2(y, -x);
                     doorArray[x.ToString() + ", " + y.ToString()] = 8;
                 }
                 else if (furniture.preset.type == -1)
@@ -1140,15 +1145,15 @@ public class PCG : MonoBehaviour
         if (INIT_FLAG == false)
             InitializePCG();
 
-        double widthIncrement = width / 100;
-        double heightIncrement = height / 100;
+        double widthIncrement = 0 * width / 100;
+        double heightIncrement = 0 * height / 100;
 
-        int resizeAttempt = 256;
+        int resizeAttempt = 10;
         while (true)
         {
             if (--resizeAttempt < 0)
             {
-                Debug.Log("fail: too many resizing");
+                Debug.Log("fail: too many attempt");
                 return (null, null, null, null);
             }
 

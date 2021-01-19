@@ -8,6 +8,7 @@ public class LevelScriptController : MonoBehaviour
     // Start is called before the first frame update
     public ParameterGenerator ParameterGenerator;
     public PCG PCG;
+    public SpawnGrass SpawnGrass;
     public FireSystem FireSystem;
     public GridSystem GridSystem;
 
@@ -36,6 +37,11 @@ public class LevelScriptController : MonoBehaviour
         Debug.Log(wallArray);
         Debug.Log(height);
         Debug.Log(width);
+
+        SpawnGrass.PlaceGrass(wallArray.shape[1], wallArray.shape[0]);
+        Vector2 entrancePosition = PCG.EntranceDoor;
+        SpawnGrass.InstantiateSpawn(entrancePosition.x, entrancePosition.y);
+
         /*
         Debug.Log(height);
         Debug.Log(width);
