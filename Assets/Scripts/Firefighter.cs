@@ -12,6 +12,7 @@ public class Firefighter : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame

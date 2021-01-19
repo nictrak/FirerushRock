@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Mirror;
 
 public class Ready : NetworkBehaviour
@@ -27,8 +28,13 @@ public class Ready : NetworkBehaviour
     {
         if(AlreadyReady == NetworkServer.connections.Count)
         {
-            Debug.Log("All ready");
+            GoToPlayScene();
         }
+    }
+    [ClientRpc]
+    private void GoToPlayScene()
+    {
+        SceneManager.LoadScene("PlayScene");
     }
     public void ToggleReady()
     {
