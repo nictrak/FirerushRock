@@ -156,14 +156,14 @@ public class Cell : NetworkBehaviour
         if (door == 1)
         {
             GameObject newDoor = Instantiate(Door_ver);
-            newDoor.transform.position = this.transform.position;
+            newDoor.transform.position = this.transform.position + new Vector3(0, (float)0.5, 0); ;
             NetworkServer.Spawn(newDoor);
         }
 
         if (door == 2)
         {
             GameObject newDoor = Instantiate(Door_hor);
-            newDoor.transform.position = this.transform.position + new Vector3(0,(float)0.5,0);
+            newDoor.transform.position = this.transform.position + new Vector3(0,(float)1.2,0);
             NetworkServer.Spawn(newDoor);
         }
 

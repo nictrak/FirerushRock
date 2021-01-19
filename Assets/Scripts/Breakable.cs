@@ -16,6 +16,7 @@ public class Breakable : NetworkBehaviour
     private GameObject bangPrefab;
 
     public bool IsEnable { get => isEnable; set => isEnable = value; }
+    public int Toughness { get => toughness; set => toughness = value; }
 
     // Start is called before the first frame update
     void Start()
