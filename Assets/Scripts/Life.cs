@@ -46,8 +46,8 @@ public class Life : NetworkBehaviour
         lifePoint -= damagePoint;
         if(lifePoint <= 0)
         {
-            if(!IsPlayer) Destroy(gameObject);
-            //if(IsPlayer) SceneManager.LoadScene("Menu");
+            if (!IsPlayer) Destroy(gameObject);
+            else GetComponent<Firefighter>().ToSpawnPoint();
         }
         isRegen = false;
         regenCounter = 0;

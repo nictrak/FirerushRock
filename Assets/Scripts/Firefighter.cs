@@ -10,6 +10,8 @@ public class Firefighter : NetworkBehaviour
 
     public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
 
+    private Vector3 spawnPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,9 +40,17 @@ public class Firefighter : NetworkBehaviour
         transform.position = new Vector3();
     }
     [ClientRpc]
-    public void ToSpawnPoint(Vector3 point)
+    public void SetSpawnPoint(Vector3 point)
     {
-        Debug.Log("Rpc to spawn point");
-        transform.position = point;
+        spawnPoint = point;
+    }
+    [ClientRpc]
+    public void ToSpawnPoint()
+    {
+        transform.position = spawnPoint;
+    }
+    public void Respawn()
+    {
+        transform.position = spawnPoint;
     }
 }

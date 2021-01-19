@@ -28,7 +28,8 @@ public class SetupSystem : NetworkBehaviour
         GetAllFirefighter();
         for (int i = 0; i < Firefighters.Length; i++)
         {
-            Firefighters[i].GetComponent<Firefighter>().ToSpawnPoint(point);
+            Firefighters[i].GetComponent<Firefighter>().SetSpawnPoint(point);
+            Firefighters[i].GetComponent<Firefighter>().ToSpawnPoint();
         }
     }
 }

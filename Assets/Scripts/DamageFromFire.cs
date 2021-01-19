@@ -61,17 +61,18 @@ public class DamageFromFire : NetworkBehaviour
         double fire1 = FireSystem.fire_1_array[y, x];
         double fire2 = FireSystem.fire_2_array[y, x];
         double fire3 = FireSystem.fire_3_array[y, x];
-        if (fire1 != 0) 
-        {
-            life.Damage(fire1Damage);
-        }
-        if (fire2 != 0)
-        {
-            life.Damage(fire2Damage);
-        }
+
         if (fire3 != 0)
         {
             life.Damage(fire3Damage);
+        }
+        else if (fire2 != 0)
+        {
+            life.Damage(fire2Damage);
+        }
+        else if (fire1 != 0) 
+        {
+            life.Damage(fire1Damage);
         }
     }
 }
