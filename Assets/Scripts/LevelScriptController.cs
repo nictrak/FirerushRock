@@ -11,7 +11,7 @@ public class LevelScriptController : NetworkBehaviour
     public PCG PCG;
     public FireSystem FireSystem;
     public GridSystem GridSystem;
-
+    public SetupSystem SetupSystem;
     void Start()
     {
 
@@ -60,7 +60,7 @@ public class LevelScriptController : NetworkBehaviour
         GridSystem.startF(height, width);
         Debug.Log("Start Grid System");
         */
-
+        SetupSystem.FirefighterToSpawnPoint(new Vector3());
     }
 
 }

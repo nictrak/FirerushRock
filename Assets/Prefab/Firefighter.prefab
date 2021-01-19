@@ -282,7 +282,7 @@ MonoBehaviour:
   syncInterval: 0.1
   moveVelocityHorizontal: 0.14
   moveVelocityVertical: 0.2
-  isEnable: 0
+  isEnable: 1
 --- !u!114 &1617501059512548448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  IsEnable: 0
+  IsEnable: 1
 --- !u!114 &7102940658308769159
 MonoBehaviour:
   m_ObjectHideFlags: 0

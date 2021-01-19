@@ -9,6 +9,7 @@ public class SetupSystem : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -22,11 +23,12 @@ public class SetupSystem : NetworkBehaviour
         Firefighters = GameObject.FindGameObjectsWithTag("Player");
     }
     [ServerCallback]
-    private void ActivateAllFirefighter()
+    public void FirefighterToSpawnPoint(Vector3 point)
     {
-        for(int i = 0; i < Firefighters.Length; i++)
+        GetAllFirefighter();
+        for (int i = 0; i < Firefighters.Length; i++)
         {
-            Debug.Log(i);
+            Firefighters[i].GetComponent<Firefighter>().ToSpawnPoint(point);
         }
     }
 }

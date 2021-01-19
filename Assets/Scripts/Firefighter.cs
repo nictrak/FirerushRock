@@ -24,11 +24,23 @@ public class Firefighter : NetworkBehaviour
     }
     private void LateUpdate()
     {
-        if(SceneManager.GetActiveScene().name == "PlayScene")
+        /*if(SceneManager.GetActiveScene().name == "PlayScene")
         {
             if (isLocalPlayer) GetComponent<GenerateCamera>().PlayerCamera.gameObject.SetActive(true);
             GetComponent<PlayerControl>().isEnable = true;
             GetComponent<PlayerDirection>().IsEnable = true;
-        }
+        }*/
+    }
+    [ClientRpc]
+    public void ToOrigin()
+    {
+        Debug.Log("Rpc to origin");
+        transform.position = new Vector3();
+    }
+    [ClientRpc]
+    public void ToSpawnPoint(Vector3 point)
+    {
+        Debug.Log("Rpc to spawn point");
+        transform.position = point;
     }
 }
