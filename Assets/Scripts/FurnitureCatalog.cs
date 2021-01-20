@@ -79,6 +79,9 @@ public class FurnitureCatalog : MonoBehaviour
     public GameObject Survivor_3;
     public GameObject Survivor_4;
 
+    //6
+    public GameObject Valve;
+
 
 
 
@@ -176,6 +179,9 @@ public class FurnitureCatalog : MonoBehaviour
             case 52: return Survivor_2;
             case 53: return Survivor_3;
             case 54: return Survivor_4;
+
+            //valve
+            case 6: return Valve;
         }
         return Survivor_1;
     }

@@ -128,6 +128,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 391094266999957698, guid: 86cd696a0078f58418b479480819e14a,
+        type: 3}
+      propertyPath: Valve
+      value: 
+      objectReference: {fileID: 6886216041744260826, guid: bfd5a2e5366e4c346977273114dfe94a,
+        type: 3}
     - target: {fileID: 391094266999957699, guid: 86cd696a0078f58418b479480819e14a,
         type: 3}
       propertyPath: m_LocalPosition.x
