@@ -35,8 +35,8 @@ public class PCG : MonoBehaviour
     private static int ENTRANCE_TYPE = -5;
     private static int FIRE_TYPE     = -6;
     private static int CAT_TYPE      = -7;
-
     private static int PAINTING_TYPE = -8;
+    private static int VALVE_TYPE    = -9;
 
     private static Point ORIGIN = new Point(0, 0);
     private static Rectangle ZERO_RECT = new Rectangle(0, 0, 0, 0);
@@ -47,9 +47,9 @@ public class PCG : MonoBehaviour
     private static FurniturePreset DOOR_3 = new FurniturePreset(-4, 0, 0, 0, new Point(1, 3)/*, new Point(5, 3), new Point(0, 0)*/);
     private static FurniturePreset ENTRANCE = new FurniturePreset(-5, 0, 0, 0, ORIGIN/*, ORIGIN, ORIGIN*/);
     private static FurniturePreset FIRE = new FurniturePreset(-6, 0, 0, 0, new Point(3, 3)/*, ORIGIN, ORIGIN*/);
-
     private static FurniturePreset CAT  = new FurniturePreset(-7, 0, 0, 0, new Point(1, 1)/*, ORIGIN, ORIGIN*/);
     private static FurniturePreset PAINTING = new FurniturePreset(-8, 0, 0, 0, new Point(1, 1)/*, ORIGIN, ORIGIN*/);
+    private static FurniturePreset VALVE = new FurniturePreset(-9, 0, 0, 0, new Point(1, 1));
 
     private static Dictionary<int, List<RoomPreset>> ROOM_PRESET_DICTIONARY;
 
@@ -701,6 +701,17 @@ public class PCG : MonoBehaviour
             }
         }
     }
+    private void PlaceValve(List<Room> roomList, int valveCount)
+    {
+        List<Room> roomListClone = new List<Room>(roomList);
+        for (int i = 0; i < valveCount && roomListClone.Count > 0; i++)
+        {
+            Room valveRoom = RandomChoicePop(roomListClone);
+            double valveX = (valveRoom.area.rectangle.x1 + 3) + (valveRoom.area.rectangle.GetWidth() - 4) * random.NextDouble();
+            double valveY = (valveRoom.area.rectangle.y1 + 1) + (valveRoom.area.rectangle.GetHeight() - 2) * random.NextDouble();
+            valveRoom.furniture.Add(new Furniture(VALVE, new Point(valveX, valveY), 0, new Rectangle(valveX, valveY, valveX + 1, valveY + 1)));
+        }
+    }
     private bool PlaceFurniture2(List<Room> roomList, int attemptPerRoom)
     {
         int choice;
@@ -869,8 +880,8 @@ public class PCG : MonoBehaviour
                 return;
             choice = random.Next(roomListClone.Count);
             Room catRoom = roomListClone[choice];
-            double catX = (catRoom.area.rectangle.x1 + 3) + (catRoom.area.rectangle.GetWidth() - 6) * random.NextDouble();
-            double catY = (catRoom.area.rectangle.y1 + 1) + (catRoom.area.rectangle.GetHeight() - 4) * random.NextDouble();
+            double catX = (catRoom.area.rectangle.x1 + 3) + (catRoom.area.rectangle.GetWidth() - 4) * random.NextDouble();
+            double catY = (catRoom.area.rectangle.y1 + 1) + (catRoom.area.rectangle.GetHeight() - 2) * random.NextDouble();
             catRoom.furniture.Add(new Furniture(CAT, new Point(catX, catY), 0, new Rectangle(catX, catY, catX + 1, catY + 1)));
             roomListClone.RemoveAt(choice);
         }
@@ -939,8 +950,8 @@ public class PCG : MonoBehaviour
                 if (furniture.preset.type == ENTRANCE_TYPE)
                 {
                     int entranceX = RoundPCG(furniture.position.x);
-                    //int entranceY = RoundPCG(furniture.position.y);
-                    int entranceY = roomArray.shape[1] - 1;
+                    int entranceY = RoundPCG(furniture.position.y);
+                    //int entranceY = roomArray.shape[1] - 1;
                     roomArray[entranceX.ToString() + ":" + (entranceX + 2).ToString() + ", " + entranceY.ToString()] = 2;
                     roomArray[(entranceX + 2).ToString() + ":" + (entranceX + 4).ToString() + ", " + entranceY.ToString()] = 0;
                 }
@@ -983,8 +994,8 @@ public class PCG : MonoBehaviour
                 if (furniture.preset.type == ENTRANCE_TYPE)
                 {
                     int x = RoundPCG(furniture.position.x) + 2;
-                    //int y = RoundPCG(furniture.position.y
-                    int y = doorArray.shape[1] - 1;
+                    int y = RoundPCG(furniture.position.y);
+                    //int y = doorArray.shape[1] - 1;
                     entranceDoor = new Vector2(y, -x);
                     doorArray[x.ToString() + ", " + y.ToString()] = 8;
                 }
@@ -1026,6 +1037,10 @@ public class PCG : MonoBehaviour
                 else if (furniture.preset.type == PAINTING_TYPE)
                 {
                     furnitureArray[x.ToString() + ", " + y.ToString()] = 41 + random.Next(6);
+                }
+                else if (furniture.preset.type == VALVE_TYPE)
+                {
+                    furnitureArray[x.ToString() + ", " + y.ToString()] = 6;
                 }
                 else if (furniture.preset.type >= 0)
                 {
@@ -1147,7 +1162,7 @@ public class PCG : MonoBehaviour
         INIT_FLAG = true;
     }
 
-    public (NDArray, NDArray, NDArray, NDArray) GenerateHouse3(List<List<int>> houseHierarchy, double width, double height, int doorCount, int fireCount, int catCount)
+    public (NDArray, NDArray, NDArray, NDArray) GenerateHouse3(List<List<int>> houseHierarchy, double width, double height, int doorCount, int fireCount, int catCount, int valveCount)
     {
 
         if (INIT_FLAG == false)
@@ -1227,6 +1242,8 @@ public class PCG : MonoBehaviour
             int connectingPathLength = 4;
             GenerateAdditionalConnection(rootRoom, roomList, roomPointDictionary, roomGraph, connectingPathLength);
 
+            PlaceValve(roomList, valveCount);
+
             PlaceDoor(interceptY, roomPointDictionary, roomGraph, width, height);
 
             PlaceFireAndCat(roomList, fireCount, catCount);
@@ -1274,28 +1291,12 @@ public class PCG : MonoBehaviour
             for (int i = 0; i < list.Count; i++)
                 list[i] = list[i] * 100 + 25 + RoundPCG(50 * random.NextDouble());
         }
-        string houseHierarchyString = "";
-        for (int i = 0; i < houseHierarchy.Count; i++)
-        {
-            houseHierarchyString += "[";
-            for (int j = 0; j < houseHierarchy[i].Count; j++)
-            {
-                houseHierarchyString += houseHierarchy[i][j].ToString();
-                if (j < houseHierarchy[i].Count - 1)
-                    houseHierarchyString += ", ";
-                else
-                    houseHierarchyString += "]";
-            }
-            if (i < houseHierarchy.Count - 1)
-                houseHierarchyString += ", ";
-        }
-        Debug.Log(houseHierarchyString);
 
         double width = 50, height = 75;
         (NDArray roomArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = (null, null, null, null);
         while (roomArray == null)
         {
-            (roomArray, doorArray, furnitureArray, fireArray) = GenerateHouse3(houseHierarchy, width, height, 5, 5, 5);
+            (roomArray, doorArray, furnitureArray, fireArray) = GenerateHouse3(houseHierarchy, width, height, 5, 5, 5, 5);
             width *= 1.5;
             height *= 1.5;
         }
