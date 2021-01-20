@@ -1114,7 +1114,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414253558}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 66e5c4428346c6a4a8a1cab61964210c, type: 3}
@@ -2897,8 +2897,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14af0be1da43f7d40a6ec1e4e955b154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IntroFrame: 280
-  ColorChangeRate: 0.01
+  IntroFrame: 55
+  ColorChangeRate: 0.05
+  FadeRate: 0.02
 --- !u!1 &1215070421
 GameObject:
   m_ObjectHideFlags: 0
