@@ -32,6 +32,26 @@ public class Breakable : NetworkBehaviour
     {
     }
     [ServerCallback]
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (isEnable)
+        {
+            Throwable throwableIncoming = collision.gameObject.GetComponent<Throwable>();
+            Breakable breakableIncoming = collision.gameObject.GetComponent<Breakable>();
+            if (throwableIncoming != null && breakableIncoming != null)
+            {
+                if (throwableIncoming.IsBreakActive)
+                {
+                    breakableIncoming.Hit();
+                    breakableIncoming.InstantiateBang();
+                    Hit();
+                }
+            }
+
+        }
+
+    }
+    [ServerCallback]
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isEnable)
