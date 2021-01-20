@@ -30,7 +30,8 @@ public class LevelScriptController : NetworkBehaviour
         (int h, int w) = ParameterGenerator.GenHouseLength();
         Debug.Log("h =" + h + " w =" + w);
         //Debug.Log(ParameterGenerator.GenSurvivor());
-        (NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = PCG.GenerateHouse3(ParameterGenerator.GenRoom(), w, h, ParameterGenerator.GenDoor(), ParameterGenerator.GenFire(), ParameterGenerator.GenSurvivor());
+        //int valveCount = 5; // NEED PARAMETER
+        (NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = PCG.GenerateHouse3(ParameterGenerator.GenRoom(), w, h, ParameterGenerator.GenDoor(), ParameterGenerator.GenFire(), ParameterGenerator.GenSurvivor(), ParameterGenerator.GenValve());
         Debug.Log("PCG complete");
         int height = wallArray.shape[0];
         int width = wallArray.shape[1];

@@ -14,6 +14,8 @@ public class ParameterGenerator : MonoBehaviour
     public int DayAddFire;
     public int BaseSurvivor;
     public int DayAddSurvivor;
+    public int BaseValve;
+    public int DayAddValve;
     public int BaseHouseLength;
     public int DayAddHouseLength;
     public int HouseLengthMultiplier;
@@ -59,6 +61,11 @@ public class ParameterGenerator : MonoBehaviour
     public int GenSurvivor()
     {
         return param(BaseSurvivor, DayAddSurvivor, this.Day);
+    }
+
+    public int GenValve()
+    {
+        return param(BaseValve, DayAddValve, this.Day);
     }
 
 
