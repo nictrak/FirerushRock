@@ -25,7 +25,6 @@ public class IntroPanel : MonoBehaviour
     {
         if(count >= IntroFrame & Phase == 1)
         {
-            Debug.Log(img.color[0]);
             img.color = new Color(img.color[0] +  ColorChangeRate, img.color[1] + ColorChangeRate, img.color[2] + ColorChangeRate, 1);
             if (img.color == new Color(1, 1, 1, 1))
             {

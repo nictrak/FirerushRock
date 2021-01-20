@@ -3083,6 +3083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1217963070}
   - component: {fileID: 1217963071}
+  - component: {fileID: 1217963072}
   m_Layer: 5
   m_Name: SfxOptionSlider
   m_TagString: Untagged
@@ -3155,13 +3156,36 @@ MonoBehaviour:
   m_FillRect: {fileID: 812950390}
   m_HandleRect: {fileID: 1553526025}
   m_Direction: 0
-  m_MinValue: 0.001
+  m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1217963072}
+        m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1217963072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217963069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60db7bb3a50ea0b4499fb8743fedfe9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1332540930
 GameObject:
   m_ObjectHideFlags: 0

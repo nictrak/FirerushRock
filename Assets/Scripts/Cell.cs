@@ -93,7 +93,7 @@ public class Cell : NetworkBehaviour
         HeatSprite.transform.localScale = new Vector3(0f, 0f, 1f);
         toilet_floor.enabled = false;
 
-        Debug.Log(FireSystem.wall_array);
+        //Debug.Log(FireSystem.wall_array);
         
         furniture_survivor = FireSystem.furniture_array[(int)gridPosition.y, (int)gridPosition.x];
         door = FireSystem.door_array[(int)gridPosition.y, (int)gridPosition.x];
