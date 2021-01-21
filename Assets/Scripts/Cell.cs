@@ -23,6 +23,7 @@ public class Cell : NetworkBehaviour
     [SyncVar]
     private double wall;
     private bool empty_space;
+    private GameObject doorObject;
     public SpriteRenderer spriteRenderer;
 
     public Color NormalColor;
@@ -152,21 +153,23 @@ public class Cell : NetworkBehaviour
                 NetworkServer.Spawn(newWall);
             }
         }
-
+        GameObject newDoor = null;
         if (door == 1)
         {
-            GameObject newDoor = Instantiate(Door_ver);
+            newDoor = Instantiate(Door_ver);
             newDoor.transform.position = this.transform.position + new Vector3(0, (float)0.5, 0); ;
-            NetworkServer.Spawn(newDoor);
         }
-
-        if (door == 2)
+        else if (door == 2)
         {
-            GameObject newDoor = Instantiate(Door_hor);
+            newDoor = Instantiate(Door_hor);
             newDoor.transform.position = this.transform.position + new Vector3(0,(float)1.2,0);
+        }
+        if(newDoor != null)
+        {
+            doorObject = newDoor;
+            newDoor.GetComponent<DamageDoor>().DoorCell = this;
             NetworkServer.Spawn(newDoor);
         }
-
     }
 
     private GameObject get_furniture_survivor_gameobject(double furnitureID)
@@ -183,9 +186,9 @@ public class Cell : NetworkBehaviour
         double fire1 = FireSystem.fire_1_array[(int)gridPosition.y, (int)gridPosition.x];
         double fire2 = FireSystem.fire_2_array[(int)gridPosition.y, (int)gridPosition.x];
         double fire3 = FireSystem.fire_3_array[(int)gridPosition.y, (int)gridPosition.x];
-        levelOneFire = fire1 > 0 && door == 0;
-        levelTwoFire = fire2 > 0 && door == 0;
-        levelThreeFire = fire3 > 0 && door == 0;
+        levelOneFire = fire1 > 0 && doorObject == null;
+        levelTwoFire = fire2 > 0 && doorObject == null;
+        levelThreeFire = fire3 > 0 && doorObject == null;
     }
     [ServerCallback]
     private void UpdateLastHeat()

@@ -17,7 +17,7 @@ public class GameConfig : MonoBehaviour
         BangObject = BangPrefab;
         if (Day == 0)
         {
-            Day = 1;
+            Day = 5;
         }
     }
 
