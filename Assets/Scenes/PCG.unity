@@ -233,9 +233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27eaaa122e074764595603ad85919e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugFurnitureBoundary: 1
-  DebugRoomCount: 29
-  DebugRoomGroup: 11
+  DebugStart: 1
+  DebugFurnitureBoundary: 0
+  DebugRoomCount: 23
+  DebugRoomGroup: 7
 --- !u!4 &1504782139
 Transform:
   m_ObjectHideFlags: 0
