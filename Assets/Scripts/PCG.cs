@@ -1104,18 +1104,71 @@ public class PCG : MonoBehaviour
         ROOM_PRESET_DICTIONARY[2] = new List<RoomPreset>();
         ROOM_PRESET_DICTIONARY[3] = new List<RoomPreset>();
         {
-            List<(FurniturePreset, int, int)> viableFurniture = new List<(FurniturePreset, int, int)>();
+            // Bedroom
+            FurniturePreset doubleBed          = new FurniturePreset(1, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (2, 2));
+            FurniturePreset singleBed          = new FurniturePreset(2, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (1, 2));
+            FurniturePreset closet             = new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 2));
+            FurniturePreset bookshelf          = new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1));
+            FurniturePreset smallChairAndTable = new FurniturePreset(5, PLACE_FLOOR, 0, ORIENT_ANY, (1, 2));
+
+            RoomPreset bedroomPreset1 = new RoomPreset(1, 0, new List<(FurniturePreset, int, int)>());
+            bedroomPreset1.viableFurniture.Add((doubleBed, 1, 1));
+            bedroomPreset1.viableFurniture.Add((singleBed, 0, 0));
+            bedroomPreset1.viableFurniture.Add((closet, 1, 3));
+            bedroomPreset1.viableFurniture.Add((bookshelf, 0, 2));
+            bedroomPreset1.viableFurniture.Add((smallChairAndTable, 0, 2));
+
+            RoomPreset bedroomPreset2 = new RoomPreset(1, 0, new List<(FurniturePreset, int, int)>());
+            bedroomPreset2.viableFurniture.Add((doubleBed, 1, 1));
+            bedroomPreset2.viableFurniture.Add((singleBed, 0, 1));
+            bedroomPreset2.viableFurniture.Add((closet, 1, 3));
+            bedroomPreset2.viableFurniture.Add((bookshelf, 0, 1));
+            bedroomPreset2.viableFurniture.Add((smallChairAndTable, 1, 3));
+
+            RoomPreset bedroomPreset3 = new RoomPreset(1, 0, new List<(FurniturePreset, int, int)>());
+            bedroomPreset3.viableFurniture.Add((doubleBed, 0, 0));
+            bedroomPreset3.viableFurniture.Add((singleBed, 1, 3));
+            bedroomPreset3.viableFurniture.Add((closet, 1, 3));
+            bedroomPreset3.viableFurniture.Add((bookshelf, 0, 3));
+            bedroomPreset3.viableFurniture.Add((smallChairAndTable, 0, 2));
+
+            ROOM_PRESET_DICTIONARY[1].Add(bedroomPreset1);
+            ROOM_PRESET_DICTIONARY[1].Add(bedroomPreset2);
+            ROOM_PRESET_DICTIONARY[1].Add(bedroomPreset3);
+
+            /*List<(FurniturePreset, int, int)> viableFurniture = new List<(FurniturePreset, int, int)>();
             //viableFurniture.Add((new FurniturePreset(1, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 3)), 1, -1));
             viableFurniture.Add((new FurniturePreset(1, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (2, 2)), 1, 1));
             viableFurniture.Add((new FurniturePreset(2, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (1, 2)), 0, -1));
             viableFurniture.Add((new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 2)), 0, -1));
             viableFurniture.Add((new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, -1));
             viableFurniture.Add((new FurniturePreset(5, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 2)), 0, -1));
-            ROOM_PRESET_DICTIONARY[1].Add(new RoomPreset(1, 0, viableFurniture));
+            ROOM_PRESET_DICTIONARY[1].Add(new RoomPreset(1, 0, viableFurniture));*/
 
         }
         {
-            List<(FurniturePreset, int, int)> viableFurniture = new List<(FurniturePreset, int, int)>();
+            // Bathroom
+            FurniturePreset toilet  = new FurniturePreset(1, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (1, 1));
+            FurniturePreset bathtub = new FurniturePreset(2, PLACE_WALL, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 2));
+            FurniturePreset shower  = new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1));
+            FurniturePreset basin   = new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1));
+
+            RoomPreset bathroomPreset1 = new RoomPreset(2, -1, new List<(FurniturePreset, int, int)>());
+            bathroomPreset1.viableFurniture.Add((toilet, 1, 1));
+            bathroomPreset1.viableFurniture.Add((bathtub, 0, 0));
+            bathroomPreset1.viableFurniture.Add((shower, 0, 1));
+            bathroomPreset1.viableFurniture.Add((basin, 1, 2));
+
+            RoomPreset bathroomPreset2 = new RoomPreset(2, -1, new List<(FurniturePreset, int, int)>());
+            bathroomPreset2.viableFurniture.Add((toilet, 0, 1));
+            bathroomPreset2.viableFurniture.Add((bathtub, 0, 1));
+            bathroomPreset2.viableFurniture.Add((shower, 1, 1));
+            bathroomPreset2.viableFurniture.Add((basin, 1, 2));
+
+            ROOM_PRESET_DICTIONARY[2].Add(bathroomPreset1);
+            ROOM_PRESET_DICTIONARY[2].Add(bathroomPreset2);
+
+            /*List<(FurniturePreset, int, int)> viableFurniture = new List<(FurniturePreset, int, int)>();
             //viableFurniture.Add((new FurniturePreset(1, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 3)), 1, -1));
             viableFurniture.Add((new FurniturePreset(1, PLACE_ANY, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_RIGHT | ORIENT_FLOOR_UP | ORIENT_WALL_0, (1, 1)), 1, 1));
             viableFurniture.Add((new FurniturePreset(2, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 2)), 1, -1));
@@ -1129,10 +1182,70 @@ public class PCG : MonoBehaviour
             viableFurniture.Add((new FurniturePreset(2, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 2)), 0, 0));
             viableFurniture.Add((new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, 0));
             viableFurniture.Add((new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 1, -1));
-            ROOM_PRESET_DICTIONARY[2].Add(new RoomPreset(2, -1, viableFurniture));
+            ROOM_PRESET_DICTIONARY[2].Add(new RoomPreset(2, -1, viableFurniture));*/
         }
         {
-            List<(FurniturePreset, int, int)> viableFurniture = new List<(FurniturePreset, int, int)>();
+            // Livingroom
+            FurniturePreset quadChairAndBigTable         = new FurniturePreset(1, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (4, 2));
+            FurniturePreset bookshelf                    = new FurniturePreset(2, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1));
+            FurniturePreset plantPot                     = new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1));
+            FurniturePreset smallSofa                    = new FurniturePreset(4, PLACE_ANY, WALL_ANY, ORIENT_ANY, (1, 1));
+            FurniturePreset bigSofa                      = new FurniturePreset(5, PLACE_ANY, WALL_ANY, ORIENT_ANY, (1, 2));
+            FurniturePreset mixedSofaAndTable            = new FurniturePreset(6, PLACE_ANY, WALL_ANY, ORIENT_ANY, (2, 4));
+            FurniturePreset doubleChairAndSmallTable     = new FurniturePreset(7, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3));
+            FurniturePreset doubleSmallSofaAndRoundChair = new FurniturePreset(8, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3));
+            FurniturePreset drawer                       = new FurniturePreset(9, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 1));
+
+            RoomPreset livingRoomPreset1 = new RoomPreset(3, 0, new List<(FurniturePreset, int, int)>());
+            livingRoomPreset1.viableFurniture.Add((quadChairAndBigTable, 1, 1));
+            livingRoomPreset1.viableFurniture.Add((bookshelf, 0, 1));
+            livingRoomPreset1.viableFurniture.Add((plantPot, 2, 6));
+            livingRoomPreset1.viableFurniture.Add((smallSofa, 0, 1));
+            livingRoomPreset1.viableFurniture.Add((bigSofa, 0, 0));
+            livingRoomPreset1.viableFurniture.Add((mixedSofaAndTable, 0, 0));
+            livingRoomPreset1.viableFurniture.Add((doubleChairAndSmallTable, 1, 2));
+            livingRoomPreset1.viableFurniture.Add((doubleSmallSofaAndRoundChair, 0, 0));
+            livingRoomPreset1.viableFurniture.Add((drawer, 0, 2));
+
+            RoomPreset livingRoomPreset2 = new RoomPreset(3, 0, new List<(FurniturePreset, int, int)>());
+            livingRoomPreset2.viableFurniture.Add((quadChairAndBigTable, 1, 1));
+            livingRoomPreset2.viableFurniture.Add((bookshelf, 2, 6));
+            livingRoomPreset2.viableFurniture.Add((plantPot, 0, 1));
+            livingRoomPreset2.viableFurniture.Add((smallSofa, 0, 2));
+            livingRoomPreset2.viableFurniture.Add((bigSofa, 0, 2));
+            livingRoomPreset2.viableFurniture.Add((mixedSofaAndTable, 0, 2));
+            livingRoomPreset2.viableFurniture.Add((doubleChairAndSmallTable, 0, 0));
+            livingRoomPreset2.viableFurniture.Add((doubleSmallSofaAndRoundChair, 0, 2));
+            livingRoomPreset2.viableFurniture.Add((drawer, 0, 1));
+
+            RoomPreset livingRoomPreset3 = new RoomPreset(3, 0, new List<(FurniturePreset, int, int)>());
+            livingRoomPreset3.viableFurniture.Add((quadChairAndBigTable, 0, 0));
+            livingRoomPreset3.viableFurniture.Add((bookshelf, 0, 2));
+            livingRoomPreset3.viableFurniture.Add((plantPot, 1, 4));
+            livingRoomPreset3.viableFurniture.Add((smallSofa, 0, 2));
+            livingRoomPreset3.viableFurniture.Add((bigSofa, 0, 0));
+            livingRoomPreset3.viableFurniture.Add((mixedSofaAndTable, 0, 0));
+            livingRoomPreset3.viableFurniture.Add((doubleChairAndSmallTable, 1, 3));
+            livingRoomPreset3.viableFurniture.Add((doubleSmallSofaAndRoundChair, 0, 0));
+            livingRoomPreset3.viableFurniture.Add((drawer, 1, 1));
+
+            RoomPreset livingRoomPreset4 = new RoomPreset(3, 0, new List<(FurniturePreset, int, int)>());
+            livingRoomPreset4.viableFurniture.Add((quadChairAndBigTable, 0, 0));
+            livingRoomPreset4.viableFurniture.Add((bookshelf, 0, 2));
+            livingRoomPreset4.viableFurniture.Add((plantPot, 0, 4));
+            livingRoomPreset4.viableFurniture.Add((smallSofa, 0, 1));
+            livingRoomPreset4.viableFurniture.Add((bigSofa, 0, 0));
+            livingRoomPreset4.viableFurniture.Add((mixedSofaAndTable, 0, 1));
+            livingRoomPreset4.viableFurniture.Add((doubleChairAndSmallTable, 0, 1));
+            livingRoomPreset4.viableFurniture.Add((doubleSmallSofaAndRoundChair, 0, 3));
+            livingRoomPreset4.viableFurniture.Add((drawer, 3, 5));
+
+            ROOM_PRESET_DICTIONARY[3].Add(livingRoomPreset1);
+            ROOM_PRESET_DICTIONARY[3].Add(livingRoomPreset2);
+            ROOM_PRESET_DICTIONARY[3].Add(livingRoomPreset3);
+            ROOM_PRESET_DICTIONARY[3].Add(livingRoomPreset4);
+
+            /*List<(FurniturePreset, int, int)> viableFurniture = new List<(FurniturePreset, int, int)>();
             //viableFurniture.Add((new FurniturePreset(1, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 3)), 1, -1));
             viableFurniture.Add((new FurniturePreset(1, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (4, 2)), 1, 1));
             viableFurniture.Add((new FurniturePreset(2, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, -1));
@@ -1150,7 +1263,7 @@ public class PCG : MonoBehaviour
             
             viableFurniture.Add((new FurniturePreset(7, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 0, -1));
             viableFurniture.Add((new FurniturePreset(8, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3)), 0, -1));
-            ROOM_PRESET_DICTIONARY[3].Add(new RoomPreset(3, 0, viableFurniture));
+            ROOM_PRESET_DICTIONARY[3].Add(new RoomPreset(3, 0, viableFurniture));*/
         }
         {
             ORIENTATION_MAPPING = new List<int>();
@@ -1183,22 +1296,23 @@ public class PCG : MonoBehaviour
                 houseHierarchyString += ", [";
         }
         houseHierarchyString += "]";
-        Debug.Log("PCG: " + width + " * " + height);
         Debug.Log("PCG: " + houseHierarchyString);
 
-        double widthIncrement = 0 * width / 100;
-        double heightIncrement = 0 * height / 100;
+        double widthIncrement = width / 256;
+        double heightIncrement = height / 256;
 
         bool LogDebug = true;
-        int resizeAttempt = 10;
+        int resizeAttempt = 0;
         while (true)
         {
-            if (--resizeAttempt < 0)
+            if (++resizeAttempt == 0)
             {
                 if (LogDebug)
                     Debug.Log("PCG: too many attempts, return null");
                 return (null, null, null, null);
             }
+
+            Debug.Log("PCG: attempt " + resizeAttempt + ", house size = " + width + " * " + height);
 
             Area rootArea = new Area(1);
             List<Room> roomList = new List<Room>();
@@ -1363,9 +1477,9 @@ public class PCG : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         
-    }
+    }*/
 
 }
