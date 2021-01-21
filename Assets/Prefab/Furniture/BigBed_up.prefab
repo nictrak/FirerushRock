@@ -167,6 +167,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  isGrabbable: 0
+  Height: 2
+  Width: 2
   SpeedMultiplier: 0
   GrabedPostion: {x: -2, y: 6, z: 0.001}
 --- !u!114 &2156205171376715587
@@ -273,6 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  cells: []
 --- !u!114 &-6063402919612036216
 MonoBehaviour:
   m_ObjectHideFlags: 0

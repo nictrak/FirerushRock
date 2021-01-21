@@ -30,11 +30,10 @@ public class Throwable : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        SyncIsBreak();
     }
     private void FixedUpdate()
     {
-        SyncIsBreak();
         ThrowedMove();
     }
     [ClientRpc]

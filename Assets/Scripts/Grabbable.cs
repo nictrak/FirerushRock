@@ -14,6 +14,8 @@ public class Grabbable : NetworkBehaviour
     private Rigidbody2D rigidbody;
     private ZSync zSync;
     private BoxCollider2D collider2D;
+    public float Height;
+    public float Width;
 
     public float SpeedMultiplier;
     public bool IsGrabed { get => isGrabed; set => isGrabed = value; }
@@ -64,7 +66,8 @@ public class Grabbable : NetworkBehaviour
     public void Released(bool newIsTrigger, Vector3 releasedVector)
     {
         IsGrabed = false;
-        transform.position = grabber.transform.position + releasedVector;
+        Vector3 translation = new Vector3(-Width / 2 + 0.5f, Height / 2 - 0.5f, 0);
+        transform.position = grabber.transform.position + releasedVector + translation;
         collider2D.isTrigger = newIsTrigger;
         transform.parent = null;
         zSync.IsEnable = true;

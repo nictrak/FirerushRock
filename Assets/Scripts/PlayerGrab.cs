@@ -141,8 +141,7 @@ public class PlayerGrab : NetworkBehaviour
         {
             if (grabedObject.GetComponent<Throwable>() != null)
             {
-                Vector3 releasedVector = CalReleasedVector();
-                CmdRelease(grabedObject.netIdentity, true, releasedVector);
+                CmdRelease(grabedObject.netIdentity, true, new Vector3());
                 CmdThrow(netIdentity, grabedObject.netIdentity, playerDirection.Direction, ThrowSpeed);
                 grabedObject = null;
             }

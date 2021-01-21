@@ -220,13 +220,24 @@ public class FireSystem : MonoBehaviour
                     Debug.Log("noooooo");
                 }
                 */
-                
-                if (fire_2_array.Equals(zero_array) || Input.GetKeyDown(KeyCode.F1))
+
+                if (fire_2_array.Equals(zero_array))
                 {
                     //TODO Fix this to multiplayer
-                    GameConfig.Day ++;
+                    GameConfig.Day++;
                     GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
                 }
+            }
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                GameConfig.Day = 1;
+                NetworkManager manager = GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>();
+                manager.StopHost();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                GameConfig.Day++;
+                GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
             }
             framerate_counter += 1;
         }
@@ -235,7 +246,7 @@ public class FireSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
     }
     static NDArray shift_left(NDArray array)
     {
