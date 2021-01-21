@@ -85,6 +85,7 @@ public class PlayerGrab : NetworkBehaviour
         PlayerGrab playerGrab = grabberIdentity.GetComponent<PlayerGrab>();
         Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
         Breakable breakable = grabedIdentity.GetComponent<Breakable>();
+        Debug.Log(grabed);
         grabed.Grabed(playerGrab);
         if(breakable != null)
         {

@@ -7,6 +7,7 @@ public class Grabbable : NetworkBehaviour
     [SyncVar]
     private bool isGrabed;
     [SyncVar]
+    [SerializeField]
     private bool isGrabbable;
     private PlayerGrab grabber;
     private Rigidbody2D rigidbody;
@@ -48,6 +49,9 @@ public class Grabbable : NetworkBehaviour
     [ClientRpc]
     public void Grabed(PlayerGrab grabber)
     {
+        rigidbody = GetComponent<Rigidbody2D>();
+        zSync = GetComponent<ZSync>();
+        collider2D = GetComponent<BoxCollider2D>();
         IsGrabed = true;
         this.grabber = grabber;
         collider2D.isTrigger = true;
