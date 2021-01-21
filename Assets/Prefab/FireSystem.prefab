@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
-  fire_spread_counter: 15
+  fire_spread_counter: 12
   fire_1_size: 20
   fire_2_size: 40
   fire_3_size: 60

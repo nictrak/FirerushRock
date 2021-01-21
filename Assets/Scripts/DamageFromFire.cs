@@ -18,7 +18,7 @@ public class DamageFromFire : NetworkBehaviour
     }
     void Start()
     {
-        fire1Damage = 1;
+        fire1Damage = 0;
         fire2Damage = 2;
         fire3Damage = 3;
         life = GetComponent<Life>();
