@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Mirror;
 public class Grabbable : NetworkBehaviour
 {
@@ -68,6 +69,7 @@ public class Grabbable : NetworkBehaviour
         transform.parent = null;
         zSync.IsEnable = true;
         this.grabber = null;
+        SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
     }
     private void MoveWhenGrabed()
     {

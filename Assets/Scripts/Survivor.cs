@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Survivor : MonoBehaviour
 {
+    [SerializeField]
     private bool isRescued;
     private Grabbable grabbable;
     public bool IsRescued { get => isRescued; set => isRescued = value; }

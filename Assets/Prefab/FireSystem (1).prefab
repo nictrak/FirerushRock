@@ -51,7 +51,7 @@ MonoBehaviour:
   fire_1_start_point: 20
   fire_2_start_point: 40
   fire_3_start_point: 70
-  max_heat_point: 120
+  max_heat_point: 0
   heat_decay: -2
   fire2_add_heat: 2
   fire3_add_heat: 1

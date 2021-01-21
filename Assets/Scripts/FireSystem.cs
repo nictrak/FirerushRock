@@ -4,7 +4,7 @@ using UnityEngine;
 using NumSharp;
 using System.Timers;
 using UnityEngine.SceneManagement;
-
+using Mirror;
 public class FireSystem : MonoBehaviour
 {
     public GridSystem grid;
@@ -221,11 +221,11 @@ public class FireSystem : MonoBehaviour
                 }
                 */
                 
-                if (fire_2_array.Equals(zero_array))
+                if (fire_2_array.Equals(zero_array) || Input.GetKeyDown(KeyCode.F1))
                 {
                     //TODO Fix this to multiplayer
                     GameConfig.Day ++;
-                    //SceneManager.LoadScene("MenuScene");
+                    GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
                 }
             }
             framerate_counter += 1;

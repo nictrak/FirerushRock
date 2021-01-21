@@ -41,7 +41,11 @@ public class DamageFromFire : NetworkBehaviour
     {
         for (int i = 0; i < cells.Count; i++)
         {
-            Damage(cells[i]);
+            if(cells[i] == null)
+            {
+                cells.RemoveAt(i);
+            }
+            else Damage(cells[i]);
         }
     }
     [ServerCallback]

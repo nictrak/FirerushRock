@@ -42,6 +42,9 @@ TagManager:
   - name: Floor
     uniqueID: 2116081655
     locked: 0
+  - name: RescueZone
+    uniqueID: 872597891
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
