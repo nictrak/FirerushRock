@@ -330,6 +330,7 @@ MonoBehaviour:
   DownGrab: {fileID: 5215916772051558344}
   ThrowSpeed: 0.25
   GrabScale: 0.5
+  ReleaseLenght: 1
 --- !u!114 &5743717428971866573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,6 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  cells: []
 --- !u!114 &5750041538200760506
 MonoBehaviour:
   m_ObjectHideFlags: 0

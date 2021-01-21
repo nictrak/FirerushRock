@@ -15,6 +15,7 @@ public class PlayerGrab : NetworkBehaviour
     public GrabHitbox DownGrab;
     public float ThrowSpeed;
     public float GrabScale;
+    public float ReleaseLenght;
     private Vector3 memGrabScale;
     public GrabHitbox UsedGrab { get => usedGrab; set => usedGrab = value; }
     public Grabbable GrabedObject { get => grabedObject; set => grabedObject = value; }
@@ -97,16 +98,38 @@ public class PlayerGrab : NetworkBehaviour
     {
         if (grabedObject != null)
         {
-            CmdRelease(grabedObject.netIdentity, false);
+            Vector3 releasedVector = CalReleasedVector();
+            CmdRelease(grabedObject.netIdentity, false, releasedVector);
             grabedObject = null;
         }
     }
+    private Vector3 CalReleasedVector()
+    {
+        Vector3 releasedVector = new Vector3();
+        if (playerDirection.Direction == "left")
+        {
+            releasedVector = new Vector3(-ReleaseLenght, 0, 0);
+        }
+        else if (playerDirection.Direction == "right")
+        {
+            releasedVector = new Vector3(ReleaseLenght, 0, 0);
+        }
+        else if (playerDirection.Direction == "up")
+        {
+            releasedVector = new Vector3(0, ReleaseLenght, 0);
+        }
+        else if (playerDirection.Direction == "down")
+        {
+            releasedVector = new Vector3(0, -ReleaseLenght, 0);
+        }
+        return releasedVector;
+    }
     [Command]
-    private void CmdRelease(NetworkIdentity grabedIdentity, bool newIsTrigger)
+    private void CmdRelease(NetworkIdentity grabedIdentity, bool newIsTrigger, Vector3 releasedVector)
     {
         Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
         Breakable breakable = grabedIdentity.GetComponent<Breakable>();
-        grabed.Released(newIsTrigger);
+        grabed.Released(newIsTrigger, releasedVector);
         if (breakable != null)
         {
             breakable.IsEnable = false;
@@ -118,7 +141,8 @@ public class PlayerGrab : NetworkBehaviour
         {
             if (grabedObject.GetComponent<Throwable>() != null)
             {
-                CmdRelease(grabedObject.netIdentity, true);
+                Vector3 releasedVector = CalReleasedVector();
+                CmdRelease(grabedObject.netIdentity, true, releasedVector);
                 CmdThrow(netIdentity, grabedObject.netIdentity, playerDirection.Direction, ThrowSpeed);
                 grabedObject = null;
             }

@@ -60,10 +60,10 @@ public class Grabbable : NetworkBehaviour
         transform.localPosition = GrabedPostion;
     }
     [ClientRpc]
-    public void Released(bool newIsTrigger)
+    public void Released(bool newIsTrigger, Vector3 releasedVector)
     {
         IsGrabed = false;
-        transform.position = grabber.transform.position + GrabedPostion;
+        transform.position = grabber.transform.position + releasedVector;
         collider2D.isTrigger = newIsTrigger;
         transform.parent = null;
         zSync.IsEnable = true;
