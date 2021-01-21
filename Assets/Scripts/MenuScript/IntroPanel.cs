@@ -8,6 +8,7 @@ public class IntroPanel : MonoBehaviour
     // Start is called before the first frame update
     public int IntroFrame;
     public float ColorChangeRate;
+    public float FadeRate;
     private int count;
     private Image img;
     private int Phase;
@@ -20,11 +21,10 @@ public class IntroPanel : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(count >= IntroFrame & Phase == 1)
         {
-            Debug.Log(img.color[0]);
             img.color = new Color(img.color[0] +  ColorChangeRate, img.color[1] + ColorChangeRate, img.color[2] + ColorChangeRate, 1);
             if (img.color == new Color(1, 1, 1, 1))
             {
@@ -33,7 +33,7 @@ public class IntroPanel : MonoBehaviour
         }
         if (Phase == 2)
         {
-            img.color = new Color(1, 1, 1, img.color[3] - (float) 0.001);
+            img.color = new Color(1, 1, 1, img.color[3] - FadeRate);
             if (img.color[3] <= 0)
             {
                 Destroy(this.gameObject);

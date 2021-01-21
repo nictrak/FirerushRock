@@ -55,6 +55,7 @@ public class ParameterGenerator : MonoBehaviour
 
     public int GenFire()
     {
+        if (GameConfig.Day <= 2) return 1;
         return param(BaseFire, DayAddFire, this.Day);
     }
 

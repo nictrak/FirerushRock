@@ -19,6 +19,14 @@ public class GameConfig : MonoBehaviour
         {
             Day = 5;
         }
+        if (MusicVolume == 0)
+        {
+            MusicVolume = 1;
+        }
+        if (SfxVolume == 0)
+        {
+            SfxVolume = 1;
+        }
     }
 
     // Update is called once per frame

@@ -13,6 +13,7 @@ public class LevelScriptController : NetworkBehaviour
     public FireSystem FireSystem;
     public GridSystem GridSystem;
     public SetupSystem SetupSystem;
+    public static int Cat;
     void Start()
     {
         startScript();
@@ -29,8 +30,9 @@ public class LevelScriptController : NetworkBehaviour
         ParameterGenerator.SetDay(GameConfig.Day);
         (int h, int w) = ParameterGenerator.GenHouseLength();
         Debug.Log("h =" + h + " w =" + w);
-        //Debug.Log(ParameterGenerator.GenSurvivor());
         //int valveCount = 5; // NEED PARAMETER
+        Cat = ParameterGenerator.GenSurvivor();
+        Debug.Log(Cat);
         (NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = PCG.GenerateHouse3(ParameterGenerator.GenRoom(), w, h, ParameterGenerator.GenDoor(), ParameterGenerator.GenFire(), ParameterGenerator.GenSurvivor(), ParameterGenerator.GenValve());
         Debug.Log("PCG complete");
         int height = wallArray.shape[0];
@@ -44,7 +46,7 @@ public class LevelScriptController : NetworkBehaviour
         Vector2 entrancePosition = PCG.EntranceDoor;
         SpawnGrass.InstantiateSpawn(entrancePosition.x, entrancePosition.y);
 
-        
+        /*
         Debug.Log(height);
         Debug.Log(width);
         
@@ -54,17 +56,20 @@ public class LevelScriptController : NetworkBehaviour
         Debug.Log(fireArray);
         
         Debug.Log(furnitureArray);
+        */
         FireSystem.startF(wallArray, doorArray, furnitureArray, fireArray,width,height);
+        /*
         Debug.Log("Start Fire System");
         
         Debug.Log(FireSystem.fire_source_array);
         Debug.Log(FireSystem.heat_array);
         Debug.Log(FireSystem.wall_array);
         Debug.Log(FireSystem.door_array);
-        
+        */
         GridSystem.startF(height, width);
+        /*
         Debug.Log("Start Grid System");
-
+        */
         entrancePosition += new Vector2(4f, 0);
         Vector3 realEntrancePoint = new Vector3(entrancePosition.x, entrancePosition.y, 0);
         SetupSystem.FirefighterToSpawnPoint(realEntrancePoint);

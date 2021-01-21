@@ -28,12 +28,15 @@ public class Spreader : NetworkBehaviour
     private bool isFillable;
     private Valve valve;
 
+    private AudioSource sfx;
+
     // Start is called before the first frame update
     void Start()
     {
         spawnCounter = 0;
         load = MaxLoad;
         maxLocalScaleX = Bar.transform.localScale.x;
+        sfx = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -76,7 +79,18 @@ public class Spreader : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && load > 0 && beingGrab)
         {
+            if(!sfx.isPlaying)
+            {
+                sfx.Play();
+            }
             CmdSpawnWater(playerDirection);
+        }
+        else
+        {
+            if (sfx.isPlaying)
+            {
+                sfx.Stop();
+            }
         }
     }
     [Command(ignoreAuthority = true)]
