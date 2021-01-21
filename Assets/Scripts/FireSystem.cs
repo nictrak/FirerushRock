@@ -33,6 +33,8 @@ public class FireSystem : MonoBehaviour
     private NDArray zero_array;
     private static bool isRun;
     private NDArray wall_array_clip;
+    private bool isMusicHigh;
+    public PlaySceneAudio PlaySceneAudio;
 
     // Start is called before the first frame update
 
@@ -43,6 +45,7 @@ public class FireSystem : MonoBehaviour
     {
         framerate_counter = 0;
         isRun = false;
+        isMusicHigh = false;
     }
 
     public void startF(NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray, int height, int width)
@@ -226,6 +229,17 @@ public class FireSystem : MonoBehaviour
                     //TODO Fix this to multiplayer
                     GameConfig.Day ++;
                     //SceneManager.LoadScene("MenuScene");
+                }
+
+                Debug.Log((float)(double)fire_3_array.sum()/ fire_3_size);
+                if (isMusicHigh == false)
+                {
+                    if((float)(double)fire_3_array.sum() / fire_3_size >=  50)
+                    {
+                        Debug.Log("ChangeMusic");
+                        PlaySceneAudio.ChangeMusicToHigh();
+                        isMusicHigh = true;
+                    }
                 }
             }
             framerate_counter += 1;
