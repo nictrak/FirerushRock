@@ -63,7 +63,7 @@ public class Grabbable : NetworkBehaviour
     public void Released(bool newIsTrigger)
     {
         IsGrabed = false;
-        transform.position = grabber.transform.position;
+        transform.position = grabber.transform.position + GrabedPostion;
         collider2D.isTrigger = newIsTrigger;
         transform.parent = null;
         zSync.IsEnable = true;
