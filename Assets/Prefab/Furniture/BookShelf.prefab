@@ -171,7 +171,7 @@ MonoBehaviour:
   Height: 1
   Width: 1
   SpeedMultiplier: 0
-  GrabedPostion: {x: 0, y: 6, z: 0.001}
+  GrabedPostion: {x: 0, y: 3.5, z: 0.001}
 --- !u!114 &2649832980727841342
 MonoBehaviour:
   m_ObjectHideFlags: 0
