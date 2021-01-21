@@ -45,17 +45,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
-  fire_spread_counter: 10
+  fire_spread_counter: 15
   fire_1_size: 20
   fire_2_size: 40
   fire_3_size: 60
   fire_1_start_point: 20
   fire_2_start_point: 40
   fire_3_start_point: 70
-  max_heat_point: 120
+  max_heat_point: 100
   heat_decay: -2
   fire2_add_heat: 2
   fire3_add_heat: 1
+  PlaySceneAudio: {fileID: 0}
 --- !u!114 &2514499717010583889
 MonoBehaviour:
   m_ObjectHideFlags: 0
