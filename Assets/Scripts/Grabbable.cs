@@ -10,7 +10,7 @@ public class Grabbable : NetworkBehaviour
     [SyncVar]
     [SerializeField]
     private bool isGrabbable;
-    private PlayerGrab grabber;
+    private NetworkIdentity grabber;
     private Rigidbody2D rigidbody;
     private ZSync zSync;
     private BoxCollider2D collider2D;
@@ -19,7 +19,7 @@ public class Grabbable : NetworkBehaviour
 
     public float SpeedMultiplier;
     public bool IsGrabed { get => isGrabed; set => isGrabed = value; }
-    public PlayerGrab Grabber { get => grabber; set => grabber = value; }
+    public NetworkIdentity Grabber { get => grabber; set => grabber = value; }
     public ZSync ZSync { get => zSync; set => zSync = value; }
     public BoxCollider2D Collider2D { get => collider2D; set => collider2D = value; }
     public bool IsGrabbable { get => isGrabbable; set => isGrabbable = value; }
@@ -50,7 +50,7 @@ public class Grabbable : NetworkBehaviour
 
     }
     [ClientRpc]
-    public void Grabed(PlayerGrab grabber)
+    public void Grabed(NetworkIdentity grabber)
     {
         rigidbody = GetComponent<Rigidbody2D>();
         zSync = GetComponent<ZSync>();

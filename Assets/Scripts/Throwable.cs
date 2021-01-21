@@ -57,7 +57,7 @@ public class Throwable : NetworkBehaviour
                 breakable.IsEnable = true;
             }
         }
-        if (playerGrab != null)
+        if (playerGrab != null && isThrowed)
         {
             if (playerGrab.netIdentity != thrower && playerGrab.GrabedObject == null)
             {

@@ -73,6 +73,7 @@ public class PlayerGrab : NetworkBehaviour
         {
             if (grabed.IsGrabbable)
             {
+                if (grabed.IsGrabed) CmdRelease(grabed.netIdentity, true, new Vector3());
                 grabedObject = grabed;
                 CmdGrab(netIdentity, grabed.netIdentity);
                 return true;
@@ -87,7 +88,7 @@ public class PlayerGrab : NetworkBehaviour
         Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
         Breakable breakable = grabedIdentity.GetComponent<Breakable>();
         Debug.Log(grabed);
-        grabed.Grabed(playerGrab);
+        grabed.Grabed(playerGrab.netIdentity);
         if(breakable != null)
         {
             breakable.IsEnable = false;
