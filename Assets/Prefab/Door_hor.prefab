@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: -8822567417810924534}
   - component: {fileID: 8425039234019927522}
   - component: {fileID: 3644992277311713776}
+  - component: {fileID: -4314320298640310504}
+  - component: {fileID: 4422467060084954915}
   m_Layer: 0
   m_Name: Door_hor
   m_TagString: Untagged
@@ -236,3 +238,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e81bf517d96b9f249b4e9b2f5956a377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-4314320298640310504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3013429047554641504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0c7cead65fea94daeedabdbe9a79bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  MaxLifePoint: 300
+  LifeBar: {fileID: 0}
+  RegenPoint: 0
+  NonRegenTime: 0
+  IsPlayer: 0
+--- !u!114 &4422467060084954915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3013429047554641504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b56897625a30d344caaac7cd30c9cc5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
