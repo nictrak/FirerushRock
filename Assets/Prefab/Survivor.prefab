@@ -169,6 +169,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   isGrabbable: 1
+  Height: 1
+  Width: 1
   SpeedMultiplier: 0
   GrabedPostion: {x: 0, y: 0, z: -0.1}
 --- !u!114 &4575613265741898931
@@ -213,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008df4044bb3ad84e9ffd0ac51fe79a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRescued: 0
 --- !u!95 &3949643201680949261
 Animator:
   serializedVersion: 3
@@ -274,6 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  cells: []
 --- !u!114 &-1140433886307812832
 MonoBehaviour:
   m_ObjectHideFlags: 0

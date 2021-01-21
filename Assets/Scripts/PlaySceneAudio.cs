@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlaySceneAudio : MonoBehaviour
+using Mirror;
+public class PlaySceneAudio : NetworkBehaviour
 {
     // Start is called before the first frame update
     public AudioClip High1;
@@ -36,7 +36,7 @@ public class PlaySceneAudio : MonoBehaviour
         System.Random random = new System.Random();
         return list[random.Next(list.Count)];
     }
-
+    [ClientRpc]
     public void ChangeMusicToHigh()
     {
         Music.Stop();

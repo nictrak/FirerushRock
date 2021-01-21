@@ -65,6 +65,9 @@ public class Grabbable : NetworkBehaviour
     [ClientRpc]
     public void Released(bool newIsTrigger, Vector3 releasedVector)
     {
+        rigidbody = GetComponent<Rigidbody2D>();
+        zSync = GetComponent<ZSync>();
+        collider2D = GetComponent<BoxCollider2D>();
         IsGrabed = false;
         Vector3 translation = new Vector3(-Width / 2 + 0.5f, Height / 2 - 0.5f, 0);
         transform.position = grabber.transform.position + releasedVector + translation;
