@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
         timeleft = timeLimit;
         timeInt = 0;
         Debug.Log(Time.fixedDeltaTime);
-        Time.fixedDeltaTime = Time.fixedDeltaTime*2;
+        //Time.fixedDeltaTime = Time.fixedDeltaTime*2;
         Debug.Log(Time.fixedDeltaTime);
     }
 
