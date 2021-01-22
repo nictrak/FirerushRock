@@ -292,7 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  MaxLifePoint: 100
+  MaxLifePoint: 500
   LifeBar: {fileID: 0}
   RegenPoint: 0
   NonRegenTime: 0

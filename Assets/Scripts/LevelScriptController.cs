@@ -14,6 +14,17 @@ public class LevelScriptController : NetworkBehaviour
     public GridSystem GridSystem;
     public SetupSystem SetupSystem;
     public static int Cat;
+    private int Day;
+
+    private Score Score;
+    public WinScoreText WinScoreText;
+    public WinCanvas WinCanvas;
+    public Timer Timer;
+    public PlaySceneAudio playSceneAudio;
+    public LoseCanvas LoseCanvas;
+    public ScoreText LoseScoreText;
+    public ScoreText UIScoreText;
+
     void Start()
     {
         startScript();
@@ -27,7 +38,10 @@ public class LevelScriptController : NetworkBehaviour
     [ServerCallback]
     public void startScript()
     {
-        ParameterGenerator.SetDay(GameConfig.Day);
+        Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
+        Score.ResetCat();
+        this.Day = Score.getDay();
+        ParameterGenerator.SetDay(Day);
         (int h, int w) = ParameterGenerator.GenHouseLength();
         Debug.Log("h =" + h + " w =" + w);
         //int valveCount = 5; // NEED PARAMETER
@@ -70,7 +84,38 @@ public class LevelScriptController : NetworkBehaviour
         /*
         Debug.Log("Start Grid System");
         */
+        UIScoreText.updateScore(Score.getScore());
+        Timer.timeLimit = ParameterGenerator.GenTime();
+        Timer.startf();
+        Timer.setWorking(true);
         
+    }
+    public void ToLobby()
+    {
+        GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
+    }
+
+    public void MissionComplete()
+    {
+        Timer.setWorking(false);
+        FireSystem.setRun(false);
+        Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
+        Score.CalculateScore();
+        WinScoreText.updateWinScore(Score.getOldScore(), Score.getScoreTime(), Score.getScoreCatRescued(), Score.getScoreCatDied(), Score.getScore());
+        WinCanvas.Win();
+        Score.addDay();
+    }
+
+    public void MissionFailed()
+    {
+        Timer.setWorking(false);
+        FireSystem.setRun(false);
+        Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
+        playSceneAudio.StopMusic();
+        LoseScoreText.updateScore(Score.getScore());
+        LoseCanvas.Lose();
+        Score.ResetScore();
+        Score.setDay(1);
     }
 
 }

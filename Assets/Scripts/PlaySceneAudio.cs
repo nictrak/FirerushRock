@@ -43,4 +43,9 @@ public class PlaySceneAudio : NetworkBehaviour
         Music.clip = randomClip(new List<AudioClip> { High1,High2,High3 });
         Music.Play();
     }
+
+    public void StopMusic()
+    {
+        Music.Stop();
+    }
 }

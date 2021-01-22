@@ -10,6 +10,7 @@ public class Survivor : MonoBehaviour
     public bool IsRescued { get => isRescued; set => isRescued = value; }
 
     private AudioSource sfx;
+    private Score Score;
 
     // Start is called before the first frame update
 
@@ -18,6 +19,7 @@ public class Survivor : MonoBehaviour
         isRescued = false;
         grabbable = GetComponent<Grabbable>();
         sfx = GetComponent<AudioSource>();
+        Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,7 @@ public class Survivor : MonoBehaviour
             if (!isRescued)
             {
                 sfx.Play();
+                Score.AddCatRecued();
                 //add cat count?
             }
             //Destroy(this.gameObject);
@@ -48,6 +51,11 @@ public class Survivor : MonoBehaviour
             isRescued = false;
             grabbable.IsGrabbable = true;
         }
+    }
+
+    private void OnDestroy()
+    {
+        Score.AddCatDied();
     }
 }
 

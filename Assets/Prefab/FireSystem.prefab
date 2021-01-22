@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
-  fire_spread_counter: 12
+  fire_spread_counter: 30
   fire_1_size: 20
   fire_2_size: 40
   fire_3_size: 60
@@ -57,6 +57,7 @@ MonoBehaviour:
   fire2_add_heat: 2
   fire3_add_heat: 1
   PlaySceneAudio: {fileID: 0}
+  levelScriptController: {fileID: 0}
 --- !u!114 &2514499717010583889
 MonoBehaviour:
   m_ObjectHideFlags: 0

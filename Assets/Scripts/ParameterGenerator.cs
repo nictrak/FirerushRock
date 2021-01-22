@@ -19,6 +19,9 @@ public class ParameterGenerator : MonoBehaviour
     public int BaseHouseLength;
     public int DayAddHouseLength;
     public int HouseLengthMultiplier;
+    public int BaseTime;
+    public int DayAddTime;
+    public int TimeMultiplier;
 
 
     private int Day;
@@ -53,9 +56,14 @@ public class ParameterGenerator : MonoBehaviour
         return param(BaseDoor, DayAddDoor, this.Day);
     }
 
+    public int GenTime()
+    {
+        return param(BaseTime, DayAddTime, this.Day,Multiplier: TimeMultiplier);
+    }
+
     public int GenFire()
     {
-        if (GameConfig.Day <= 2) return 1;
+        if (Day <= 2) return 1;
         return param(BaseFire, DayAddFire, this.Day);
     }
 

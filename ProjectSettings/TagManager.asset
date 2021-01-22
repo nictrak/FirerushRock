@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Network
+  - Score
+  - Timer
   layers:
   - Default
   - TransparentFX

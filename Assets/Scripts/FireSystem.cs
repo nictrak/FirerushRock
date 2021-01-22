@@ -36,6 +36,7 @@ public class FireSystem : MonoBehaviour
     private bool isMusicHigh;
     public PlaySceneAudio PlaySceneAudio;
     private bool isPassDay;
+    public LevelScriptController levelScriptController;
     // Start is called before the first frame update
 
 
@@ -244,13 +245,16 @@ public class FireSystem : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.F1))
             {
-                GameConfig.Day = 1;
                 NetworkManager manager = GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>();
                 manager.StopHost();
             }
             if (Input.GetKeyDown(KeyCode.F2))
             {
                 PassDay();
+            }
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                levelScriptController.MissionFailed();
             }
             framerate_counter += 1;
         }
@@ -259,8 +263,9 @@ public class FireSystem : MonoBehaviour
     {
         if (!isPassDay)
         {
-            GameConfig.Day++;
-            GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
+            //GameConfig.Day++;
+            //GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
+            levelScriptController.MissionComplete();
             isPassDay = true;
         }
     }
