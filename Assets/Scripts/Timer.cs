@@ -8,10 +8,9 @@ public class Timer : MonoBehaviour
     private float timeleft;
     public TimerText TimerText;
     private int timeInt;
-    public PlaySceneAudio playSceneAudio;
-    public LoseCanvas LoseCanvas;
     private bool isWorking;
-    void Start()
+    public LevelScriptController LevelScriptController;
+    public void startf()
     {
         isWorking = false;
         timeleft = timeLimit;
@@ -53,11 +52,7 @@ public class Timer : MonoBehaviour
 
     void TimeOver()
     {
-        FireSystem.setRun(false);
-        playSceneAudio.StopMusic();
-        LoseCanvas.Lose();
-        GameConfig.Day = 1;
-        isWorking = false;
+        LevelScriptController.MissionFailed();
     }
 
     public int getTimeLeft()

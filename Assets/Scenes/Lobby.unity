@@ -5107,6 +5107,7 @@ GameObject:
   - component: {fileID: 307524760}
   - component: {fileID: 307524759}
   - component: {fileID: 307524758}
+  - component: {fileID: 307524761}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -5186,6 +5187,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307524756}
   m_CullTransparentMesh: 0
+--- !u!114 &307524761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307524756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798d8776047b3ba47bf47faf3ba00e36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIScoreText: {fileID: 307524758}
 --- !u!1 &310965787
 GameObject:
   m_ObjectHideFlags: 0
@@ -27812,7 +27826,6 @@ MonoBehaviour:
   TimeScorePerSecond: 100
   CatRecuedScore: 5000
   CatDiedMinusScore: 2000
-  Timer: {fileID: 0}
 --- !u!4 &1904481053
 Transform:
   m_ObjectHideFlags: 0

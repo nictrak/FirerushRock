@@ -84,4 +84,20 @@ public class Score : MonoBehaviour
     {
         score = 0;
     }
+
+    public void ResetCat()
+    {
+        catRecued = 0;
+        catDied = 0;
+    }
+
+    public void AddCatRecued()
+    {
+        catRecued++;
+    }
+
+    public void AddCatDied()
+    {
+        catDied++;
+    }
 }

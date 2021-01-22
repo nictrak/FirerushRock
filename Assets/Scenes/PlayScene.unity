@@ -440,6 +440,41 @@ PrefabInstance:
       propertyPath: Timer
       value: 
       objectReference: {fileID: 722109126}
+    - target: {fileID: 3320242539675953439, guid: a012089402961b84e81aca86a27da92e,
+        type: 3}
+      propertyPath: playSceneAudio
+      value: 
+      objectReference: {fileID: 1372729197}
+    - target: {fileID: 3320242539675953439, guid: a012089402961b84e81aca86a27da92e,
+        type: 3}
+      propertyPath: LoseCanvas
+      value: 
+      objectReference: {fileID: 1480065942}
+    - target: {fileID: 3320242539675953439, guid: a012089402961b84e81aca86a27da92e,
+        type: 3}
+      propertyPath: LoseScoreText
+      value: 
+      objectReference: {fileID: 1817502397}
+    - target: {fileID: 3320242539675953439, guid: a012089402961b84e81aca86a27da92e,
+        type: 3}
+      propertyPath: UIScoreText
+      value: 
+      objectReference: {fileID: 547194352}
+    - target: {fileID: 4190582191641841294, guid: a012089402961b84e81aca86a27da92e,
+        type: 3}
+      propertyPath: BaseTime
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190582191641841294, guid: a012089402961b84e81aca86a27da92e,
+        type: 3}
+      propertyPath: TimeMultiplier
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190582191641841294, guid: a012089402961b84e81aca86a27da92e,
+        type: 3}
+      propertyPath: DayAddTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4402438854443097613, guid: a012089402961b84e81aca86a27da92e,
         type: 3}
       propertyPath: sceneId
@@ -1009,10 +1044,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296264ab1828c6843bbfd762bf200184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 10
+  timeLimit: 50
   TimerText: {fileID: 713907328}
-  playSceneAudio: {fileID: 1372729197}
-  LoseCanvas: {fileID: 1480065942}
+  LevelScriptController: {fileID: 363942142}
 --- !u!4 &722109127
 Transform:
   m_ObjectHideFlags: 0
@@ -2068,7 +2102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f4e47a1dfeec2409d0be8eca7463c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScoreText: {fileID: 1817502397}
 --- !u!1 &1546104130
 GameObject:
   m_ObjectHideFlags: 0

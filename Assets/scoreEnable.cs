@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoseCanvas : MonoBehaviour
+public class scoreEnable : MonoBehaviour
 {
     // Start is called before the first frame update
+    private Score Score;
+    public ScoreText UIScoreText;
     void Start()
     {
-        gameObject.SetActive(false);
+        Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
+        UIScoreText.updateScore(Score.getScore());
     }
 
     // Update is called once per frame
@@ -15,9 +18,4 @@ public class LoseCanvas : MonoBehaviour
     {
         
     }
-
-    public void Lose()
-    {
-        gameObject.SetActive(true);
-    }  
 }
