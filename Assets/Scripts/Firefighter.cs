@@ -30,8 +30,6 @@ public class Firefighter : NetworkBehaviour
         {
             
         }*/
-        if(spawnPoint != null && isLocalPlayer)
-        Debug.Log(spawnPoint);
     }
     [ClientRpc]
     public void ToOrigin()
@@ -44,7 +42,6 @@ public class Firefighter : NetworkBehaviour
     {
         spawnPoint = point;
     }
-    [ClientRpc]
     public void ToSpawnPoint()
     {
         GameObject spawnPoint = GameObject.FindGameObjectWithTag("Respawn");

@@ -5127,9 +5127,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5363365468861744533, guid: 6d2ea012a6b8c3543b8d71c7919d55d0,
         type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5363365468861744533, guid: 6d2ea012a6b8c3543b8d71c7919d55d0,
+        type: 3}
       propertyPath: onlineScene
       value: Assets/Scenes/Lobby.unity
       objectReference: {fileID: 0}
+    - target: {fileID: 5363365468861744533, guid: 6d2ea012a6b8c3543b8d71c7919d55d0,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[69]
+      value: 
+      objectReference: {fileID: 6886216041744260826, guid: bfd5a2e5366e4c346977273114dfe94a,
+        type: 3}
     - target: {fileID: 5363365468861744534, guid: 6d2ea012a6b8c3543b8d71c7919d55d0,
         type: 3}
       propertyPath: m_Name

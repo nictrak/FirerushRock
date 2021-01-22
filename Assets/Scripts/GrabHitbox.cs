@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class GrabHitbox : MonoBehaviour
 {
+    [SerializeField]
     private List<Grabbable> grabbables;
 
     public List<Grabbable> Grabbables { get => grabbables; set => grabbables = value; }
@@ -25,6 +26,8 @@ public class GrabHitbox : MonoBehaviour
         Grabbable grabbable = collision.gameObject.GetComponent<Grabbable>();
         if (grabbable != null)
         {
+            string a = collision.ToString();
+            string b = gameObject.ToString();
             grabbables.Add(grabbable);
         }
     }
@@ -33,6 +36,8 @@ public class GrabHitbox : MonoBehaviour
         Grabbable grabbable = collision.gameObject.GetComponent<Grabbable>();
         if (grabbable != null)
         {
+            string a = collision.ToString();
+            string b = gameObject.ToString();
             grabbables.Remove(grabbable);
         }
     }

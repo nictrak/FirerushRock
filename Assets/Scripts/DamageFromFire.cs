@@ -23,7 +23,7 @@ public class DamageFromFire : NetworkBehaviour
 
     protected void DamageSetup()
     {
-        fire1Damage = 1;
+        fire1Damage = 0;
         fire2Damage = 2;
         fire3Damage = 3;
         life = GetComponent<Life>();

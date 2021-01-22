@@ -35,7 +35,7 @@ public class FireSystem : MonoBehaviour
     private NDArray wall_array_clip;
     private bool isMusicHigh;
     public PlaySceneAudio PlaySceneAudio;
-
+    private bool isPassDay;
     // Start is called before the first frame update
 
 
@@ -46,6 +46,7 @@ public class FireSystem : MonoBehaviour
         framerate_counter = 0;
         isRun = false;
         isMusicHigh = false;
+        isPassDay = false;
     }
 
     public void startF(NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray, int height, int width)
@@ -227,8 +228,7 @@ public class FireSystem : MonoBehaviour
                 if (fire_2_array.Equals(zero_array))
                 {
                     //TODO Fix this to multiplayer
-                    GameConfig.Day++;
-                    GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
+                    PassDay();
                 }
 
                 Debug.Log((float)(double)fire_3_array.sum()/ fire_3_size);
@@ -250,13 +250,20 @@ public class FireSystem : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.F2))
             {
-                GameConfig.Day++;
-                GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
+                PassDay();
             }
             framerate_counter += 1;
         }
     }
-
+    private void PassDay()
+    {
+        if (!isPassDay)
+        {
+            GameConfig.Day++;
+            GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
+            isPassDay = true;
+        }
+    }
     // Update is called once per frame
     void Update()
     {

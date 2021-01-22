@@ -32,7 +32,6 @@ public class PlayerGrab : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            SelectGrab();
             GrabControl();
         }
     }
@@ -54,7 +53,7 @@ public class PlayerGrab : NetworkBehaviour
         {
             usedGrab = LeftGrab;
         }
-        else if (direction == "rigth")
+        else if (direction == "right")
         {
             usedGrab = RightGrab;
         }
@@ -69,6 +68,8 @@ public class PlayerGrab : NetworkBehaviour
     }
     public bool Grab(Grabbable grabed)
     {
+        Debug.Log("Grab");
+        Debug.Log(grabed);
         if (grabed != null && grabedObject == null)
         {
             if (grabed.IsGrabbable)
@@ -84,16 +85,16 @@ public class PlayerGrab : NetworkBehaviour
     [Command]
     private void CmdGrab(NetworkIdentity grabberIdentity, NetworkIdentity grabedIdentity)
     {
-        PlayerGrab playerGrab = grabberIdentity.GetComponent<PlayerGrab>();
-        Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
-        Breakable breakable = grabedIdentity.GetComponent<Breakable>();
-        Debug.Log(grabed);
-        grabed.Grabed(playerGrab.netIdentity);
-        if(breakable != null)
+        if(grabberIdentity != null && grabedIdentity != null)
         {
-            breakable.IsEnable = false;
+            Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
+            Breakable breakable = grabedIdentity.GetComponent<Breakable>();
+            if (grabed != null) grabed.Grabed(grabberIdentity);
+            if (breakable != null)
+            {
+                breakable.IsEnable = false;
+            }
         }
-
     }
     private void Release()
     {
@@ -128,12 +129,15 @@ public class PlayerGrab : NetworkBehaviour
     [Command]
     private void CmdRelease(NetworkIdentity grabedIdentity, bool newIsTrigger, Vector3 releasedVector)
     {
-        Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
-        Breakable breakable = grabedIdentity.GetComponent<Breakable>();
-        grabed.Released(newIsTrigger, releasedVector);
-        if (breakable != null)
+        if(grabedIdentity != null && releasedVector != null)
         {
-            breakable.IsEnable = false;
+            Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
+            Breakable breakable = grabedIdentity.GetComponent<Breakable>();
+            if (grabed != null) grabed.Released(newIsTrigger, releasedVector);
+            if (breakable != null)
+            {
+                breakable.IsEnable = true;
+            }
         }
     }
     private void Throw()
@@ -151,8 +155,20 @@ public class PlayerGrab : NetworkBehaviour
     [Command]
     private void CmdThrow(NetworkIdentity throwerIdentity, NetworkIdentity throwedIdentity, string direction, float throwSpeed)
     {
-        Throwable throwed = throwedIdentity.GetComponent<Throwable>();
-        throwed.Throwed(throwerIdentity, direction, throwSpeed);
+        if(throwerIdentity != null && throwedIdentity != null)
+        {
+            Throwable throwed = throwedIdentity.GetComponent<Throwable>();
+            throwed.Throwed(throwerIdentity, direction, throwSpeed);
+        }
+    }
+    [Command]
+    private void CmdUnthrow(NetworkIdentity throwedIdentity)
+    {
+        if (throwedIdentity != null)
+        {
+            Throwable throwed = throwedIdentity.GetComponent<Throwable>();
+            throwed.Unthrowed();
+        }
     }
     private void GrabControl()
     {
@@ -160,6 +176,8 @@ public class PlayerGrab : NetworkBehaviour
         {
             if (grabedObject == null)
             {
+                Debug.Log(playerDirection.Direction);
+                SelectGrab();
                 Grabbable grabed = usedGrab.CalNearest();
                 Grab(grabed);
             }
@@ -173,6 +191,22 @@ public class PlayerGrab : NetworkBehaviour
             if (grabedObject != null)
             {
                 Throw();
+            }
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isLocalPlayer)
+        {
+            Grabbable incomingGrabbable = collision.gameObject.GetComponent<Grabbable>();
+            Throwable incomingThrowable = collision.gameObject.GetComponent<Throwable>();
+            if (incomingGrabbable != null && incomingThrowable != null)
+            {
+                if (incomingThrowable.IsThrowed && incomingThrowable.Thrower != netIdentity)
+                {
+                    CmdUnthrow(incomingThrowable.netIdentity);
+                    Grab(incomingGrabbable);
+                }
             }
         }
     }

@@ -18,6 +18,7 @@ public class Throwable : NetworkBehaviour
     public bool IsThrowed { get => isThrowed; set => isThrowed = value; }
     public Vector2 ThrowVector { get => throwVector; set => throwVector = value; }
     public bool IsBreakActive { get => isBreakActive; set => isBreakActive = value; }
+    public NetworkIdentity Thrower { get => thrower; set => thrower = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -36,11 +37,12 @@ public class Throwable : NetworkBehaviour
     {
         ThrowedMove();
     }
-    [ClientRpc]
-    private void RpcGrap(PlayerGrab playerGrab)
+    /*[ClientRpc]
+    private void RpcGrap(NetworkIdentity playerGrabIdentity)
     {
-        playerGrab.Grab(this.GetComponent<Grabbable>());
-    }
+        if(playerGrabIdentity.isLocalPlayer)
+        playerGrabIdentity.GetComponent<PlayerGrab>().Grab(this.GetComponent<Grabbable>());
+    }*/
 
     [ServerCallback]
     private void OnTriggerEnter2D(Collider2D collision)
@@ -57,15 +59,15 @@ public class Throwable : NetworkBehaviour
                 breakable.IsEnable = true;
             }
         }
-        if (playerGrab != null && isThrowed)
+        /*if (playerGrab != null && isThrowed)
         {
             if (playerGrab.netIdentity != thrower && playerGrab.GrabedObject == null)
             {
-                RpcGrap(playerGrab);
+                RpcGrap(playerGrab.netIdentity);
                 isThrowed = false;
                 throwVector = new Vector2();
             }
-        }
+        }*/
         /*if (breakThrow != null && throwVector.magnitude > 0.00001)
         {
             isThrowed = false;
@@ -94,7 +96,7 @@ public class Throwable : NetworkBehaviour
             isBreakActive = false;
         }
     }
-    [ClientCallback]
+    
     private void ThrowedMove()
     {
         if (isThrowed)
@@ -102,6 +104,7 @@ public class Throwable : NetworkBehaviour
             rigidbody.position += throwVector;
         }
     }
+    [ClientRpc]
     public void Throwed(NetworkIdentity throwerIdentity, string direction, float throwSpeed)
     {
         Vector2 throwVector;
@@ -124,5 +127,12 @@ public class Throwable : NetworkBehaviour
             throwVector = new Vector2(0, -throwSpeed);
         }
         this.throwVector = throwVector;
+    }
+    [ClientRpc]
+    public void Unthrowed()
+    {
+        isThrowed = false;
+        thrower = null;
+        throwVector = new Vector2();
     }
 }
