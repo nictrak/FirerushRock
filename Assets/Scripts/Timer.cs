@@ -8,12 +8,14 @@ public class Timer : MonoBehaviour
     private float timeleft;
     public TimerText TimerText;
     private int timeInt;
+    public PlaySceneAudio playSceneAudio;
+    public LoseCanvas LoseCanvas;
     void Start()
     {
         timeleft = timeLimit;
         timeInt = 0;
         Debug.Log(Time.fixedDeltaTime);
-        Time.fixedDeltaTime = Time.fixedDeltaTime*2;
+        //Time.fixedDeltaTime = Time.fixedDeltaTime*2;
         Debug.Log(Time.fixedDeltaTime);
     }
 
@@ -24,20 +26,30 @@ public class Timer : MonoBehaviour
 
         if (timeleft <= 0)
         {
-            Debug.Log("Time out" + timeleft);
+            TimeOver();
         }
         else
         {
             timeleft -= Time.deltaTime;
         }
 
-        if((int)timeleft != timeInt)
+        sentTimeToTimerText();
+
+
+    }
+
+    void sentTimeToTimerText()
+    {
+        if ((int)timeleft != timeInt)
         {
             timeInt = (int)timeleft;
             TimerText.ChangeText(timeInt);
-            Debug.Log(timeInt);
         }
+    }
 
-
+    void TimeOver()
+    {
+        playSceneAudio.StopMusic();
+        LoseCanvas.Lose();
     }
 }
