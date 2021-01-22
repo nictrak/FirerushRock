@@ -20,6 +20,7 @@ public class WinScoreText : MonoBehaviour
 
     public void updateWinScore(int oldScore,int TimeScore, int CatRes, int CatDied, int Score)
     {
+        text = GetComponent<Text>();
         text.text = "" + oldScore + "\n" + TimeScore + "\n" + CatRes + "\n" + CatDied + "\n" + Score;
     }
 }

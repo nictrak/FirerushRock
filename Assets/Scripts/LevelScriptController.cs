@@ -18,6 +18,7 @@ public class LevelScriptController : NetworkBehaviour
     private Score Score;
     public WinScoreText WinScoreText;
     public WinCanvas WinCanvas;
+    public Timer Timer;
     
     void Start()
     {
@@ -76,6 +77,7 @@ public class LevelScriptController : NetworkBehaviour
         /*
         Debug.Log("Start Grid System");
         */
+        Timer.setWorking(true);
         
     }
     public void ToLobby()
@@ -85,6 +87,7 @@ public class LevelScriptController : NetworkBehaviour
 
     public void MissionComplete()
     {
+        Timer.setWorking(false);
         FireSystem.setRun(false);
         Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
         Score.CalculateScore();

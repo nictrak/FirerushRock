@@ -36,6 +36,7 @@ public class FireSystem : MonoBehaviour
     private bool isMusicHigh;
     public PlaySceneAudio PlaySceneAudio;
     private bool isPassDay;
+    public LevelScriptController levelScriptController;
     // Start is called before the first frame update
 
 
@@ -259,8 +260,9 @@ public class FireSystem : MonoBehaviour
     {
         if (!isPassDay)
         {
-            GameConfig.Day++;
-            GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
+            //GameConfig.Day++;
+            //GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
+            levelScriptController.MissionComplete();
             isPassDay = true;
         }
     }

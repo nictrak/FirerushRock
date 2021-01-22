@@ -19,7 +19,7 @@ public class LoseCanvas : MonoBehaviour
 
     public void Lose()
     {
-        ScoreText.updateScore();
         gameObject.SetActive(true);
+        ScoreText.updateScore();
     }  
 }

@@ -27809,9 +27809,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749fa2eaa105efe48bcb7aebc30646b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeScorePerSecond: 0
-  CatRecuedScore: 0
-  CatDiedMinusScore: 0
+  TimeScorePerSecond: 100
+  CatRecuedScore: 5000
+  CatDiedMinusScore: 2000
   Timer: {fileID: 0}
 --- !u!4 &1904481053
 Transform:

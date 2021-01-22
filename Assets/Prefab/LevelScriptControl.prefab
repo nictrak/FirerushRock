@@ -20,6 +20,8 @@ MonoBehaviour:
   FireSystem: {fileID: 2248634465929424658}
   GridSystem: {fileID: 2921306325108692093}
   SetupSystem: {fileID: 0}
+  WinScoreText: {fileID: 0}
+  WinCanvas: {fileID: 0}
 --- !u!114 &8132825424635200398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +262,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 56602694301073486, guid: c5b3318304bc3fb4cbc422bff66c1aac,
+        type: 3}
+      propertyPath: levelScriptController
+      value: 
+      objectReference: {fileID: 3320242539675953439}
     - target: {fileID: 56602694301073487, guid: c5b3318304bc3fb4cbc422bff66c1aac,
         type: 3}
       propertyPath: m_Name

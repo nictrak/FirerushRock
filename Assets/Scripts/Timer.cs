@@ -10,32 +10,36 @@ public class Timer : MonoBehaviour
     private int timeInt;
     public PlaySceneAudio playSceneAudio;
     public LoseCanvas LoseCanvas;
+    private bool isWorking;
     void Start()
     {
+        isWorking = false;
         timeleft = timeLimit;
         timeInt = 0;
         Debug.Log(Time.fixedDeltaTime);
         //Time.fixedDeltaTime = Time.fixedDeltaTime*2;
         Debug.Log(Time.fixedDeltaTime);
+        
+    }
+
+    public void setWorking(bool w)
+    {
+        isWorking = w;
     }
 
     void FixedUpdate()
     {
-
-
-
-        if (timeleft <= 0)
-        {
-            TimeOver();
+        if (isWorking) { 
+            if (timeleft <= 0)
+            {
+                TimeOver();
+            }
+            else
+            {
+                timeleft -= Time.deltaTime;
+            }
+            sentTimeToTimerText();
         }
-        else
-        {
-            timeleft -= Time.deltaTime;
-        }
-
-        sentTimeToTimerText();
-
-
     }
 
     void sentTimeToTimerText()
@@ -53,6 +57,7 @@ public class Timer : MonoBehaviour
         playSceneAudio.StopMusic();
         LoseCanvas.Lose();
         GameConfig.Day = 1;
+        isWorking = false;
     }
 
     public int getTimeLeft()

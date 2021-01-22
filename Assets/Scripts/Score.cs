@@ -17,11 +17,13 @@ public class Score : MonoBehaviour
     public int CatRecuedScore;
     public int CatDiedMinusScore;
 
-    public Timer Timer;
+    private Timer Timer;
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         score = 500;
+        catRecued = 1;
+        catDied = 1;
     }
 
     // Update is called once per frame
@@ -48,6 +50,7 @@ public class Score : MonoBehaviour
     public void CalculateScore()
     {
         oldScore = score;
+        Timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
         scoreTime = Timer.getTimeLeft() * TimeScorePerSecond;
         scoreCatRescued = catRecued * CatRecuedScore;
         scoreCatDied = catDied * (- CatDiedMinusScore);
@@ -76,5 +79,9 @@ public class Score : MonoBehaviour
     public int getScoreCatDied()
     {
         return scoreCatDied;
+    }
+    public void ResetScore()
+    {
+        score = 0;
     }
 }
