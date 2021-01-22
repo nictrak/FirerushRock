@@ -334,7 +334,7 @@ MonoBehaviour:
   Angle: 60
   Range: 0
   UseRate: 1
-  MaxLoad: 200
+  MaxLoad: 300
   Bar: {fileID: 1225341857787436220}
 --- !u!114 &-2698059487946537292
 MonoBehaviour:

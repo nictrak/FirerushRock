@@ -231,10 +231,10 @@ public class FireSystem : MonoBehaviour
                     PassDay();
                 }
 
-                Debug.Log((float)(double)fire_3_array.sum()/ fire_3_size);
+                //Debug.Log((float)(double)fire_3_array.sum()/ fire_3_size);
                 if (isMusicHigh == false)
                 {
-                    if((float)(double)fire_3_array.sum() / fire_3_size >=  50)
+                    if((float)(double)fire_3_array.sum() / fire_3_size >=  100)
                     {
                         Debug.Log("ChangeMusic");
                         PlaySceneAudio.ChangeMusicToHigh();

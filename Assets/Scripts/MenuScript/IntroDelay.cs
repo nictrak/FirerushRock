@@ -14,7 +14,7 @@ public class IntroDelay : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(count >= Countdown)
         {

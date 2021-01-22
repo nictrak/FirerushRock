@@ -1107,7 +1107,7 @@ public class PCG : MonoBehaviour
             // Bedroom
             FurniturePreset doubleBed          = new FurniturePreset(1, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (2, 2));
             FurniturePreset singleBed          = new FurniturePreset(2, PLACE_WALL, WALL_LEFT | WALL_RIGHT | WALL_UP, ORIENT_WALL_0, (1, 2));
-            FurniturePreset closet             = new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 2));
+            FurniturePreset closet             = new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (2, 1));
             FurniturePreset bookshelf          = new FurniturePreset(4, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1));
             FurniturePreset smallChairAndTable = new FurniturePreset(5, PLACE_FLOOR, 0, ORIENT_ANY, (1, 2));
 
@@ -1186,12 +1186,12 @@ public class PCG : MonoBehaviour
         }
         {
             // Livingroom
-            FurniturePreset quadChairAndBigTable         = new FurniturePreset(1, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (4, 2));
+            FurniturePreset quadChairAndBigTable         = new FurniturePreset(1, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (2, 4));
             FurniturePreset bookshelf                    = new FurniturePreset(2, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1));
             FurniturePreset plantPot                     = new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1));
             FurniturePreset smallSofa                    = new FurniturePreset(4, PLACE_ANY, WALL_ANY, ORIENT_ANY, (1, 1));
             FurniturePreset bigSofa                      = new FurniturePreset(5, PLACE_ANY, WALL_ANY, ORIENT_ANY, (1, 2));
-            FurniturePreset mixedSofaAndTable            = new FurniturePreset(6, PLACE_ANY, WALL_ANY, ORIENT_ANY, (2, 4));
+            FurniturePreset mixedSofaAndTable            = new FurniturePreset(6, PLACE_ANY, WALL_ANY, ORIENT_ANY, (4, 2));
             FurniturePreset doubleChairAndSmallTable     = new FurniturePreset(7, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3));
             FurniturePreset doubleSmallSofaAndRoundChair = new FurniturePreset(8, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (1, 3));
             FurniturePreset drawer                       = new FurniturePreset(9, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 1));
@@ -1247,7 +1247,7 @@ public class PCG : MonoBehaviour
 
             /*List<(FurniturePreset, int, int)> viableFurniture = new List<(FurniturePreset, int, int)>();
             //viableFurniture.Add((new FurniturePreset(1, PLACE_WALL, WALL_ANY, ORIENT_WALL_0, (1, 3)), 1, -1));
-            viableFurniture.Add((new FurniturePreset(1, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (4, 2)), 1, 1));
+            viableFurniture.Add((new FurniturePreset(1, PLACE_ANY, WALL_ANY, ORIENT_FLOOR_LEFT | ORIENT_FLOOR_UP, (2, 4)), 1, 1));
             viableFurniture.Add((new FurniturePreset(2, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, -1));
             viableFurniture.Add((new FurniturePreset(3, PLACE_WALL, WALL_UP, ORIENT_WALL_0, (1, 1)), 0, -1));
             viableFurniture.Add((new FurniturePreset(4, PLACE_ANY, WALL_ANY, ORIENT_ANY, (1, 1)), 0, -1));
