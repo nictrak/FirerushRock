@@ -134,5 +134,6 @@ public class Throwable : NetworkBehaviour
         isThrowed = false;
         thrower = null;
         throwVector = new Vector2();
+        isBreakActive = false;
     }
 }

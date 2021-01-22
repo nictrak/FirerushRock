@@ -199,6 +199,7 @@ public class FireSystem : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!isRun) zero_array = np.zeros(gridsize);
         if (isRun)
         {
             if (framerate_counter >= fire_spread_counter)
@@ -224,7 +225,6 @@ public class FireSystem : MonoBehaviour
                     Debug.Log("noooooo");
                 }
                 */
-
                 if (fire_2_array.Equals(zero_array))
                 {
                     //TODO Fix this to multiplayer
