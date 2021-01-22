@@ -90,6 +90,7 @@ public class LevelScriptController : NetworkBehaviour
         Score.CalculateScore();
         WinScoreText.updateWinScore(Score.getOldScore(), Score.getScoreTime(), Score.getScoreCatRescued(), Score.getScoreCatDied(), Score.getScore());
         WinCanvas.Win();
+        GameConfig.Day++;
     }
 
 }
