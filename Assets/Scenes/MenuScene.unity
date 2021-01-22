@@ -275,6 +275,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63203905}
   m_CullTransparentMesh: 0
+--- !u!114 &77718810 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4470782394695396292, guid: 6d2ea012a6b8c3543b8d71c7919d55d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 2022807702}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a9b75608dbf6e147928c318b47d7972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &130431907
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,7 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   address: {fileID: 364229324}
-  manager: {fileID: 1966813173}
+  manager: {fileID: 77718810}
 --- !u!1 &296837515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3886,7 +3898,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 27.599976, y: 11.399994}
+  m_AnchoredPosition: {x: 27.599976, y: 11.400024}
   m_SizeDelta: {x: 566.5281, y: 448.87158}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1698155826
@@ -4910,18 +4922,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954483981}
   m_CullTransparentMesh: 0
---- !u!114 &1966813173 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5363365468861744533, guid: 6d2ea012a6b8c3543b8d71c7919d55d0,
-    type: 3}
-  m_PrefabInstance: {fileID: 2022807702}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1992618541
 GameObject:
   m_ObjectHideFlags: 0
@@ -5031,6 +5031,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4470782394695396292, guid: 6d2ea012a6b8c3543b8d71c7919d55d0,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.size
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470782394695396292, guid: 6d2ea012a6b8c3543b8d71c7919d55d0,
+        type: 3}
+      propertyPath: spawnPrefabs.Array.data[68]
+      value: 
+      objectReference: {fileID: 4876791363610225998, guid: bbebd534910b0454ca667fd9bc598986,
+        type: 3}
     - target: {fileID: 5363365468861744533, guid: 6d2ea012a6b8c3543b8d71c7919d55d0,
         type: 3}
       propertyPath: spawnPrefabs.Array.size
