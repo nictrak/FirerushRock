@@ -413,7 +413,7 @@ PrefabInstance:
     - target: {fileID: 2248634465929424658, guid: a012089402961b84e81aca86a27da92e,
         type: 3}
       propertyPath: fire_spread_counter
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2921306325108692093, guid: a012089402961b84e81aca86a27da92e,
         type: 3}

@@ -21,9 +21,10 @@ public class Score : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        score = 500;
-        catRecued = 1;
-        catDied = 1;
+        Day = 1;
+        score = 0;
+        catRecued = 0;
+        catDied = 0;
     }
 
     // Update is called once per frame
@@ -31,11 +32,6 @@ public class Score : MonoBehaviour
     {
         
     }
-
-    public void startf()
-    {
-        
-    } 
 
     public int getDay()
     {
@@ -45,6 +41,11 @@ public class Score : MonoBehaviour
     public void setDay(int d)
     {
         Day = d;
+    }
+
+    public void addDay(int d = 1)
+    {
+        Day = Day + d;
     }
 
     public void CalculateScore()

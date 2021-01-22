@@ -14,6 +14,7 @@ public class LevelScriptController : NetworkBehaviour
     public GridSystem GridSystem;
     public SetupSystem SetupSystem;
     public static int Cat;
+    private int Day;
 
     private Score Score;
     public WinScoreText WinScoreText;
@@ -39,7 +40,8 @@ public class LevelScriptController : NetworkBehaviour
     {
         Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
         Score.ResetCat();
-        ParameterGenerator.SetDay(GameConfig.Day);
+        this.Day = Score.getDay();
+        ParameterGenerator.SetDay(Day);
         (int h, int w) = ParameterGenerator.GenHouseLength();
         Debug.Log("h =" + h + " w =" + w);
         //int valveCount = 5; // NEED PARAMETER
@@ -101,7 +103,7 @@ public class LevelScriptController : NetworkBehaviour
         Score.CalculateScore();
         WinScoreText.updateWinScore(Score.getOldScore(), Score.getScoreTime(), Score.getScoreCatRescued(), Score.getScoreCatDied(), Score.getScore());
         WinCanvas.Win();
-        GameConfig.Day++;
+        Score.addDay();
     }
 
     public void MissionFailed()
@@ -113,7 +115,7 @@ public class LevelScriptController : NetworkBehaviour
         LoseScoreText.updateScore(Score.getScore());
         LoseCanvas.Lose();
         Score.ResetScore();
-        GameConfig.Day = 1;
+        Score.setDay(1);
     }
 
 }

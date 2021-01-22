@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameConfig : MonoBehaviour
 {
     public static AudioClip Music;
-    public static int Day;
     public static int ContinueDay;
     public static GameObject BangObject;
     public GameObject BangPrefab;
@@ -15,10 +14,7 @@ public class GameConfig : MonoBehaviour
     void Start()
     {
         BangObject = BangPrefab;
-        if (Day == 0)
-        {
-            Day = 1;
-        }
+        
         if (MusicVolume == 0)
         {
             MusicVolume = 1;

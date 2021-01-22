@@ -245,13 +245,16 @@ public class FireSystem : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.F1))
             {
-                GameConfig.Day = 1;
                 NetworkManager manager = GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>();
                 manager.StopHost();
             }
             if (Input.GetKeyDown(KeyCode.F2))
             {
                 PassDay();
+            }
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                levelScriptController.MissionFailed();
             }
             framerate_counter += 1;
         }
