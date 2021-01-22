@@ -49,7 +49,14 @@ public class Timer : MonoBehaviour
 
     void TimeOver()
     {
+        FireSystem.setRun(false);
         playSceneAudio.StopMusic();
         LoseCanvas.Lose();
+        GameConfig.Day = 1;
+    }
+
+    public int getTimeLeft()
+    {
+        return timeInt;
     }
 }

@@ -14,6 +14,11 @@ public class LevelScriptController : NetworkBehaviour
     public GridSystem GridSystem;
     public SetupSystem SetupSystem;
     public static int Cat;
+
+    private Score Score;
+    public WinScoreText WinScoreText;
+    public WinCanvas WinCanvas;
+    
     void Start()
     {
         startScript();
@@ -27,6 +32,7 @@ public class LevelScriptController : NetworkBehaviour
     [ServerCallback]
     public void startScript()
     {
+        Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
         ParameterGenerator.SetDay(GameConfig.Day);
         (int h, int w) = ParameterGenerator.GenHouseLength();
         Debug.Log("h =" + h + " w =" + w);
@@ -71,6 +77,19 @@ public class LevelScriptController : NetworkBehaviour
         Debug.Log("Start Grid System");
         */
         
+    }
+    public void ToLobby()
+    {
+        GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
+    }
+
+    public void MissionComplete()
+    {
+        FireSystem.setRun(false);
+        Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
+        Score.CalculateScore();
+        WinScoreText.updateWinScore(Score.getOldScore(), Score.getScoreTime(), Score.getScoreCatRescued(), Score.getScoreCatDied(), Score.getScore());
+        WinCanvas.Win();
     }
 
 }

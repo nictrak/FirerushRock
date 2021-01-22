@@ -10,7 +10,10 @@ public class ScoreText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
+        //Debug.Log(Score.getScore());
         text = GetComponent<Text>();
+        this.text.text = "" + Score.getScore();
     }
 
     // Update is called once per frame
@@ -21,8 +24,8 @@ public class ScoreText : MonoBehaviour
     public void updateScore()
     {
         Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
-        Debug.Log(Score.getScore());
+        //Debug.Log(Score.getScore());
         text = GetComponent<Text>();
-        this.text.text = "Score : " + Score.getScore();
+        this.text.text = "" + Score.getScore();
     }
 }
