@@ -231,7 +231,7 @@ public class FireSystem : MonoBehaviour
                     //SceneManager.LoadScene("MenuScene");
                 }
 
-                Debug.Log((float)(double)fire_3_array.sum()/ fire_3_size);
+                //Debug.Log((float)(double)fire_3_array.sum()/ fire_3_size);
                 if (isMusicHigh == false)
                 {
                     if((float)(double)fire_3_array.sum() / fire_3_size >=  100)

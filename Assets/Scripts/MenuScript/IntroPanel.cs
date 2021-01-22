@@ -34,7 +34,7 @@ public class IntroPanel : MonoBehaviour
         if (Phase == 2)
         {
             img.color = new Color(1, 1, 1, img.color[3] - FadeRate);
-            Debug.Log(img.color[3]);
+            
             if (img.color[3] <= 0)
             {
                 Destroy(this.gameObject);
