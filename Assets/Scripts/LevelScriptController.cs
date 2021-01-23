@@ -93,6 +93,11 @@ public class LevelScriptController : NetworkBehaviour
     }
     public void ToLobby()
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerGrab>().ForceRelease();
+        }
         GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
     }
 

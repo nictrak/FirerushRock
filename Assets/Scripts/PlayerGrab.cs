@@ -36,8 +36,6 @@ public class PlayerGrab : NetworkBehaviour
         }
     }
 
-    
-
     public void UseObject()
     {
         if (Input.GetKey(KeyCode.Space))
@@ -106,11 +104,11 @@ public class PlayerGrab : NetworkBehaviour
         }
     }
     [ClientRpc]
-    public void RpcRelease()
+    public void ForceRelease()
     {
         if (grabedObject != null)
         {
-            CmdRelease(grabedObject.netIdentity, false, new Vector3());
+            Destroy(grabedObject.gameObject);
             grabedObject = null;
         }
     }
