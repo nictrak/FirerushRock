@@ -364,7 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  moveVelocityHorizontal: 0.14
+  moveVelocityHorizontal: 0.16
   moveVelocityVertical: 0.2
   isEnable: 1
 --- !u!114 &3687502987216642908
@@ -412,7 +412,7 @@ MonoBehaviour:
   RightGrab: {fileID: 3687502987216642683}
   UpGrab: {fileID: 3687502987216642757}
   DownGrab: {fileID: 3687502987216642632}
-  ThrowSpeed: 0.25
+  ThrowSpeed: 0.3
   GrabScale: 0.5
   ReleaseLenght: 1
 --- !u!114 &3687502987216643502
