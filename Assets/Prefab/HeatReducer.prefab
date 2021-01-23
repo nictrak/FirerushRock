@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  ReduceRate: 5
+  ReduceRate: 3
 --- !u!212 &1790308967355296923
 SpriteRenderer:
   m_ObjectHideFlags: 0

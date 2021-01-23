@@ -54,7 +54,10 @@ MonoBehaviour:
   BaseSurvivor: 0
   DayAddSurvivor: 4
   BaseValve: 1
-  DayAddValve: 6
+  DayAddValve: 3
   BaseHouseLength: 26
   DayAddHouseLength: 2
-  HouseLengthMultiplier: 4
+  HouseLengthMultiplier: 5
+  BaseTime: 95
+  DayAddTime: 2
+  TimeMultiplier: 15
