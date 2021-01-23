@@ -436,7 +436,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   DelaySpawnTime: 100
-  moveVelocityHorizontal: 0.14
+  moveVelocityHorizontal: 0.16
   moveVelocityVertical: 0.2
   isEnable: 1
 --- !u!114 &1032012647148047043
@@ -484,7 +484,7 @@ MonoBehaviour:
   RightGrab: {fileID: 5434592624633243908}
   UpGrab: {fileID: 3193972205714213329}
   DownGrab: {fileID: 5783288257278830955}
-  ThrowSpeed: 0.25
+  ThrowSpeed: 0.3
   GrabScale: 0.5
   ReleaseLenght: 1
 --- !u!114 &6311018888251244398

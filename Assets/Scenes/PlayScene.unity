@@ -397,11 +397,6 @@ PrefabInstance:
       propertyPath: PlaySceneAudio
       value: 
       objectReference: {fileID: 1372729197}
-    - target: {fileID: 2248634465929424658, guid: a012089402961b84e81aca86a27da92e,
-        type: 3}
-      propertyPath: fire_spread_counter
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 2921306325108692093, guid: a012089402961b84e81aca86a27da92e,
         type: 3}
       propertyPath: FurnitureCatalog
@@ -447,21 +442,6 @@ PrefabInstance:
       propertyPath: UIScoreText
       value: 
       objectReference: {fileID: 547194352}
-    - target: {fileID: 4190582191641841294, guid: a012089402961b84e81aca86a27da92e,
-        type: 3}
-      propertyPath: BaseTime
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4190582191641841294, guid: a012089402961b84e81aca86a27da92e,
-        type: 3}
-      propertyPath: TimeMultiplier
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4190582191641841294, guid: a012089402961b84e81aca86a27da92e,
-        type: 3}
-      propertyPath: DayAddTime
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4402438854443097613, guid: a012089402961b84e81aca86a27da92e,
         type: 3}
       propertyPath: sceneId
@@ -2561,7 +2541,8 @@ MonoBehaviour:
 
     Cat Rescued :
 
-    Cat go Isekai :
+    Cat go Isekai
+    :
 
     New Score :'
 --- !u!222 &1812646713
