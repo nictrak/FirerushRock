@@ -32,6 +32,11 @@ public class Survivor : NetworkBehaviour
     {
 
     }
+    [ClientRpc]
+    private void RpcPlaySfx()
+    {
+        sfx.Play();
+    }
     [ServerCallback]
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -39,7 +44,7 @@ public class Survivor : NetworkBehaviour
         {
             if (!isRescued)
             {
-                sfx.Play();
+                RpcPlaySfx();
                 Score.AddCatRecued();
                 //add cat count?
             }
@@ -61,7 +66,12 @@ public class Survivor : NetworkBehaviour
     [ServerCallback]
     private void OnDestroy()
     {
-        Score.AddCatDied();
+        GameObject obj = GameObject.FindGameObjectWithTag("Score");
+        if(obj != null)
+        {
+            Score = obj.GetComponent<Score>();
+            Score.AddCatDied();
+        }
     }
 }
 

@@ -15,6 +15,7 @@ public class LevelScriptController : NetworkBehaviour
     public SetupSystem SetupSystem;
     public static int Cat;
     private int Day;
+    private GameObject[] players;
 
     private Score Score;
     public WinScoreText WinScoreText;
@@ -115,5 +116,4 @@ public class LevelScriptController : NetworkBehaviour
         Score.ResetScore();
         Score.setDay(1);
     }
-
 }

@@ -105,6 +105,15 @@ public class PlayerGrab : NetworkBehaviour
             grabedObject = null;
         }
     }
+    [ClientRpc]
+    public void RpcRelease()
+    {
+        if (grabedObject != null)
+        {
+            CmdRelease(grabedObject.netIdentity, false, new Vector3());
+            grabedObject = null;
+        }
+    }
     private Vector3 CalReleasedVector()
     {
         Vector3 releasedVector = new Vector3();

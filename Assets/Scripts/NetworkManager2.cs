@@ -93,4 +93,14 @@ public class NetworkManager2 : NetworkManager
         else obj = PlayerPrefab1;
         return obj;
     }
+    public override void OnStopHost()
+    {
+        base.OnStopHost();
+        Destroy(GameObject.FindGameObjectWithTag("Score"));
+    }
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        Destroy(GameObject.FindGameObjectWithTag("Score"));
+    }
 }

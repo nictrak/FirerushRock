@@ -24,7 +24,7 @@ public class Score : NetworkBehaviour
     public int TimeScorePerSecond;
     public int CatRecuedScore;
     public int CatDiedMinusScore;
-
+    public static GameObject Singleton;
     private Timer Timer;
     void Start()
     {
@@ -38,7 +38,8 @@ public class Score : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Score.Singleton == null) Score.Singleton = gameObject;
+        else if (Score.Singleton != gameObject) Destroy(gameObject);
     }
 
     public int getDay()

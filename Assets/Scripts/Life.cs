@@ -47,10 +47,15 @@ public class Life : NetworkBehaviour
         if(lifePoint <= 0)
         {
             if (!IsPlayer) Destroy(gameObject);
-            else GetComponent<Firefighter>().ToSpawnPoint();
+            else RpcToSpawnPoint(netIdentity);
         }
         isRegen = false;
         regenCounter = 0;
+    }
+    [ClientRpc]
+    private void RpcToSpawnPoint(NetworkIdentity identity)
+    {
+        identity.GetComponent<Firefighter>().ToSpawnPoint();
     }
     [ServerCallback]
     private void SyncLifeBar()
