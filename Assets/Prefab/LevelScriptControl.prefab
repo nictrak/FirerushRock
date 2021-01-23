@@ -22,6 +22,11 @@ MonoBehaviour:
   SetupSystem: {fileID: 0}
   WinScoreText: {fileID: 0}
   WinCanvas: {fileID: 0}
+  Timer: {fileID: 0}
+  playSceneAudio: {fileID: 0}
+  LoseCanvas: {fileID: 0}
+  LoseScoreText: {fileID: 0}
+  UIScoreText: {fileID: 0}
 --- !u!114 &8132825424635200398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  serverOnly: 0
+  serverOnly: 1
   m_AssetId: 
   hasSpawned: 0
 --- !u!1001 &25590738075069831

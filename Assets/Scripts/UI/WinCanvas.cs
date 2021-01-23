@@ -1,23 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class WinCanvas : MonoBehaviour
+using Mirror;
+public class WinCanvas : NetworkBehaviour
 {
+    public GameObject Canvas;
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        Canvas.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
+    }
+    [ClientRpc]
     public void Win()
     {
-        gameObject.SetActive(true);
+        Canvas.SetActive(true);
     }
 }

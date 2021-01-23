@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Survivor : MonoBehaviour
+using Mirror;
+public class Survivor : NetworkBehaviour
 {
     [SerializeField]
     private bool isRescued;
@@ -19,9 +19,13 @@ public class Survivor : MonoBehaviour
         isRescued = false;
         grabbable = GetComponent<Grabbable>();
         sfx = GetComponent<AudioSource>();
+        SetupScore();
+    }
+    [ServerCallback]
+    private void SetupScore()
+    {
         Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -52,7 +56,7 @@ public class Survivor : MonoBehaviour
             grabbable.IsGrabbable = true;
         }
     }
-
+    [ServerCallback]
     private void OnDestroy()
     {
         Score.AddCatDied();

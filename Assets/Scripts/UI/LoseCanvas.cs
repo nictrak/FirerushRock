@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class LoseCanvas : MonoBehaviour
+using Mirror;
+public class LoseCanvas : NetworkBehaviour
 {
+    public GameObject Canvas;
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        Canvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -15,9 +16,9 @@ public class LoseCanvas : MonoBehaviour
     {
         
     }
-
+    [ClientRpc]
     public void Lose()
     {
-        gameObject.SetActive(true);
+        Canvas.SetActive(true);
     }  
 }

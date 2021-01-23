@@ -5194,7 +5194,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307524756}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 798d8776047b3ba47bf47faf3ba00e36, type: 3}
   m_Name: 
@@ -21521,7 +21521,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: RecueArea
       objectReference: {fileID: 0}
-    m_RemovedComponents: [{fileID: 0}]
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 7a4047f82604cad49b8f7dee34dbf213, type: 3}
 --- !u!4 &1382562561 stripped
 Transform:
@@ -27803,6 +27804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1904481053}
   - component: {fileID: 1904481052}
+  - component: {fileID: 1904481054}
   m_Layer: 0
   m_Name: ScoreSystem
   m_TagString: Score
@@ -27822,6 +27824,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749fa2eaa105efe48bcb7aebc30646b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   TimeScorePerSecond: 100
   CatRecuedScore: 5000
   CatDiedMinusScore: 2000
@@ -27839,6 +27843,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1904481054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904481051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3255891376
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &1905669854
 GameObject:
   m_ObjectHideFlags: 0

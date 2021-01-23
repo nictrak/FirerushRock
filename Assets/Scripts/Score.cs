@@ -1,17 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Score : MonoBehaviour
+using Mirror;
+public class Score : NetworkBehaviour
 {
     // Start is called before the first frame update
+    [SyncVar]
     private int Day;
+    [SyncVar]
     private int oldScore;
+    [SyncVar]
     private int score;
+    [SyncVar]
     private int catRecued;
+    [SyncVar]
     private int catDied;
+    [SyncVar]
     private int scoreTime;
+    [SyncVar]
     private int scoreCatRescued;
+    [SyncVar]
     private int scoreCatDied;
     public int TimeScorePerSecond;
     public int CatRecuedScore;
@@ -42,12 +50,12 @@ public class Score : MonoBehaviour
     {
         Day = d;
     }
-
+    [ServerCallback]
     public void addDay(int d = 1)
     {
         Day = Day + d;
     }
-
+    [ServerCallback]
     public void CalculateScore()
     {
         oldScore = score;
@@ -81,22 +89,23 @@ public class Score : MonoBehaviour
     {
         return scoreCatDied;
     }
+    [ServerCallback]
     public void ResetScore()
     {
         score = 0;
     }
-
+    [ServerCallback]
     public void ResetCat()
     {
         catRecued = 0;
         catDied = 0;
     }
-
+    [ServerCallback]
     public void AddCatRecued()
     {
         catRecued++;
     }
-
+    [ServerCallback]
     public void AddCatDied()
     {
         catDied++;

@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Timer : MonoBehaviour
+using Mirror;
+public class Timer : NetworkBehaviour
 {
     public float timeLimit;
     private float timeleft;
     public TimerText TimerText;
+    [SyncVar]
     private int timeInt;
     private bool isWorking;
     public LevelScriptController LevelScriptController;
+
+    public int TimeInt { get => timeInt; set => timeInt = value; }
+
     public void startf()
     {
         isWorking = false;
@@ -25,7 +29,7 @@ public class Timer : MonoBehaviour
     {
         isWorking = w;
     }
-
+    [ServerCallback]
     void FixedUpdate()
     {
         if (isWorking) { 
@@ -40,16 +44,15 @@ public class Timer : MonoBehaviour
             sentTimeToTimerText();
         }
     }
-
+    [ServerCallback]
     void sentTimeToTimerText()
     {
         if ((int)timeleft != timeInt)
         {
             timeInt = (int)timeleft;
-            TimerText.ChangeText(timeInt);
         }
     }
-
+    [ServerCallback]
     void TimeOver()
     {
         LevelScriptController.MissionFailed();

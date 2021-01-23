@@ -9,18 +9,21 @@ public class DayIntro : MonoBehaviour
     private Text text;
     void Start()
     {
-        text = this.GetComponent<Text>();
-        int d = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>().getDay();
-        if (d <= 0)
-        {
-            d = 1;
-        }
-        text.text = "Day " + d;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        text = this.GetComponent<Text>();
+        GameObject scoreObj = GameObject.FindGameObjectWithTag("Score");
+        if(scoreObj != null)
+        {
+            int d = scoreObj.GetComponent<Score>().getDay();
+            if (d <= 0)
+            {
+                d = 1;
+            }
+            text.text = "Day " + d;
+        }
     }
 }

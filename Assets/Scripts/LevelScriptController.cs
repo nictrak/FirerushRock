@@ -84,7 +84,7 @@ public class LevelScriptController : NetworkBehaviour
         /*
         Debug.Log("Start Grid System");
         */
-        UIScoreText.updateScore(Score.getScore());
+        //UIScoreText.updateScore(Score.getScore());
         Timer.timeLimit = ParameterGenerator.GenTime();
         Timer.startf();
         Timer.setWorking(true);
@@ -101,7 +101,6 @@ public class LevelScriptController : NetworkBehaviour
         FireSystem.setRun(false);
         Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
         Score.CalculateScore();
-        WinScoreText.updateWinScore(Score.getOldScore(), Score.getScoreTime(), Score.getScoreCatRescued(), Score.getScoreCatDied(), Score.getScore());
         WinCanvas.Win();
         Score.addDay();
     }
@@ -112,7 +111,6 @@ public class LevelScriptController : NetworkBehaviour
         FireSystem.setRun(false);
         Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
         playSceneAudio.StopMusic();
-        LoseScoreText.updateScore(Score.getScore());
         LoseCanvas.Lose();
         Score.ResetScore();
         Score.setDay(1);
