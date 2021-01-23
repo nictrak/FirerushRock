@@ -10,6 +10,7 @@ public class Grabbable : NetworkBehaviour
     [SyncVar]
     [SerializeField]
     private bool isGrabbable;
+    [SyncVar]
     private NetworkIdentity grabber;
     private Rigidbody2D rigidbody;
     private ZSync zSync;
@@ -58,30 +59,36 @@ public class Grabbable : NetworkBehaviour
     [ClientRpc]
     public void Grabed(NetworkIdentity grabber)
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        zSync = GetComponent<ZSync>();
-        collider2D = GetComponent<BoxCollider2D>();
-        IsGrabed = true;
-        this.grabber = grabber;
-        collider2D.isTrigger = true;
-        transform.parent = grabber.transform;
-        zSync.IsEnable = false;
-        transform.localPosition = GrabedPostion;
+        if(grabber != null)
+        {
+            rigidbody = GetComponent<Rigidbody2D>();
+            zSync = GetComponent<ZSync>();
+            collider2D = GetComponent<BoxCollider2D>();
+            IsGrabed = true;
+            this.grabber = grabber;
+            collider2D.isTrigger = true;
+            transform.parent = grabber.transform;
+            zSync.IsEnable = false;
+            transform.localPosition = GrabedPostion;
+        }
     }
     [ClientRpc]
     public void Released(bool newIsTrigger, Vector3 releasedVector)
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        zSync = GetComponent<ZSync>();
-        collider2D = GetComponent<BoxCollider2D>();
-        IsGrabed = false;
-        Vector3 translation = new Vector3(-Width / 2 + 0.5f, Height / 2 - 0.5f, 0);
-        transform.position = grabber.transform.position + releasedVector + translation;
-        collider2D.isTrigger = newIsTrigger;
-        transform.parent = null;
-        zSync.IsEnable = true;
-        this.grabber = null;
-        SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+        if(releasedVector != null && grabber != null)
+        {
+            rigidbody = GetComponent<Rigidbody2D>();
+            zSync = GetComponent<ZSync>();
+            collider2D = GetComponent<BoxCollider2D>();
+            IsGrabed = false;
+            Vector3 translation = new Vector3(-Width / 2 + 0.5f, Height / 2 - 0.5f, 0);
+            transform.position = grabber.transform.position + releasedVector + translation;
+            collider2D.isTrigger = newIsTrigger;
+            transform.parent = null;
+            zSync.IsEnable = true;
+            this.grabber = null;
+            SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+        }
     }
     private void MoveWhenGrabed()
     {

@@ -120,12 +120,12 @@ public class Spreader : NetworkBehaviour
     }
     private void FillLoop()
     {
-        if (Input.GetKey(KeyCode.K) && !valvePush && isFillable && beingGrab)
+        if ((Input.GetKey(KeyCode.K) || Input.GetKey(KeyCode.X)) && !valvePush && isFillable && beingGrab)
         {
             valve.Fill(this);
             valvePush = true;
         }
-        if (!Input.GetKey(KeyCode.K))
+        if (!Input.GetKey(KeyCode.K) && !Input.GetKey(KeyCode.X))
         {
             valvePush = false;
         }
