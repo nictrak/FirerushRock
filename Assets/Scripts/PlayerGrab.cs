@@ -108,7 +108,6 @@ public class PlayerGrab : NetworkBehaviour
     {
         if (grabedObject != null)
         {
-            Destroy(grabedObject.gameObject);
             grabedObject = null;
         }
     }

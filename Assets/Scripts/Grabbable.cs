@@ -16,7 +16,7 @@ public class Grabbable : NetworkBehaviour
     private BoxCollider2D collider2D;
     public float Height;
     public float Width;
-
+    private string lastScene;
     public float SpeedMultiplier;
     public bool IsGrabed { get => isGrabed; set => isGrabed = value; }
     public NetworkIdentity Grabber { get => grabber; set => grabber = value; }
@@ -35,11 +35,17 @@ public class Grabbable : NetworkBehaviour
         zSync = GetComponent<ZSync>();
         collider2D = GetComponent<BoxCollider2D>();
         isGrabbable = true;
+        lastScene = SceneManager.GetActiveScene().name;
     }
 
     // Update is called once per frame
     void Update()
     {
+        string newScene = SceneManager.GetActiveScene().name;
+        if(newScene != lastScene)
+        {
+            Destroy(gameObject);
+        }
     }
     private void FixedUpdate()
     {
