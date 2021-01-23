@@ -12,6 +12,9 @@ public class Grabbable : NetworkBehaviour
     private bool isGrabbable;
     [SyncVar]
     private NetworkIdentity grabber;
+    [SyncVar]
+    private Vector3 serverScale;
+    private int syncCounter;
     private Rigidbody2D rigidbody;
     private ZSync zSync;
     private BoxCollider2D collider2D;
@@ -19,6 +22,7 @@ public class Grabbable : NetworkBehaviour
     public float Width;
     private string lastScene;
     public float SpeedMultiplier;
+    public int SyncServerTime;
     public bool IsGrabed { get => isGrabed; set => isGrabed = value; }
     public NetworkIdentity Grabber { get => grabber; set => grabber = value; }
     public ZSync ZSync { get => zSync; set => zSync = value; }
@@ -37,6 +41,7 @@ public class Grabbable : NetworkBehaviour
         collider2D = GetComponent<BoxCollider2D>();
         isGrabbable = true;
         lastScene = SceneManager.GetActiveScene().name;
+        syncCounter = 0;
     }
 
     // Update is called once per frame
@@ -48,8 +53,35 @@ public class Grabbable : NetworkBehaviour
             Destroy(gameObject);
         }
     }
+    [ServerCallback]
+    private void ServerSync()
+    {
+        serverScale = transform.localScale;
+    }
+    [ClientCallback]
+    private void ClientSync()
+    {
+        if(grabber != null)
+        {
+            if(transform.parent == null)
+            {
+                collider2D.isTrigger = true;
+                transform.parent = grabber.transform;
+                zSync.IsEnable = false;
+                transform.localPosition = GrabedPostion;
+                transform.localScale = serverScale;
+            }
+        }
+        //transform.localScale = serverScale;
+    }
     private void FixedUpdate()
     {
+        if (syncCounter >= SyncServerTime)
+        {
+            ServerSync();
+            ClientSync();
+        }
+        else syncCounter += 1;
         //MoveWhenGrabed();
     }
     public void Use()

@@ -17,11 +17,11 @@ public class GameConfig : MonoBehaviour
         
         if (MusicVolume == 0)
         {
-            MusicVolume = 1;
+            MusicVolume = 0f;
         }
         if (SfxVolume == 0)
         {
-            SfxVolume = 1;
+            SfxVolume = 0f;
         }
         
     }

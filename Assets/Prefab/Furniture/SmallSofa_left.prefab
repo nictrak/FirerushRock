@@ -171,6 +171,7 @@ MonoBehaviour:
   Height: 1
   Width: 1
   SpeedMultiplier: 0
+  SyncServerTime: 50
   GrabedPostion: {x: 0, y: 3.5, z: 0.001}
 --- !u!114 &3080785000109370047
 MonoBehaviour:
@@ -213,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  DelaySpawnTime: 0
   moveVelocityHorizontal: 0
   moveVelocityVertical: 0
   isEnable: 0
