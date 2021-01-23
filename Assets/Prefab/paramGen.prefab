@@ -52,7 +52,7 @@ MonoBehaviour:
   BaseFire: 2
   DayAddFire: 5
   BaseSurvivor: 0
-  DayAddSurvivor: 4
+  DayAddSurvivor: 3
   BaseValve: 1
   DayAddValve: 3
   BaseHouseLength: 26
