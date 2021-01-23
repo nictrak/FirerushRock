@@ -5,6 +5,7 @@ using Mirror;
 public class Survivor : NetworkBehaviour
 {
     [SerializeField]
+    [SyncVar]
     private bool isRescued;
     private Grabbable grabbable;
     public bool IsRescued { get => isRescued; set => isRescued = value; }
@@ -31,7 +32,7 @@ public class Survivor : NetworkBehaviour
     {
 
     }
-
+    [ServerCallback]
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<RescueZone>() != null)
@@ -47,6 +48,7 @@ public class Survivor : NetworkBehaviour
             grabbable.IsGrabbable = false;
         }
     }
+    [ServerCallback]
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<RescueZone>() != null)
