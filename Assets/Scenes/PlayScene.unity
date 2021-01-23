@@ -441,7 +441,7 @@ PrefabInstance:
         type: 3}
       propertyPath: LoseScoreText
       value: 
-      objectReference: {fileID: 1817502397}
+      objectReference: {fileID: 0}
     - target: {fileID: 3320242539675953439, guid: a012089402961b84e81aca86a27da92e,
         type: 3}
       propertyPath: UIScoreText
@@ -2644,7 +2644,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1817502393}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fccc8e877eb6d34eb081cafd4f4b4fb, type: 3}
+  m_Script: {fileID: 11500000, guid: dce91992db26a4c4fbc40114e2023d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2044179507
