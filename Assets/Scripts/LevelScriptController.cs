@@ -116,6 +116,7 @@ public class LevelScriptController : NetworkBehaviour
         Timer.setWorking(false);
         FireSystem.setRun(false);
         Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Score>();
+        Score.setOldScoreToScore();
         playSceneAudio.StopMusic();
         LoseCanvas.Lose();
         Score.ResetScore();

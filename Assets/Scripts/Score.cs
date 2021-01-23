@@ -77,6 +77,11 @@ public class Score : NetworkBehaviour
         return oldScore;
     }
 
+    public void setOldScoreToScore()
+    {
+        oldScore = score;
+    }
+
     public int getScoreTime()
     {
         return scoreTime;

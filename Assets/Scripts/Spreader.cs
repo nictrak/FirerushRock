@@ -27,6 +27,7 @@ public class Spreader : NetworkBehaviour
     private float maxLocalScaleX;
     private bool isFillable;
     private Valve valve;
+    private bool valvePush = false;
 
     private AudioSource sfx;
 
@@ -119,10 +120,21 @@ public class Spreader : NetworkBehaviour
     }
     private void FillLoop()
     {
+        if (Input.GetKey(KeyCode.K) && !valvePush && isFillable && beingGrab)
+        {
+            valve.Fill(this);
+            valvePush = true;
+        }
+        if (!Input.GetKey(KeyCode.K))
+        {
+            valvePush = false;
+        }
+        /*
         if ((Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.X)) && isFillable && beingGrab)
         {
             valve.Fill(this);
         }
+        */
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
