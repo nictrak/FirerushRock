@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class WinScoreText : MonoBehaviour
+public class WinText : MonoBehaviour
 {
     // Start is called before the first frame update
     private Text text;
@@ -17,32 +17,32 @@ public class WinScoreText : MonoBehaviour
     void Update()
     {
         scoreObj = GameObject.FindGameObjectWithTag("Score");
-        if(scoreObj != null)
+        if (scoreObj != null)
         {
             score = scoreObj.GetComponent<Score>();
-            updateWinScore(score.getOldScore(), score.getScoreTime(), score.getScoreCatRescued(), score.getScoreCatDied(), score.getScore());
+            updateWinScore(score.getScoreCatRescued(), score.getScoreCatDied());
         }
     }
-    public void updateWinScore(int oldScore,int TimeScore, int CatRes, int CatDied, int Score)
+    public void updateWinScore(int CatRes, int CatDied)
     {
         text = GetComponent<Text>();
         if (CatRes == 0 && CatDied == 0)
         {
-            text.text = "" + oldScore + "\n" + TimeScore + "\n" + Score;
+            text.text = "Current Score :" + "\n" + "Time Left :" + "\n" + "New Score :";
         }
         if (CatRes != 0 && CatDied != 0)
         {
-            text.text = "" + oldScore + "\n" + TimeScore + "\n" + CatRes + "\n" + CatDied + "\n" + Score;
+            text.text = "Current Score :" + "\n" + "Time Left :" + "\n" + "Cat Rescued :" + "\n" + "Cat go Isekai:" + "\n" + "New Score :";
         }
         if (CatRes != 0 && CatDied == 0)
         {
-            text.text = "" + oldScore + "\n" + TimeScore + "\n" + CatRes + "\n" + Score;
+            text.text = "Current Score :" + "\n" + "Time Left :" + "\n" + "Cat Rescued :" + "\n" + "New Score :";
         }
         if (CatRes == 0 && CatDied != 0)
         {
-            text.text = "" + oldScore + "\n" + TimeScore + "\n" + CatDied + "\n" + Score;
+            text.text = "Current Score :" + "\n" + "Time Left :" + "\n" + "Cat go Isekai:" + "\n" + "New Score :";
         }
 
-        //text.text = "" + oldScore + "\n" + TimeScore + "\n" + CatRes + "\n" + CatDied + "\n" + Score;
+        //text.text = "Current Score :" + "\n" + "Time Left :" + "\n" + "Cat Rescued :" + "\n" + "Cat go Isekai:" + "\n" + "New Score :";
     }
 }

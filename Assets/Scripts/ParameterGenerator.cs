@@ -191,7 +191,7 @@ public class ParameterGenerator : MonoBehaviour
     {
         int size = 20;
         if (roomtype == 1) size = Random.Range(25, 40);
-        if (roomtype == 2) size = Random.Range(20, 30);
+        if (roomtype == 2) size = Random.Range(15, 20);
         if (roomtype == 3) size = Random.Range(35, 50);
         return (roomtype * 100) + size;
     }
