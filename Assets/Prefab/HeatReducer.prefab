@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  ReduceRate: 3
+  ReduceRate: 4
 --- !u!212 &1790308967355296923
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.5, y: 3.8}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!50 &4509294992067482833
 Rigidbody2D:

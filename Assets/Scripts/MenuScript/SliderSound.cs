@@ -11,7 +11,7 @@ public class SliderSound : MonoBehaviour
     {
         if (GameConfig.MusicVolume == 0)
         {
-            GameConfig.MusicVolume = (float)1;
+            GameConfig.MusicVolume = (float) 0.5;
         }
 
         Slider slider = this.gameObject.GetComponent<Slider>();
