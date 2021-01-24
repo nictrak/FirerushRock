@@ -29,7 +29,7 @@ public class Score : NetworkBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        Day = 20;
+        Day = 1;
         score = 0;
         catRecued = 0;
         catDied = 0;
