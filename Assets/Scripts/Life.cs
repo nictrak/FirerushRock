@@ -56,6 +56,7 @@ public class Life : NetworkBehaviour
     private void RpcToSpawnPoint(NetworkIdentity identity)
     {
         identity.GetComponent<Firefighter>().ToSpawnPoint();
+        identity.GetComponent<PlayerControl>().DelayEnable();
     }
     [ServerCallback]
     private void SyncLifeBar()

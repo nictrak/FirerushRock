@@ -12,7 +12,9 @@ public class PlayerControl : NetworkBehaviour
     private Vector2 downVector;
     private Vector2 idleVector;
     private Vector2 moveVector;
-
+    public int DelaySpawnTime;
+    private int counter;
+    private bool isDelay;
     private bool isMove;
 
     public float moveVelocityHorizontal;
@@ -40,11 +42,19 @@ public class PlayerControl : NetworkBehaviour
     }
     private void FixedUpdate()
     {
+        if (isDelay)
+        {
+            if (DelaySpawnTime <= counter)
+            {
+                isDelay = false;
+            }
+            else counter += 1;
+        }
         if(isLocalPlayer) Move();
     }
     private void Move()
     {
-        if (isEnable)
+        if (isEnable && !isDelay)
         {
             rigidbody.MovePosition(rigidbody.position + moveVector);
             if (moveVector.magnitude > 0.0001)
@@ -79,7 +89,11 @@ public class PlayerControl : NetworkBehaviour
         }
         return outVector;
     }
-
+    public void DelayEnable()
+    {
+        isDelay = true;
+        counter = 0;
+    }
     /*private void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.GetComponent<BreakWater>() != null)

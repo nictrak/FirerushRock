@@ -132,7 +132,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.25, y: 0.25}
-    oldSize: {x: 5.6099997, y: 5.6299996}
+    oldSize: {x: 5.58, y: 5.6299996}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -171,6 +171,7 @@ MonoBehaviour:
   Height: 1
   Width: 2
   SpeedMultiplier: 0
+  SyncServerTime: 50
   GrabedPostion: {x: -2, y: 3.5, z: 0.001}
 --- !u!114 &1361359809950449706
 MonoBehaviour:
@@ -213,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  DelaySpawnTime: 0
   moveVelocityHorizontal: 0
   moveVelocityVertical: 0
   isEnable: 0

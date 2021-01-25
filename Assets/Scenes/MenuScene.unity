@@ -2554,25 +2554,20 @@ MonoBehaviour:
   m_Text: '- This game''s difficulty is recommeded for 4 players, but you can solo
     if you want.
 
-    - Multiplayer play through LAN connection or using application
-    that act like LAN connection, like Hamachi.
+    - Multiplayer play through LAN connection or using application that act like LAN
+    connection, like Hamachi.
 
-    - One player need to be a host,
-    others join with the host''s IP address.
+    - One player need to be a host, others join with the host''s IP address.
 
-    - Singleplayer can just be a host
-    and play.
+    - Singleplayer can just be a host and play.
 
     - To complete a mission you must put out all fire in the building.
 
-    -
-    You will find control manual in lobby after host the game.
+    - You will find control manual in lobby after host the game.
 
-    - Difficulty
-    will be increased for each mission, be prepared.
+    - Difficulty will be increased for each mission, be prepared.
 
-    - You have a nice taste
-    choosing to play this game. Good luck. Have fun.'
+    - You have a nice taste choosing to play this game. Good luck. Have fun.'
 --- !u!222 &995424973
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3267,7 +3262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -124}
+  m_AnchoredPosition: {x: -17.544006, y: -124}
   m_SizeDelta: {x: 35.087494, y: 11.890015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1348873996

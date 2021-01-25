@@ -50,9 +50,16 @@ public class Cell : NetworkBehaviour
 
     private FurnitureCatalog FurnitureCatalog;
 
+    private int fire1start;
+    private int fire2start;
+    private int fire3start;
+
     // Start is called before the first frame update
     void Start()
     {
+        fire1start = FireSystem.fire1StartPoint;
+        fire2start = FireSystem.fire2StartPoint;
+        fire3start = FireSystem.fire3StartPoint;
         SpawnHouse();
         HeatSprite.transform.localScale = new Vector3(0f, 0f, 1f);
         if (wall == -1)
@@ -183,12 +190,12 @@ public class Cell : NetworkBehaviour
     private void HeatAndFireSync()
     {
         heat = FireSystem.heat_array[(int)gridPosition.y, (int)gridPosition.x];
-        double fire1 = FireSystem.fire_1_array[(int)gridPosition.y, (int)gridPosition.x];
-        double fire2 = FireSystem.fire_2_array[(int)gridPosition.y, (int)gridPosition.x];
-        double fire3 = FireSystem.fire_3_array[(int)gridPosition.y, (int)gridPosition.x];
-        levelOneFire = fire1 > 0 && doorObject == null;
-        levelTwoFire = fire2 > 0 && doorObject == null;
-        levelThreeFire = fire3 > 0 && doorObject == null;
+        //double fire1 = FireSystem.fire_1_array[(int)gridPosition.y, (int)gridPosition.x];
+        //double fire2 = FireSystem.fire_2_array[(int)gridPosition.y, (int)gridPosition.x];
+        //double fire3 = FireSystem.fire_3_array[(int)gridPosition.y, (int)gridPosition.x];
+        levelOneFire = heat >= fire1start && heat < fire2start && doorObject == null;
+        levelTwoFire = heat >= fire2start && heat < fire3start && doorObject == null;
+        levelThreeFire = heat > fire3start && doorObject == null;
     }
     [ServerCallback]
     private void UpdateLastHeat()
