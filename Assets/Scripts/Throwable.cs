@@ -53,7 +53,7 @@ public class Throwable : NetworkBehaviour
         {
             isThrowed = false;
             throwVector = new Vector2();
-            collider.isTrigger = false;
+            RpcSetIstrigger(false);
             if(breakable != null)
             {
                 breakable.IsEnable = true;
@@ -83,6 +83,11 @@ public class Throwable : NetworkBehaviour
                 throwVector = new Vector2();
             }
         }*/
+    }
+    [ClientRpc]
+    private void RpcSetIstrigger(bool newIsTrigger)
+    {
+        collider.isTrigger = newIsTrigger;
     }
     [ServerCallback]
     private void SyncIsBreak()

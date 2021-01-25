@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: -1140433886307812832}
   - component: {fileID: 8335225475018169386}
   - component: {fileID: 5811089889988025301}
+  - component: {fileID: 7179534446967958498}
   m_Layer: 0
   m_Name: Survivor
   m_TagString: Untagged
@@ -172,6 +173,7 @@ MonoBehaviour:
   Height: 1
   Width: 1
   SpeedMultiplier: 0
+  SyncServerTime: 0
   GrabedPostion: {x: 0, y: 0, z: -0.1}
 --- !u!114 &4575613265741898931
 MonoBehaviour:
@@ -200,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  DelaySpawnTime: 0
   moveVelocityHorizontal: 0
   moveVelocityVertical: 0
   isEnable: 0
@@ -215,6 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008df4044bb3ad84e9ffd0ac51fe79a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   isRescued: 0
 --- !u!95 &3949643201680949261
 Animator:
@@ -403,5 +408,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 499b90d113686ce4eb0fb1152f5eeabe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7179534446967958498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033900264385998663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23f11ba197856147b3f45c231f0c421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
