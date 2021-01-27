@@ -703,7 +703,20 @@ public class PCG : MonoBehaviour
     }
     private void PlaceValve(List<Room> roomList, int valveCount)
     {
-        List<Room> roomListClone = new List<Room>(roomList);
+        List<Room> roomListClone = new List<Room>();
+        for (int i = 0; i < roomList.Count && valveCount > 0; i++)
+        {
+            Room room = roomList[i];
+            if (room.preset.type == 2)
+            {
+                double valveX = (room.area.rectangle.x1 + 3) + (room.area.rectangle.GetWidth() - 4) * random.NextDouble();
+                double valveY = (room.area.rectangle.y1 + 1) + (room.area.rectangle.GetHeight() - 2) * random.NextDouble();
+                room.furniture.Add(new Furniture(VALVE, new Point(valveX, valveY), 0, new Rectangle(valveX, valveY, valveX + 1, valveY + 1)));
+                --valveCount;
+            }
+            else
+                roomListClone.Add(room);
+        }
         for (int i = 0; i < valveCount && roomListClone.Count > 0; i++)
         {
             Room valveRoom = RandomChoicePop(roomListClone);
