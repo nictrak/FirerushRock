@@ -139,6 +139,7 @@ public class Throwable : NetworkBehaviour
         isThrowed = false;
         thrower = null;
         throwVector = new Vector2();
+        collider.isTrigger = false;
         isBreakActive = false;
     }
 }
