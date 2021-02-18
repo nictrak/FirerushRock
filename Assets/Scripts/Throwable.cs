@@ -14,6 +14,8 @@ public class Throwable : NetworkBehaviour
     private Breakable breakable;
     [SyncVar]
     private bool isBreakActive;
+    public int AirTime;
+    private int airCounter;
     private NetworkIdentity thrower;
     public bool IsThrowed { get => isThrowed; set => isThrowed = value; }
     public Vector2 ThrowVector { get => throwVector; set => throwVector = value; }
@@ -26,6 +28,7 @@ public class Throwable : NetworkBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         breakable = GetComponent<Breakable>();
+        airCounter = 0;
     }
 
     // Update is called once per frame
@@ -52,7 +55,7 @@ public class Throwable : NetworkBehaviour
         if (breakThrow != null && throwVector.magnitude > 0.00001)
         {
             isThrowed = false;
-            throwVector = new Vector2();
+            Unthrowed(false);
             RpcSetIstrigger(false);
             if(breakable != null)
             {
@@ -107,6 +110,18 @@ public class Throwable : NetworkBehaviour
         if (isThrowed)
         {
             rigidbody.position += throwVector;
+            if (AirTime > 0)
+            {
+                if (airCounter >= AirTime)
+                {
+                    Unthrowed(false);
+                }
+                else
+                {
+                    airCounter++;
+                    Debug.Log(airCounter);
+                }
+            }
         }
     }
     [ClientRpc]
@@ -141,5 +156,6 @@ public class Throwable : NetworkBehaviour
         throwVector = new Vector2();
         collider.isTrigger = newIsIrigger;
         isBreakActive = false;
+        airCounter = 0;
     }
 }
