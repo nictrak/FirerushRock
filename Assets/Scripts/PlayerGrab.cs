@@ -173,7 +173,7 @@ public class PlayerGrab : NetworkBehaviour
         if (throwedIdentity != null)
         {
             Throwable throwed = throwedIdentity.GetComponent<Throwable>();
-            throwed.Unthrowed();
+            throwed.Unthrowed(true);
         }
     }
     private void GrabControl()

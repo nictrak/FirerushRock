@@ -109,7 +109,7 @@ public class FireSystem : MonoBehaviour
                     Debug.Log("noooooo");
                 }
                 */
-                if (fire_2_array.Equals(zero_array))
+                if (fire_2_array.Equals(zero_array) || Input.GetKey(KeyCode.F1))
                 {
                     //TODO Fix this to multiplayer
                     PassDay();

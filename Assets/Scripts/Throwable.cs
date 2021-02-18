@@ -134,12 +134,12 @@ public class Throwable : NetworkBehaviour
         this.throwVector = throwVector;
     }
     [ClientRpc]
-    public void Unthrowed()
+    public void Unthrowed(bool newIsIrigger)
     {
         isThrowed = false;
         thrower = null;
         throwVector = new Vector2();
-        collider.isTrigger = false;
+        collider.isTrigger = newIsIrigger;
         isBreakActive = false;
     }
 }

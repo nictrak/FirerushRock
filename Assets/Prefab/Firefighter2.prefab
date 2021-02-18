@@ -435,7 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  DelaySpawnTime: 100
+  DelaySpawnTime: 250
   moveVelocityHorizontal: 0.16
   moveVelocityVertical: 0.2
   isEnable: 1
