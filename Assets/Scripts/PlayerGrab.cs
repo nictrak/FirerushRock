@@ -216,4 +216,12 @@ public class PlayerGrab : NetworkBehaviour
             }
         }
     }
+    public bool IsGrab()
+    {
+        if(grabedObject != null)
+        {
+            return true;
+        }
+        return false;
+    }
 }

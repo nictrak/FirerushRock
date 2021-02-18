@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerControl : NetworkBehaviour
 {
     private Rigidbody2D rigidbody;
+    private PlayerGrab playerGrab;
     private Vector2 leftVector;
     private Vector2 rightVector;
     private Vector2 upVector;
@@ -27,6 +28,7 @@ public class PlayerControl : NetworkBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        playerGrab = GetComponent<PlayerGrab>();
         leftVector = new Vector2(-moveVelocityHorizontal, 0);
         rightVector = new Vector2(moveVelocityHorizontal, 0);
         upVector = new Vector2(0, moveVelocityVertical);
@@ -86,6 +88,12 @@ public class PlayerControl : NetworkBehaviour
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             outVector += downVector;
+        }
+        //while grab
+        if(playerGrab != null)
+        if(playerGrab.IsGrab())
+        {
+            outVector = outVector * playerGrab.GrabedObject.SpeedMultiplier;
         }
         return outVector;
     }
