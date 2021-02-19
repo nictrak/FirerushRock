@@ -9,13 +9,13 @@ public class LobbyMusic : MonoBehaviour
     private AudioSource music;
     void Start()
     {
-        music = GetComponent<AudioSource>();
-        music.volume = GameConfig.MusicVolume;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        music = GetComponent<AudioSource>();
+        music.volume = GameConfig.MusicVolume;
     }
 }

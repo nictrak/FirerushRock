@@ -10,25 +10,31 @@ public class GameConfig : MonoBehaviour
     public GameObject BangPrefab;
     public static float MusicVolume;
     public static float SfxVolume;
+    private static bool isStart;
     // Start is called before the first frame update
     void Start()
     {
-        BangObject = BangPrefab;
-        
-        if (MusicVolume == 0)
+        if (!isStart)
         {
-            MusicVolume = (float)0.5;
+            BangObject = BangPrefab;
+
+            if (MusicVolume == 0)
+            {
+                MusicVolume = (float)0.5;
+            }
+            if (SfxVolume == 0)
+            {
+                SfxVolume = (float)0.5;
+            }
         }
-        if (SfxVolume == 0)
-        {
-            SfxVolume = (float)0.5;
-        }
+        isStart = true;
+
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(MusicVolume);
     }
 }
