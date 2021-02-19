@@ -91,7 +91,7 @@ public class PlayerControl : NetworkBehaviour
         }
         //while grab
         if(playerGrab != null)
-        if(playerGrab.IsGrab())
+        if(playerGrab.IsGrab() && playerGrab.GrabedObject.SpeedMultiplier > 0)
         {
             outVector = outVector * playerGrab.GrabedObject.SpeedMultiplier;
         }
