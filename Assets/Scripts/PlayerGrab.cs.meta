@@ -3,7 +3,14 @@ guid: 3fd722ceee366b4499487b79c51111b8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - LeftGrab: {instanceID: 0}
+  - RightGrab: {instanceID: 0}
+  - UpGrab: {instanceID: 0}
+  - DownGrab: {instanceID: 0}
+  - GrabSound: {fileID: 8300000, guid: 9e20414a1ab4cfb4ab8998083671d217, type: 3}
+  - ReleaseSound: {fileID: 8300000, guid: c93bc9e858690624fac2886c9d6d19b2, type: 3}
+  - ThrowSound: {fileID: 8300000, guid: c010e2c01cef0474ebf23246a045f553, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
