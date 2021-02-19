@@ -496,7 +496,7 @@ MonoBehaviour:
   DownGrab: {fileID: 7659412490604459845}
   ThrowSpeed: 0.3
   GrabScale: 0.5
-  ReleaseLenght: 1
+  ReleaseLenght: 0.5
 --- !u!114 &7659412490604458147
 MonoBehaviour:
   m_ObjectHideFlags: 0
