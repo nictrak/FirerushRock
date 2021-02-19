@@ -29,7 +29,8 @@ public class Spreader : NetworkBehaviour
     private Valve valve;
     private bool valvePush = false;
 
-    private AudioSource sfx;
+    public AudioSource SpraySound;
+    public AudioSource RefillSound;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,9 @@ public class Spreader : NetworkBehaviour
         spawnCounter = 0;
         load = MaxLoad;
         maxLocalScaleX = Bar.transform.localScale.x;
-        sfx = GetComponent<AudioSource>();
+        SpraySound.volume = GameConfig.SfxVolume;
+        RefillSound.volume = GameConfig.SfxVolume;
+        //sfx = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -80,17 +83,17 @@ public class Spreader : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && load > 0 && beingGrab)
         {
-            if(!sfx.isPlaying)
+            if(!SpraySound.isPlaying)
             {
-                sfx.Play();
+                SpraySound.Play();
             }
             CmdSpawnWater(playerDirection);
         }
         else
         {
-            if (sfx.isPlaying)
+            if (SpraySound.isPlaying)
             {
-                sfx.Stop();
+                SpraySound.Stop();
             }
         }
     }
@@ -112,10 +115,15 @@ public class Spreader : NetworkBehaviour
     [Command(ignoreAuthority = true)]
     public void Fill(float amount)
     {
-        load += amount;
+        /*load += amount;
         if(load > MaxLoad)
         {
             load = MaxLoad;
+        }*/
+        if (load < MaxLoad)
+        {
+            load = Mathf.Min(load + amount, MaxLoad);
+            RefillSound.Play();
         }
     }
     private void FillLoop()

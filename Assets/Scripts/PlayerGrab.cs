@@ -8,6 +8,7 @@ public class PlayerGrab : NetworkBehaviour
     private GrabHitbox usedGrab;
     private Grabbable grabedObject;
     private PlayerDirection playerDirection;
+    private AudioSource audioSource;
 
     public GrabHitbox LeftGrab;
     public GrabHitbox RightGrab;
@@ -16,6 +17,9 @@ public class PlayerGrab : NetworkBehaviour
     public float ThrowSpeed;
     public float GrabScale;
     public float ReleaseLenght;
+    public AudioClip GrabSound;
+    public AudioClip ReleaseSound;
+    public AudioClip ThrowSound;
     private Vector3 memGrabScale;
     public GrabHitbox UsedGrab { get => usedGrab; set => usedGrab = value; }
     public Grabbable GrabedObject { get => grabedObject; set => grabedObject = value; }
@@ -23,8 +27,10 @@ public class PlayerGrab : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerDirection = GetComponent<PlayerDirection>(); 
+        playerDirection = GetComponent<PlayerDirection>();
         usedGrab = LeftGrab;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = GameConfig.SfxVolume;
     }
 
     // Update is called once per frame
@@ -185,11 +191,13 @@ public class PlayerGrab : NetworkBehaviour
                 Debug.Log(playerDirection.Direction);
                 SelectGrab();
                 Grabbable grabed = usedGrab.CalNearest();
-                Grab(grabed);
+                if (Grab(grabed))
+                    audioSource.PlayOneShot(GrabSound);
             }
             else
             {
                 Release();
+                audioSource.PlayOneShot(ReleaseSound);
             }
         }
         if (Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.C))
@@ -197,6 +205,7 @@ public class PlayerGrab : NetworkBehaviour
             if (grabedObject != null)
             {
                 Throw();
+                audioSource.PlayOneShot(ThrowSound);
             }
         }
     }

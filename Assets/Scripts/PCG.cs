@@ -1405,6 +1405,28 @@ public class PCG : MonoBehaviour
 
     }
 
+    public (NDArray, NDArray, NDArray, NDArray) Dummy()
+    {
+        List<List<int>> houseHierarchy = DebugHouseHierarchy(9, 3);
+        foreach (List<int> list in houseHierarchy)
+        {
+            for (int i = 0; i < list.Count; i++)
+                list[i] = list[i] * 100 + 25 + RoundPCG(50 * random.NextDouble());
+        }
+
+        double width = 24, height = 15;
+        (NDArray roomArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray) = (null, null, null, null);
+        while (roomArray == null)
+        {
+            (roomArray, doorArray, furnitureArray, fireArray) = GenerateHouse3(houseHierarchy, width, height, 5, 2, 2, 5);
+            width *= 1.5;
+            height *= 1.5;
+        }
+
+        return (roomArray, doorArray, furnitureArray, fireArray);
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
