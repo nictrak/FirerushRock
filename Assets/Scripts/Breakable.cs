@@ -74,10 +74,13 @@ public class Breakable : NetworkBehaviour
     [ServerCallback]
     public void Hit()
     {
-        toughness -= 1;
-        if (toughness <= 0)
+        if(MaxToughness > 0)
         {
-            Destroy(this.gameObject);
+            toughness -= 1;
+            if (toughness <= 0)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
     [ServerCallback]

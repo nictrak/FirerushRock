@@ -104,24 +104,28 @@ public class Throwable : NetworkBehaviour
             isBreakActive = false;
         }
     }
-    
+    [ServerCallback]
+    private void AirCount()
+    {
+        if (AirTime > 0)
+        {
+            if (airCounter >= AirTime)
+            {
+                Unthrowed(false);
+            }
+            else
+            {
+                airCounter++;
+                Debug.Log(airCounter);
+            }
+        }
+    }
     private void ThrowedMove()
     {
         if (isThrowed)
         {
             rigidbody.position += throwVector;
-            if (AirTime > 0)
-            {
-                if (airCounter >= AirTime)
-                {
-                    Unthrowed(false);
-                }
-                else
-                {
-                    airCounter++;
-                    Debug.Log(airCounter);
-                }
-            }
+            AirCount();
         }
     }
     [ClientRpc]

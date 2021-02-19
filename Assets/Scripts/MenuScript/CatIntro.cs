@@ -22,10 +22,10 @@ public class CatIntro : MonoBehaviour
         if (done == false) {
             if (LevelScriptController.Cat >= 0)
              {
-                text.text = "Cat : " + LevelScriptController.Cat;
                 text.color = Color.white;
                 done = true;
              }
-        } 
+        }
+        text.text = "Cat : " + LevelScriptController.Cat;
     }
 }
