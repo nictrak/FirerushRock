@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  AirTime: 0
 --- !u!114 &7903507764010875226
 MonoBehaviour:
   m_ObjectHideFlags: 0
