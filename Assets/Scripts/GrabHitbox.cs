@@ -7,13 +7,15 @@ public class GrabHitbox : MonoBehaviour
 {
     [SerializeField]
     private List<Grabbable> grabbables;
-
+    [SerializeField]
+    private List<GameObject> breakWaters;
     public List<Grabbable> Grabbables { get => grabbables; set => grabbables = value; }
 
     // Start is called before the first frame update
     void Start()
     {
         grabbables = new List<Grabbable>();
+        breakWaters = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -24,21 +26,27 @@ public class GrabHitbox : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Grabbable grabbable = collision.gameObject.GetComponent<Grabbable>();
+        BreakWater breaker = collision.gameObject.GetComponent<BreakWater>();
         if (grabbable != null)
         {
-            string a = collision.ToString();
-            string b = gameObject.ToString();
             grabbables.Add(grabbable);
+        }
+        if(breaker != null || grabbable != null)
+        {
+            breakWaters.Add(collision.gameObject);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         Grabbable grabbable = collision.gameObject.GetComponent<Grabbable>();
+        BreakWater breaker = collision.gameObject.GetComponent<BreakWater>();
         if (grabbable != null)
         {
-            string a = collision.ToString();
-            string b = gameObject.ToString();
             grabbables.Remove(grabbable);
+        }
+        if (breaker != null || grabbable != null)
+        {
+            breakWaters.Remove(collision.gameObject);
         }
     }
     public Grabbable CalNearest()
@@ -76,6 +84,14 @@ public class GrabHitbox : MonoBehaviour
             return grabbables[index];
         }
         return null;
+    }
+    public bool IsBreakWatersEmpty()
+    {
+        if(breakWaters.Count <= 0)
+        {
+            return true;
+        }
+        return false;
     }
     private float CalDistance(Vector3 position)
     {

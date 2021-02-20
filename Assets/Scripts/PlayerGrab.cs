@@ -38,6 +38,7 @@ public class PlayerGrab : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            SelectGrab();
             GrabControl();
         }
     }
@@ -105,6 +106,7 @@ public class PlayerGrab : NetworkBehaviour
         if (grabedObject != null)
         {
             Vector3 releasedVector = CalReleasedVector();
+            if (IsReleaseBreak()) KnockBackBeforeRelease(releasedVector);
             CmdRelease(grabedObject.netIdentity, false, releasedVector);
             grabedObject = null;
         }
@@ -188,8 +190,6 @@ public class PlayerGrab : NetworkBehaviour
         {
             if (grabedObject == null)
             {
-                Debug.Log(playerDirection.Direction);
-                SelectGrab();
                 Grabbable grabed = usedGrab.CalNearest();
                 if (Grab(grabed))
                     audioSource.PlayOneShot(GrabSound);
@@ -232,5 +232,33 @@ public class PlayerGrab : NetworkBehaviour
             return true;
         }
         return false;
+    }
+    private bool IsReleaseBreak()
+    {
+        Debug.Log(usedGrab);
+        Debug.Log(!usedGrab.IsBreakWatersEmpty());
+        return !usedGrab.IsBreakWatersEmpty();
+    }
+    private void KnockBackBeforeRelease(Vector3 releasedVector)
+    {
+        string direction = playerDirection.Direction;
+        Vector3 AdditionalKnock = new Vector3();
+        if (direction == "left")
+        {
+            AdditionalKnock = new Vector3(GrabedObject.Width/2 - 0.5f, 0, 0);
+        }
+        else if (direction == "right")
+        {
+            AdditionalKnock = new Vector3(-GrabedObject.Width/2 + 0.5f, 0, 0);
+        }
+        else if (direction == "up")
+        {
+            AdditionalKnock = new Vector3(0, -GrabedObject.Width/2 + 0.5f, 0);
+        }
+        else if (direction == "down")
+        {
+            AdditionalKnock = new Vector3(0, GrabedObject.Width/2 - 0.5f, 0);
+        }
+        transform.position = transform.position - releasedVector + AdditionalKnock;
     }
 }
