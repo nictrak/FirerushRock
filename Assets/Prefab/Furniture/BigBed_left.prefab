@@ -170,7 +170,7 @@ MonoBehaviour:
   isGrabbable: 0
   Height: 2
   Width: 2
-  SpeedMultiplier: 0.5
+  SpeedMultiplier: 0.6
   SyncServerTime: 50
   GrabedPostion: {x: -2, y: 6, z: 0.001}
 --- !u!114 &4347179489802237985
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  AirTime: 0
+  AirTime: 20
 --- !u!114 &8772287697962647361
 MonoBehaviour:
   m_ObjectHideFlags: 0

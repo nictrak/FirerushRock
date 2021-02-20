@@ -57,6 +57,11 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   MaxToughness: 3
+  IsDoor: 1
+  DoorHitSfx: {fileID: 4179628338119554633, guid: 2c931cc3de0590a47b1f1676e18f6040,
+    type: 3}
+  DoorBreakSfx: {fileID: 6048506360835206505, guid: e5beeb10c84352f469afab900f1e8ee9,
+    type: 3}
 --- !u!50 &3013429047554641511
 Rigidbody2D:
   serializedVersion: 4
