@@ -84,13 +84,15 @@ public class Breakable : NetworkBehaviour
             toughness -= 1;
             if (IsDoor)
             {
-                Instantiate(DoorHitSfx);
+                GameObject sfxHit = Instantiate(DoorHitSfx);
+                NetworkServer.Spawn(sfxHit);
             }
             if (toughness <= 0)
             {
                 if (IsDoor)
                 {
-                    Instantiate(DoorBreakSfx);
+                    GameObject sfxBreak = Instantiate(DoorBreakSfx);
+                    NetworkServer.Spawn(sfxBreak);
                 }
                 Destroy(this.gameObject);
             }
