@@ -18,6 +18,11 @@ public class Breakable : NetworkBehaviour
     public bool IsEnable { get => isEnable; set => isEnable = value; }
     public int Toughness { get => toughness; set => toughness = value; }
 
+    public bool IsDoor;
+
+    public GameObject DoorHitSfx;
+    public GameObject DoorBreakSfx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,8 +82,16 @@ public class Breakable : NetworkBehaviour
         if(MaxToughness > 0)
         {
             toughness -= 1;
+            if (IsDoor)
+            {
+                Instantiate(DoorHitSfx);
+            }
             if (toughness <= 0)
             {
+                if (IsDoor)
+                {
+                    Instantiate(DoorBreakSfx);
+                }
                 Destroy(this.gameObject);
             }
         }
