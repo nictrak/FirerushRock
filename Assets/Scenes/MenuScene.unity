@@ -546,6 +546,7 @@ GameObject:
   - component: {fileID: 243707574}
   - component: {fileID: 243707573}
   - component: {fileID: 243707572}
+  - component: {fileID: 243707575}
   m_Layer: 5
   m_Name: TutorialBackButton
   m_TagString: Untagged
@@ -638,6 +639,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1029738472}
+        m_MethodName: ChangeToWhite
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &243707573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,6 +687,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 243707570}
   m_CullTransparentMesh: 0
+--- !u!114 &243707575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243707570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1029738472}
+          m_MethodName: ChangeToRed
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1029738472}
+          m_MethodName: ChangeToWhite
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &246251681
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,6 +2270,7 @@ GameObject:
   - component: {fileID: 682314730}
   - component: {fileID: 682314732}
   - component: {fileID: 682314731}
+  - component: {fileID: 682314733}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2282,6 +2338,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682314729}
   m_CullTransparentMesh: 0
+--- !u!114 &682314733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682314729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a4e4a4dc602ad438013040b6c042bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &779017422
 GameObject:
   m_ObjectHideFlags: 0
@@ -3441,6 +3509,7 @@ GameObject:
   - component: {fileID: 1029738469}
   - component: {fileID: 1029738471}
   - component: {fileID: 1029738470}
+  - component: {fileID: 1029738472}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -3508,6 +3577,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029738468}
   m_CullTransparentMesh: 0
+--- !u!114 &1029738472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029738468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a4e4a4dc602ad438013040b6c042bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1060750461
 GameObject:
   m_ObjectHideFlags: 0
@@ -4228,6 +4309,7 @@ GameObject:
   - component: {fileID: 1489850235}
   - component: {fileID: 1489850234}
   - component: {fileID: 1489850233}
+  - component: {fileID: 1489850236}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -4320,6 +4402,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2130644083}
+        m_MethodName: ChangeToWhite
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1489850234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4357,6 +4450,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489850231}
   m_CullTransparentMesh: 0
+--- !u!114 &1489850236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489850231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2130644083}
+          m_MethodName: ChangeToRed
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2130644083}
+          m_MethodName: ChangeToWhite
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1537218201
 GameObject:
   m_ObjectHideFlags: 0
@@ -5595,6 +5731,7 @@ GameObject:
   - component: {fileID: 1934372588}
   - component: {fileID: 1934372587}
   - component: {fileID: 1934372586}
+  - component: {fileID: 1934372589}
   m_Layer: 5
   m_Name: OptionBackButton
   m_TagString: Untagged
@@ -5687,6 +5824,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 682314733}
+        m_MethodName: ChangeToWhite
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1934372587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5724,6 +5872,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934372584}
   m_CullTransparentMesh: 0
+--- !u!114 &1934372589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934372584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 682314733}
+          m_MethodName: ChangeToRed
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 682314733}
+          m_MethodName: ChangeToWhite
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1954483981
 GameObject:
   m_ObjectHideFlags: 0
@@ -6140,6 +6331,7 @@ GameObject:
   - component: {fileID: 2130644080}
   - component: {fileID: 2130644082}
   - component: {fileID: 2130644081}
+  - component: {fileID: 2130644083}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -6207,6 +6399,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130644079}
   m_CullTransparentMesh: 0
+--- !u!114 &2130644083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130644079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a4e4a4dc602ad438013040b6c042bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7365831190357037575
 PrefabInstance:
   m_ObjectHideFlags: 0
