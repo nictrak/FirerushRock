@@ -12,7 +12,7 @@ public class GameConfig : MonoBehaviour
     public static float SfxVolume;
     private static bool isStart;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (!isStart)
         {
