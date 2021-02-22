@@ -11,16 +11,14 @@ public class Firefighter : NetworkBehaviour
     public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
 
     private Vector3 spawnPoint;
-    private int spawnCounter;
 
-    private string lastScene;
+    private bool isLoadNewLevel;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         DontDestroyOnLoad(gameObject);
-        lastScene = "";
-        spawnCounter = 0;
+        isLoadNewLevel = false;
     }
 
     // Update is called once per frame
@@ -30,7 +28,7 @@ public class Firefighter : NetworkBehaviour
     }
     private void FixedUpdate()
     {
-        SpawnWhenSceneChange();
+        ToSpawnPointLoop();
     }
     [ClientRpc]
     public void ToOrigin()
@@ -57,22 +55,18 @@ public class Firefighter : NetworkBehaviour
     {
         transform.position = spawnPoint;
     }
-
-    private void SpawnWhenSceneChange()
+    private void OnLevelWasLoaded(int level)
     {
-        string activeNow = SceneManager.GetActiveScene().name;
-        if (lastScene == "") lastScene = activeNow;
-        if(lastScene != activeNow)
+        isLoadNewLevel = true;
+    }
+    private void ToSpawnPointLoop()
+    {
+        if (isLoadNewLevel)
         {
-            if (spawnCounter >= 100)
+            if (ToSpawnPoint())
             {
-                if (ToSpawnPoint())
-                {
-                    lastScene = activeNow;
-                    spawnCounter = 0;
-                }
+                isLoadNewLevel = false;
             }
-            else spawnCounter += 1;
         }
     }
 }
