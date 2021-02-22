@@ -1,31 +1,7 @@
 fileFormatVersion: 2
-guid: a37993a3479cce042b14eede9b925cf7
+guid: 9e3bc9407e68652418da121e4f3c4c62
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -8995056878774297502
-    second: IMG_1704_0
-  - first:
-      213: 5579705127240624614
-    second: IMG_1704_1
-  - first:
-      213: 146624318206000256
-    second: IMG_1704_2
-  - first:
-      213: -4386047238099721786
-    second: IMG_1704_3
-  - first:
-      213: 1197424549721249095
-    second: IMG_1704_4
-  - first:
-      213: 2668147966933397396
-    second: IMG_1704_5
-  - first:
-      213: -4086157922521339464
-    second: IMG_1704_6
-  - first:
-      213: -768287447112597366
-    second: IMG_1704_7
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -64,7 +40,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -95,42 +71,9 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: IMG_1704_0
-      rect:
-        serializedVersion: 2
-        x: 621
-        y: 243
-        width: 2220
-        height: 677
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 26c59363d632b2380800000000000000
-      internalID: -8995056878774297502
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
