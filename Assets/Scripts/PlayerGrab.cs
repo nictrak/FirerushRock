@@ -111,6 +111,18 @@ public class PlayerGrab : NetworkBehaviour
             grabedObject = null;
         }
     }
+    public void PositionFixedRelease(Vector3 position)
+    {
+        if (grabedObject != null)
+        {
+            Grabbable temp = grabedObject;
+            Vector3 releasedVector = CalReleasedVector();
+            if (IsReleaseBreak()) KnockBackBeforeRelease(releasedVector);
+            CmdRelease(grabedObject.netIdentity, false, releasedVector);
+            grabedObject = null;
+            temp.transform.position = position;
+        }
+    }
     [ClientRpc]
     public void ForceRelease()
     {
