@@ -29,12 +29,16 @@ public class Score : NetworkBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        Setup();
+    }
+    [ServerCallback]
+    private void Setup()
+    {
         Day = 1;
         score = 0;
         catRecued = 0;
         catDied = 0;
     }
-
     // Update is called once per frame
     void Update()
     {

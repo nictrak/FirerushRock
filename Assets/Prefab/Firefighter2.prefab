@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbables: []
+  breakWaters: []
 --- !u!1 &4438271289214778648
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbables: []
+  breakWaters: []
 --- !u!1 &5077146833884534835
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbables: []
+  breakWaters: []
 --- !u!1 &5845790956214066666
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +490,7 @@ MonoBehaviour:
   DownGrab: {fileID: 5783288257278830955}
   ThrowSpeed: 0.3
   GrabScale: 0.5
-  ReleaseLenght: 0.75
+  ReleaseLenght: 0.9
   GrabSound: {fileID: 8300000, guid: 9e20414a1ab4cfb4ab8998083671d217, type: 3}
   ReleaseSound: {fileID: 8300000, guid: c93bc9e858690624fac2886c9d6d19b2, type: 3}
   ThrowSound: {fileID: 8300000, guid: c010e2c01cef0474ebf23246a045f553, type: 3}
@@ -956,3 +959,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbables: []
+  breakWaters: []

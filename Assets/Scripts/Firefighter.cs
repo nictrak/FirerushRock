@@ -28,7 +28,7 @@ public class Firefighter : NetworkBehaviour
     {
         
     }
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         SpawnWhenSceneChange();
     }
@@ -64,7 +64,7 @@ public class Firefighter : NetworkBehaviour
         if (lastScene == "") lastScene = activeNow;
         if(lastScene != activeNow)
         {
-            if (spawnCounter >= 30)
+            if (spawnCounter >= 100)
             {
                 if (ToSpawnPoint())
                 {

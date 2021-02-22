@@ -19,6 +19,7 @@ public class DayIntro : MonoBehaviour
         if(scoreObj != null)
         {
             int d = scoreObj.GetComponent<Score>().getDay();
+            Debug.Log("Day " + d);
             if (d <= 0)
             {
                 d = 1;
