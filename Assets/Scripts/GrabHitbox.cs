@@ -10,6 +10,7 @@ public class GrabHitbox : MonoBehaviour
     [SerializeField]
     private List<GameObject> breakWaters;
     public List<Grabbable> Grabbables { get => grabbables; set => grabbables = value; }
+    public List<GameObject> BreakWaters { get => breakWaters; set => breakWaters = value; }
 
     // Start is called before the first frame update
     void Start()

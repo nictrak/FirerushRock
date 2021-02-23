@@ -246,10 +246,18 @@ public class PlayerGrab : NetworkBehaviour
         return false;
     }
     private bool IsReleaseBreak()
-    {
-        Debug.Log(usedGrab);
-        Debug.Log(!usedGrab.IsBreakWatersEmpty());
-        return !usedGrab.IsBreakWatersEmpty();
+    { 
+        if(usedGrab.BreakWaters.Count == 0)
+        {
+            return false;
+        }else if(usedGrab.BreakWaters.Count == 1)
+        {
+            if(usedGrab.BreakWaters[0].GetComponent<Grabbable>() == GrabedObject)
+            {
+                return false;
+            }
+        }
+        return true;
     }
     private void KnockBackBeforeRelease(Vector3 releasedVector)
     {

@@ -46,7 +46,7 @@ public class Firefighter : NetworkBehaviour
         GameObject spawnPoint = GameObject.FindGameObjectWithTag("Respawn");
         if (spawnPoint != null)
         {
-            transform.position = spawnPoint.transform.position;
+            rigidbody.position = new Vector2(spawnPoint.transform.position.x, spawnPoint.transform.position.y);
             return true;
         }
         else return false;
