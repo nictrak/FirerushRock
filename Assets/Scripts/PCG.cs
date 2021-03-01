@@ -9,6 +9,7 @@ public class PCG : MonoBehaviour
 
     public bool DebugStart = false;
     public bool DebugFurnitureBoundary = false;
+    public bool DebugFurnitureIndex = false;
     public int DebugRoomCount = 11;
     public int DebugRoomGroup = 3;
 
@@ -651,6 +652,7 @@ public class PCG : MonoBehaviour
                 double entranceY = firstMiddle.y;
                 Rectangle entranceBoundary = new Rectangle(entranceX, entranceY - 4, entranceX + 4, entranceY);
                 firstRoom.furniture.Add(new Furniture(ENTRANCE, new Point(entranceX, entranceY), 2, entranceBoundary));
+                firstRoom.preset = RandomChoice(ROOM_PRESET_DICTIONARY[3]); // force living room
             }
             foreach (Room secondRoom in roomGraph.graph[firstRoom].Keys)
             {
@@ -1369,9 +1371,9 @@ public class PCG : MonoBehaviour
             int connectingPathLength = 4;
             GenerateAdditionalConnection(rootRoom, roomList, roomPointDictionary, roomGraph, connectingPathLength);
 
-            PlaceValve(roomList, valveCount);
-
             PlaceDoor(interceptY, roomPointDictionary, roomGraph, width, height);
+
+            PlaceValve(roomList, valveCount);
 
             PlaceFireAndCat(roomList, fireCount, catCount);
 
@@ -1489,14 +1491,14 @@ public class PCG : MonoBehaviour
                     else if (roomString == "2")
                         arrayString += "# ";
                     else
-                        //arrayString += " " + roomString;
-                        arrayString += "  ";
+                        arrayString += " " + roomString[roomString.Length - 1];
+                        //arrayString += "  ";
                 }
 
             }
             arrayString += "\n";
         }
-        if (!DebugFurnitureBoundary)
+        if (DebugFurnitureIndex)
         {
             foreach ((char c, string s) in furnitureList)
             {
