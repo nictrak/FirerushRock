@@ -8,7 +8,11 @@ using Mirror;
 public class FireSystem : MonoBehaviour
 {
     public GridSystem grid;
-    public int fire_spread_counter;
+    public int fire_spread_counter_4p;
+    public int fire_spread_counter_3p;
+    public int fire_spread_counter_2p;
+    public int fire_spread_counter_1p;
+    private int fire_spread_counter;
     private int framerate_counter;
     public static NDArray heat_array;
     //public static NDArray fire_1_array;
@@ -43,10 +47,13 @@ public class FireSystem : MonoBehaviour
     // Start is called before the first frame update
 
 
+    private GameObject NetworkObj;
+    private NetworkManager2 NetworkMananger;
 
 
     void Awake()
     {
+        fire_spread_counter = 20;
         framerate_counter = 0;
         isRun = false;
         isMusicHigh = false;
@@ -54,6 +61,25 @@ public class FireSystem : MonoBehaviour
         fire1StartPoint = fire_1_start_point;
         fire2StartPoint = fire_2_start_point;
         fire3StartPoint = fire_3_start_point;
+
+        NetworkObj = GameObject.FindGameObjectWithTag("Network");
+        NetworkMananger = NetworkObj.GetComponent<NetworkManager2>();
+        int playerCount = NetworkMananger.CountPlayer();
+        Debug.Log("PLayer NUMMMMMMMMMMMMMMMMMMMMMMMMMM : " + playerCount);
+        if (playerCount == 1) fire_spread_counter = fire_spread_counter_1p;
+        else
+        {
+            if (playerCount == 2) fire_spread_counter = fire_spread_counter_2p;
+            else
+            {
+                if (playerCount == 3) fire_spread_counter = fire_spread_counter_3p;
+                else
+                {
+                    if (playerCount == 4) fire_spread_counter = fire_spread_counter_4p;
+                }
+            }
+        }
+        Debug.Log("fire_spread_counter : " + fire_spread_counter);
     }
 
     public void startF(NDArray wallArray, NDArray doorArray, NDArray furnitureArray, NDArray fireArray, int height, int width)
