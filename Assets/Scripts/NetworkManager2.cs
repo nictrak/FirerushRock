@@ -103,4 +103,15 @@ public class NetworkManager2 : NetworkManager
         base.OnStopClient();
         Destroy(GameObject.FindGameObjectWithTag("Score"));
     }
+
+    public int CountPlayer()
+    {
+        int i = 0;
+        if (isUse1) i++;
+        if (isUse2) i++;
+        if (isUse3) i++;
+        if (isUse4) i++;
+        return i;
+
+    }
 }
