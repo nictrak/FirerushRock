@@ -102,6 +102,15 @@ public class PlayerControl : NetworkBehaviour
         isDelay = true;
         counter = 0;
     }
+    [ClientRpc]
+    public void Pause()
+    {
+        isEnable = false;
+    }
+    public void Unpause()
+    {
+        isEnable = true;
+    }
     /*private void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.GetComponent<BreakWater>() != null)

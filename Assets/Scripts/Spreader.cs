@@ -123,15 +123,16 @@ public class Spreader : NetworkBehaviour
         if (load < MaxLoad)
         {
             load = Mathf.Min(load + amount, MaxLoad);
-            RefillSound.Play();
         }
     }
+    [ClientCallback]
     private void FillLoop()
     {
         if ((Input.GetKey(KeyCode.K) || Input.GetKey(KeyCode.X)) && !valvePush && isFillable && beingGrab)
         {
             valve.Fill(this);
             valvePush = true;
+            RefillSound.Play();
         }
         if (!Input.GetKey(KeyCode.K) && !Input.GetKey(KeyCode.X))
         {

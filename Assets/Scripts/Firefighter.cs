@@ -47,6 +47,7 @@ public class Firefighter : NetworkBehaviour
         if (spawnPoint != null)
         {
             rigidbody.position = new Vector2(spawnPoint.transform.position.x, spawnPoint.transform.position.y);
+            GetComponent<PlayerControl>().Unpause();
             return true;
         }
         else return false;

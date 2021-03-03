@@ -157,8 +157,17 @@ public class FireSystem : MonoBehaviour
             {
                 levelScriptController.MissionFailed();
                 isRun = false;
+                PauseEveryPlayer();
             }
             framerate_counter += 1;
+        }
+    }
+    private void PauseEveryPlayer()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < objs.Length; i++)
+        {
+            objs[i].GetComponent<PlayerControl>().Pause();
         }
     }
     private void PassDay()
@@ -169,6 +178,7 @@ public class FireSystem : MonoBehaviour
             //GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("Lobby");
             levelScriptController.MissionComplete();
             isPassDay = true;
+            PauseEveryPlayer();
         }
     }
     // Update is called once per frame
