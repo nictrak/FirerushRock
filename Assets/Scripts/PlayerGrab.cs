@@ -106,7 +106,6 @@ public class PlayerGrab : NetworkBehaviour
         if (grabedObject != null)
         {
             Vector3 releasedVector = CalReleasedVector();
-            if (IsReleaseBreak()) KnockBackBeforeRelease(releasedVector);
             CmdRelease(grabedObject.netIdentity, false, releasedVector);
             grabedObject = null;
         }
@@ -117,7 +116,6 @@ public class PlayerGrab : NetworkBehaviour
         {
             Grabbable temp = grabedObject;
             Vector3 releasedVector = CalReleasedVector();
-            if (IsReleaseBreak()) KnockBackBeforeRelease(releasedVector);
             CmdRelease(grabedObject.netIdentity, false, releasedVector);
             grabedObject = null;
             temp.transform.position = position;

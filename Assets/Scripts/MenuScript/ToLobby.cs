@@ -21,6 +21,7 @@ public class ToLobby : MonoBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             players[i].GetComponent<PlayerGrab>().ForceRelease();
+            players[i].GetComponent<PlayerControl>().Pause();
         }
         GameObject.FindGameObjectWithTag("Network").GetComponent<NetworkManager>().ServerChangeScene("PlayScene");
     }
