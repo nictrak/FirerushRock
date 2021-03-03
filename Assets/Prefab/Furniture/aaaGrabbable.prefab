@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 3746787870199620571}
   - component: {fileID: 5197000810407354718}
   - component: {fileID: -1908004019822553508}
-  - component: {fileID: -174076012013182775}
+  - component: {fileID: -5140172173514993206}
   m_Layer: 0
   m_Name: aaaGrabbable
   m_TagString: Untagged
@@ -215,6 +215,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   MaxToughness: 1
+  IsDoor: 0
+  DoorHitSfx: {fileID: 0}
+  DoorBreakSfx: {fileID: 0}
 --- !u!114 &3746787870199620571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +265,7 @@ MonoBehaviour:
   RegenPoint: 0
   NonRegenTime: 0
   IsPlayer: 0
---- !u!114 &-174076012013182775
+--- !u!114 &-5140172173514993206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,9 +274,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3583791644520692933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56897625a30d344caaac7cd30c9cc5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 785795d0a3fba7747be97ccde49f38c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  cells: []

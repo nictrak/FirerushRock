@@ -26,7 +26,7 @@ public class Firefighter : NetworkBehaviour
     {
         
     }
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         ToSpawnPointLoop();
     }

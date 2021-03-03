@@ -6,7 +6,6 @@ using Mirror;
 public class HeatReducer : NetworkBehaviour
 {
     public double ReduceRate;
-    private List<Cell> cells;
     [SyncVar]
     private Vector2 moveVector;
     private int lifeTime;
@@ -18,7 +17,6 @@ public class HeatReducer : NetworkBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        cells = new List<Cell>();
     }
     void Start()
     {
@@ -46,6 +44,36 @@ public class HeatReducer : NetworkBehaviour
         timeCounter += 1;
     }
     [ServerCallback]
+    protected Vector2 GetGridPosition()
+    {
+        return GridTransformer.CalGridPosition(rigidbody.position);
+    }
+    [ServerCallback]
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<BreakWater>() != null)
+        {
+            Debug.Log("breaked");
+            Debug.Log(collision.gameObject);
+            Destroy(this.gameObject);
+        }
+    }
+    [ServerCallback]
+    private void ReduceHeat()
+    {
+        Vector2 gridPosition = GetGridPosition();
+        Reduce((int)gridPosition.x, (int)gridPosition.y, ReduceRate);
+    }
+    [ServerCallback]
+    protected void Reduce(int x, int y, double rate)
+    {
+        if (FireSystem.isRun)
+        {
+            double heat = FireSystem.heat_array[y, x];
+            FireSystem.heat_array[y, x] = heat - rate;
+        }
+    }
+    /*[ServerCallback]
     private void ReduceHeat()
     {
         for (int i = 0; i < cells.Count; i++)
@@ -82,5 +110,9 @@ public class HeatReducer : NetworkBehaviour
     {
         double heat = FireSystem.heat_array[(int)cell.GridPosition.y, (int)cell.GridPosition.x];
         FireSystem.heat_array[(int)cell.GridPosition.y, (int)cell.GridPosition.x] = heat - ReduceRate;
+    }*/
+    private void OnDestroy()
+    {
+        Debug.Log("Destroyed");
     }
 }

@@ -333,9 +333,9 @@ GameObject:
   - component: {fileID: 7659412490604459958}
   - component: {fileID: 7659412490604459984}
   - component: {fileID: 7659412490604459594}
-  - component: {fileID: 7659412490604458217}
   - component: {fileID: 7659412490604458150}
   - component: {fileID: 593313278532555984}
+  - component: {fileID: 3091951089834359166}
   m_Layer: 0
   m_Name: Firefighter3
   m_TagString: Player
@@ -686,21 +686,6 @@ MonoBehaviour:
   RegenPoint: 20
   NonRegenTime: 15
   IsPlayer: 1
---- !u!114 &7659412490604458217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7659412490604459422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56897625a30d344caaac7cd30c9cc5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  cells: []
 --- !u!114 &7659412490604458150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,6 +801,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3091951089834359166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7659412490604459422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785795d0a3fba7747be97ccde49f38c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
 --- !u!1 &7659412490604459443
 GameObject:
   m_ObjectHideFlags: 0

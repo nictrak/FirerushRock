@@ -10,12 +10,11 @@ public class SfxControl : MonoBehaviour
     void Start()
     {
         sound = GetComponent<AudioSource>();
-        sound.volume = GameConfig.SfxVolume;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        sound.volume = GameConfig.SfxVolume;
     }
 }

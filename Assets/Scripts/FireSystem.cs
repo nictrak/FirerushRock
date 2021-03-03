@@ -38,7 +38,7 @@ public class FireSystem : MonoBehaviour
     public float fire3_add_heat;
     private (int, int) gridsize;
     private NDArray zero_array;
-    private static bool isRun;
+    public static bool isRun;
     private NDArray wall_array_clip;
     private bool isMusicHigh;
     public PlaySceneAudio PlaySceneAudio;
@@ -139,6 +139,7 @@ public class FireSystem : MonoBehaviour
                 {
                     //TODO Fix this to multiplayer
                     PassDay();
+                    isRun = false;
                 }
 
                 //Debug.Log((float)(double)fire_3_array.sum()/ fire_3_size);
@@ -155,6 +156,7 @@ public class FireSystem : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 levelScriptController.MissionFailed();
+                isRun = false;
             }
             framerate_counter += 1;
         }

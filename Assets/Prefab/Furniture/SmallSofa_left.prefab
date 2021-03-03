@@ -20,8 +20,8 @@ GameObject:
   - component: {fileID: 3815367086592074964}
   - component: {fileID: 7684071143323270741}
   - component: {fileID: 5002495175585645718}
-  - component: {fileID: 4190930853454331903}
   - component: {fileID: -1584396130200074848}
+  - component: {fileID: -3776150481241318818}
   m_Layer: 0
   m_Name: SmallSofa_left
   m_TagString: Untagged
@@ -234,6 +234,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   MaxToughness: 1
+  IsDoor: 0
+  DoorHitSfx: {fileID: 0}
+  DoorBreakSfx: {fileID: 0}
 --- !u!114 &7684071143323270741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,21 +268,6 @@ MonoBehaviour:
   RegenPoint: 0
   NonRegenTime: 0
   IsPlayer: 0
---- !u!114 &4190930853454331903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7557077326426169675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56897625a30d344caaac7cd30c9cc5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  cells: []
 --- !u!114 &-1584396130200074848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,3 +284,17 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &-3776150481241318818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7557077326426169675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785795d0a3fba7747be97ccde49f38c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1

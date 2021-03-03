@@ -37,10 +37,14 @@ public class GridTransformer : MonoBehaviour
             return gridPosition;
         }
         Vector2 originPosition2 = new Vector2(ReferencedGrid.OriginPosition.x, ReferencedGrid.OriginPosition.y);
-        Vector2 basePosition = originPosition2 - ReferencedGrid.CellSize;
+        Vector2 basePosition = originPosition2 - ReferencedGrid.CellSize/2;
         float xDistance = realPosition.x - basePosition.x;
         float yDistance = basePosition.y - realPosition.y;
-        gridPosition = new Vector2((int)(xDistance / ReferencedGrid.CellSize.x), (int)(yDistance / ReferencedGrid.CellSize.y));
+        gridPosition = new Vector2((int)(xDistance / ReferencedGrid.CellSize.x), (int)(yDistance / ReferencedGrid.CellSize.y + 1));
+        if(gridPosition.x >= ReferencedGrid.GridSize.x || gridPosition.y >= ReferencedGrid.GridSize.y)
+        {
+            return new Vector2();
+        }
         return gridPosition;
         
     }

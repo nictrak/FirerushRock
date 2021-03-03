@@ -15,6 +15,7 @@ public class Cell : NetworkBehaviour
     private bool levelTwoFire;
     [SyncVar]
     private bool levelThreeFire;
+    [SerializeField]
     private Vector2 gridPosition;
     private double lastHeat;
     private double furniture_survivor;
