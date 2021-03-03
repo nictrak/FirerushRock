@@ -46,9 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
   fire_spread_counter_4p: 20
-  fire_spread_counter_3p: 25
-  fire_spread_counter_2p: 30
-  fire_spread_counter_1p: 35
+  fire_spread_counter_3p: 30
+  fire_spread_counter_2p: 40
+  fire_spread_counter_1p: 50
   fire_1_size: 20
   fire_2_size: 40
   fire_3_size: 60
