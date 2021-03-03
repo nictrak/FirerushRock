@@ -106,7 +106,7 @@ public class Spreader : NetworkBehaviour
         usedRange = Random.Range(-usedRange, usedRange);
         HeatReducer water = Instantiate<HeatReducer>(HeatReducerPrefab);
         Vector2 directionalVector = new Vector2(Mathf.Cos(usedAngle), Mathf.Sin(usedAngle));
-        water.transform.position = transform.position + new Vector3(directionalVector.x, directionalVector.y, 0);
+        water.transform.position = transform.position + new Vector3(directionalVector.x, directionalVector.y, 0)*0.25f;
         water.MoveVector = directionalVector * WaterVelocity;
         water.LifeTime = LifeTime;
         load -= UseRate;

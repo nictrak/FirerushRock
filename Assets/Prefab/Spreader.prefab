@@ -426,6 +426,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   MaxToughness: 1
+  IsDoor: 0
+  DoorHitSfx: {fileID: 0}
+  DoorBreakSfx: {fileID: 0}
 --- !u!114 &2521464223037957949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  HeatReducerPrefab: {fileID: 7125382727417787545, guid: bbebd534910b0454ca667fd9bc598986,
+  HeatReducerPrefab: {fileID: 815398939334857435, guid: bbebd534910b0454ca667fd9bc598986,
     type: 3}
   LeftSpawnVector: {x: -0.5, y: 0, z: 0}
   RightSpawnVector: {x: 0.5, y: 0, z: 0}
