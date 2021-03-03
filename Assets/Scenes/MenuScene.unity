@@ -3402,20 +3402,16 @@ MonoBehaviour:
   m_Text: '- This game''s difficulty is recommeded for 4 players, but you can solo
     if you want.
 
-    - Multiplayer play through LAN connection or using application
-    that act like LAN connection, like Hamachi.
+    - Multiplayer play through LAN connection or using application that act like LAN
+    connection, like Hamachi.
 
-    - One player need to be a host,
-    others join with the host''s IP address.
+    - One player need to be a host, others join with the host''s IP address.
 
-    - To complete a mission you must
-    put out all fire in the building.
+    - To complete a mission you must put out all fire in the building.
 
-    - You will find control manual in lobby
-    after host the game.
+    - You will find control manual in lobby after host the game.
 
-    - Difficulty will be increased for each mission, be
-    prepared.'
+    - Difficulty will be increased for each mission, be prepared.'
 --- !u!222 &995424973
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4165,15 +4161,16 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a37993a3479cce042b14eede9b925cf7, type: 3}
+  m_Sprite: {fileID: -8995056878774297502, guid: a37993a3479cce042b14eede9b925cf7,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 35.087494, y: 11.889999}
+  m_Size: {x: 22.20474, y: 6.7700005}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1414933631
