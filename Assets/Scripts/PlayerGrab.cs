@@ -155,12 +155,17 @@ public class PlayerGrab : NetworkBehaviour
     {
         if(grabedIdentity != null && releasedVector != null)
         {
+            Survivor cat = grabedIdentity.GetComponent<Survivor>();
             Grabbable grabed = grabedIdentity.GetComponent<Grabbable>();
             Breakable breakable = grabedIdentity.GetComponent<Breakable>();
             if (grabed != null) grabed.Released(newIsTrigger, releasedVector);
             if (breakable != null)
             {
                 breakable.IsEnable = true;
+            }
+            if (cat != null)
+            {
+                cat.RpcPlaySfx();
             }
         }
     }

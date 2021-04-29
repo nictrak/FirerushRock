@@ -118,7 +118,7 @@ public class Grabbable : NetworkBehaviour
             collider2D.isTrigger = newIsTrigger;
             transform.parent = null;
             zSync.IsEnable = true;
-            this.grabber = null;
+            this.grabber = null; 
             SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
         }
     }

@@ -33,9 +33,9 @@ public class Survivor : NetworkBehaviour
 
     }
     [ClientRpc]
-    private void RpcPlaySfx()
+    public void RpcPlaySfx()
     {
-        sfx.Play();
+        if(isRescued) sfx.Play();
     }
     [ServerCallback]
     private void OnTriggerStay2D(Collider2D collision)

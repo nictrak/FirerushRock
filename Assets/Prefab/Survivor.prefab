@@ -20,12 +20,12 @@ GameObject:
   - component: {fileID: 3949643201680949261}
   - component: {fileID: 5910555515748716644}
   - component: {fileID: 1261377878233520053}
-  - component: {fileID: -4737083439864910054}
   - component: {fileID: -1140433886307812832}
   - component: {fileID: 8335225475018169386}
   - component: {fileID: 5811089889988025301}
   - component: {fileID: 7179534446967958498}
   - component: {fileID: 6507445475846388749}
+  - component: {fileID: 8577758655554264518}
   m_Layer: 0
   m_Name: Survivor
   m_TagString: Untagged
@@ -269,21 +269,6 @@ MonoBehaviour:
   serverOnly: 0
   m_AssetId: 
   hasSpawned: 0
---- !u!114 &-4737083439864910054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9033900264385998663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56897625a30d344caaac7cd30c9cc5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  cells: []
 --- !u!114 &-1140433886307812832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,3 +423,20 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   MaxToughness: 0
+  IsDoor: 0
+  DoorHitSfx: {fileID: 0}
+  DoorBreakSfx: {fileID: 0}
+--- !u!114 &8577758655554264518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033900264385998663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785795d0a3fba7747be97ccde49f38c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1

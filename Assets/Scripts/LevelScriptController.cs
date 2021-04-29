@@ -109,6 +109,7 @@ public class LevelScriptController : NetworkBehaviour
         Score.CalculateScore();
         WinCanvas.Win();
         Score.addDay();
+        PauseEveryPlayer();
     }
 
     public void MissionFailed()
@@ -121,5 +122,14 @@ public class LevelScriptController : NetworkBehaviour
         LoseCanvas.Lose();
         Score.ResetScore();
         Score.setDay(1);
+        PauseEveryPlayer();
+    }
+    private void PauseEveryPlayer()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < objs.Length; i++)
+        {
+            objs[i].GetComponent<PlayerControl>().Pause();
+        }
     }
 }
